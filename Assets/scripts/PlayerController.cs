@@ -30,7 +30,6 @@ public class PlayerController : MonoBehaviour
         {
             _rb.velocity = new Vector3(_joystick.Horizontal * speed, _rb.velocity.y, _joystick.Vertical * speed);
         }
-
     }
 
     public void ChangeJoystick(FixedJoystick newJstk)
