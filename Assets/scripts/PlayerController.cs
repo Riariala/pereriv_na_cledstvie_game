@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Rigidbody _rb;
-    [SerializeField] public FixedJoystick _joystick;
+    [SerializeField] private FixedJoystick _joystick;
     //[SerializeField] private Animator _animator;
 
     [SerializeField] private float speed =  10f;
@@ -31,5 +31,10 @@ public class PlayerController : MonoBehaviour
             _rb.velocity = new Vector3(_joystick.Horizontal * speed, _rb.velocity.y, _joystick.Vertical * speed);
         }
 
+    }
+
+    public void ChangeJoystick(FixedJoystick newJstk)
+    {
+        _joystick = newJstk;
     }
 }
