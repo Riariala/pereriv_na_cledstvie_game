@@ -5,4 +5,5 @@ using UnityEngine;
 public class PlayerData : MonoBehaviour
 {
     public bool isPlayer1;
+    public GameObject char_player;
 }

@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class changeCharacter : MonoBehaviour
 {
-    [SerializeField] private PlayerController Player1_script;
-    [SerializeField] private PlayerController Player2_script;
+    [SerializeField] private GameObject Player1;
+    [SerializeField] private GameObject Player2;
+    private PlayerController Player1_script;
+    private PlayerController Player2_script;
     [SerializeField] private FixedJoystick _jystick;
     [SerializeField] private PlayerData player_data;
-    //private bool ispl1;
 
-    // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
+        Player1_script = Player1.GetComponent<PlayerController>();
+        Player2_script = Player2.GetComponent<PlayerController>();
         Player1_script.ChangeJoystick(_jystick);
         player_data.isPlayer1 = true;
+        player_data.char_player = Player1;
     }
 
     public void Change_chars(){
@@ -22,12 +25,14 @@ public class changeCharacter : MonoBehaviour
             player_data.isPlayer1 = false;
             Player2_script.ChangeJoystick(_jystick);
             Player1_script.ChangeJoystick(null);
+            player_data.char_player = Player2;
         }
         else
         {
             player_data.isPlayer1 = true;
             Player1_script.ChangeJoystick(_jystick);
             Player2_script.ChangeJoystick(null);
+            player_data.char_player = Player1;
         }
     }
 }

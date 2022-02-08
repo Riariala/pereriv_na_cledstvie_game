@@ -6,23 +6,21 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private Rigidbody _rb;
+    private Rigidbody _rb;
     [SerializeField] private FixedJoystick _joystick;
     //[SerializeField] private Animator _animator;
 
     [SerializeField] private float speed =  10f;
 
-    // Start is called before the first frame update
     void Start()
     {
-        
+        _rb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    // void Update()
+    // {
         
-    }
+    // }
 
     void FixedUpdate()
     {
