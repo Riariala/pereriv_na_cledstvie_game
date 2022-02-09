@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
 using System.Linq;
 using UnityEngine;
 
@@ -18,7 +19,7 @@ public class touchMenu : MonoBehaviour
     // if (Input.touchCount == 1)                   //НЕ УДАЛЯТЬ
        if (Input.GetMouseButtonDown(0))
         {
-            if (menu != null)
+            if ((menu != null ) && (!EventSystem.current.IsPointerOverGameObject()))
             {
                 Destroy(menu);
             }
@@ -29,8 +30,10 @@ public class touchMenu : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(pos);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit))
+            if ((menu == null) && (Physics.Raycast(ray, out hit)))
             {
+                Debug.Log(hit.collider.tag);
+                
                 if (hit.collider.tag == "Item")
                 {   
                     touched_item = hit.collider.gameObject;
@@ -51,11 +54,9 @@ public class touchMenu : MonoBehaviour
                             indActiveAction++;
                         }
                     }
-                    
                 }
             }
          }
-
         // if (Input.touchCount == 1)
         // {
         //     if (menu != null)
@@ -77,5 +78,21 @@ public class touchMenu : MonoBehaviour
         //         }
         //     }
         // } 
+    }
+
+    //кнопки менюшки объектов, позже приделаю сюда нормальную реализацию, а не просто подписи
+    public void watchAtAction()
+    {
+        Debug.Log("Когда-нибудь тут будут описываться итоги осмотра. И он будет привязан к объекту, на который смотрят.");
+    }
+
+    public void TakeItAction()
+    {
+        Debug.Log("Когда-нибудь тут возьмут предмет. И действие будет привязано к объекту, который берут.");
+    }
+
+    public void doItAction()
+    {
+        Debug.Log("Когда-нибудь тут будут описываться итоги взаимодействия. И оно будет привязано к объекту, с которым взаимодействуют.");
     }
 }
