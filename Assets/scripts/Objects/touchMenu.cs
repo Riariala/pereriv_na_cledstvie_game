@@ -16,20 +16,20 @@ public class touchMenu : MonoBehaviour
     void Update()
     {
         //обработка нажатия мышки, тестовое для работы на ноуте, для обработки нажатия пальцем раскомментить строки и закомментить ону строку под каждой
-     if (Input.touchCount == 1)                   //НЕ УДАЛЯТЬ
-      // if (Input.GetMouseButtonDown(0))
+     //if (Input.touchCount == 1)                   //НЕ УДАЛЯТЬ
+       if (Input.GetMouseButtonDown(0))
         {
-            Touch touch = Input.GetTouch(0);        //НЕ УДАЛЯТЬ
+            //Touch touch = Input.GetTouch(0);        //НЕ УДАЛЯТЬ
 
 
-            if ((menu != null ) && (!EventSystem.current.IsPointerOverGameObject(touch.fingerId)))
-            //if ((menu != null ) && (!EventSystem.current.IsPointerOverGameObject())
+            //if ((menu != null ) && (!EventSystem.current.IsPointerOverGameObject(touch.fingerId)))
+            if ((menu != null ) && (!EventSystem.current.IsPointerOverGameObject()))
             {
                 Destroy(menu);
             }
 
-          Vector3 pos = touch.position;           //НЕ УДАЛЯТЬ
-            //Vector3 pos = Input.mousePosition;
+          //Vector3 pos = touch.position;           //НЕ УДАЛЯТЬ
+            Vector3 pos = Input.mousePosition;
             Ray ray = Camera.main.ScreenPointToRay(pos);
             RaycastHit hit;
 

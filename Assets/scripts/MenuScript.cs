@@ -10,6 +10,7 @@ public class MenuScript : MonoBehaviour
     [SerializeField] public GameObject second_menu;
     [SerializeField] public GameObject third_menu;
     [SerializeField] public GameObject fourth_menu;
+    [SerializeField] public GameObject new_game_modal;
 
     private bool _isCoworker;
     private bool _isUnknowns;
@@ -36,13 +37,10 @@ public class MenuScript : MonoBehaviour
         {
             if (child.CompareTag("Button")) {child.GetComponent<Button>().interactable = false;}
         }
-        foreach (Transform child in third_menu.GetComponentsInChildren<Transform>())
+        foreach (Transform child in fourth_menu.GetComponentsInChildren<Transform>())
         {
             if (child.CompareTag("Button")) {child.GetComponent<Button>().interactable = false;}
         }
-        
-        //first_menu.enabled  = false;
-        // third_menu.interactable = false;
     }
 
     public void closeModal(GameObject modal_menu)
@@ -52,7 +50,7 @@ public class MenuScript : MonoBehaviour
         {
             if (child.CompareTag("Button")) {child.GetComponent<Button>().interactable = true;}
         }
-        foreach (Transform child in third_menu.GetComponentsInChildren<Transform>())
+        foreach (Transform child in fourth_menu.GetComponentsInChildren<Transform>())
         {
             if (child.CompareTag("Button")) {child.GetComponent<Button>().interactable = true;}
         }
@@ -92,7 +90,11 @@ public class MenuScript : MonoBehaviour
         }
         else 
         {
-
+            new_game_modal.SetActive(true);
+            foreach (Transform child in fourth_menu.GetComponentsInChildren<Transform>())
+            {
+                if (child.CompareTag("Button")) {child.GetComponent<Button>().interactable = true;}
+            }
         }
     }
 
