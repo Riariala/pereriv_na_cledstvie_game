@@ -1658,23 +1658,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1001 &961807624854250559
+--- !u!1001 &4795372931023177743
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 222572541304478237, guid: 1fcb718175c971142b5f30571a68345e,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 909991262}
-    - target: {fileID: 1180575144159145217, guid: 1fcb718175c971142b5f30571a68345e,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 909991262}
     - target: {fileID: 4405593650993367899, guid: 1fcb718175c971142b5f30571a68345e,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1733,7 +1723,7 @@ PrefabInstance:
     - target: {fileID: 4405593650993367899, guid: 1fcb718175c971142b5f30571a68345e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10.330971
+      value: -6.689625
       objectReference: {fileID: 0}
     - target: {fileID: 4405593650993367899, guid: 1fcb718175c971142b5f30571a68345e,
         type: 3}
@@ -1758,12 +1748,12 @@ PrefabInstance:
     - target: {fileID: 4405593650993367899, guid: 1fcb718175c971142b5f30571a68345e,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -11.584124
+      value: -19.305733
       objectReference: {fileID: 0}
     - target: {fileID: 4405593650993367899, guid: 1fcb718175c971142b5f30571a68345e,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.0000009536743
+      value: -0.0000019073486
       objectReference: {fileID: 0}
     - target: {fileID: 4405593650993367899, guid: 1fcb718175c971142b5f30571a68345e,
         type: 3}
@@ -1785,9 +1775,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: menu_obj_touch
       objectReference: {fileID: 0}
-    - target: {fileID: 7503822281260492215, guid: 1fcb718175c971142b5f30571a68345e,
+    - target: {fileID: 8425442713043449401, guid: 1fcb718175c971142b5f30571a68345e,
         type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      propertyPath: touch_menu
       value: 
       objectReference: {fileID: 909991262}
     m_RemovedComponents: []

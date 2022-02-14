@@ -16,16 +16,19 @@ public class touchMenu : MonoBehaviour
     void Update()
     {
         //обработка нажатия мышки, тестовое для работы на ноуте, для обработки нажатия пальцем раскомментить строки и закомментить ону строку под каждой
-    // if (Input.touchCount == 1)                   //НЕ УДАЛЯТЬ
+     //if (Input.touchCount == 1)                   //НЕ УДАЛЯТЬ
        if (Input.GetMouseButtonDown(0))
         {
+            //Touch touch = Input.GetTouch(0);        //НЕ УДАЛЯТЬ
+
+
+            //if ((menu != null ) && (!EventSystem.current.IsPointerOverGameObject(touch.fingerId)))
             if ((menu != null ) && (!EventSystem.current.IsPointerOverGameObject()))
             {
                 Destroy(menu);
             }
 
-        //  Touch touch = Input.GetTouch(0);        //НЕ УДАЛЯТЬ
-        //  Vector3 pos = touch.position;           //НЕ УДАЛЯТЬ
+          //Vector3 pos = touch.position;           //НЕ УДАЛЯТЬ
             Vector3 pos = Input.mousePosition;
             Ray ray = Camera.main.ScreenPointToRay(pos);
             RaycastHit hit;
@@ -50,34 +53,13 @@ public class touchMenu : MonoBehaviour
                         {
                             GameObject btn = menu.transform.GetChild(i).gameObject;
                             btn.SetActive(true); 
-                            btn.transform.localPosition  = new Vector3(Mathf.Cos(indActiveAction * koef)*50, Mathf.Sin(indActiveAction * koef)*50, 0);
+                            btn.transform.localPosition  = new Vector3(Mathf.Cos(indActiveAction * koef)*60, Mathf.Sin(indActiveAction * koef)*60, 0);
                             indActiveAction++;
                         }
                     }
                 }
             }
          }
-        // if (Input.touchCount == 1)
-        // {
-        //     if (menu != null)
-        //     {
-        //         Debug.Log(menu.tag);
-        //         Destroy(menu);
-        //     }
-        //     Touch touch = Input.GetTouch(0);
-        //     Vector3 pos = touch.position;
-        //     Ray ray = Camera.main.ScreenPointToRay(pos);
-
-        //     RaycastHit hit;
-        //     if (Physics.Raycast(ray, out hit))
-        //     {
-        //         if (hit.collider.tag == "Item")
-        //         {
-        //             menu = Instantiate(menu_obj_touch, parent);
-        //             menu.transform.position = pos;
-        //         }
-        //     }
-        // } 
     }
 
     //кнопки менюшки объектов, позже приделаю сюда нормальную реализацию, а не просто подписи
