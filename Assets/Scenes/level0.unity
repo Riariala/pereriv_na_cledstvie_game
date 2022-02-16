@@ -559,7 +559,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a875f4f2f4de824bbb46076d8dbf115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player1: {fileID: 7271299863970637550, guid: 0c1981a37fc42c548ba5a05713bf0724, type: 3}
+  Player1: {fileID: 5946829683437410507, guid: 83d193202199d2c48b6c6ce3ba0a37a5, type: 3}
   Player2: {fileID: 1428669931}
   _jystick: {fileID: 210846479}
   player_data: {fileID: 333963699}
@@ -609,7 +609,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &575329977
 AudioListener:
   m_ObjectHideFlags: 0
@@ -682,7 +682,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 575329976}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85d406ef69a61444485f1a086bcd4b47, type: 3}
   m_Name: 
@@ -1851,7 +1851,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5c20180f6223954188e17fb6e946a9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1: {fileID: 7271299863970637550, guid: 0c1981a37fc42c548ba5a05713bf0724, type: 3}
+  player1: {fileID: 5946829683437410507, guid: 83d193202199d2c48b6c6ce3ba0a37a5, type: 3}
   player2: {fileID: 1428669931}
 --- !u!4 &1927280843
 Transform:
