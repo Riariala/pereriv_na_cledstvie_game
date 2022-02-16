@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: b3988e02c470c3648a6c94d7a8bd06b4
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Cyrillic Times ET
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 63c6af28e3f1dd54fb90de38d545fdc0, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
