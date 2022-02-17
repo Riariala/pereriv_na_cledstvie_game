@@ -18,7 +18,11 @@ public class Menu : GlobalEventListener
 
     public void StartServer()
     {
+        if (BoltNetwork.IsClient) {
+            BoltLauncher.Shutdown();
+        }
         BoltLauncher.StartServer();
+       
     }
     public override void BoltStartDone()
     {
@@ -34,6 +38,11 @@ public class Menu : GlobalEventListener
 
     public void StartClient()
     {
+        if (BoltNetwork.IsServer)
+        {
+            BoltLauncher.Shutdown(); 
+        }
+
         BoltLauncher.StartClient();
     }
 
