@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sceneGuid: 
   _serializerGuid: 08749a27-84bf-4822-b032-cc1f1ff04870
-  _prefabId: 2
+  _prefabId: 1
   _updateRate: 1
   _autoFreezeProxyFrames: 0
   _clientPredicted: 1
@@ -77,7 +77,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _joystick: {fileID: 0}
-  speed: 0.25
 --- !u!114 &2724038146988532182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91,6 +90,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 5990132392419870659}
+  player: {fileID: 8704860325164240504}
 --- !u!1 &5990132392419870659
 GameObject:
   m_ObjectHideFlags: 0
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 7659789364008275384}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -203,20 +203,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.19, y: 2.95, z: 1.07}
   m_Center: {x: 0.18, y: 1, z: -2.11}
---- !u!114 &2945174162310302471
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8704860325164240504}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6600cdb7d32100b41847be438bcf8fb0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _joystick: {fileID: 0}
-  speed: 0.25
 --- !u!1001 &8362209831918203689
 PrefabInstance:
   m_ObjectHideFlags: 0

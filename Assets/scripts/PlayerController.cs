@@ -19,7 +19,7 @@ public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>//Mono
     //[SerializeField] private Animator _animator;
 
     //[SerializeField] private float speed =  10f;
-    [SerializeField] private float speed = 0.25f;
+    private float speed = 170f;
 
     /*void Start()
     {
@@ -28,8 +28,8 @@ public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>//Mono
     }*/
     public override void Attached()
     {
+        _rb = transform.GetChild(0).GetComponent<Rigidbody>();
         //_rb = GetComponent<Rigidbody>();
-        Debug.Log("Attached");
         state.SetTransforms(state.PlayerTransform, transform);
         //ChangeJoystick(_joystick);
         //_transform = transform;
@@ -51,9 +51,8 @@ public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>//Mono
 
         if (!(_joystick is null))
         {
-            Debug.Log("S2");
-            transform.position = transform.position + new Vector3(_joystick.Horizontal, -transform.position.y, _joystick.Vertical) * speed * BoltNetwork.FrameDeltaTime;
-            //_rb.velocity = new Vector3(_joystick.Horizontal * speed * BoltNetwork.FrameDeltaTime, _rb.velocity.y, _joystick.Vertical * speed* BoltNetwork.FrameDeltaTime);
+            //transform.position = transform.position + new Vector3(_joystick.Horizontal, -transform.position.y, _joystick.Vertical) * speed * BoltNetwork.FrameDeltaTime;
+            _rb.velocity = new Vector3(_joystick.Horizontal * speed * BoltNetwork.FrameDeltaTime, _rb.velocity.y, _joystick.Vertical * speed* BoltNetwork.FrameDeltaTime);
         }
     }
         
