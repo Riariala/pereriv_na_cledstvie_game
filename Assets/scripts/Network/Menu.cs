@@ -52,9 +52,8 @@ public class Menu : GlobalEventListener
         foreach (var session in SessionList)
         {
             UdpSession photonSession = session.Value as UdpSession;
-            Button joinClone = Instantiate(joinBtnInList);
-            joinClone.transform.parent = SessionListPanel.transform;//попробовать убрать
-            joinClone.transform.localPosition = new Vector3(0, BtnSpacing+ joinServerBtns.Count, 0);
+            Button joinClone = Instantiate(joinBtnInList, SessionListPanel.transform);
+            joinClone.transform.localPosition = new Vector3(0, BtnSpacing*joinServerBtns.Count, 0);
             joinClone.gameObject.SetActive(true);
             joinClone.onClick.AddListener(() => JoinGame(photonSession));
 
