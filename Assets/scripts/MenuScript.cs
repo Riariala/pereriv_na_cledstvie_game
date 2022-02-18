@@ -98,7 +98,7 @@ public class MenuScript : MonoBehaviour
                 if (child.CompareTag("Button")) {child.GetComponent<Button>().interactable = true;}
             }
             NetworkMenu.StartServer();
-            //SceneManager.LoadScene(1); //убрать
+            //SceneManager.LoadScene(1); //пїЅпїЅпїЅпїЅпїЅпїЅ
         }
     }
 
