@@ -49,11 +49,17 @@ public class Menu : GlobalEventListener
     public override void SessionListUpdated(Map<Guid, UdpSession> SessionList)
     {
         ClearSessions();
+        Debug.Log("авыав");
         foreach (var session in SessionList)
         {
+            Debug.Log("Sessions");
             UdpSession photonSession = session.Value as UdpSession;
+            // Button joinClone = Instantiate(joinBtnInList, SessionListPanel.transform);
+            // joinClone.transform.localPosition = new Vector3(0, BtnSpacing*joinServerBtns.Count, 0);
             Button joinClone = Instantiate(joinBtnInList, SessionListPanel.transform);
+            //joinClone.transform.localPosition = new Vector3(0, joinClone.GetComponent<RectTransform>().sizeDelta.y*joinServerBtns.Count, 0);
             joinClone.transform.localPosition = new Vector3(0, BtnSpacing*joinServerBtns.Count, 0);
+            joinClone.transform.GetChild(0).GetComponent<Text>().text = session.Key.ToString(); //здесь надо имя, потом еще понять, откуда взять номер главы, которая проходится
             joinClone.gameObject.SetActive(true);
             joinClone.onClick.AddListener(() => JoinGame(photonSession));
 

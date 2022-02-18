@@ -10,7 +10,6 @@ public class NetworkCamera : Photon.Bolt.EntityBehaviour<ICustomPlayer>
     private Transform cameraTransform;
     private Transform playerTransform;
 
-
     private void FixedUpdate()
     {
         if (entity.IsOwner && playerCamera.activeInHierarchy == false)

@@ -53,8 +53,8 @@ public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>//Mono
             Debug.Log((other.transform.position-transform.position).normalized);
             //transform.position = transform.position + (other.transform.position-transform.position).normalized * -0.1f;
             //transform.position = other.transform.position - (other.transform.position - transform.position);
-            Debug.Log(other.bounds.size);
-            Debug.Log(this.GetComponent<CapsuleCollider>());
+            //Debug.Log(other.bounds.size);
+            //Debug.Log(this.GetComponent<CapsuleCollider>());
             Vector3 normalised_distance = (other.transform.position-transform.position).normalized * -1;
             Vector3 other_size = other.bounds.size;
             Vector3 distance_teleport = new Vector3(normalised_distance.x * other_size.x, transform.position.y, normalised_distance.z * other_size.z);
