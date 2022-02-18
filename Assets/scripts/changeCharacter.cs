@@ -1,8 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using UdpKit;
+using UnityEngine.SceneManagement;
+using UdpKit.Platform.Photon;
+using Photon.Bolt;
+using Photon.Bolt.Matchmaking;
+using Photon.Bolt.Utils;
 
-public class changeCharacter : MonoBehaviour
+
+public class changeCharacter : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehaviour
 {
     [SerializeField] private GameObject Player1;
     [SerializeField] private GameObject Player2;

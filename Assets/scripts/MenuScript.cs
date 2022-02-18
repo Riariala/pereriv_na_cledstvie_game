@@ -11,6 +11,7 @@ public class MenuScript : MonoBehaviour
     [SerializeField] public GameObject third_menu;
     [SerializeField] public GameObject fourth_menu;
     [SerializeField] public GameObject new_game_modal;
+    public Menu NetworkMenu;
 
     private bool _isCoworker;
     private bool _isUnknowns;
@@ -41,6 +42,7 @@ public class MenuScript : MonoBehaviour
         {
             if (child.CompareTag("Button")) {child.GetComponent<Button>().interactable = false;}
         }
+        NetworkMenu.StartClient();
     }
 
     public void closeModal(GameObject modal_menu)
@@ -95,6 +97,8 @@ public class MenuScript : MonoBehaviour
             {
                 if (child.CompareTag("Button")) {child.GetComponent<Button>().interactable = true;}
             }
+            NetworkMenu.StartServer();
+            //SceneManager.LoadScene(1); //������
         }
     }
 

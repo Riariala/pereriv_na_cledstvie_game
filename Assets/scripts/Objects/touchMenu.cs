@@ -19,6 +19,7 @@ public class touchMenu : MonoBehaviour
      //if (Input.touchCount == 1)                   //НЕ УДАЛЯТЬ
        if (Input.GetMouseButtonDown(0))
         {
+            Debug.Log("hit");
             //Touch touch = Input.GetTouch(0);        //НЕ УДАЛЯТЬ
 
 
@@ -31,10 +32,13 @@ public class touchMenu : MonoBehaviour
           //Vector3 pos = touch.position;           //НЕ УДАЛЯТЬ
             Vector3 pos = Input.mousePosition;
             Ray ray = Camera.main.ScreenPointToRay(pos);
+            //Ray ray = Camera.ScreenPointToRay(pos);
             RaycastHit hit;
+            
 
             if ((menu == null) && (Physics.Raycast(ray, out hit)))
             {
+                
                 Debug.Log(hit.collider.tag);
                 
                 if (hit.collider.tag == "Item")
