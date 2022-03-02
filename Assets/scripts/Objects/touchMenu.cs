@@ -15,9 +15,24 @@ public class touchMenu : MonoBehaviour
 
     void Update()
     {
-        //обработка нажатия мышки, тестовое для работы на ноуте, для обработки нажатия пальцем раскомментить строки и закомментить ону строку под каждой
-     //if (Input.touchCount == 1)                   //НЕ УДАЛЯТЬ
-       if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
+        {
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+            //обработка нажатия мышки, тестовое для работы на ноуте, для обработки нажатия пальцем раскомментить строки и закомментить ону строку под каждой
+            //if (Input.touchCount == 1)                   //НЕ УДАЛЯТЬ
+            if (Input.GetMouseButtonDown(0))
         {
             Debug.Log("hit");
             //Touch touch = Input.GetTouch(0);        //НЕ УДАЛЯТЬ
