@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class InventoryScript : MonoBehaviour
@@ -24,8 +25,11 @@ public class InventoryScript : MonoBehaviour
         if (!(currentMenu is null)) { currentMenu.SetActive(false); }
         currentMenu = menu;
         currentMenu.SetActive(true);
+
     }
 
-
-
+    public void toMainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
 }
