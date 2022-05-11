@@ -76,7 +76,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6600cdb7d32100b41847be438bcf8fb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rb: {fileID: 0}
+  _rb: {fileID: 8736208006572542834}
+  playerCamera: {fileID: 5990132392419870659}
   _joystick: {fileID: 0}
 --- !u!114 &2724038146988532182
 MonoBehaviour:
@@ -92,6 +93,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 5990132392419870659}
   player: {fileID: 8704860325164240504}
+  centerArea: {x: 4.39, y: 7.78, z: -0.46}
 --- !u!1 &5990132392419870659
 GameObject:
   m_ObjectHideFlags: 0
@@ -214,10 +216,10 @@ BoxCollider:
   m_GameObject: {fileID: 8704860325164240504}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.2, y: 2.95, z: 1.07}
-  m_Center: {x: 0.18, y: 1, z: -2.11}
+  m_Size: {x: 1.1411862, y: 2.9499998, z: 1.2611452}
+  m_Center: {x: 0.26822066, y: 1, z: -1.9262068}
 --- !u!1001 &8362209831918203689
 PrefabInstance:
   m_ObjectHideFlags: 0

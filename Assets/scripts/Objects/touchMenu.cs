@@ -41,12 +41,12 @@ public class touchMenu : MonoBehaviour
 
                 case TouchPhase.Ended:
                     direction = touch.position - start_pos;
-                    if ((direction.y <= -50) && (start_pos.y <= 75))
+                    if ((direction.y <= -50) && (start_pos.y >= screen_height / 2))
                     {
                         inventory_panel.SetActive(true);
                     }
 
-                    if ((direction.y >= 50) && (start_pos.y >= screen_height - 75))
+                    if ((direction.y >= 50) && (start_pos.y <= screen_height / 2))
                     {
                         inventory_panel.SetActive(false);
                     }
