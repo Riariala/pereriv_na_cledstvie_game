@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,7 +11,7 @@ public class touchMenu : MonoBehaviour
 
     [SerializeField] public GameObject menu_obj_touch;
     [SerializeField] public Transform parent;
-    [SerializeField] public GameObject inventory_panel;
+    //public GameObject inventory_panel;
 
     private GameObject menu;
     private GameObject touched_item;
@@ -33,23 +34,23 @@ public class touchMenu : MonoBehaviour
             switch (touch.phase)
             {
                 case TouchPhase.Began:
-                    start_pos = touch.position;
+                    //start_pos = touch.position;
                     break;
 
                 case TouchPhase.Moved:
                     break;
 
                 case TouchPhase.Ended:
-                    direction = touch.position - start_pos;
-                    if ((direction.y <= -50) && (start_pos.y >= screen_height / 2))
-                    {
-                        inventory_panel.SetActive(true);
-                    }
+                    //direction = touch.position - start_pos;
+                    //if ((direction.y <= -50) && (start_pos.y >= screen_height / 2))
+                    //{
+                    //    inventory_panel.SetActive(true);
+                    //}
 
-                    if ((direction.y >= 50) && (start_pos.y <= screen_height / 2))
-                    {
-                        inventory_panel.SetActive(false);
-                    }
+                    //if ((direction.y >= 50) && (start_pos.y <= screen_height / 2))
+                    //{
+                    //    inventory_panel.SetActive(false);
+                    //}
 
                     if (menu != null){Destroy(menu);}
 
@@ -85,6 +86,22 @@ public class touchMenu : MonoBehaviour
                     break;
             }
         }
+    }
+
+    //кнопки меню игрока
+    public void callMenuBtns(GameObject btnHolder)
+    {
+        btnHolder.SetActive(!btnHolder.activeInHierarchy);
+    }
+
+    public void toMainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void callJournal(GameObject journal_panel)
+    {
+        journal_panel.SetActive(true);
     }
 
     //кнопки менюшки объектов, позже приделаю сюда нормальную реализацию, а не просто подписи
