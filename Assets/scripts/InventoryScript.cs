@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class InventoryScript : MonoBehaviour
@@ -28,8 +27,8 @@ public class InventoryScript : MonoBehaviour
 
     }
 
-    public void toMainMenu()
+    public void close_inv(GameObject inv)
     {
-        SceneManager.LoadScene(0);
+        inv.SetActive(false);
     }
 }
