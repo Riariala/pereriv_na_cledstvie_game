@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b3988e02c470c3648a6c94d7a8bd06b4
+guid: 92b188c4d11c9a64d974fd92a1c9b2b3
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,9 +9,8 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Cyrillic Times ET
-  fallbackFontReferences:
-  - {fileID: 12800000, guid: 63c6af28e3f1dd54fb90de38d545fdc0, type: 3}
+  - Art-Victorian
+  fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1

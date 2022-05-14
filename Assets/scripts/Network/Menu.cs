@@ -13,6 +13,7 @@ public class Menu : GlobalEventListener
 {
     public Button joinBtnInList;
     public GameObject SessionListPanel;
+    public PlayerData playerData;
     public float BtnSpacing;
     private List<Button> joinServerBtns = new List<Button>();
 
@@ -24,6 +25,7 @@ public class Menu : GlobalEventListener
         BoltLauncher.StartServer();
        
     }
+
     public override void BoltStartDone()
     {
 

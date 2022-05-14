@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 649e32b4125fa2246bc091571a0f882d
+guid: 4d3216d002418134d9bb62dd033df491
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -8,7 +8,7 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: a57477913897c46af95d590f580878bd, type: 3}
-  svgType: 1
+  svgType: 0
   texturedSpriteMeshType: 0
   svgPixelsPerUnit: 100
   gradientResolution: 64
@@ -17,11 +17,11 @@ ScriptedImporter:
   generatePhysicsShape: 0
   viewportOptions: 0
   preserveViewport: 0
-  advancedMode: 1
+  advancedMode: 0
   predefinedResolutionIndex: 1
   targetResolution: 1080
   resolutionMultiplier: 1
-  stepDistance: 5
+  stepDistance: 10
   samplingStepDistance: 100
   maxCordDeviationEnabled: 0
   maxCordDeviation: 1
@@ -33,23 +33,23 @@ ScriptedImporter:
   textureHeight: 256
   wrapMode: 0
   filterMode: 1
-  sampleCount: 8
+  sampleCount: 4
   preserveSVGImageAspect: 0
   useSVGPixelsPerUnit: 0
   spriteData:
     TessellationDetail: 0
     SpriteRect:
-      name: take_actionSprite
+      name: 
       originalName: 
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       alignment: 0
       border: {x: 0, y: 0, z: 0, w: 0}
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 250
-        height: 250
-      spriteID: 7de35e245995450449f8dddb8230d1e9
+        width: 0
+        height: 0
+      spriteID: 33d5b2985a4aa5641a681f9fef4e3680
       internalID: 0
     PhysicsOutlines: []

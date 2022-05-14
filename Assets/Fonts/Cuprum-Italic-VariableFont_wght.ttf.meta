@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e641398e437496b43b65fddd33eeb2bc
+guid: 9b45de98da1fb32449205788e6e2485e
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,10 +9,8 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Cyrillic Times ET
-  fallbackFontReferences:
-  - {fileID: 12800000, guid: b3988e02c470c3648a6c94d7a8bd06b4, type: 3}
-  - {fileID: 12800000, guid: 63c6af28e3f1dd54fb90de38d545fdc0, type: 3}
+  - Cuprum
+  fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1
