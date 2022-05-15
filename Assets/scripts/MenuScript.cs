@@ -52,6 +52,7 @@ public class MenuScript : MonoBehaviour
             if (child.CompareTag("Button")) {child.GetComponent<Button>().interactable = false;}
         }
         NetworkMenu.StartClient();
+        NetworkMenu.JoinGame();
     }
 
     public void closeModal(GameObject modal_menu)
@@ -97,7 +98,7 @@ public class MenuScript : MonoBehaviour
     {
         if (!isCoworker)
         {
-            SceneManager.LoadScene(1);
+            NetworkMenu.StartServer();
         }
         else 
         {
@@ -106,6 +107,7 @@ public class MenuScript : MonoBehaviour
             {
                 if (child.CompareTag("Button")) {child.GetComponent<Button>().interactable = true;}
             }
+            
             NetworkMenu.StartServer();
             //SceneManager.LoadScene(1); //������
         }
