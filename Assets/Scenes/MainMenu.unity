@@ -2580,6 +2580,9 @@ MonoBehaviour:
   joinBtnInList: {fileID: 916963010}
   SessionListPanel: {fileID: 1474366439}
   BtnSpacing: 30
+  menuscript: {fileID: 0}
+  friendBool: 0
+  unknownBool: 0
 --- !u!1 &761585844
 GameObject:
   m_ObjectHideFlags: 0
@@ -5562,6 +5565,9 @@ MonoBehaviour:
   joinBtnInList: {fileID: 916963010}
   SessionListPanel: {fileID: 1474366439}
   BtnSpacing: 40
+  menuscript: {fileID: 707613682}
+  friendBool: 0
+  unknownBool: 0
 --- !u!4 &1672513917
 Transform:
   m_ObjectHideFlags: 0
@@ -6523,7 +6529,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1930422728
 RectTransform:
   m_ObjectHideFlags: 0
