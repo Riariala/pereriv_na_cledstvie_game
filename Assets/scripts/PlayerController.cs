@@ -45,13 +45,13 @@ public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>//Mono
         {
             _rb.velocity = new Vector3(_joystick.Horizontal * speed * BoltNetwork.FrameDeltaTime, _rb.velocity.y, _joystick.Vertical * speed* BoltNetwork.FrameDeltaTime);
             _transform.position = new Vector3(_joystick.Horizontal * speed * BoltNetwork.FrameDeltaTime + _transform.position.x, _transform.position.y, _transform.position.z + _joystick.Vertical * speed * BoltNetwork.FrameDeltaTime);
-            Debug.Log(playerCamera_transf.rotation.y);
+            //Debug.Log(playerCamera_transf.rotation.y);
         }
     }
 
     public void GoBack()
     {
-        Debug.Log(_joystick);
+        //Debug.Log(_joystick);
         //_rb.velocity = new Vector3(0,0,0);
     }
         

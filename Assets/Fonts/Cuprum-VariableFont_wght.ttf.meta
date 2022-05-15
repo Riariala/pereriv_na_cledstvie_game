@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bd565291f8cd3954ca51b0150cacd670
+guid: 7d8f9a8d33eda9c4b8d8a78b329db310
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -11,7 +11,7 @@ TrueTypeFontImporter:
   fontNames:
   - Cuprum
   fallbackFontReferences:
-  - {fileID: 12800000, guid: d77a1f4678f54e24f83e73f8253ca168, type: 3}
+  - {fileID: 12800000, guid: 9b45de98da1fb32449205788e6e2485e, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1
