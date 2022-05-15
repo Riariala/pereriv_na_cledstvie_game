@@ -5564,7 +5564,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   joinBtnInList: {fileID: 916963010}
   SessionListPanel: {fileID: 1474366439}
-  BtnSpacing: 25
+  BtnSpacing: 40
   menuscript: {fileID: 707613682}
   friendBool: 0
   unknownBool: 0

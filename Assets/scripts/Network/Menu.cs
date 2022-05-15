@@ -31,13 +31,14 @@ public class Menu : GlobalEventListener
     public override void BoltStartDone()
     {
         //int randInt = UnityEngine.Random.Range(0, 99999);
-        string matchName = "булка";//Guid.NewGuid().ToString();
+        string matchName = Guid.NewGuid().ToString();
         friendBool = menuscript.isCoworker;
         unknownBool = menuscript.isUnknowns;
         Debug.Log(friendBool);
         Debug.Log(unknownBool);
         if (friendBool && !unknownBool)
         {
+            matchName = "булка";
             Debug.Log("уууууууууууу");
             //BoltNetwork.SetServerInfo("Private_" + randInt.ToString(), null);
             //BoltMatchmaking.CreateSession(sessionID: "Private_" + randInt.ToString(), sceneToLoad: "level0");
@@ -98,7 +99,7 @@ public class Menu : GlobalEventListener
             // joinClone.transform.localPosition = new Vector3(0, BtnSpacing*joinServerBtns.Count, 0);
             Button joinClone = Instantiate(joinBtnInList, SessionListPanel.transform);
             //joinClone.transform.localPosition = new Vector3(0, joinClone.GetComponent<RectTransform>().sizeDelta.y*joinServerBtns.Count, 0);
-            joinClone.transform.localPosition = new Vector3(0, BtnSpacing*joinServerBtns.Count, 0);
+            joinClone.transform.localPosition = new Vector3(0, -BtnSpacing*joinServerBtns.Count+100, 0);
             joinClone.transform.GetChild(0).GetComponent<Text>().text = session.Key.ToString(); //здесь надо имя, потом еще понять, откуда взять номер главы, которая проходится
             //var token = new TestToken();
             Debug.Log(photonSession.Id);
