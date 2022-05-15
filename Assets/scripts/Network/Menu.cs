@@ -15,6 +15,10 @@ public class Menu : GlobalEventListener
     public GameObject SessionListPanel;
     public float BtnSpacing;
     private List<Button> joinServerBtns = new List<Button>();
+    public MenuScript menuscript;
+    public bool friendBool=false;
+    public bool unknownBool=false;
+
 
     public void StartServer()
     {
@@ -26,14 +30,51 @@ public class Menu : GlobalEventListener
     }
     public override void BoltStartDone()
     {
+        //int randInt = UnityEngine.Random.Range(0, 99999);
+        string matchName = Guid.NewGuid().ToString();
+        friendBool = menuscript.isCoworker;
+        unknownBool = menuscript.isUnknowns;
+        Debug.Log(friendBool);
+        Debug.Log(unknownBool);
+        if (friendBool && !unknownBool)
+        {
+            matchName = "булка";
+            Debug.Log("уууууууууууу");
+            //BoltNetwork.SetServerInfo("Private_" + randInt.ToString(), null);
+            //BoltMatchmaking.CreateSession(sessionID: "Private_" + randInt.ToString(), sceneToLoad: "level0");
+            var props = new PhotonRoomProperties();
 
-        //if (BoltNetwork.IsServer)
-        //{
-            int randInt = UnityEngine.Random.Range(0, 99999);
-            BoltMatchmaking.CreateSession(sessionID: randInt.ToString(), sceneToLoad: "level0");
-            //BoltNetwork.setServerInfo(randInt, null);
-            //BoltNetwork.LoadScene("level0");
-        //}
+            props.IsOpen = true;
+            props.IsVisible = false; // Make the session invisible
+
+            props["type"] = "game01";
+            props["map"] = "Tutorial1";
+
+            BoltMatchmaking.CreateSession(
+                sessionID: matchName,
+                sceneToLoad: "level0",
+                token: props
+            );
+        }
+        else
+        {
+            //BoltNetwork.SetServerInfo(randInt.ToString(), null);
+            //BoltMatchmaking.CreateSession(sessionID: randInt.ToString(), sceneToLoad: "level0");
+            var props = new PhotonRoomProperties();
+
+            props.IsOpen = true;
+            props.IsVisible = true; // Make the session invisible
+
+            props["type"] = "game01";
+            props["map"] = "Tutorial1";
+
+            BoltMatchmaking.CreateSession(
+                sessionID: matchName,
+                sceneToLoad: "level0",
+                token: props
+            );
+        }
+            
     }
 
     public void StartClient()
@@ -52,16 +93,19 @@ public class Menu : GlobalEventListener
         Debug.Log("авыав");
         foreach (var session in SessionList)
         {
-            Debug.Log("Sessions");
+            
             UdpSession photonSession = session.Value as UdpSession;
             // Button joinClone = Instantiate(joinBtnInList, SessionListPanel.transform);
             // joinClone.transform.localPosition = new Vector3(0, BtnSpacing*joinServerBtns.Count, 0);
             Button joinClone = Instantiate(joinBtnInList, SessionListPanel.transform);
             //joinClone.transform.localPosition = new Vector3(0, joinClone.GetComponent<RectTransform>().sizeDelta.y*joinServerBtns.Count, 0);
-            joinClone.transform.localPosition = new Vector3(0, BtnSpacing*joinServerBtns.Count, 0);
+            joinClone.transform.localPosition = new Vector3(0, -BtnSpacing*joinServerBtns.Count+100, 0);
             joinClone.transform.GetChild(0).GetComponent<Text>().text = session.Key.ToString(); //здесь надо имя, потом еще понять, откуда взять номер главы, которая проходится
+            //var token = new TestToken();
+            Debug.Log(photonSession.Id);
             joinClone.gameObject.SetActive(true);
-            joinClone.onClick.AddListener(() => JoinGame(photonSession));
+            //joinClone.onClick.AddListener(() => JoinGame(photonSession));
+            joinClone.onClick.AddListener(() => BoltMatchmaking.JoinSession(photonSession));
 
             joinServerBtns.Add(joinClone);
 
@@ -76,9 +120,21 @@ public class Menu : GlobalEventListener
         }
     }
 
-    private void JoinGame(UdpSession photonSession)
+    public void JoinGame()
     {
-        BoltMatchmaking.JoinSession(photonSession);
+        //BoltMatchmaking.JoinSession(photonSession);
+        if (BoltNetwork.IsRunning && BoltNetwork.IsClient)
+        {
+            //var userToken = new UserToken();
+            //userToken.user = user;
+            //userToken.password = password;
+
+            BoltMatchmaking.JoinSession("булка", null);
+        }
+        else
+        {
+            BoltLog.Warn("Only a started client can join sessions");
+        }
     }
 
     private void ClearSessions()

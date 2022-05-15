@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: bd565291f8cd3954ca51b0150cacd670
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Cuprum
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: d77a1f4678f54e24f83e73f8253ca168, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
