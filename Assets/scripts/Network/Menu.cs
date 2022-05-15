@@ -31,7 +31,7 @@ public class Menu : GlobalEventListener
     public override void BoltStartDone()
     {
         //int randInt = UnityEngine.Random.Range(0, 99999);
-        string matchName = Guid.NewGuid().ToString();
+        string matchName = "булка";//Guid.NewGuid().ToString();
         friendBool = menuscript.isCoworker;
         unknownBool = menuscript.isUnknowns;
         Debug.Log(friendBool);
@@ -103,7 +103,8 @@ public class Menu : GlobalEventListener
             //var token = new TestToken();
             Debug.Log(photonSession.Id);
             joinClone.gameObject.SetActive(true);
-            joinClone.onClick.AddListener(() => JoinGame(photonSession));
+            //joinClone.onClick.AddListener(() => JoinGame(photonSession));
+            joinClone.onClick.AddListener(() => BoltMatchmaking.JoinSession(photonSession));
 
             joinServerBtns.Add(joinClone);
 
@@ -118,9 +119,21 @@ public class Menu : GlobalEventListener
         }
     }
 
-    private void JoinGame(UdpSession photonSession)
+    public void JoinGame()
     {
-        BoltMatchmaking.JoinSession(photonSession);
+        //BoltMatchmaking.JoinSession(photonSession);
+        if (BoltNetwork.IsRunning && BoltNetwork.IsClient)
+        {
+            //var userToken = new UserToken();
+            //userToken.user = user;
+            //userToken.password = password;
+
+            BoltMatchmaking.JoinSession("булка", null);
+        }
+        else
+        {
+            BoltLog.Warn("Only a started client can join sessions");
+        }
     }
 
     private void ClearSessions()
