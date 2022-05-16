@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
 {
-    [SerializeField] private PlayerData player_data;
+    private PlayerData player_data;
     private Transform target;
 
     void Start()

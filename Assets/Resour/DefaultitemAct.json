@@ -1,0 +1,19 @@
+{
+  "itemPlayerActions": [
+    {
+      "ID": 0,
+      "firstPlayerActs": [ 0, 0 ],
+      "secPlayerActs": [ 0, 0 ]
+    },
+    {
+      "ID": 1,
+      "firstPlayerActs": [ 0, 0 ],
+      "secPlayerActs": [ 0, 0 ]
+    },
+    {
+      "ID": 2,
+      "firstPlayerActs": [ 0, 0 ],
+      "secPlayerActs": [ 0, 0 ]
+    }
+  ]
+}

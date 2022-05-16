@@ -11,6 +11,10 @@ public class MenuScript : MonoBehaviour
     [SerializeField] public GameObject third_menu;
     [SerializeField] public GameObject fourth_menu;
     [SerializeField] public GameObject new_game_modal;
+    public ActionsSaver actionsSaver;
+    public DialogSaver dialogSaver;
+    public PlayerData playerData;
+
     public Menu NetworkMenu;
 
     private bool _isCoworker;
@@ -18,6 +22,11 @@ public class MenuScript : MonoBehaviour
 
     public bool isCoworker {get {return _isCoworker;} set {_isCoworker = value;} }
     public bool isUnknowns {get {return _isUnknowns;} set {_isUnknowns = value;} }
+
+    void Start()
+    {
+        dialogSaver.setDefault();
+    }
 
     public void changeCoworker(GameObject checkp) 
     {
@@ -102,6 +111,7 @@ public class MenuScript : MonoBehaviour
             NetworkMenu.StartServer();
             //SceneManager.LoadScene(1); //������
         }
+        actionsSaver.setDefault();
     }
 
 

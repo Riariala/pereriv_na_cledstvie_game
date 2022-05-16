@@ -52,7 +52,7 @@ public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>//Mono
 
     public void GoBack()
     {
-        Debug.Log(_joystick);
+        //Debug.Log(_joystick);
         //_rb.velocity = new Vector3(0,0,0);
     }
         
