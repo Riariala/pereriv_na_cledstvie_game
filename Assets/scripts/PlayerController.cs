@@ -43,6 +43,7 @@ public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>//Mono
     {
         if (!(_joystick is null))
         {
+
             _rb.velocity = new Vector3(_joystick.Horizontal * speed * BoltNetwork.FrameDeltaTime, _rb.velocity.y, _joystick.Vertical * speed* BoltNetwork.FrameDeltaTime);
             _transform.position = new Vector3(_joystick.Horizontal * speed * BoltNetwork.FrameDeltaTime + _transform.position.x, _transform.position.y, _transform.position.z + _joystick.Vertical * speed * BoltNetwork.FrameDeltaTime);
             //Debug.Log(playerCamera_transf.rotation.y);
@@ -59,4 +60,15 @@ public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>//Mono
     {
         _joystick = newJstk;
     }
+
+    /*void OnCollisionEnter(Collision other)
+    {
+        Debug.Log("Толк");
+        if (other.gameObject.tag == "Player")
+        {
+            Debug.Log("Толк2");
+            GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+            other.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+        }
+    }*/
 }
