@@ -11,6 +11,7 @@ public class MenuScript : MonoBehaviour
     [SerializeField] public GameObject third_menu;
     [SerializeField] public GameObject fourth_menu;
     [SerializeField] public GameObject new_game_modal;
+    [SerializeField] public GameObject store_menu;
     public ActionsSaver actionsSaver;
     public DialogSaver dialogSaver;
     public PlayerData playerData;
@@ -92,6 +93,11 @@ public class MenuScript : MonoBehaviour
     public void goToFourthMenu(GameObject prev_menu)
     {
         StartCoroutine(changing_menu(prev_menu, fourth_menu));
+    }
+
+    public void goToStorehMenu(GameObject prev_menu)
+    {
+        StartCoroutine(changing_menu(prev_menu, store_menu));
     }
 
     public void createNewGame()
