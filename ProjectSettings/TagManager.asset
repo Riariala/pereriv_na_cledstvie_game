@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Item
   - Button
+  - menu_touch
   layers:
   - Default
   - TransparentFX

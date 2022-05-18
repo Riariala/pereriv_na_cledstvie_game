@@ -29,7 +29,10 @@ public class DialogSaver : ScriptableObject
 
     public void ReplaceActionSaver(int ObjectID, int ActionID)
     {
-        actionsSaver.Rewrite(ObjectID, objects[ObjectID].changes[ActionID][0], objects[ObjectID].changes[ActionID][1]);
+        foreach (ObjectActions change in objects[ObjectID].changes[ActionID])
+        {
+            actionsSaver.Rewrite(change.ID, change.firstPlayerActs, change.secPlayerActs);
+        }
     }
 
     public List<string> AskDialog(int ObjectID, int dialogId)

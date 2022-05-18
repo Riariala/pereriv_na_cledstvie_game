@@ -11,9 +11,7 @@ public class touchMenu : MonoBehaviour
 
     [SerializeField] public GameObject menu_obj_touch;
     [SerializeField] public Transform parent;
-    //public GameObject menu_btn;
     public DialogPlayer dialogPlayer;
-    //public GameObject inventory_panel;
 
     private GameObject menu;
     private GameObject touched_item;
@@ -36,7 +34,6 @@ public class touchMenu : MonoBehaviour
             switch (touch.phase)
             {
                 case TouchPhase.Began:
-                    //start_pos = touch.position;
                     break;
 
                 case TouchPhase.Moved:
@@ -113,6 +110,21 @@ public class touchMenu : MonoBehaviour
                     }
                 }
             }
+            else
+            {
+                PointerEventData pointer = new PointerEventData(EventSystem.current);
+                pointer.position = Input.mousePosition;
+                List<RaycastResult> raycastResults = new List<RaycastResult>();
+                EventSystem.current.RaycastAll(pointer, raycastResults);
+                if (raycastResults.Count != 0)
+                {
+                    //Debug.Log(raycastResults[0].gameObject.tag);
+                    if (!raycastResults[0].gameObject.CompareTag("menu_touch"))
+                    {
+                        if (menu != null) { Destroy(menu); }
+                    }
+                }
+            }
         }
     }
 
@@ -138,6 +150,7 @@ public class touchMenu : MonoBehaviour
         Debug.Log("Когда-нибудь тут будут описываться итоги осмотра. И он будет привязан к объекту, на который смотрят.");
         int itemID = touched_item.GetComponent<ObjectManager>().ID;
         dialogPlayer.beginDialog(itemID, 0);
+        if (menu != null) { Destroy(menu); }
     }
 
     public void TakeItAction() //actionKind = 1

@@ -8,6 +8,6 @@ public class ObjectDialogs
     public int obgID;
     public List<List<string>> titles;
     public List<List<string>> dialogs;
-    public List<List<List<int>>> changes;
+    public List<List<ObjectActions>> changes;
     public List<int> effects;
 }
