@@ -10,4 +10,5 @@ public class ObjectDialogs
     public List<List<string>> dialogs;
     public List<List<ObjectActions>> changes;
     public List<int> effects;
+    public List<List<ChoosingDialogs>> clickedEffect;
 }

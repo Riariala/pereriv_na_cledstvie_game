@@ -28,7 +28,6 @@ public class touchMenu : MonoBehaviour
     {
         if (Input.touchCount == 1)
         {
-
             Touch touch = Input.GetTouch(0);
 
             switch (touch.phase)
@@ -40,41 +39,58 @@ public class touchMenu : MonoBehaviour
                     break;
 
                 case TouchPhase.Ended:
-                    if (menu != null){Destroy(menu);}
-
-                    Vector3 pos = touch.position;
-                    Ray ray = Camera.main.ScreenPointToRay(pos);
-                    RaycastHit hit;
-                    if (Physics.Raycast(ray, out hit))
+                    if (!EventSystem.current.IsPointerOverGameObject())
                     {
+                        if (menu != null) { Destroy(menu); }
 
-                        if (hit.collider.tag == "Item")
+                        Vector3 pos = touch.position;
+                        Ray ray = Camera.main.ScreenPointToRay(pos);
+                        RaycastHit hit;
+                        if (Physics.Raycast(ray, out hit))
                         {
-                            touched_item = hit.collider.gameObject;
-                            menu = Instantiate(menu_obj_touch, parent);
-                            menu.transform.position = pos;
-                            List<bool> enable_actionsl = new List<bool>(touched_item.GetComponent<ObjectManager>().enable_actions);
-                            int count_actions = enable_actionsl.Count(x => x == true);
 
-                            float koef = Mathf.PI * 2 / count_actions;
-                            int indActiveAction = 0;
-                            for (int i = 0; i < enable_actionsl.Count; i++)
+                            if (hit.collider.CompareTag("Item") || hit.collider.CompareTag("NPC"))
                             {
-                                if (enable_actionsl[i])
+                                touched_item = hit.collider.gameObject;
+                                menu = Instantiate(menu_obj_touch, parent);
+                                menu.transform.position = pos;
+                                List<bool> enable_actionsl = new List<bool>(touched_item.GetComponent<ObjectManager>().enable_actions);
+                                int count_actions = enable_actionsl.Count(x => x == true);
+
+                                float koef = Mathf.PI * 2 / count_actions;
+                                int indActiveAction = 0;
+                                for (int i = 0; i < enable_actionsl.Count; i++)
                                 {
-                                    GameObject btn = menu.transform.GetChild(i).gameObject;
-                                    btn.SetActive(true);
-                                    btn.transform.localPosition = new Vector3(Mathf.Cos(indActiveAction * koef + (Mathf.PI / 2)) * 60, Mathf.Sin(indActiveAction * koef + (Mathf.PI / 2)) * 60, 0);
-                                    indActiveAction++;
+                                    if (enable_actionsl[i])
+                                    {
+                                        GameObject btn = menu.transform.GetChild(i).gameObject;
+                                        btn.SetActive(true);
+                                        btn.transform.localPosition = new Vector3(Mathf.Cos(indActiveAction * koef + (Mathf.PI / 2)) * 60, Mathf.Sin(indActiveAction * koef + (Mathf.PI / 2)) * 60, 0);
+                                        indActiveAction++;
+                                    }
                                 }
                             }
                         }
                     }
-
+                    else
+                    {
+                        PointerEventData pointer = new PointerEventData(EventSystem.current);
+                        pointer.position = Input.mousePosition;
+                        List<RaycastResult> raycastResults = new List<RaycastResult>();
+                        EventSystem.current.RaycastAll(pointer, raycastResults);
+                        if (raycastResults.Count != 0)
+                        {
+                            if (!raycastResults[0].gameObject.CompareTag("menu_touch"))
+                            {
+                                if (menu != null) { Destroy(menu); }
+                            }
+                        }
+                    }
                     break;
             }
         }
 
+        //---удалить на финальной, чисто для проверки на компьютере---
         if (Input.GetMouseButton(0))
         {
             if (!EventSystem.current.IsPointerOverGameObject())
@@ -87,7 +103,7 @@ public class touchMenu : MonoBehaviour
                 if (Physics.Raycast(ray, out hit))
                 {
 
-                    if (hit.collider.tag == "Item")
+                    if (hit.collider.CompareTag("Item") || hit.collider.CompareTag("NPC"))
                     {
                         touched_item = hit.collider.gameObject;
                         menu = Instantiate(menu_obj_touch, parent);
@@ -118,7 +134,6 @@ public class touchMenu : MonoBehaviour
                 EventSystem.current.RaycastAll(pointer, raycastResults);
                 if (raycastResults.Count != 0)
                 {
-                    //Debug.Log(raycastResults[0].gameObject.tag);
                     if (!raycastResults[0].gameObject.CompareTag("menu_touch"))
                     {
                         if (menu != null) { Destroy(menu); }
@@ -126,6 +141,7 @@ public class touchMenu : MonoBehaviour
                 }
             }
         }
+        //------
     }
 
     //кнопки меню игрока
@@ -144,10 +160,10 @@ public class touchMenu : MonoBehaviour
         journal_panel.SetActive(true);
     }
 
-    //кнопки менюшки объектов, позже приделаю сюда нормальную реализацию, а не просто подписи
+    //кнопки менюшки объектов
     public void watchAtAction() //actionKind = 0
     {
-        Debug.Log("Когда-нибудь тут будут описываться итоги осмотра. И он будет привязан к объекту, на который смотрят.");
+        //Debug.Log("Когда-нибудь тут будут описываться итоги осмотра. И он будет привязан к объекту, на который смотрят.");
         int itemID = touched_item.GetComponent<ObjectManager>().ID;
         dialogPlayer.beginDialog(itemID, 0);
         if (menu != null) { Destroy(menu); }
@@ -155,7 +171,10 @@ public class touchMenu : MonoBehaviour
 
     public void TakeItAction() //actionKind = 1
     {
-        Debug.Log("Когда-нибудь тут возьмут предмет. И действие будет привязано к объекту, который берут.");
+        int itemID = touched_item.GetComponent<ObjectManager>().ID;
+        dialogPlayer.beginDialog(itemID, 1);
+        if (menu != null) { Destroy(menu); }
+        //Debug.Log("Когда-нибудь тут возьмут предмет. И действие будет привязано к объекту, который берут.");
     }
 
     public void doItAction()

@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionsSaver: {fileID: 11400000, guid: 9d3e989a4e3bcb34795e602d6e824d4a, type: 2}
   playerData: {fileID: 11400000, guid: 2336fb71654d97d4b9c3e67c350c186e, type: 2}
+  journalInfo: {fileID: 11400000, guid: dd172ace3ffc9ed4f9bf32fd16a613b0, type: 2}
+  effectChangesSaver: {fileID: 11400000, guid: d5c41f13daa6f474ebc9850edee32c4f, type: 2}
