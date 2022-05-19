@@ -6,18 +6,34 @@ public class InventoryScript : MonoBehaviour
 {
     public GameObject currentTab;
     public GameObject currentMenu;
+    private float defaultPosX;
+
+    void Start()
+    {
+        defaultPosX = currentTab.transform.position.x;
+        OpenTab(currentTab);
+        OpenMenu(currentMenu);
+    }
 
     public void OpenTab(GameObject tab)
     {
         if (!(currentTab is null)){CloseTab();}
         currentTab = tab;
-        currentTab.transform.localScale = new Vector3(1f, 1f, 1f);
+        Transform tabTr = currentTab.transform;
+        defaultPosX = tabTr.position.x;
+        tabTr.position = new Vector2(tabTr.parent.position.x, tabTr.position.y);
     }
 
     public void CloseTab()
     {
-        currentTab.transform.localScale = new Vector3(1f, 0.75f, 1f);
+        currentTab.transform.position = new Vector2(defaultPosX, currentTab.transform.position.y);
     }
+
+    public void SetHelpActive(GameObject helpTab)
+    {
+        helpTab.SetActive(true);
+    }
+
 
     public void OpenMenu(GameObject menu)
     {

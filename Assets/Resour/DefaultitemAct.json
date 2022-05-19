@@ -2,16 +2,21 @@
   "itemPlayerActions": [
     {
       "ID": 0,
-      "firstPlayerActs": [ 0, 0 ],
-      "secPlayerActs": [ 0, 0 ]
+      "firstPlayerActs": [ 1, 3 ],
+      "secPlayerActs": [ 1, 3 ]
     },
     {
       "ID": 1,
-      "firstPlayerActs": [ 0, 0 ],
-      "secPlayerActs": [ 0, 0 ]
+      "firstPlayerActs": [ 1, 0 ],
+      "secPlayerActs": [ 1, 0 ]
     },
     {
       "ID": 2,
+      "firstPlayerActs": [ 1, 3 ],
+      "secPlayerActs": [ 1, 3 ]
+    },
+    {
+      "ID": 3,
       "firstPlayerActs": [ 0, 0 ],
       "secPlayerActs": [ 0, 0 ]
     }

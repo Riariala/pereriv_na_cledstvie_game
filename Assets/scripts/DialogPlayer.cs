@@ -60,4 +60,9 @@ public class DialogPlayer : MonoBehaviour
             dialogSaver.ReplaceActionSaver(ObjectId, dialogId);
         }
     }
+
+    public void textClicked()
+    {
+        dialogSaver.clickedEffectProcess(ObjectId, dialogId, dialogCount);
+    }
 }

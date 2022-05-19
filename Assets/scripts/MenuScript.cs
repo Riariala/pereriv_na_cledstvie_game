@@ -15,6 +15,7 @@ public class MenuScript : MonoBehaviour
     public ActionsSaver actionsSaver;
     public DialogSaver dialogSaver;
     public PlayerData playerData;
+    public JournalInfo journalInfo;
 
     public Menu NetworkMenu;
 
@@ -118,6 +119,7 @@ public class MenuScript : MonoBehaviour
             //SceneManager.LoadScene(1); //������
         }
         actionsSaver.setDefault();
+        journalInfo.clearAll();
     }
 
 
