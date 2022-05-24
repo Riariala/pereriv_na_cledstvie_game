@@ -13,8 +13,13 @@ public class DialogSaver : ScriptableObject
     public PlayerData playerData;
     public JournalInfo journalInfo;
     public EffectChangesSaver effectChangesSaver;
+    public DialogVariantsSaver dialogVariantsSaver;
 
     public List<ObjectDialogs> objects;
+
+    private bool isdialogOver;
+
+    public bool IsdialogOver {get { return isdialogOver;  } set { isdialogOver = value; } }
 
     public void setDefault()
     {
@@ -22,6 +27,7 @@ public class DialogSaver : ScriptableObject
         Debug.Log(_path);
         objects = readFromJSON(_path).objects;
         effectChangesSaver.setDefault();
+        dialogVariantsSaver.setDefault();
     }
 
     public DialogesHolder readFromJSON(string _path)
@@ -37,7 +43,14 @@ public class DialogSaver : ScriptableObject
         }
     }
 
-    public void clickedEffectProcess(int objID, int dialogID, int lineID)
+    public int takeEffectId(int objID, int dialogID)
+    {
+        int effectID = objects[objID].effects[dialogID];
+        return effectID;
+        //if (effectID != 0) { effectProceess(effectID); }
+    }
+
+    public void clickedEffectFind(int objID, int dialogID, int lineID)
     {
         int effectID = -1;
         foreach (ChoosingDialogs choosdia in objects[objID].clickedEffect[dialogID])
@@ -50,29 +63,73 @@ public class DialogSaver : ScriptableObject
         }
         if (effectID > -1)
         {
-            Debug.Log("effectID" + effectID);
-            Effectschanges effect = effectChangesSaver.takeEffect(effectID);
-            if (effect.history.Count != 0) { journalInfo.addHistory(effect.history); }
-            if (effect.evidences.Count != 0) 
-            { 
-                foreach (Evidences evid in effect.evidences)
-                {
-                    journalInfo.changeEvidenceStatus(evid.evidenceID, evid.status);
-                }
-            }
-            if (effect.info.Count != 0)
+            effectProceess(effectID);
+        }
+    }
+
+    public void effectProceess(int effectID)
+    {
+        Debug.Log("effectID" + effectID);
+        Effectschanges effect = effectChangesSaver.takeEffect(effectID);
+        if (effect.history.Count != 0) { journalInfo.addHistory(effect.history); }
+        if (effect.evidences.Count != 0)
+        {
+            foreach (Evidences evid in effect.evidences)
             {
-                foreach (InfoDeteiledID inf in effect.info)
+                journalInfo.changeEvidenceStatus(evid.evidenceID, evid.status);
+            }
+        }
+        if (effect.info.Count != 0)
+        {
+            foreach (InfoDeteiledID inf in effect.info)
+            {
+                journalInfo.addToPersonInfo(inf.InfoId, inf.linesId);
+            }
+        }
+        Debug.Log(" effect.dialog_open.Count " + effect.dialog_open.Count.ToString());
+        if (effect.dialog_open.Count != 0)
+        {
+            foreach (OpenedDialogs opndia in effect.dialog_open)
+            {
+                Debug.Log(" opndia: " + opndia.dialogId.ToString() + " " + opndia.variantId.ToString() + " " + opndia.newMeaning.ToString());
+                dialogVariantsSaver.changeAvailable(opndia.dialogId, opndia.variantId, opndia.newMeaning);
+            }
+        }
+    }
+
+    public void dialogVariantEffect(int diavarID, int variantIndex)
+    {
+        ObjectActions changes = dialogVariantsSaver.variants[diavarID].changes[variantIndex];
+        actionsSaver.Rewrite(changes.ID, changes.firstPlayerActs, changes.secPlayerActs);
+        int effectID = dialogVariantsSaver.variants[diavarID].effects[variantIndex];
+        effectProceess(effectID);
+
+        if (dialogVariantsSaver.variants[diavarID].specailActions.Count > 0)
+        {
+            foreach (List<int> special in dialogVariantsSaver.variants[diavarID].specailActions)
+            {
+                switch (special[1])
                 {
-                    journalInfo.addToPersonInfo(inf.InfoId, inf.linesId);
+                    case 0:
+                        IsdialogOver = true;
+                        Debug.Log(" IsdialogOver " + IsdialogOver);
+                        break;
+                    case 1:
+                        break;
+
+                    case 2:
+                        break;
                 }
+                
             }
         }
 
     }
 
+
     public List<string> AskDialog(int ObjectID, int dialogId)
     {
+        IsdialogOver = false;
         return objects[ObjectID].dialogs[dialogId];
     }
 

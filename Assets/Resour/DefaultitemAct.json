@@ -19,6 +19,11 @@
       "ID": 3,
       "firstPlayerActs": [ 0, 0 ],
       "secPlayerActs": [ 0, 0 ]
+    },
+    {
+      "ID": 4,
+      "firstPlayerActs": [ 1, 0 ],
+      "secPlayerActs": [ 1, 0 ]
     }
   ]
 }
