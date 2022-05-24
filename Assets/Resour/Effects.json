@@ -5,8 +5,10 @@
           "Status":  int (0, 1, 2)
         }
       ],
-  "info": [InfoId: int 
-  linesId: List<int>]
+  "info": [{InfoId: int 
+  linesId: List<int>}]
+  "dialog_open": [{dialogId: int, variantId: int, newMeaning: bool}]
+  "dialog_variant_play": dialog_variantId, 
   */
 
 {
@@ -15,13 +17,39 @@
       "effectID": 0,
       "history": [],
       "evidences": [],
-      "info": []
+      "info": [],
+      "dialog_variant_play": 0,
+      "dialog_open": []
     },
     {
       "effectID": 1,
       "history": [ 0, 2 ],
       "evidences": [],
-      "info": []
+      "info": [],
+      "dialog_variant_play": 0,
+      "dialog_open": []
+    },
+    {
+      "effectID": 2,
+      "history": [ 1 ],
+      "evidences": [],
+      "info": [],
+      "dialog_variant_play": 1,
+      "dialog_open": []
+    },
+    {
+      "effectID": 3,
+      "history": [ ],
+      "evidences": [],
+      "info": [],
+      "dialog_variant_play": 0,
+      "dialog_open": [
+        {
+          "dialogId": 1,
+          "variantId": 2,
+          "newMeaning": true
+        }
+      ]
     }
   ]
 }
