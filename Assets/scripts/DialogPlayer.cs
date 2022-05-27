@@ -39,8 +39,6 @@ public class DialogPlayer : MonoBehaviour
 
     public void playNext()
     {
-        Debug.Log(titleText.Count);
-        Debug.Log(dialogCount);
         if (dialogCount < titleText.Count)
         {
             massage_txt.text = massageText[dialogCount];
@@ -103,12 +101,10 @@ public class DialogPlayer : MonoBehaviour
     public void textClicked()
     {
         dialogSaver.clickedEffectFind(ObjectId, dialogId, dialogCount);
-        Debug.Log("textClicked");
     }
 
     public void dialogVariantClicked(int btn_ind)
     {
-        //int effectId = dialogSaver.takeEffectId(ObjectId, dialogId);
         int dialogVariantID = dialogSaver.effectChangesSaver.effectsChanges[lastEffectID].dialog_variant_play;
         dialogSaver.dialogVariantEffect(dialogVariantID, btn_ind);
         for (int i = 0; i < 3; i++)
