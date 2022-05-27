@@ -23,16 +23,31 @@ public class DialogSaver : ScriptableObject
 
     public void setDefault()
     {
-        string _path = Application.dataPath + "/Resour/" + "ObjectDialogs.json";
-        Debug.Log(_path);
-        objects = readFromJSON(_path).objects;
+        objects = readFromJSON();
         effectChangesSaver.setDefault();
         dialogVariantsSaver.setDefault();
     }
 
-    public DialogesHolder readFromJSON(string _path)
+    public List<ObjectDialogs> readFromJSON()
     {
-        return JsonConvert.DeserializeObject<DialogesHolder>(File.ReadAllText(_path, Encoding.GetEncoding("utf-8")));
+#if UNITY_ANDROID && !UNITY_EDITOR
+        string _path = Application.streamingAssetsPath + "/ObjectDialogs.json";
+        WWW reader = new WWW(_path);
+        while (!reader.isDone) { }
+        if ( reader.error != null )
+        {
+            Debug.LogError("error : " + _path);
+            return new List<ObjectDialogs>();
+        }
+        string file = reader.text;
+#endif
+
+#if UNITY_EDITOR
+        string _path = Application.dataPath + "/Resources/" + "ObjectDialogs.json";
+        string file = File.ReadAllText(_path, Encoding.UTF8);
+#endif
+        DialogesHolder itm = JsonConvert.DeserializeObject<DialogesHolder>(file);
+        return itm.objects;
     }
 
     public void ReplaceActionSaver(int ObjectID, int ActionID)
@@ -142,7 +157,7 @@ public class DialogSaver : ScriptableObject
     {
         int dialogId;
         if (playerData.isPlayer1) { dialogId = actionsSaver.itemPlayerActions[ObjectID].firstPlayerActs[actionKind]; }
-        else { dialogId = actionsSaver.itemPlayerActions[ObjectID].firstPlayerActs[actionKind]; }
+        else { dialogId = actionsSaver.itemPlayerActions[ObjectID].secPlayerActs[actionKind]; }
         return dialogId;
     }
 
