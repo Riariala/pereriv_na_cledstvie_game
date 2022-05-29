@@ -1,39 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
+using UnityEngine.UI;
 
 public class InventoryScript : MonoBehaviour
 {
-    public GameObject currentTab;
+    public Sprite currentMenuImgName;
     public GameObject currentMenu;
+    public GameObject background;
     private float defaultPosX;
 
     void Start()
     {
-        defaultPosX = currentTab.transform.position.x;
-        OpenTab(currentTab);
+        OpenTab(currentMenuImgName);
         OpenMenu(currentMenu);
     }
 
-    public void OpenTab(GameObject tab)
+    public void OpenTab(Sprite tabmenu_type)
     {
-        if (!(currentTab is null)){CloseTab();}
-        currentTab = tab;
-        Transform tabTr = currentTab.transform;
-        defaultPosX = tabTr.position.x;
-        tabTr.position = new Vector2(tabTr.parent.position.x, tabTr.position.y);
-    }
-
-    public void CloseTab()
-    {
-        currentTab.transform.position = new Vector2(defaultPosX, currentTab.transform.position.y);
+        background.GetComponent<Image>().sprite = tabmenu_type;
     }
 
     public void SetHelpActive(GameObject helpTab)
     {
         helpTab.SetActive(true);
     }
-
 
     public void OpenMenu(GameObject menu)
     {

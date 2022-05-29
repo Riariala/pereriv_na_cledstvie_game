@@ -10,6 +10,9 @@ public class JournalInfo : ScriptableObject
     public List<Evidences> playerEvidencesID;
     public List<InfoDeteiledID> playerInfoID;
 
+    private int newInHistory;
+    private int newInEvid;
+    private int newInInfo;
 
     public void clearAll()
     {
@@ -22,13 +25,21 @@ public class JournalInfo : ScriptableObject
     {
         foreach (int id in newid)
         {
-            playerHistoryID.Add(id);
+            if (!playerHistoryID.Contains(id))
+            {
+                playerHistoryID.Add(id);
+                newInHistory++;
+            }
         }
     }
 
     public void addHistory(int newid)
     {
+        if (!playerHistoryID.Contains(newid))
+        {
             playerHistoryID.Add(newid);
+            newInHistory++;
+        }
     }
 
     public void addEvidence(int newid, int newStatus)
