@@ -29,8 +29,10 @@ public class EffectChangesSaver : ScriptableObject
         string file = reader.text;
 #endif
 
-#if !UNITY_ANDROID//UNITY_EDITOR
-        string _path = Application.dataPath + "/Resources/" + "Effects.json";
+
+#if UNITY_EDITOR
+        string _path = Application.dataPath + "/StreamingAssets/" + "Effects.json";
+
         string file = File.ReadAllText(_path, Encoding.UTF8);
 #endif
         EffectChangesHolder itm = JsonConvert.DeserializeObject<EffectChangesHolder>(file);

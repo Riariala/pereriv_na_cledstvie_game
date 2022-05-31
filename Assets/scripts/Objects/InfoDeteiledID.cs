@@ -8,6 +8,11 @@ public class InfoDeteiledID
     public int InfoId;
     public List<int> linesId;
 
+    public InfoDeteiledID()
+    {
+
+    }
+
     public InfoDeteiledID(int newid)
     {
         InfoId = newid;
@@ -18,6 +23,7 @@ public class InfoDeteiledID
     {
         InfoId = newid;
         linesId = newlines;
+        linesId.Sort();
     }
 
     public void addLinesTo(List<int> newLines)
@@ -26,5 +32,12 @@ public class InfoDeteiledID
         {
             linesId.Add(line);
         }
+        linesId.Sort();
+    }
+
+    public void addLinesTo(int newLine)
+    {
+        linesId.Add(newLine);
+        linesId.Sort();
     }
 }
