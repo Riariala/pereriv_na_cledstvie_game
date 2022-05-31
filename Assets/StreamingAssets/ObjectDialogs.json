@@ -30,7 +30,7 @@
         [ { "ID": 0, "firstPlayerActs": [ 3, 0 ], "secPlayerActs": [ 3, 0 ] } ],
         []
       ],
-      "effects": [ 0, 2, 0, 0 ],
+      "effects": [ 0, 1, 2, 0 ],
       "clickedEffect": [   [],    [],    [],  [   {"queue":  3, "effect": 1}]   ]
     },
     {

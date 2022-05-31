@@ -30,7 +30,7 @@ public class ActionsSaver : ScriptableObject
         string file = reader.text;
 #endif
 #if UNITY_EDITOR
-        string _path = Application.dataPath + "/Resources/" + "DefaultitemAct.json";
+        string _path = Application.dataPath + "/StreamingAssets/" + "DefaultitemAct.json";
         string file = File.ReadAllText(_path, Encoding.UTF8);
 #endif
         ObjectsHolder itm = JsonConvert.DeserializeObject<ObjectsHolder>(file);
