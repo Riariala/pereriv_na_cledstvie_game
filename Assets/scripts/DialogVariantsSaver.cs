@@ -31,8 +31,10 @@ public class DialogVariantsSaver : ScriptableObject
         string file = reader.text;
 #endif
 
+
 #if UNITY_EDITOR
         string _path = Application.dataPath + "/StreamingAssets/" + "DialogVariants.json";
+
         string file = File.ReadAllText(_path, Encoding.UTF8);
 #endif
         DialogVariantsHolder itm = JsonConvert.DeserializeObject<DialogVariantsHolder>(file);

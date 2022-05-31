@@ -1729,7 +1729,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 381639372}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1672513916}
+        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
+        m_MethodName: JoinGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &381639372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3058,6 +3070,9 @@ MonoBehaviour:
   menuscript: {fileID: 0}
   friendBool: 0
   unknownBool: 0
+  roomCode: {fileID: 0}
+  inputCode: {fileID: 0}
+  matchName: 
 --- !u!1 &761585844
 GameObject:
   m_ObjectHideFlags: 0
@@ -6202,6 +6217,9 @@ MonoBehaviour:
   menuscript: {fileID: 707613682}
   friendBool: 0
   unknownBool: 0
+  roomCode: {fileID: 2138478509}
+  inputCode: {fileID: 129918009}
+  matchName: 
 --- !u!4 &1672513917
 Transform:
   m_ObjectHideFlags: 0
@@ -8000,7 +8018,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "[\u043A\u043E\u0434 \u0434\u043E\u0441\u0442\u0443\u043F\u0430]"
+  m_Text: "\u0413\u0435\u043D\u0435\u0440\u0430\u0446\u0438\u044F \u043A\u043E\u0434\u0430..."
 --- !u!222 &2138478510
 CanvasRenderer:
   m_ObjectHideFlags: 0
