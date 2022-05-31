@@ -26,6 +26,10 @@ public class DialogSaver : ScriptableObject
         objects = readFromJSON();
         effectChangesSaver.setDefault();
         dialogVariantsSaver.setDefault();
+        journalInfo.newInHistory = 0;
+        journalInfo.newInEvid = new List<int>();
+        journalInfo.newInInfo = new List<int>();
+
     }
 
     public List<ObjectDialogs> readFromJSON()
@@ -43,7 +47,7 @@ public class DialogSaver : ScriptableObject
 #endif
 
 #if UNITY_EDITOR
-        string _path = Application.dataPath + "/Resources/" + "ObjectDialogs.json";
+        string _path = Application.dataPath + "/StreamingAssets/" + "ObjectDialogs.json";
         string file = File.ReadAllText(_path, Encoding.UTF8);
 #endif
         DialogesHolder itm = JsonConvert.DeserializeObject<DialogesHolder>(file);

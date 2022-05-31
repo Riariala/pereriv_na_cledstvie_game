@@ -10,9 +10,9 @@ public class JournalInfo : ScriptableObject
     public List<Evidences> playerEvidencesID;
     public List<InfoDeteiledID> playerInfoID;
 
-    private int newInHistory;
-    private int newInEvid;
-    private int newInInfo;
+    public int newInHistory;
+    public List<int> newInEvid;
+    public List<int> newInInfo;
 
     public void clearAll()
     {
@@ -58,11 +58,13 @@ public class JournalInfo : ScriptableObject
     public void newInfoPerson(int personInfoId)
     {
         playerInfoID.Add(new InfoDeteiledID(personInfoId));
+        if (!newInInfo.Contains(personInfoId)) { newInInfo.Add(personInfoId); }
     }
 
     public void newInfoPerson(int personInfoId, List<int> newlines)
     {
         playerInfoID.Add(new InfoDeteiledID(personInfoId, newlines));
+        if (!newInInfo.Contains(personInfoId)) { newInInfo.Add(personInfoId); }
     }
 
     public void addToPersonInfo(int personInfoId, List<int> newLines)
@@ -71,10 +73,20 @@ public class JournalInfo : ScriptableObject
         {
             if (personInfo.InfoId == personInfoId)
             {
-                personInfo.addLinesTo(newLines);
+                foreach (int lineid in newLines)
+                { 
+                    if (!personInfo.linesId.Contains(lineid))
+                    {
+
+                        if (!newInInfo.Contains(personInfoId)) { newInInfo.Add(personInfoId); }
+                        personInfo.addLinesTo(newLines);
+                    }
+                }
+                personInfo.linesId.Sort();
                 return;
             }
         }
+        newInfoPerson(personInfoId, newLines);
     }
 
     public void changeEvidenceStatus(int evidID, int newStatus)

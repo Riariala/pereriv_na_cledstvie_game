@@ -24,8 +24,17 @@
     {
       "effectID": 1,
       "history": [ 0, 2 ],
-      "evidences": [],
-      "info": [],
+      "evidences": [    ],
+      "info": [
+        {
+          "InfoId": 0,
+          "linesId": [ 1 ]
+        },
+        {
+          "InfoId": 1,
+          "linesId": [ 0 ]
+        }
+      ],
       "dialog_variant_play": 0,
       "dialog_open": []
     },
@@ -33,7 +42,12 @@
       "effectID": 2,
       "history": [ 1 ],
       "evidences": [],
-      "info": [],
+      "info": [
+        {
+          "InfoId": 0,
+          "linesId": [0, 2]
+        }
+      ],
       "dialog_variant_play": 1,
       "dialog_open": []
     },

@@ -30,7 +30,7 @@ public class EffectChangesSaver : ScriptableObject
 #endif
 
 #if UNITY_EDITOR
-        string _path = Application.dataPath + "/Resources/" + "Effects.json";
+        string _path = Application.dataPath + "/StreamingAssets/" + "Effects.json";
         string file = File.ReadAllText(_path, Encoding.UTF8);
 #endif
         EffectChangesHolder itm = JsonConvert.DeserializeObject<EffectChangesHolder>(file);
