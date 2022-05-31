@@ -19,13 +19,17 @@ public class Menu : GlobalEventListener
     public MenuScript menuscript;
     public bool friendBool=false;
     public bool unknownBool=false;
-
+    public Text roomCode;
+    public InputField inputCode;
+    public string matchName;
 
     public void StartServer()
     {
         if (BoltNetwork.IsClient) {
             BoltLauncher.Shutdown();
         }
+        matchName = UnityEngine.Random.Range(1000, 99999).ToString();
+        roomCode.text = matchName;
         BoltLauncher.StartServer();
        
     }
@@ -33,14 +37,15 @@ public class Menu : GlobalEventListener
     public override void BoltStartDone()
     {
         //int randInt = UnityEngine.Random.Range(0, 99999);
-        string matchName = Guid.NewGuid().ToString();
+        //string matchName = Guid.NewGuid().ToString();
+        
         friendBool = menuscript.isCoworker;
         unknownBool = menuscript.isUnknowns;
         Debug.Log(friendBool);
         Debug.Log(unknownBool);
         if (friendBool && !unknownBool)
         {
-            matchName = "булка";
+            
             Debug.Log("уууууууууууу");
             //BoltNetwork.SetServerInfo("Private_" + randInt.ToString(), null);
             //BoltMatchmaking.CreateSession(sessionID: "Private_" + randInt.ToString(), sceneToLoad: "level0");
@@ -63,7 +68,7 @@ public class Menu : GlobalEventListener
             //BoltNetwork.SetServerInfo(randInt.ToString(), null);
             //BoltMatchmaking.CreateSession(sessionID: randInt.ToString(), sceneToLoad: "level0");
             var props = new PhotonRoomProperties();
-
+            Debug.Log("ввввввввв");
             props.IsOpen = true;
             props.IsVisible = true; // Make the session invisible
 
@@ -130,8 +135,9 @@ public class Menu : GlobalEventListener
             //var userToken = new UserToken();
             //userToken.user = user;
             //userToken.password = password;
-
-            BoltMatchmaking.JoinSession("булка", null);
+            Debug.Log(inputCode.text);
+            BoltMatchmaking.JoinSession(inputCode.text, null);
+                   
         }
         else
         {

@@ -42,7 +42,7 @@ public class DialogSaver : ScriptableObject
         string file = reader.text;
 #endif
 
-#if UNITY_EDITOR
+#if !UNITY_ANDROID//UNITY_EDITOR
         string _path = Application.dataPath + "/Resources/" + "ObjectDialogs.json";
         string file = File.ReadAllText(_path, Encoding.UTF8);
 #endif
