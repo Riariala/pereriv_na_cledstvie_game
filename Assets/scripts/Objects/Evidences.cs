@@ -5,7 +5,10 @@ using UnityEngine;
 public class Evidences
 {
     public int evidenceID;
-    public int status;
+    public int status; //0 - неподтвержден, 1 - подтвержден, 2 - ложный
+    //public List<int> position;
+    //public int scale;
+    public List<int> connected;
 
     public Evidences(int id, int newStatus)
     {

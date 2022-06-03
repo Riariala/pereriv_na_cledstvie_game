@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.EventSystems;
 
 public class InventoryLoader : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class InventoryLoader : MonoBehaviour
     public Transform content_btns;
     public JournalInfo journalInfo;
     public EffectsSaver effectsSaver;
+    public DialogSaver dialogSaver;
 
     public Transform newHistoryPin;
     public Transform newEvidPin;
@@ -19,11 +21,21 @@ public class InventoryLoader : MonoBehaviour
     public GameObject InfoField;
     public Text infoText;
     public GameObject infoImage;
+    public GameObject evidPrefub;
+    public GameObject evidLinePrefub;
+    public Transform evidContent;
 
+
+    private int choosenEvidId;
+    private GameObject choosenEvidObj;
+    private Evidences choosenEvidInfo;
+    private int evidListScale;
+    private float timeEvidClickOn;
 
     void Start()
     {
         effectsSaver.setDefault();
+        redrawEvidPage();
     }
 
     public void updateHistory()
@@ -41,12 +53,6 @@ public class InventoryLoader : MonoBehaviour
         if (journalInfo.playerInfoID.Count != 0)
         {
             List<int> changeCopy = new List<int>(journalInfo.newInInfo);
-            string test = "";
-            foreach(int f in changeCopy)
-            {
-                test += f.ToString() + " ";
-            }
-            Debug.Log("Tested before " + test);
             foreach (Transform child in content_btns.GetChild(1).transform)
             {
                 Debug.Log(content_btns.gameObject.name);
@@ -77,12 +83,6 @@ public class InventoryLoader : MonoBehaviour
                 changeCopy.Remove(childId);
             }
             Transform parent;
-            test = "";
-            foreach (int f in changeCopy)
-            {
-                test += f.ToString() + " ";
-            }
-            Debug.Log("Tested after " + test);
             foreach (var btnId in changeCopy)
             {
                 switch (effectsSaver.info[btnId].type)
@@ -119,7 +119,6 @@ public class InventoryLoader : MonoBehaviour
     public void callInfoPage(int ID)
     {
         InfoField.SetActive(true);
-        //infoText.text = "";
         string newText = "";
         List<int> infoLines = new List<int>();
         foreach (InfoDeteiledID infoid in journalInfo.playerInfoID)
@@ -139,7 +138,6 @@ public class InventoryLoader : MonoBehaviour
         foreach (int lineid in infoLines)
         {
             newText += effectsSaver.info[ID].lines[lineid] + "\n";
-            //infoText.text += effectsSaver.info[ID].lines[lineid] + "\n";
         }
         if (effectsSaver.info[ID].picture != "")
         {
@@ -151,6 +149,117 @@ public class InventoryLoader : MonoBehaviour
         }
         InfoField.transform.GetChild(0).GetComponent<Text>().text = effectsSaver.info[ID].title;
         infoText.text = newText;
+    }
+
+    public void redrawEvidPage()
+    {
+        List < int[] > existConnections;
+        foreach (Evidences evid in journalInfo.playerEvidencesID)
+        {
+            drawEvid(evid);
+        }
+    }
+
+    public void addNewEvid()
+    {
+        choosenEvidId = -1;
+        List<int> changeCopy = new List<int>(journalInfo.newInEvid);
+
+        foreach (Transform child in evidContent.GetChild(1).transform)
+        {
+            int id = Int32.Parse(child.gameObject.name);
+            if (changeCopy.Contains(id))
+            {
+                changeEvidColor(child.gameObject, journalInfo.playerEvidencesID[id]);
+                changeCopy.Remove(id);
+            }
+        }
+        if (changeCopy.Count != 0)
+        {
+            foreach (Evidences evid in journalInfo.playerEvidencesID)
+            {
+                if (changeCopy.Contains(evid.evidenceID))
+                {
+                    drawEvid(evid);
+                }
+            }
+            journalInfo.newInEvid = new List<int>();
+        }
+    }
+
+    public void drawEvid(Evidences evid)
+    {
+        GameObject newEvid = Instantiate(evidPrefub, evidContent.GetChild(1));
+        EvidencesSaver evidInfo = effectsSaver.evidences[evid.evidenceID];
+        newEvid.transform.localPosition = new Vector2(evidInfo.startPosition[0], evidInfo.startPosition[1]);
+        newEvid.transform.GetChild(0).gameObject.GetComponent<Text>().text = evidInfo.title;
+        newEvid.name = evid.evidenceID.ToString();
+        changeEvidColor(newEvid, evid);
+        EventTrigger trigger = newEvid.GetComponent<EventTrigger>();
+        EventTrigger.Entry entry = new EventTrigger.Entry();
+        entry.eventID = EventTriggerType.PointerDown;
+        entry.callback.AddListener((data) => { clickEvidence(evid.evidenceID); });
+        trigger.triggers.Add(entry);
+        entry = new EventTrigger.Entry();
+        entry.eventID = EventTriggerType.PointerUp;
+        entry.callback.AddListener((data) => { unclickedEvidence(evid.evidenceID, newEvid, evid); });
+        trigger.triggers.Add(entry);
+    }
+
+    public void changeEvidColor(GameObject newEvid, Evidences evid)
+    {
+        Color evidColor;
+        switch (evid.status)
+        {
+            case 0:
+                evidColor = new Color(255, 200, 0, 255);
+                break;
+            case 1:
+                evidColor = new Color(0, 255, 100, 255);
+                break;
+            case 2:
+                evidColor = new Color(0, 100, 255, 255);
+                break;
+            default:
+                evidColor = new Color(255, 255, 255, 255);
+                break;
+        }
+        newEvid.GetComponent<Image>().color = evidColor;
+    }
+
+    public void clickEvidence(int ID)
+    {
+        timeEvidClickOn = Time.time;
+    }
+
+    public void unclickedEvidence(int ID, GameObject evidObj, Evidences evid)
+    {
+        float timePass = Time.time - timeEvidClickOn;
+        if (timePass > 0.7f)
+        {
+            Debug.Log("timePass " + timePass.ToString()); //в ожидании дизайна уллик
+        }
+        else
+        {
+            if (choosenEvidId != -1)
+            {
+                changeEvidColor(choosenEvidObj, choosenEvidInfo);
+                if (effectsSaver.evidences[ID].connectionList.Contains(choosenEvidId))
+                {
+                    int connectionId = effectsSaver.evidences[ID].connectionList.IndexOf(choosenEvidId);
+                    dialogSaver.effectProceess(effectsSaver.evidences[ID].effects[connectionId]);
+                    addNewEvid();
+                }
+                choosenEvidId = -1;
+            }
+            else
+            {
+                choosenEvidId = ID;
+                evidObj.GetComponent<Image>().color = new Color(255, 255, 255, 255);
+                choosenEvidObj = evidObj;
+                choosenEvidInfo = evid;
+            }
+        }
     }
 
     public void closeInfoField()
@@ -178,12 +287,12 @@ public class InventoryLoader : MonoBehaviour
         }
         else { newHistoryPin.gameObject.SetActive(false); }
 
-        //if (journalInfo.newInEvid.Count != 0)
-        //{
-        //    newEvidPin.gameObject.SetActive(true);
-        //    newEvidPin.GetChild(0).GetComponent<Text>().text = journalInfo.newInEvid.Count.ToString();
-        //}
-        //else { newEvidPin.gameObject.SetActive(false); }
+        if (journalInfo.newInEvid.Count != 0)
+        {
+            newEvidPin.gameObject.SetActive(true);
+            newEvidPin.GetChild(0).GetComponent<Text>().text = journalInfo.newInEvid.Count.ToString();
+        }
+        else { newEvidPin.gameObject.SetActive(false); }
 
         if (journalInfo.newInInfo.Count != 0)
         {
@@ -191,6 +300,12 @@ public class InventoryLoader : MonoBehaviour
             newInfoPin.GetChild(0).GetComponent<Text>().text = journalInfo.newInInfo.Count.ToString();
         }
         else { newInfoPin.gameObject.SetActive(false); }
+    }
+
+    public void removeEvidPin()
+    {
+        journalInfo.newInEvid = new List<int>();
+        newEvidPin.gameObject.SetActive(false);
     }
 
     public void removeHistoryPin()

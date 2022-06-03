@@ -30,7 +30,7 @@ public class EffectsSaver : ScriptableObject
         if ( reader.error != null )
         {
             Debug.LogError("error : " + _path);
-            return new EffectsHolder;
+            return new EffectsHolder();
         }
         string file = reader.text;
 #endif
