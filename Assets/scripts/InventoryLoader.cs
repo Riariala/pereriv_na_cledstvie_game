@@ -31,10 +31,12 @@ public class InventoryLoader : MonoBehaviour
     private Evidences choosenEvidInfo;
     private int evidListScale;
     private float timeEvidClickOn;
+    private List<int[]> connectedLinesList;
 
     void Start()
     {
         effectsSaver.setDefault();
+        connectedLinesList = new List<int[]>();
         redrawEvidPage();
     }
 
@@ -153,10 +155,13 @@ public class InventoryLoader : MonoBehaviour
 
     public void redrawEvidPage()
     {
-        List < int[] > existConnections;
         foreach (Evidences evid in journalInfo.playerEvidencesID)
         {
             drawEvid(evid);
+            foreach (int connectedId in evid.connected)
+            {
+                drawEvidConnections(evid.evidenceID, connectedId);
+            }
         }
     }
 
@@ -206,6 +211,26 @@ public class InventoryLoader : MonoBehaviour
         trigger.triggers.Add(entry);
     }
 
+    public void drawEvidConnections(int firstId, int secondId)
+    {
+        //int[] connect1 = new int[] { firstId, secondId };
+        //int[] connect2 = new int[] { secondId, firstId };
+
+        //if (!(connectedLinesList.Contains(connect1) || connectedLinesList.Contains(connect2)))
+        //{
+        //    connectedLinesList.Add(connect1);
+        //    GameObject newLine = Instantiate(evidLinePrefub, evidContent.GetChild(0));
+        //    //newLine.GetComponent<UILineRenderer>().positionCount = 2;
+        //    newLine.transform.GetChild(0).GetComponent<UILineRenderer>().SetPosition(0, new Vector2(effectsSaver.evidences[firstId].startPosition[0], effectsSaver.evidences[firstId].startPosition[1]));
+        //    newLine.transform.GetChild(0).GetComponent<UILineRenderer>().SetPosition(0, new Vector2(effectsSaver.evidences[secondId].startPosition[0], effectsSaver.evidences[secondId].startPosition[1]));
+        //    //newLine.GetComponent<LineRenderer>().startWidth = 20f;
+        //    //newLine.GetComponent<LineRenderer>().endWidth = 20f;
+        //    //newLine.GetComponent<LineRenderer>().SetPosition(0, new Vector3(effectsSaver.evidences[firstId].startPosition[0], effectsSaver.evidences[firstId].startPosition[1], 10));
+        //    //newLine.GetComponent<LineRenderer>().SetPosition(1, new Vector3(effectsSaver.evidences[secondId].startPosition[0], effectsSaver.evidences[secondId].startPosition[1], -10));
+
+        //}
+    }
+
     public void changeEvidColor(GameObject newEvid, Evidences evid)
     {
         Color evidColor;
@@ -247,6 +272,7 @@ public class InventoryLoader : MonoBehaviour
                 if (effectsSaver.evidences[ID].connectionList.Contains(choosenEvidId))
                 {
                     int connectionId = effectsSaver.evidences[ID].connectionList.IndexOf(choosenEvidId);
+                    drawEvidConnections(ID, choosenEvidId);
                     dialogSaver.effectProceess(effectsSaver.evidences[ID].effects[connectionId]);
                     addNewEvid();
                 }
