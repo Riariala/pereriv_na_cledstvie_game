@@ -30,7 +30,7 @@ public class touchMenu : MonoBehaviour
         forAndroid();
 #endif
 
-#if !UNITY_ANDROID//UNITY_EDITOR
+#if !UNITY_ANDROID || UNITY_EDITOR
         forEditorUpdate();
 #endif
     }
