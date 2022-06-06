@@ -10,7 +10,26 @@
     {
       "evidanceID": 0,
       "title": "Улика 1",
-      "desc":  "Описание улики 1"
+      "desc": "Описание улики 1",
+      "connectionList": [ 1 ],
+      "effects": [ 4 ],
+      "startPosition": [ 0, 0 ]
+    },
+    {
+      "evidanceID": 1,
+      "title": "Улика 2",
+      "desc": "Описание улики 2",
+      "connectionList": [ 0 ],
+      "effects": [ 4 ],
+      "startPosition": [ 200, -200 ]
+    },
+    {
+      "evidanceID": 2,
+      "title": "Улика 3",
+      "desc": "Описание улики 3",
+      "connectionList": [],
+      "effects": [],
+      "startPosition": [ 400, -250 ]
     }
 
   ],

@@ -24,7 +24,12 @@
     {
       "effectID": 1,
       "history": [ 0, 2 ],
-      "evidences": [    ],
+      "evidences": [
+        {
+          "EvidenceID": 1,
+          "Status": 0
+        }
+      ],
       "info": [
         {
           "InfoId": 0,
@@ -41,7 +46,12 @@
     {
       "effectID": 2,
       "history": [ 1 ],
-      "evidences": [],
+      "evidences": [
+        {
+          "EvidenceID": 0,
+          "Status":  0
+        }
+      ],
       "info": [
         {
           "InfoId": 0,
@@ -53,7 +63,7 @@
     },
     {
       "effectID": 3,
-      "history": [ ],
+      "history": [],
       "evidences": [],
       "info": [],
       "dialog_variant_play": 0,
@@ -64,6 +74,20 @@
           "newMeaning": true
         }
       ]
+    },
+
+    {
+      "effectID": 4,
+      "history": [],
+      "evidences": [
+        {
+          "EvidenceID": 2,
+          "Status": 0
+        }
+      ],
+      "info": [],
+      "dialog_variant_play": 0,
+      "dialog_open": [ ]
     }
   ]
 }
