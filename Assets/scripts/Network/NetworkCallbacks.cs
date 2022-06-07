@@ -57,6 +57,7 @@ public class NetworkCallbacks : GlobalEventListener
     public override void OnEvent(PlayerCharacter evnt)
     {
         isPlayer1=evnt.IsPlayer1;
+        data.isPlayer1 = isPlayer1;
     }
 
     /*public override void SceneLoadLocalDone(string map)

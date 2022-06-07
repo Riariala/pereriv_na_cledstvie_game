@@ -7,6 +7,7 @@ public class PlayerData : ScriptableObject
 {
     public bool isPlayer1;
     public GameObject char_player;
+    public int dialogId;
 
     public void ChangeCharacter(GameObject newplayer)
     {
