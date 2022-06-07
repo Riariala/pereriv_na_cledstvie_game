@@ -9,6 +9,7 @@ public class NetworkCallbacks : GlobalEventListener
     public GameObject player2;
     public bool isPlayer1;
     public CharReader reader;
+    public PlayerData data;
 
     public override void BoltStartBegin()
     {
@@ -18,6 +19,8 @@ public class NetworkCallbacks : GlobalEventListener
 
     public override void SceneLoadLocalDone(string scene, IProtocolToken token)
     {
+        isPlayer1 = data.isPlayer1;
+
         if (BoltNetwork.IsClient)
         {
             isPlayer1 = !reader.isPlayer1;

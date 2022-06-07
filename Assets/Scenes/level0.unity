@@ -10663,6 +10663,7 @@ MonoBehaviour:
   player2: {fileID: 5946829683437410507, guid: 83d193202199d2c48b6c6ce3ba0a37a5, type: 3}
   isPlayer1: 0
   reader: {fileID: 1927280845}
+  data: {fileID: 11400000, guid: 2336fb71654d97d4b9c3e67c350c186e, type: 2}
 --- !u!4 &1927280843
 Transform:
   m_ObjectHideFlags: 0
