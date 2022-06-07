@@ -47,7 +47,7 @@ public class DialogSaver : ScriptableObject
 #endif
 
 
-#if UNITY_EDITOR
+#if !UNITY_ANDROID//UNITY_EDITOR
         string _path = Application.dataPath + "/StreamingAssets/" + "ObjectDialogs.json";
         string file = File.ReadAllText(_path, Encoding.UTF8);
 #endif
