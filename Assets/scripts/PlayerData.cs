@@ -14,6 +14,11 @@ public class PlayerData : ScriptableObject
         char_player = newplayer;
     }
 
+    public void ChangeCharacter()
+    {
+        isPlayer1 = !isPlayer1;
+    }
+
     public void SetCharacter(bool _isPlayer1, GameObject newplayer)
     {
         isPlayer1 = _isPlayer1;
