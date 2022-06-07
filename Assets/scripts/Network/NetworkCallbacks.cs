@@ -7,7 +7,7 @@ public class NetworkCallbacks : GlobalEventListener
 {
     public GameObject player1;
     public GameObject player2;
-    public bool isPlayer1=true;
+    public bool isPlayer1;
     public CharReader reader;
 
     public override void BoltStartBegin()
