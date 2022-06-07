@@ -8,6 +8,7 @@ TagManager:
   - Button
   - menu_touch
   - NPC
+  - Door
   layers:
   - Default
   - TransparentFX
