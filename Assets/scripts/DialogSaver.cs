@@ -63,6 +63,14 @@ public class DialogSaver : ScriptableObject
         }
     }
 
+    public void ReplaceActionSaver(List<ObjectActions> newActions)
+    {
+        foreach (ObjectActions change in newActions)
+        {
+            actionsSaver.Rewrite(change.ID, change.firstPlayerActs, change.secPlayerActs);
+        }
+    }
+
     public int takeEffectId(int objID, int dialogID)
     {
         int effectID = objects[objID].effects[dialogID];
@@ -161,7 +169,10 @@ public class DialogSaver : ScriptableObject
     public int AskDialogId(int ObjectID, int actionKind)
     {
         int dialogId;
-        if (playerData.isPlayer1) { dialogId = actionsSaver.itemPlayerActions[ObjectID].firstPlayerActs[actionKind]; }
+        if (playerData.isPlayer1) 
+        { 
+            dialogId = actionsSaver.itemPlayerActions[ObjectID].firstPlayerActs[actionKind]; 
+        }
         else { dialogId = actionsSaver.itemPlayerActions[ObjectID].secPlayerActs[actionKind]; }
         return dialogId;
     }

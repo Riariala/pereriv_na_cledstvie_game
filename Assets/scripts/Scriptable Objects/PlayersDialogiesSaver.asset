@@ -9,11 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2320509e04fb3d4fa65cb71cbcdb03a, type: 3}
-  m_Name: PlayerData
+  m_Script: {fileID: 11500000, guid: 982a731c36eaab4429ec7a99971792f2, type: 3}
+  m_Name: PlayersDialogiesSaver
   m_EditorClassIdentifier: 
-  isPlayer1: 1
-  char_player: {fileID: 5946829683437410507, guid: 83d193202199d2c48b6c6ce3ba0a37a5,
-    type: 3}
-  dialogId: 0
-  isBusy: 1

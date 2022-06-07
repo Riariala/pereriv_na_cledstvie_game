@@ -8,6 +8,7 @@ public class PlayerData : ScriptableObject
     public bool isPlayer1;
     public GameObject char_player;
     public int dialogId;
+    public bool isBusy;
 
     public void ChangeCharacter(GameObject newplayer)
     {

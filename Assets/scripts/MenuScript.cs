@@ -16,6 +16,7 @@ public class MenuScript : MonoBehaviour
     public DialogSaver dialogSaver;
     public PlayerData playerData;
     public JournalInfo journalInfo;
+    public PlayersDialogiesSaver playersDialogiesSaver;
 
     public Menu NetworkMenu;
 
@@ -122,6 +123,7 @@ public class MenuScript : MonoBehaviour
         }
         actionsSaver.setDefault();
         journalInfo.clearAll();
+        playersDialogiesSaver.setDefault();
     }
 
 
