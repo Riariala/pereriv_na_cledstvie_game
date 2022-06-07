@@ -27,6 +27,6 @@ public class CharToken : Photon.Bolt.PooledProtocolToken
     public override void Reset()
     {
         // Reset Token Data
-        isPlayer1 = default(bool);
+        isPlayer1 = true;
     }
 }

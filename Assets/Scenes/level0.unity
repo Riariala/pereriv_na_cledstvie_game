@@ -1983,6 +1983,7 @@ MonoBehaviour:
   Player2: {fileID: 5946829683437410507, guid: 83d193202199d2c48b6c6ce3ba0a37a5, type: 3}
   _jystick: {fileID: 210846479}
   player_data: {fileID: 11400000, guid: 2336fb71654d97d4b9c3e67c350c186e, type: 2}
+  handler: {fileID: 1927280844}
 --- !u!4 &333963700
 Transform:
   m_ObjectHideFlags: 0
@@ -3025,7 +3026,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.17500001, y: 0.051111117}
   m_AnchorMax: {x: 0.85375, y: 0.94888896}
-  m_AnchoredPosition: {x: -11.5, y: 0}
+  m_AnchoredPosition: {x: -11.500336, y: 0}
   m_SizeDelta: {x: 257, y: 45.99991}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &583651015
@@ -5924,9 +5925,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 2336fb71654d97d4b9c3e67c350c186e, type: 2}
-        m_TargetAssemblyTypeName: PlayerData, Assembly-CSharp
-        m_MethodName: ChangeCharacter
+      - m_Target: {fileID: 333963698}
+        m_TargetAssemblyTypeName: changeCharacter, Assembly-CSharp
+        m_MethodName: Change_chars
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10663,7 +10664,10 @@ MonoBehaviour:
   player2: {fileID: 5946829683437410507, guid: 83d193202199d2c48b6c6ce3ba0a37a5, type: 3}
   isPlayer1: 0
   reader: {fileID: 1927280845}
+  handler: {fileID: 1927280844}
   data: {fileID: 11400000, guid: 2336fb71654d97d4b9c3e67c350c186e, type: 2}
+  actions: {fileID: 11400000, guid: 9d3e989a4e3bcb34795e602d6e824d4a, type: 2}
+  journal: {fileID: 11400000, guid: dd172ace3ffc9ed4f9bf32fd16a613b0, type: 2}
 --- !u!4 &1927280843
 Transform:
   m_ObjectHideFlags: 0
