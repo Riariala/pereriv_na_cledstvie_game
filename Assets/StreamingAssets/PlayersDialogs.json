@@ -1,0 +1,31 @@
+
+/*
+       "changes": [ {
+          "ID": 0,
+          "firstPlayerActs": [ 2, 0 ],
+          "secPlayerActs": [ 2, 0 ]
+        }]
+  */
+{
+  "dialogiesList": [
+    {
+      "ID": 0,
+      "isFirstTalk": [ true, false, true, false ],
+      "dialogLines": [ "Привет", "И тебе привет, Роджерс", "Пока, Мари", "Прощай" ],
+      "changes": [
+      ],
+      "effect": 0,
+      "nextDialog": 1
+    },
+    {
+      "ID": 1,
+      "isFirstTalk": [ false, true, false ],
+      "dialogLines": [ "А второй диалог начинаю я!", "Не хвастайся, Мари", "И не буду" ],
+      "changes": [
+      ],
+      "effect": 0,
+      "nextDialog": 0
+    }
+
+  ]
+}

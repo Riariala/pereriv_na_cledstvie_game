@@ -1,0 +1,93 @@
+/*
+  "evidences": [
+        {
+          "EvidenceID": int,
+          "Status":  int (0, 1, 2)
+        }
+      ],
+  "info": [{InfoId: int 
+  linesId: List<int>}]
+  "dialog_open": [{dialogId: int, variantId: int, newMeaning: bool}]
+  "dialog_variant_play": dialog_variantId, 
+  */
+
+{
+  "effect": [
+    {
+      "effectID": 0,
+      "history": [],
+      "evidences": [],
+      "info": [],
+      "dialog_variant_play": 0,
+      "dialog_open": []
+    },
+    {
+      "effectID": 1,
+      "history": [ 0, 2 ],
+      "evidences": [
+        {
+          "EvidenceID": 1,
+          "Status": 0
+        }
+      ],
+      "info": [
+        {
+          "InfoId": 0,
+          "linesId": [ 1 ]
+        },
+        {
+          "InfoId": 1,
+          "linesId": [ 0 ]
+        }
+      ],
+      "dialog_variant_play": 0,
+      "dialog_open": []
+    },
+    {
+      "effectID": 2,
+      "history": [ 1 ],
+      "evidences": [
+        {
+          "EvidenceID": 0,
+          "Status":  0
+        }
+      ],
+      "info": [
+        {
+          "InfoId": 0,
+          "linesId": [0, 2]
+        }
+      ],
+      "dialog_variant_play": 1,
+      "dialog_open": []
+    },
+    {
+      "effectID": 3,
+      "history": [],
+      "evidences": [],
+      "info": [],
+      "dialog_variant_play": 0,
+      "dialog_open": [
+        {
+          "dialogId": 1,
+          "variantId": 2,
+          "newMeaning": true
+        }
+      ]
+    },
+
+    {
+      "effectID": 4,
+      "history": [],
+      "evidences": [
+        {
+          "EvidenceID": 2,
+          "Status": 0
+        }
+      ],
+      "info": [],
+      "dialog_variant_play": 0,
+      "dialog_open": [ ]
+    }
+  ]
+}

@@ -13,20 +13,46 @@ public class DialogSaver : ScriptableObject
     public PlayerData playerData;
     public JournalInfo journalInfo;
     public EffectChangesSaver effectChangesSaver;
+    public DialogVariantsSaver dialogVariantsSaver;
 
     public List<ObjectDialogs> objects;
 
+    private bool isdialogOver;
+
+    public bool IsdialogOver {get { return isdialogOver;  } set { isdialogOver = value; } }
+
     public void setDefault()
     {
-        string _path = Application.dataPath + "/Resour/" + "ObjectDialogs.json";
-        Debug.Log(_path);
-        objects = readFromJSON(_path).objects;
+        objects = readFromJSON();
         effectChangesSaver.setDefault();
+        dialogVariantsSaver.setDefault();
+        journalInfo.newInHistory = 0;
+        journalInfo.newInEvid = new List<int>();
+        journalInfo.newInInfo = new List<int>();
+
     }
 
-    public DialogesHolder readFromJSON(string _path)
+    public List<ObjectDialogs> readFromJSON()
     {
-        return JsonConvert.DeserializeObject<DialogesHolder>(File.ReadAllText(_path, Encoding.GetEncoding("utf-8")));
+#if UNITY_ANDROID && !UNITY_EDITOR
+        string _path = Application.streamingAssetsPath + "/ObjectDialogs.json";
+        WWW reader = new WWW(_path);
+        while (!reader.isDone) { }
+        if ( reader.error != null )
+        {
+            Debug.LogError("error : " + _path);
+            return new List<ObjectDialogs>();
+        }
+        string file = reader.text;
+#endif
+
+
+#if !UNITY_ANDROID || UNITY_EDITOR
+        string _path = Application.dataPath + "/StreamingAssets/" + "ObjectDialogs.json";
+        string file = File.ReadAllText(_path, Encoding.UTF8);
+#endif
+        DialogesHolder itm = JsonConvert.DeserializeObject<DialogesHolder>(file);
+        return itm.objects;
     }
 
     public void ReplaceActionSaver(int ObjectID, int ActionID)
@@ -37,7 +63,22 @@ public class DialogSaver : ScriptableObject
         }
     }
 
-    public void clickedEffectProcess(int objID, int dialogID, int lineID)
+    public void ReplaceActionSaver(List<ObjectActions> newActions)
+    {
+        foreach (ObjectActions change in newActions)
+        {
+            actionsSaver.Rewrite(change.ID, change.firstPlayerActs, change.secPlayerActs);
+        }
+    }
+
+    public int takeEffectId(int objID, int dialogID)
+    {
+        int effectID = objects[objID].effects[dialogID];
+        return effectID;
+        //if (effectID != 0) { effectProceess(effectID); }
+    }
+
+    public void clickedEffectFind(int objID, int dialogID, int lineID)
     {
         int effectID = -1;
         foreach (ChoosingDialogs choosdia in objects[objID].clickedEffect[dialogID])
@@ -50,29 +91,73 @@ public class DialogSaver : ScriptableObject
         }
         if (effectID > -1)
         {
-            Debug.Log("effectID" + effectID);
-            Effectschanges effect = effectChangesSaver.takeEffect(effectID);
-            if (effect.history.Count != 0) { journalInfo.addHistory(effect.history); }
-            if (effect.evidences.Count != 0) 
-            { 
-                foreach (Evidences evid in effect.evidences)
-                {
-                    journalInfo.changeEvidenceStatus(evid.evidenceID, evid.status);
-                }
-            }
-            if (effect.info.Count != 0)
+            effectProceess(effectID);
+        }
+    }
+
+    public void effectProceess(int effectID)
+    {
+        Debug.Log("effectID" + effectID);
+        Effectschanges effect = effectChangesSaver.takeEffect(effectID);
+        if (effect.history.Count != 0) { journalInfo.addHistory(effect.history); }
+        if (effect.evidences.Count != 0)
+        {
+            foreach (Evidences evid in effect.evidences)
             {
-                foreach (InfoDeteiledID inf in effect.info)
+                journalInfo.changeEvidenceStatus(evid.evidenceID, evid.status);
+            }
+        }
+        if (effect.info.Count != 0)
+        {
+            foreach (InfoDeteiledID inf in effect.info)
+            {
+                journalInfo.addToPersonInfo(inf.InfoId, inf.linesId);
+            }
+        }
+        Debug.Log(" effect.dialog_open.Count " + effect.dialog_open.Count.ToString());
+        if (effect.dialog_open.Count != 0)
+        {
+            foreach (OpenedDialogs opndia in effect.dialog_open)
+            {
+                Debug.Log(" opndia: " + opndia.dialogId.ToString() + " " + opndia.variantId.ToString() + " " + opndia.newMeaning.ToString());
+                dialogVariantsSaver.changeAvailable(opndia.dialogId, opndia.variantId, opndia.newMeaning);
+            }
+        }
+    }
+
+    public void dialogVariantEffect(int diavarID, int variantIndex)
+    {
+        ObjectActions changes = dialogVariantsSaver.variants[diavarID].changes[variantIndex];
+        actionsSaver.Rewrite(changes.ID, changes.firstPlayerActs, changes.secPlayerActs);
+        int effectID = dialogVariantsSaver.variants[diavarID].effects[variantIndex];
+        effectProceess(effectID);
+
+        if (dialogVariantsSaver.variants[diavarID].specailActions.Count > 0)
+        {
+            foreach (List<int> special in dialogVariantsSaver.variants[diavarID].specailActions)
+            {
+                switch (special[1])
                 {
-                    journalInfo.addToPersonInfo(inf.InfoId, inf.linesId);
+                    case 0:
+                        IsdialogOver = true;
+                        Debug.Log(" IsdialogOver " + IsdialogOver);
+                        break;
+                    case 1:
+                        break;
+
+                    case 2:
+                        break;
                 }
+                
             }
         }
 
     }
 
+
     public List<string> AskDialog(int ObjectID, int dialogId)
     {
+        IsdialogOver = false;
         return objects[ObjectID].dialogs[dialogId];
     }
 
@@ -84,8 +169,11 @@ public class DialogSaver : ScriptableObject
     public int AskDialogId(int ObjectID, int actionKind)
     {
         int dialogId;
-        if (playerData.isPlayer1) { dialogId = actionsSaver.itemPlayerActions[ObjectID].firstPlayerActs[actionKind]; }
-        else { dialogId = actionsSaver.itemPlayerActions[ObjectID].firstPlayerActs[actionKind]; }
+        if (playerData.isPlayer1) 
+        { 
+            dialogId = actionsSaver.itemPlayerActions[ObjectID].firstPlayerActs[actionKind]; 
+        }
+        else { dialogId = actionsSaver.itemPlayerActions[ObjectID].secPlayerActs[actionKind]; }
         return dialogId;
     }
 

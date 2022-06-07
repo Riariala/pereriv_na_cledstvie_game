@@ -16,6 +16,7 @@ public class MenuScript : MonoBehaviour
     public DialogSaver dialogSaver;
     public PlayerData playerData;
     public JournalInfo journalInfo;
+    public PlayersDialogiesSaver playersDialogiesSaver;
 
     public Menu NetworkMenu;
 
@@ -52,9 +53,10 @@ public class MenuScript : MonoBehaviour
         foreach (Transform child in fourth_menu.GetComponentsInChildren<Transform>())
         {
             if (child.CompareTag("Button")) {child.GetComponent<Button>().interactable = false;}
+
         }
         NetworkMenu.StartClient();
-        NetworkMenu.JoinGame();
+        //NetworkMenu.JoinGame();
     }
 
     public void closeModal(GameObject modal_menu)
@@ -113,13 +115,15 @@ public class MenuScript : MonoBehaviour
             foreach (Transform child in fourth_menu.GetComponentsInChildren<Transform>())
             {
                 if (child.CompareTag("Button")) {child.GetComponent<Button>().interactable = true;}
+                
             }
-            
             NetworkMenu.StartServer();
+
             //SceneManager.LoadScene(1); //������
         }
         actionsSaver.setDefault();
         journalInfo.clearAll();
+        playersDialogiesSaver.setDefault();
     }
 
 

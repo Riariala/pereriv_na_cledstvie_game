@@ -15,15 +15,30 @@ public class EffectsSaver : ScriptableObject
 
     public void setDefault()
     {
-        string _path = Application.dataPath + "/Resour/" + "EffectsData.json";
-        EffectsHolder objects = readFromJSON(_path);
+        EffectsHolder objects = readFromJSON();
         history = objects.history;
         evidences = objects.evidences;
         info = objects.info;
     }
 
-    public EffectsHolder readFromJSON(string _path)
+    public EffectsHolder readFromJSON()
     {
-        return JsonConvert.DeserializeObject<EffectsHolder>(File.ReadAllText(_path, Encoding.GetEncoding("utf-8")));
+#if UNITY_ANDROID && !UNITY_EDITOR
+        string _path = Application.streamingAssetsPath + "/EffectsData.json";
+        WWW reader = new WWW(_path);
+        while (!reader.isDone) { }
+        if ( reader.error != null )
+        {
+            Debug.LogError("error : " + _path);
+            return new EffectsHolder();
+        }
+        string file = reader.text;
+#endif
+
+#if !UNITY_ANDROID || UNITY_EDITOR
+        string _path = Application.dataPath + "/StreamingAssets/" + "EffectsData.json";
+        string file = File.ReadAllText(_path, Encoding.UTF8);
+#endif
+        return JsonConvert.DeserializeObject<EffectsHolder>(file);
     }
 }

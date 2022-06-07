@@ -9,4 +9,6 @@ public class Effectschanges
     public List<int> history;
     public List<Evidences> evidences;
     public List<InfoDeteiledID> info;
+    public int dialog_variant_play;
+    public List<OpenedDialogs> dialog_open;
 }

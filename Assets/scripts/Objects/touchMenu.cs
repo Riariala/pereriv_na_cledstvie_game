@@ -26,20 +26,25 @@ public class touchMenu : MonoBehaviour
 
     void Update()
     {
-        if (Input.touchCount == 1)
+#if UNITY_ANDROID && !UNITY_EDITOR
+        forAndroid();
+#endif
+
+#if !UNITY_ANDROID || UNITY_EDITOR
+        forEditorUpdate();
+#endif
+    }
+
+    public void forAndroid()
+    {
+        if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
 
             switch (touch.phase)
             {
                 case TouchPhase.Began:
-                    break;
-
-                case TouchPhase.Moved:
-                    break;
-
-                case TouchPhase.Ended:
-                    if (!EventSystem.current.IsPointerOverGameObject())
+                    if (!EventSystem.current.IsPointerOverGameObject(touch.fingerId))
                     {
                         if (menu != null) { Destroy(menu); }
 
@@ -48,7 +53,6 @@ public class touchMenu : MonoBehaviour
                         RaycastHit hit;
                         if (Physics.Raycast(ray, out hit))
                         {
-
                             if (hit.collider.CompareTag("Item") || hit.collider.CompareTag("NPC"))
                             {
                                 touched_item = hit.collider.gameObject;
@@ -70,27 +74,44 @@ public class touchMenu : MonoBehaviour
                                     }
                                 }
                             }
+                            else if (hit.collider.CompareTag("Player"))
+                            {
+                                //if (/*второй игрок не занят*/) //!!!!!!!!!!!!!!!!КРИСТИНА СЮДА ПРОВЕРКУ ЗАНЯТ ЛИ ВТОРОЙ ИГРОК!!!!!!!!!!!!!!!!!!
+                                //{
+                                //  dialogPlayer.beginPlayersDialog(dialogPlayer.dialogSaver.playerData.dialogId);
+                                //}
+                            }
                         }
                     }
                     else
                     {
                         PointerEventData pointer = new PointerEventData(EventSystem.current);
-                        pointer.position = Input.mousePosition;
+                        Vector3 pos = new Vector3(touch.position.x, touch.position.y, 0f);
+                        pointer.position = pos;
                         List<RaycastResult> raycastResults = new List<RaycastResult>();
                         EventSystem.current.RaycastAll(pointer, raycastResults);
                         if (raycastResults.Count != 0)
                         {
-                            if (!raycastResults[0].gameObject.CompareTag("menu_touch"))
+                            if (!(raycastResults[0].gameObject.CompareTag("menu_touch")))
                             {
                                 if (menu != null) { Destroy(menu); }
                             }
                         }
                     }
                     break;
+
+                case TouchPhase.Moved:
+                    break;
+
+                case TouchPhase.Ended:
+
+                    break;
             }
         }
+    }
 
-        //---удалить на финальной, чисто для проверки на компьютере---
+    public void forEditorUpdate()
+    {
         if (Input.GetMouseButton(0))
         {
             if (!EventSystem.current.IsPointerOverGameObject())
@@ -124,6 +145,13 @@ public class touchMenu : MonoBehaviour
                             }
                         }
                     }
+                    else if (hit.collider.CompareTag("Player"))
+                    {
+                        //if (/*второй игрок не занят*/) //!!!!!!!!!!!!!!!!КРИСТИНА СЮДА ПРОВЕРКУ ЗАНЯТ ЛИ ВТОРОЙ ИГРОК!!!!!!!!!!!!!!!!!!
+                        //{
+                        //  dialogPlayer.beginPlayersDialog(dialogPlayer.dialogSaver.playerData.dialogId);
+                        //}
+                    }
                 }
             }
             else
@@ -141,7 +169,6 @@ public class touchMenu : MonoBehaviour
                 }
             }
         }
-        //------
     }
 
     //кнопки меню игрока

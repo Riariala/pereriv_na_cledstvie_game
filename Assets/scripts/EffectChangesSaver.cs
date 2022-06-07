@@ -12,13 +12,31 @@ public class EffectChangesSaver : ScriptableObject
 
     public void setDefault()
     {
-        string _path = Application.dataPath + "/Resour/" + "Effects.json";
-        effectsChanges = readFromJSON(_path).effect;
+        effectsChanges = readFromJSON();
     }
 
-    public EffectChangesHolder readFromJSON(string _path)
+    public List<Effectschanges> readFromJSON()
     {
-        return JsonConvert.DeserializeObject<EffectChangesHolder>(File.ReadAllText(_path, Encoding.UTF8));
+#if UNITY_ANDROID && !UNITY_EDITOR
+        string _path = Application.streamingAssetsPath + "/Effects.json";
+        WWW reader = new WWW(_path);
+        while (!reader.isDone) { }
+        if ( reader.error != null )
+        {
+            Debug.LogError("error : " + _path);
+            return new List<Effectschanges>();
+        }
+        string file = reader.text;
+#endif
+
+
+#if !UNITY_ANDROID || UNITY_EDITOR
+        string _path = Application.dataPath + "/StreamingAssets/" + "Effects.json";
+
+        string file = File.ReadAllText(_path, Encoding.UTF8);
+#endif
+        EffectChangesHolder itm = JsonConvert.DeserializeObject<EffectChangesHolder>(file);
+        return itm.effect;
     }
 
     public Effectschanges takeEffect(int effectID)

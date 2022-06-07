@@ -13,14 +13,32 @@ public class ActionsSaver : ScriptableObject
 
     public void setDefault()
     {
-        string _path = Application.dataPath + "/Resour/" + "DefaultitemAct.json";
-        itemPlayerActions = readFromJSON(_path).itemPlayerActions;
+        itemPlayerActions = readFromJSON();
     }
 
-    public ObjectsHolder readFromJSON(string _path)
+    public List<ObjectActions> readFromJSON()
     {
-        return JsonConvert.DeserializeObject<ObjectsHolder>(File.ReadAllText(_path, Encoding.UTF8));
+#if UNITY_ANDROID && !UNITY_EDITOR
+        string _path = Application.streamingAssetsPath + "/DefaultitemAct.json";
+        WWW reader = new WWW(_path);
+        while (!reader.isDone) { }
+        if ( reader.error != null )
+        {
+            Debug.LogError("error : " + _path);
+            return new List<ObjectActions>();
+        }
+        string file = reader.text;
+#endif
+
+#if !UNITY_ANDROID || UNITY_EDITOR
+        string _path = Application.dataPath + "/StreamingAssets/" + "DefaultitemAct.json";
+
+        string file = File.ReadAllText(_path, Encoding.UTF8);
+#endif
+        ObjectsHolder itm = JsonConvert.DeserializeObject<ObjectsHolder>(file);
+        return itm.itemPlayerActions;
     }
+
 
     public void Rewrite(int id, List<int> first, List<int> sec)
     {

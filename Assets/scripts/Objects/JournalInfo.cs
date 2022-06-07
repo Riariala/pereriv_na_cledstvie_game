@@ -10,6 +10,11 @@ public class JournalInfo : ScriptableObject
     public List<Evidences> playerEvidencesID;
     public List<InfoDeteiledID> playerInfoID;
 
+    public List<int> evidListShift; //(x,y)
+
+    public int newInHistory;
+    public List<int> newInEvid;
+    public List<int> newInInfo;
 
     public void clearAll()
     {
@@ -22,36 +27,33 @@ public class JournalInfo : ScriptableObject
     {
         foreach (int id in newid)
         {
-            playerHistoryID.Add(id);
+            if (!playerHistoryID.Contains(id))
+            {
+                playerHistoryID.Add(id);
+                newInHistory++;
+            }
         }
     }
 
     public void addHistory(int newid)
     {
-            playerHistoryID.Add(newid);
-    }
-
-    public void addEvidence(int newid, int newStatus)
-    {
-        playerEvidencesID.Add(new Evidences(newid, newStatus));
-    }
-
-    public void addEvidence(List<int> newid)
-    {
-        foreach (int id in newid)
+        if (!playerHistoryID.Contains(newid))
         {
-            playerEvidencesID.Add(new Evidences(id, 0));
+            playerHistoryID.Add(newid);
+            newInHistory++;
         }
     }
 
     public void newInfoPerson(int personInfoId)
     {
         playerInfoID.Add(new InfoDeteiledID(personInfoId));
+        if (!newInInfo.Contains(personInfoId)) { newInInfo.Add(personInfoId); }
     }
 
     public void newInfoPerson(int personInfoId, List<int> newlines)
     {
         playerInfoID.Add(new InfoDeteiledID(personInfoId, newlines));
+        if (!newInInfo.Contains(personInfoId)) { newInInfo.Add(personInfoId); }
     }
 
     public void addToPersonInfo(int personInfoId, List<int> newLines)
@@ -60,9 +62,34 @@ public class JournalInfo : ScriptableObject
         {
             if (personInfo.InfoId == personInfoId)
             {
-                personInfo.addLinesTo(newLines);
+                foreach (int lineid in newLines)
+                { 
+                    if (!personInfo.linesId.Contains(lineid))
+                    {
+
+                        if (!newInInfo.Contains(personInfoId)) { newInInfo.Add(personInfoId); }
+                        personInfo.addLinesTo(newLines);
+                    }
+                }
+                personInfo.linesId.Sort();
                 return;
             }
+        }
+        newInfoPerson(personInfoId, newLines);
+    }
+
+    public void addEvidence(int newid, int newStatus)
+    {
+        playerEvidencesID.Add(new Evidences(newid, newStatus));
+        newInEvid.Add(newid);
+    }
+
+    public void addEvidence(List<int> newid)
+    {
+        foreach (int id in newid)
+        {
+            playerEvidencesID.Add(new Evidences(id, 0));
+            newInEvid.Add(id);
         }
     }
 
@@ -72,7 +99,11 @@ public class JournalInfo : ScriptableObject
         {
             if (evidence.evidenceID == evidID)
             {
-                evidence.status = newStatus;
+                if (evidence.status != newStatus)
+                {
+                    evidence.status = newStatus;
+                    newInEvid.Add(evidID);
+                }
                 return;
             }
         }
