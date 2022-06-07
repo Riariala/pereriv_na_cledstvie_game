@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <projectSettings>
-<<<<<<< Updated upstream
-  <projectSetting name="com.google.external-dependency-managerAnalyticsEnabled" value="False" />
-  <projectSetting name="com.google.firebaseAnalyticsEnabled" value="False" />
-=======
-  <projectSetting name="com.google.external-dependency-managerAnalyticsCookie" value="ded56cedefb8433fa07e87302448740f" />
-  <projectSetting name="com.google.external-dependency-managerAnalyticsEnabled" value="True" />
-  <projectSetting name="com.google.firebaseAnalyticsCookie" value="772510209d97485796d9224310c883fb" />
-  <projectSetting name="com.google.firebaseAnalyticsEnabled" value="True" />
->>>>>>> Stashed changes
   <projectSetting name="Google.IOSResolver.VerboseLoggingEnabled" value="False" />
   <projectSetting name="Google.PackageManagerResolver.VerboseLoggingEnabled" value="False" />
   <projectSetting name="Google.VersionHandler.VerboseLoggingEnabled" value="False" />
+  <projectSetting name="GooglePlayServices.AutoResolverEnabled" value="False" />
   <projectSetting name="GooglePlayServices.PromptBeforeAutoResolution" value="False" />
 </projectSettings>
