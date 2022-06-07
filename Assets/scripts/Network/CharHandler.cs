@@ -13,12 +13,16 @@ public class CharHandler : Photon.Bolt.EntityBehaviour<ICustomPlayer>
 {
     public PlayerData data;
     public bool isPlayer1;
+    //public GameObject player1;
 
     public void SetValueChar()
     {
         isPlayer1 = data.isPlayer1;
         var token = new CharToken();
         token.isPlayer1= isPlayer1;
+        //BoltNetwork.Instantiate(BoltPrefabs.Test, token);
+        //Debug.Log(token.isPlayer1);
+        //Debug.Log("Сделаль11111111111");
     }
 
 }

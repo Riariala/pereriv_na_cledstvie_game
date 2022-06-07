@@ -13,8 +13,10 @@ public class CharReader : Photon.Bolt.EntityBehaviour<ICustomPlayer>
     public override void Attached()
     {
         var CharToken = ProtocolTokenUtils.GetToken<CharToken>();
-        isPlayer1 = CharToken.isPlayer1;
-        Debug.Log(isPlayer1);
+        //var CharToken=(CharToken)entity.Char;
+        //isPlayer1 = CharToken.isPlayer1;
+        Debug.Log(CharToken);
+        Debug.Log("Сделаль");
         //var readerChar = player1.GetComponent<BoltEntity>().Character;//(CharToken)entity.Character;
     }
 }

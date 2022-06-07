@@ -18,30 +18,44 @@ public class changeCharacter : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoB
     private PlayerController Player2_script;
     [SerializeField] private FixedJoystick _jystick;
     public PlayerData player_data;
+    public CharHandler handler;
 
     void OnEnable()
     {
+
         Player1_script = Player1.GetComponent<PlayerController>();
         Player2_script = Player2.GetComponent<PlayerController>();
         Player1_script.ChangeJoystick(_jystick);
-        player_data.SetCharacter(true, Player1);
+        var character = PlayerCharacter.Create();
+        character.IsPlayer1 = true;
+        character.Send();
+        if (player_data.isPlayer1)
+        {
+            player_data.SetObjectCharacter(Player1);
+        }
+        //player_data.SetCharacter(true, Player1);
+        
         //player_data.isPlayer1 = true;
         //player_data.char_player = Player1;
     }
 
-    //public void Change_chars(){
-    //    if (player_data.isPlayer1){
-    //        player_data.isPlayer1 = false;
-    //        Player2_script.ChangeJoystick(_jystick);
-    //        Player1_script.ChangeJoystick(null);
-    //        player_data.char_player = Player2;
-    //    }
-    //    else
-    //    {
-    //        player_data.isPlayer1 = true;
-    //        Player1_script.ChangeJoystick(_jystick);
-    //        Player2_script.ChangeJoystick(null);
-    //        player_data.char_player = Player1;
-    //    }
-    //}
+    public void Change_chars(){
+        var character = PlayerCharacter.Create();
+        character.IsPlayer1 = !player_data.isPlayer1;
+        character.Send();
+        //handler.SetValueChar();
+        //    if (player_data.isPlayer1){
+        //        player_data.isPlayer1 = false;
+        //        Player2_script.ChangeJoystick(_jystick);
+        //        Player1_script.ChangeJoystick(null);
+        //        player_data.char_player = Player2;
+        //    }
+        //    else
+        //    {
+        //        player_data.isPlayer1 = true;
+        //        Player1_script.ChangeJoystick(_jystick);
+        //        Player2_script.ChangeJoystick(null);
+        //        player_data.char_player = Player1;
+        //    }
+    }
 }
