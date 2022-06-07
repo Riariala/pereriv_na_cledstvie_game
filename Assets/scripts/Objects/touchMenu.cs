@@ -74,6 +74,13 @@ public class touchMenu : MonoBehaviour
                                     }
                                 }
                             }
+                            else if (hit.collider.CompareTag("Player"))
+                            {
+                                //if (/*второй игрок не занят*/) //!!!!!!!!!!!!!!!!КРИСТИНА СЮДА ПРОВЕРКУ ЗАНЯТ ЛИ ВТОРОЙ ИГРОК!!!!!!!!!!!!!!!!!!
+                                //{
+                                //  dialogPlayer.beginPlayersDialog(dialogPlayer.dialogSaver.playerData.dialogId);
+                                //}
+                            }
                         }
                     }
                     else
@@ -137,6 +144,13 @@ public class touchMenu : MonoBehaviour
                                 indActiveAction++;
                             }
                         }
+                    }
+                    else if (hit.collider.CompareTag("Player"))
+                    {
+                        //if (/*второй игрок не занят*/) //!!!!!!!!!!!!!!!!КРИСТИНА СЮДА ПРОВЕРКУ ЗАНЯТ ЛИ ВТОРОЙ ИГРОК!!!!!!!!!!!!!!!!!!
+                        //{
+                        //  dialogPlayer.beginPlayersDialog(dialogPlayer.dialogSaver.playerData.dialogId);
+                        //}
                     }
                 }
             }
