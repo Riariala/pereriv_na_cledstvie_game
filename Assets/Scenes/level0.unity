@@ -3044,7 +3044,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &583651013
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5005,6 +5005,7 @@ MonoBehaviour:
     type: 3}
   parent: {fileID: 909991261}
   dialogPlayer: {fileID: 909991263}
+  callbacks: {fileID: 1927280842}
 --- !u!114 &909991263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7772,7 +7773,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1381045394
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10792,6 +10793,8 @@ MonoBehaviour:
   player1: {fileID: 5946829683437410507, guid: 83d193202199d2c48b6c6ce3ba0a37a5, type: 3}
   player2: {fileID: 5946829683437410507, guid: 83d193202199d2c48b6c6ce3ba0a37a5, type: 3}
   isPlayer1: 0
+  isBusy: 0
+  click: 0
   data: {fileID: 11400000, guid: 2336fb71654d97d4b9c3e67c350c186e, type: 2}
   actions: {fileID: 11400000, guid: 9d3e989a4e3bcb34795e602d6e824d4a, type: 2}
   journal: {fileID: 11400000, guid: dd172ace3ffc9ed4f9bf32fd16a613b0, type: 2}

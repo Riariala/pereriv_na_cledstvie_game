@@ -5,8 +5,12 @@ using UnityEngine.SceneManagement;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using UdpKit.Platform.Photon;
+using Photon.Bolt;
+using Photon.Bolt.Matchmaking;
+using Photon.Bolt.Utils;
 
-public class touchMenu : MonoBehaviour
+public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehaviour
 {
 
     [SerializeField] public GameObject menu_obj_touch;
@@ -18,6 +22,9 @@ public class touchMenu : MonoBehaviour
     private Vector2 start_pos;
     private Vector2 direction;
     private float screen_height;
+    private bool isInitiator=false;
+    public NetworkCallbacks callbacks;
+    private bool isBusy;
 
     void Start()
     {
@@ -26,6 +33,15 @@ public class touchMenu : MonoBehaviour
 
     void Update()
     {
+        if ((callbacks.click) & (isInitiator))
+        {
+            var busy = IsBusy.Create();
+            busy.Busy = callbacks.data.isBusy;
+            busy.Send();
+            isBusy = busy.Busy;
+            //Debug.Log("Я туть");
+        }
+
 #if UNITY_ANDROID && !UNITY_EDITOR
         forAndroid();
 #endif
@@ -76,10 +92,18 @@ public class touchMenu : MonoBehaviour
                             }
                             else if (hit.collider.CompareTag("Player"))
                             {
-                                //if (/*второй игрок не занят*/) //!!!!!!!!!!!!!!!!КРИСТИНА СЮДА ПРОВЕРКУ ЗАНЯТ ЛИ ВТОРОЙ ИГРОК!!!!!!!!!!!!!!!!!!
-                                //{
-                                //  dialogPlayer.beginPlayersDialog(dialogPlayer.dialogSaver.playerData.dialogId);
-                                //}
+                                //Debug.Log("Хэээээээээй");
+                                var click = ClickOnPlayer.Create();
+                                click.Click = true;
+                                click.Send();
+                                isInitiator = true;
+                                if (isBusy) //!!!!!!!!!!!!!!!!КРИСТИНА СЮДА ПРОВЕРКУ ЗАНЯТ ЛИ ВТОРОЙ ИГРОК!!!!!!!!!!!!!!!!!!
+                                {
+                                  dialogPlayer.beginPlayersDialog(dialogPlayer.dialogSaver.playerData.dialogId);
+                                }
+                                isInitiator = false;
+                                click.Click = false;
+                                click.Send();
                             }
                         }
                     }
@@ -147,10 +171,18 @@ public class touchMenu : MonoBehaviour
                     }
                     else if (hit.collider.CompareTag("Player"))
                     {
-                        //if (/*второй игрок не занят*/) //!!!!!!!!!!!!!!!!КРИСТИНА СЮДА ПРОВЕРКУ ЗАНЯТ ЛИ ВТОРОЙ ИГРОК!!!!!!!!!!!!!!!!!!
-                        //{
-                        //  dialogPlayer.beginPlayersDialog(dialogPlayer.dialogSaver.playerData.dialogId);
-                        //}
+                        //Debug.Log("Хэээээээээй");
+                        var click = ClickOnPlayer.Create();
+                        click.Click = true;
+                        click.Send();
+                        isInitiator = true;
+                        if (isBusy) //!!!!!!!!!!!!!!!!КРИСТИНА СЮДА ПРОВЕРКУ ЗАНЯТ ЛИ ВТОРОЙ ИГРОК!!!!!!!!!!!!!!!!!!
+                        {
+                            dialogPlayer.beginPlayersDialog(dialogPlayer.dialogSaver.playerData.dialogId);
+                        }
+                        isInitiator = false;
+                        click.Click = false;
+                        click.Send();
                     }
                 }
             }

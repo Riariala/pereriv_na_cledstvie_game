@@ -8,6 +8,8 @@ public class NetworkCallbacks : GlobalEventListener
     public GameObject player1;
     public GameObject player2;
     public bool isPlayer1;
+    public bool isBusy;
+    public bool click;
     public PlayerData data;
     public ActionsSaver actions;
     public JournalInfo journal;
@@ -58,6 +60,19 @@ public class NetworkCallbacks : GlobalEventListener
     {
         isPlayer1=evnt.IsPlayer1;
         data.isPlayer1 = isPlayer1;
+    }
+
+    public override void OnEvent(IsBusy evnt)
+    {
+        isBusy = evnt.Busy;
+        //Debug.Log(isBusy);
+    }
+    public override void OnEvent(ClickOnPlayer evnt)
+    {
+        click = evnt.Click;
+        //Debug.Log(click);
+        /*isPlayer1 = evnt.IsPlayer1;
+        data.isPlayer1 = isPlayer1;*/
     }
 
     /*public override void SceneLoadLocalDone(string map)
