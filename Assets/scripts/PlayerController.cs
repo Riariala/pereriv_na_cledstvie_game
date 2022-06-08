@@ -9,7 +9,6 @@ using Photon.Bolt;
 using Photon.Bolt.Matchmaking;
 using Photon.Bolt.Utils;
 
-//[RequireComponent(typeof(Rigidbody)), typeof(BoxCollider)))]
 
 public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehaviour
 {
@@ -23,7 +22,7 @@ public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>//Mono
     //[SerializeField] private Animator _animator;
 
     //[SerializeField] private float speed =  10f;
-    private float speed = 5f;
+    private float speed = 0.1f;
     private Transform playerCamera_transf;
 
 
@@ -43,32 +42,23 @@ public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>//Mono
     {
         if (!(_joystick is null))
         {
-
-            _rb.velocity = new Vector3(_joystick.Horizontal * speed * BoltNetwork.FrameDeltaTime, _rb.velocity.y, _joystick.Vertical * speed* BoltNetwork.FrameDeltaTime);
-            _transform.position = new Vector3(_joystick.Horizontal * speed * BoltNetwork.FrameDeltaTime + _transform.position.x, _transform.position.y, _transform.position.z + _joystick.Vertical * speed * BoltNetwork.FrameDeltaTime);
-            //Debug.Log(playerCamera_transf.rotation.y);
+            float rad = playerCamera_transf.rotation.y * Mathf.PI;
+            //_rb.velocity = new Vector3(_joystick.Horizontal * speed * Mathf.Cos(rad) * BoltNetwork.FrameDeltaTime + _joystick.Vertical * speed * Mathf.Sin(rad) * BoltNetwork.FrameDeltaTime
+            //    , _rb.velocity.y,
+            //    _joystick.Horizontal * speed * Mathf.Sin(rad) * BoltNetwork.FrameDeltaTime + _joystick.Vertical * speed * Mathf.Cos(rad) * BoltNetwork.FrameDeltaTime);
+            //_transform.position = new Vector3(_joystick.Horizontal * speed * BoltNetwork.FrameDeltaTime + _transform.position.x, _transform.position.y, _transform.position.z + _joystick.Vertical * speed * BoltNetwork.FrameDeltaTime);
+            //Debug.Log("rot = " + (playerCamera_transf.rotation.y * 180f * 0.64f).ToString() + " " + (playerCamera_transf.rotation.x * 180f).ToString());
+            _transform.position = new Vector3(_transform.position.x + _joystick.Horizontal * speed * Mathf.Cos(rad) + _joystick.Vertical * speed * Mathf.Sin(rad),
+                _transform.position.y,
+                _transform.position.z + _joystick.Horizontal * speed * Mathf.Sin(rad) + _joystick.Vertical * speed * Mathf.Cos(rad));
+            
         }
     }
 
-    public void GoBack()
-    {
-        //Debug.Log(_joystick);
-        //_rb.velocity = new Vector3(0,0,0);
-    }
         
     public void ChangeJoystick(FixedJoystick newJstk)
     {
         _joystick = newJstk;
     }
 
-    /*void OnCollisionEnter(Collision other)
-    {
-        Debug.Log("Толк");
-        if (other.gameObject.tag == "Player")
-        {
-            Debug.Log("Толк2");
-            GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-            other.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-        }
-    }*/
 }

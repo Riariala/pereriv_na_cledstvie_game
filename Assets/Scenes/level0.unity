@@ -3199,7 +3199,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &575329977
 AudioListener:
   m_ObjectHideFlags: 0
@@ -4473,6 +4473,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 471715361731111009, guid: 074e9990b6605a14391d8a1df7a793bc,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.1
+      objectReference: {fileID: 0}
     - target: {fileID: 668657506361046689, guid: 074e9990b6605a14391d8a1df7a793bc,
         type: 3}
       propertyPath: m_RootOrder
@@ -4481,7 +4486,7 @@ PrefabInstance:
     - target: {fileID: 668657506361046689, guid: 074e9990b6605a14391d8a1df7a793bc,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.460892
+      value: 11.178
       objectReference: {fileID: 0}
     - target: {fileID: 668657506361046689, guid: 074e9990b6605a14391d8a1df7a793bc,
         type: 3}
@@ -12073,6 +12078,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 471715361731111009, guid: 074e9990b6605a14391d8a1df7a793bc,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.98
+      objectReference: {fileID: 0}
     - target: {fileID: 668657506361046689, guid: 074e9990b6605a14391d8a1df7a793bc,
         type: 3}
       propertyPath: m_RootOrder
