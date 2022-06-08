@@ -4,13 +4,13 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - player1: {fileID: 8483960265488751661, guid: 7ce6a265d19d4094c8c6ad1827f5c985,
+  - player1: {fileID: 5946829683437410507, guid: 83d193202199d2c48b6c6ce3ba0a37a5,
       type: 3}
-  - player2: {fileID: 1651104453875658818, guid: a37251e2c7bdcf74291f8ab32ba3eb6e,
+  - player2: {fileID: 5946829683437410507, guid: 83d193202199d2c48b6c6ce3ba0a37a5,
       type: 3}
-  - data: {fileID: 11400000, guid: 2336fb71654d97d4b9c3e67c350c186e, type: 2}
-  - actions: {fileID: 11400000, guid: 9d3e989a4e3bcb34795e602d6e824d4a, type: 2}
-  - journal: {fileID: 11400000, guid: dd172ace3ffc9ed4f9bf32fd16a613b0, type: 2}
+  - data: {instanceID: 0}
+  - actions: {instanceID: 0}
+  - journal: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
