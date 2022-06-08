@@ -45,12 +45,14 @@ public class NetworkCallbacks : GlobalEventListener
         var spawnPos = new Vector3(Random.Range(-5, 5), 0, Random.Range(-5, 5));
         if (isPlayer1)
         {
-            BoltNetwork.Instantiate(player1, spawnPos, Quaternion.identity);
+            var player = BoltNetwork.Instantiate(player1, spawnPos, Quaternion.identity);
+            player.transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
             Debug.Log("Player 1 Rogers " + player1.name);
         }
         else
         {
-            BoltNetwork.Instantiate(player2, spawnPos, Quaternion.identity);
+            var player = BoltNetwork.Instantiate(player2, spawnPos, Quaternion.identity);
+            player.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
             Debug.Log("Player 2 Mary " + player2.name);
         }
 

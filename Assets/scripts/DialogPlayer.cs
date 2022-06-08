@@ -60,7 +60,7 @@ public class DialogPlayer : MonoBehaviour
 
     public void PlayNextCall()
     {
-        if (dialogCount < titleText.Count)
+        if (dialogCount < isFirstTalkList.Count)
         {
             massage_txt.text = massageText[dialogCount];
             string name;
