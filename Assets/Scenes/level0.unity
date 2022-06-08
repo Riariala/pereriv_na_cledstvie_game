@@ -1844,7 +1844,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a875f4f2f4de824bbb46076d8dbf115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player1: {fileID: 8483960265488751661, guid: 7ce6a265d19d4094c8c6ad1827f5c985, type: 3}
+  Player1: {fileID: 1651104453875658818, guid: a37251e2c7bdcf74291f8ab32ba3eb6e, type: 3}
   Player2: {fileID: 1651104453875658818, guid: a37251e2c7bdcf74291f8ab32ba3eb6e, type: 3}
   _jystick: {fileID: 210846479}
   player_data: {fileID: 11400000, guid: 2336fb71654d97d4b9c3e67c350c186e, type: 2}
@@ -4852,7 +4852,8 @@ MonoBehaviour:
   simple_dialog_panel: {fileID: 1023974635}
   variable_dialog_panel: {fileID: 394785391}
   dialogSaver: {fileID: 11400000, guid: 61d9fcc0319dcc940a4e8ecece744dad, type: 2}
-  playersDialogiesSaver: {fileID: 0}
+  playersDialogiesSaver: {fileID: 11400000, guid: 857f4ea528d999545bbab4bdc54360e8,
+    type: 2}
   massage_click_btn: {fileID: 686187208}
 --- !u!114 &909991264
 MonoBehaviour:
@@ -10318,7 +10319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5c20180f6223954188e17fb6e946a9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1: {fileID: 8483960265488751661, guid: 7ce6a265d19d4094c8c6ad1827f5c985, type: 3}
+  player1: {fileID: 1651104453875658818, guid: a37251e2c7bdcf74291f8ab32ba3eb6e, type: 3}
   player2: {fileID: 1651104453875658818, guid: a37251e2c7bdcf74291f8ab32ba3eb6e, type: 3}
   isPlayer1: 0
   isBusy: 0
