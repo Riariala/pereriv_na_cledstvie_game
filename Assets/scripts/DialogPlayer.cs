@@ -39,6 +39,7 @@ public class DialogPlayer : MonoBehaviour
         dialogCount = 0;
         Debug.Log(ObjectId);
         Debug.Log(dialogId);
+        isPlayersDialog = false;
         playNext();
     }
 
@@ -180,6 +181,7 @@ public class DialogPlayer : MonoBehaviour
         massageText = playersDialogiesSaver.AskDialog(locdialogId);
         isFirstTalkList = playersDialogiesSaver.AskTitles(locdialogId);
         dialogId = locdialogId;
+        isPlayersDialog = true;
         //isHost = //////////////////////////КРИСТИНА ОПРЕДЕЛИ ХОСТ ЭТО ИЛИ НЕТ
         dialogCount = 0;
         Debug.Log("начало диалога между игроками");

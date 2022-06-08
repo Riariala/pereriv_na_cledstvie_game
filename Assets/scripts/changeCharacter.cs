@@ -22,7 +22,6 @@ public class changeCharacter : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoB
 
     void OnEnable()
     {
-
         Player1_script = Player1.GetComponent<PlayerController>();
         Player2_script = Player2.GetComponent<PlayerController>();
         Player1_script.ChangeJoystick(_jystick);
@@ -32,6 +31,10 @@ public class changeCharacter : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoB
         if (player_data.isPlayer1)
         {
             player_data.SetObjectCharacter(Player1);
+        }
+        else
+        {
+            player_data.SetObjectCharacter(Player2);
         }
         //player_data.SetCharacter(true, Player1);
         

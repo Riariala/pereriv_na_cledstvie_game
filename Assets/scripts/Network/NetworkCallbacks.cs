@@ -44,12 +44,12 @@ public class NetworkCallbacks : GlobalEventListener
         if (isPlayer1)
         {
             BoltNetwork.Instantiate(player1, spawnPos, Quaternion.identity);
-            Debug.Log("1");
+            Debug.Log("Player 1 Rogers " + player1.name);
         }
         else
         {
             BoltNetwork.Instantiate(player2, spawnPos, Quaternion.identity);
-            Debug.Log("2");
+            Debug.Log("Player 2 Mary " + player2.name);
         }
 
     }
