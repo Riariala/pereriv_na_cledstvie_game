@@ -25,7 +25,7 @@ public class PlayersDialogiesSaver : ScriptableObject
         if ( reader.error != null )
         {
             Debug.LogError("error : " + _path);
-            return new List<ObjectActions>();
+            return new List<PlayerDialog>();
         }
         string file = reader.text;
 #endif
