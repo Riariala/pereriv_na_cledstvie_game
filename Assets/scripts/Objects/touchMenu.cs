@@ -33,14 +33,16 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
 
     void Update()
     {
-        if ((callbacks.click) & (isInitiator))
+        if ((callbacks.click) & (isInitiator=false))
         {
             var busy = IsBusy.Create();
             busy.Busy = callbacks.data.isBusy;
             busy.Send();
             isBusy = busy.Busy;
-            //Debug.Log("Я туть");
+            Debug.Log("Я туть");
+            
         }
+        
 
 #if UNITY_ANDROID && !UNITY_EDITOR
         forAndroid();
@@ -97,7 +99,7 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
                                 click.Click = true;
                                 click.Send();
                                 isInitiator = true;
-                                if (isBusy) //!!!!!!!!!!!!!!!!КРИСТИНА СЮДА ПРОВЕРКУ ЗАНЯТ ЛИ ВТОРОЙ ИГРОК!!!!!!!!!!!!!!!!!!
+                                if (!isBusy) //!!!!!!!!!!!!!!!!КРИСТИНА СЮДА ПРОВЕРКУ ЗАНЯТ ЛИ ВТОРОЙ ИГРОК!!!!!!!!!!!!!!!!!!
                                 {
                                   dialogPlayer.beginPlayersDialog(dialogPlayer.dialogSaver.playerData.dialogId);
                                 }
@@ -176,7 +178,7 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
                         click.Click = true;
                         click.Send();
                         isInitiator = true;
-                        if (isBusy) //!!!!!!!!!!!!!!!!КРИСТИНА СЮДА ПРОВЕРКУ ЗАНЯТ ЛИ ВТОРОЙ ИГРОК!!!!!!!!!!!!!!!!!!
+                        if (!isBusy) //!!!!!!!!!!!!!!!!КРИСТИНА СЮДА ПРОВЕРКУ ЗАНЯТ ЛИ ВТОРОЙ ИГРОК!!!!!!!!!!!!!!!!!!
                         {
                             dialogPlayer.beginPlayersDialog(dialogPlayer.dialogSaver.playerData.dialogId);
                         }

@@ -65,11 +65,12 @@ public class NetworkCallbacks : GlobalEventListener
     public override void OnEvent(IsBusy evnt)
     {
         isBusy = evnt.Busy;
-        //Debug.Log(isBusy);
+        Debug.Log(isBusy);
     }
     public override void OnEvent(ClickOnPlayer evnt)
     {
         click = evnt.Click;
+        //Debug.Log("клац");
         //Debug.Log(click);
         /*isPlayer1 = evnt.IsPlayer1;
         data.isPlayer1 = isPlayer1;*/
