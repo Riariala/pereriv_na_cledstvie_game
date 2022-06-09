@@ -55,8 +55,8 @@ public class GoogleSignInDemo : MonoBehaviour
         GoogleSignIn.Configuration.RequestIdToken = true;
         AddToInformation("Calling SignIn");
 
-        //GoogleSignIn.DefaultInstance.SignIn().ContinueWith(OnAuthenticationFinished);
-        GoogleSignIn.DefaultInstance.SignIn().ContinueWithOnMainThread(OnAuthenticationFinished);
+        GoogleSignIn.DefaultInstance.SignIn().ContinueWith(OnAuthenticationFinished);
+        //GoogleSignIn.DefaultInstance.SignIn().ContinueWithOnMainThread(OnAuthenticationFinished);
     }
 
     private void OnSignOut()
