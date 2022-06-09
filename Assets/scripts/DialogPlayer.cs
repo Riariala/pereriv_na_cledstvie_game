@@ -2,8 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UdpKit.Platform.Photon;
+using Photon.Bolt;
+using Photon.Bolt.Matchmaking;
+using Photon.Bolt.Utils;
 
-public class DialogPlayer : MonoBehaviour
+public class DialogPlayer : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehaviour
 {
     public GameObject dialogPanel;
     public Text title_txt;
@@ -25,6 +29,28 @@ public class DialogPlayer : MonoBehaviour
     private int lastEffectID;
     private bool isPlayersDialog;
     private bool isHost;
+    public NetworkCallbacks callbacks;
+
+    void Update()
+    {
+        if (callbacks.click)
+        {
+            if (callbacks.next)
+            {
+                if (isHost = false)
+                {
+                    PlayNextCall();
+
+                }
+                else
+                {
+                    var next = NextDialog.Create();
+                    next.Next = false;
+                    next.Send();
+                }
+            }
+        }
+    }
 
 
     public void beginDialog(int ObjId, int actionKind)
@@ -53,14 +79,17 @@ public class DialogPlayer : MonoBehaviour
     {
         if (isHost) //РНЦДЮ ПЮАНРЮЕР
         {
-            //бнр гдеяэ нропюбэ йнлюмдс брнпнлс хцпнйс,врнаш лемък. бшгбюрэ с мецн йнлюмдс PlayNextCall();
-            PlayNextCall();
+                var next = NextDialog.Create();
+                next.Next = true;
+                next.Send();
+                //бнр гдеяэ нропюбэ йнлюмдс брнпнлс хцпнйс,врнаш лемък. бшгбюрэ с мецн йнлюмдс PlayNextCall();
+                PlayNextCall();
         }
     }
 
     public void PlayNextCall()
     {
-        if (dialogCount < titleText.Count)
+        if (dialogCount < isFirstTalkList.Count)
         {
             massage_txt.text = massageText[dialogCount];
             string name;
@@ -182,6 +211,14 @@ public class DialogPlayer : MonoBehaviour
         isFirstTalkList = playersDialogiesSaver.AskTitles(locdialogId);
         dialogId = locdialogId;
         isPlayersDialog = true;
+        if (BoltNetwork.IsServer)
+        {
+            isHost=true;
+        }
+        else
+        {
+            isHost = false;
+        }
         //isHost = //////////////////////////йпхярхмю нопедекх уняр щрн хкх мер
         dialogCount = 0;
         Debug.Log("МЮВЮКН ДХЮКНЦЮ ЛЕФДС ХЦПНЙЮЛХ");

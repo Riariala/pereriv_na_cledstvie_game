@@ -22,7 +22,7 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
     private Vector2 start_pos;
     private Vector2 direction;
     private float screen_height;
-    private bool isInitiator=false;
+    private bool isInitiator;
     public NetworkCallbacks callbacks;
     private bool isBusy;
 
@@ -33,14 +33,36 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
 
     void Update()
     {
-        if ((callbacks.click) & (isInitiator=false))
+        if (callbacks.click)
         {
-            var busy = IsBusy.Create();
-            busy.Busy = callbacks.data.isBusy;
-            busy.Send();
-            isBusy = busy.Busy;
-            Debug.Log("Я туть");
-            
+            if (isInitiator = false)
+            {
+                var busy = IsBusy.Create();
+                busy.Busy = callbacks.data.isBusy;
+                busy.Send();
+                //isBusy = busy.Busy;
+                if (!busy.Busy) //!!!!!!!!!!!!!!!!КРИСТИНА СЮДА ПРОВЕРКУ ЗАНЯТ ЛИ ВТОРОЙ ИГРОК!!!!!!!!!!!!!!!!!!
+                {
+                    dialogPlayer.beginPlayersDialog(dialogPlayer.dialogSaver.playerData.dialogId);
+                }
+                Debug.Log("Я туть");
+
+                
+
+            }
+            else
+            {
+                isInitiator = false;
+                var click = ClickOnPlayer.Create();
+                click.Click = false;
+                click.Send();
+                if (!callbacks.isBusy) //!!!!!!!!!!!!!!!!КРИСТИНА СЮДА ПРОВЕРКУ ЗАНЯТ ЛИ ВТОРОЙ ИГРОК!!!!!!!!!!!!!!!!!!
+                {
+                   Debug.Log("Жизньтлен");
+                   dialogPlayer.beginPlayersDialog(dialogPlayer.dialogSaver.playerData.dialogId);
+                }
+
+            }
         }
         
 
@@ -99,13 +121,14 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
                                 click.Click = true;
                                 click.Send();
                                 isInitiator = true;
-                                if (!isBusy) //!!!!!!!!!!!!!!!!КРИСТИНА СЮДА ПРОВЕРКУ ЗАНЯТ ЛИ ВТОРОЙ ИГРОК!!!!!!!!!!!!!!!!!!
-                                {
-                                  dialogPlayer.beginPlayersDialog(dialogPlayer.dialogSaver.playerData.dialogId);
+                                //if (!isBusy) //!!!!!!!!!!!!!!!!КРИСТИНА СЮДА ПРОВЕРКУ ЗАНЯТ ЛИ ВТОРОЙ ИГРОК!!!!!!!!!!!!!!!!!!
+                                /*{
+                                    Debug.Log("Жизньтлен");
+                                    dialogPlayer.beginPlayersDialog(dialogPlayer.dialogSaver.playerData.dialogId);
                                 }
                                 isInitiator = false;
                                 click.Click = false;
-                                click.Send();
+                                click.Send();*/
                             }
                         }
                     }
@@ -178,13 +201,15 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
                         click.Click = true;
                         click.Send();
                         isInitiator = true;
-                        if (!isBusy) //!!!!!!!!!!!!!!!!КРИСТИНА СЮДА ПРОВЕРКУ ЗАНЯТ ЛИ ВТОРОЙ ИГРОК!!!!!!!!!!!!!!!!!!
-                        {
+                        Debug.Log(callbacks.isBusy);
+                        //new WaitForSeconds(3);
+                        //if (callbacks.isBusy) //!!!!!!!!!!!!!!!!КРИСТИНА СЮДА ПРОВЕРКУ ЗАНЯТ ЛИ ВТОРОЙ ИГРОК!!!!!!!!!!!!!!!!!!
+                        /*{
+                            Debug.Log("Жизньтлен");
                             dialogPlayer.beginPlayersDialog(dialogPlayer.dialogSaver.playerData.dialogId);
-                        }
-                        isInitiator = false;
-                        click.Click = false;
-                        click.Send();
+                        }*/
+                        //isInitiator = false;
+
                     }
                 }
             }
