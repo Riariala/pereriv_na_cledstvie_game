@@ -12,6 +12,8 @@ public class MenuScript : MonoBehaviour
     [SerializeField] public GameObject fourth_menu;
     [SerializeField] public GameObject new_game_modal;
     [SerializeField] public GameObject store_menu;
+    [SerializeField] public GameObject reg_menu;
+    [SerializeField] public GameObject auth_menu;
     public ActionsSaver actionsSaver;
     public DialogSaver dialogSaver;
     public PlayerData playerData;
@@ -101,6 +103,15 @@ public class MenuScript : MonoBehaviour
     public void goToStorehMenu(GameObject prev_menu)
     {
         StartCoroutine(changing_menu(prev_menu, store_menu));
+    }
+
+    public void goToRegMenu(GameObject prev_menu)
+    {
+        StartCoroutine(changing_menu(prev_menu, reg_menu));
+    }
+    public void goToAuthMenu(GameObject prev_menu)
+    {
+        StartCoroutine(changing_menu(prev_menu, auth_menu));
     }
 
     public void createNewGame()

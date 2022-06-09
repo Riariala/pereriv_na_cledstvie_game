@@ -69,6 +69,7 @@ public class AuthManager : MonoBehaviour
 
     private IEnumerator Login(string _email, string _password)
     {
+        //InitializeFirebase();
         //Call the Firebase auth signin function passing the email and password
         var LoginTask = auth.SignInWithEmailAndPasswordAsync(_email, _password);
         //Wait until the task completes
@@ -100,7 +101,8 @@ public class AuthManager : MonoBehaviour
                     message = "Account does not exist";
                     break;
             }
-            warningLoginText.text = message;
+            //warningLoginText.text = message;
+            Debug.Log(message);
         }
         else
         {
@@ -108,8 +110,9 @@ public class AuthManager : MonoBehaviour
             //Now get the result
             User = LoginTask.Result;
             Debug.LogFormat("User signed in successfully: {0} ({1})", User.DisplayName, User.Email);
-            warningLoginText.text = "";
-            confirmLoginText.text = "Logged In";
+            //warningLoginText.text = "";
+            //confirmLoginText.text = "Logged In";
+            Debug.Log("Logged In");
         }
     }
 
@@ -158,7 +161,7 @@ public class AuthManager : MonoBehaviour
                         message = "Email Already In Use";
                         break;
                 }
-                warningRegisterText.text = message;
+                //warningRegisterText.text = message;
             }
             else
             {
@@ -189,7 +192,7 @@ public class AuthManager : MonoBehaviour
                         //Username is now set
                         //Now return to login screen
                         //UIManager.instance.LoginScreen();
-                        warningRegisterText.text = "";
+                        //warningRegisterText.text = "";
                     }
                 }
             }
