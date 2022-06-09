@@ -84,16 +84,16 @@ public class GoogleSignInDemo : MonoBehaviour
                     //AddToInformation("Got Error: " + error.Status + " " + error.Message);
                     Debug.Log("Мёд");
                 }
-                else
+                /*else
                 {
-                    //AddToInformation("Got Unexpected Exception?!?" + task.Exception);
-                }
+                    AddToInformation("Got Unexpected Exception?!?" + task.Exception);
+                }*/
             }
         }
-        else if (task.IsCanceled)
+        /*else if (task.IsCanceled)
         {
             //AddToInformation("Canceled");
-        }
+        }*/
         else
         {
             //AddToInformation("Welcome: " + task.Result.DisplayName + "!");
@@ -111,20 +111,20 @@ public class GoogleSignInDemo : MonoBehaviour
         auth.SignInWithCredentialAsync(credential).ContinueWith(task =>
         {
             AggregateException ex = task.Exception;
-            if (ex != null)
+            /*if (ex != null)
             {
                 if (ex.InnerExceptions[0] is FirebaseException inner && (inner.ErrorCode != 0))
                     //AddToInformation("\nError code = " + inner.ErrorCode + " Message = " + inner.Message);
                 else
                 {
-                    //AddToInformation("КАК");
-                }
+                    AddToInformation("КАК");
+                }*/
             }
-            else
+            /*else
             {
                 //AddToInformation("Sign In Successful.");
             }
-        });
+        }*/);
     }
 
     public void OnSignInSilently()
