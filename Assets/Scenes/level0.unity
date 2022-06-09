@@ -5851,6 +5851,7 @@ MonoBehaviour:
   playersDialogiesSaver: {fileID: 11400000, guid: 857f4ea528d999545bbab4bdc54360e8,
     type: 2}
   massage_click_btn: {fileID: 686187208}
+  callbacks: {fileID: 1927280842}
 --- !u!114 &909991264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12741,6 +12742,7 @@ MonoBehaviour:
   isPlayer1: 0
   isBusy: 0
   click: 0
+  next: 0
   data: {fileID: 11400000, guid: 2336fb71654d97d4b9c3e67c350c186e, type: 2}
   actions: {fileID: 11400000, guid: 9d3e989a4e3bcb34795e602d6e824d4a, type: 2}
   journal: {fileID: 11400000, guid: dd172ace3ffc9ed4f9bf32fd16a613b0, type: 2}

@@ -8,64 +8,6 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:154253283042:android:75312845ce813ef60b18bb",
-        "android_client_info": {
-          "package_name": "com.GraverDV.pereriv_na_cledstvie"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "154253283042-95e1l4q9ngk556thu3mkfb38u3e3pv79.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyC62eAuk0jLFIjpLITae5AaMSMob5od36c"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "154253283042-95e1l4q9ngk556thu3mkfb38u3e3pv79.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:154253283042:android:bd8b12f2c3f80b2f0b18bb",
-        "android_client_info": {
-          "package_name": "com.GraverDV.pereriv_na_cledstvie_game"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "154253283042-95e1l4q9ngk556thu3mkfb38u3e3pv79.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyC62eAuk0jLFIjpLITae5AaMSMob5od36c"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "154253283042-95e1l4q9ngk556thu3mkfb38u3e3pv79.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
         "mobilesdk_app_id": "1:154253283042:android:055455ac17fac98e0b18bb",
         "android_client_info": {
           "package_name": "com.GraverDV.pereriv_na_cledstvie_mobile"
