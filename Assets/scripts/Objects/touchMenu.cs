@@ -116,19 +116,24 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
                             }
                             else if (hit.collider.CompareTag("Player"))
                             {
-                                //Debug.Log("Хэээээээээй");
-                                var click = ClickOnPlayer.Create();
-                                click.Click = true;
-                                click.Send();
-                                isInitiator = true;
-                                //if (!isBusy) //!!!!!!!!!!!!!!!!КРИСТИНА СЮДА ПРОВЕРКУ ЗАНЯТ ЛИ ВТОРОЙ ИГРОК!!!!!!!!!!!!!!!!!!
-                                /*{
-                                    Debug.Log("Жизньтлен");
-                                    dialogPlayer.beginPlayersDialog(dialogPlayer.dialogSaver.playerData.dialogId);
+                                bool isfirst;
+                                isfirst = hit.collider.transform.GetChild(0).GetChild(0).gameObject.activeInHierarchy;
+                                if (dialogPlayer.dialogSaver.playerData.isPlayer1 != isfirst) //это чтобы не вызывал диалог сам с собой
+                                {
+                                    //Debug.Log("Хэээээээээй");
+                                    var click = ClickOnPlayer.Create();
+                                    click.Click = true;
+                                    click.Send();
+                                    isInitiator = true;
+                                    //if (!isBusy) //!!!!!!!!!!!!!!!!КРИСТИНА СЮДА ПРОВЕРКУ ЗАНЯТ ЛИ ВТОРОЙ ИГРОК!!!!!!!!!!!!!!!!!!
+                                    /*{
+                                        Debug.Log("Жизньтлен");
+                                        dialogPlayer.beginPlayersDialog(dialogPlayer.dialogSaver.playerData.dialogId);
+                                    }
+                                    isInitiator = false;
+                                    click.Click = false;
+                                    click.Send();*/
                                 }
-                                isInitiator = false;
-                                click.Click = false;
-                                click.Send();*/
                             }
                         }
                     }
@@ -196,20 +201,25 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
                     }
                     else if (hit.collider.CompareTag("Player"))
                     {
-                        //Debug.Log("Хэээээээээй");
-                        var click = ClickOnPlayer.Create();
-                        click.Click = true;
-                        click.Send();
-                        isInitiator = true;
-                        Debug.Log(callbacks.isBusy);
-                        //new WaitForSeconds(3);
-                        //if (callbacks.isBusy) //!!!!!!!!!!!!!!!!КРИСТИНА СЮДА ПРОВЕРКУ ЗАНЯТ ЛИ ВТОРОЙ ИГРОК!!!!!!!!!!!!!!!!!!
-                        /*{
-                            Debug.Log("Жизньтлен");
-                            dialogPlayer.beginPlayersDialog(dialogPlayer.dialogSaver.playerData.dialogId);
-                        }*/
-                        //isInitiator = false;
 
+                        bool isfirst;
+                        isfirst = hit.collider.transform.GetChild(0).GetChild(0).gameObject.activeInHierarchy;
+                        if (dialogPlayer.dialogSaver.playerData.isPlayer1 != isfirst) //это чтобы не вызывал диалог сам с собой
+                        {
+                            //Debug.Log("Хэээээээээй");
+                            var click = ClickOnPlayer.Create();
+                            click.Click = true;
+                            click.Send();
+                            isInitiator = true;
+                            Debug.Log(callbacks.isBusy);
+                            //if (!isBusy) //!!!!!!!!!!!!!!!!КРИСТИНА СЮДА ПРОВЕРКУ ЗАНЯТ ЛИ ВТОРОЙ ИГРОК!!!!!!!!!!!!!!!!!!
+                            //{
+                            //    Debug.Log("Жизньтлен");
+                            //    dialogPlayer.beginPlayersDialog(dialogPlayer.dialogSaver.playerData.dialogId);
+                            //}
+                            //isInitiator = false;
+                        }
+                        else { Debug.Log("Нельзя разговаривать самим с собой!"); }
                     }
                 }
             }
@@ -249,7 +259,6 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
     //кнопки менюшки объектов
     public void watchAtAction() //actionKind = 0
     {
-        //Debug.Log("Когда-нибудь тут будут описываться итоги осмотра. И он будет привязан к объекту, на который смотрят.");
         int itemID = touched_item.GetComponent<ObjectManager>().ID;
         dialogPlayer.beginDialog(itemID, 0);
         if (menu != null) { Destroy(menu); }
@@ -260,7 +269,6 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
         int itemID = touched_item.GetComponent<ObjectManager>().ID;
         dialogPlayer.beginDialog(itemID, 1);
         if (menu != null) { Destroy(menu); }
-        //Debug.Log("Когда-нибудь тут возьмут предмет. И действие будет привязано к объекту, который берут.");
     }
 
     public void doItAction()
