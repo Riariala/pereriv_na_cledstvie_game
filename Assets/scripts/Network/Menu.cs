@@ -137,7 +137,6 @@ public class Menu : GlobalEventListener
             //userToken.password = password;
             Debug.Log(inputCode.text);
             BoltMatchmaking.JoinSession(inputCode.text, null);
-                   
         }
         else
         {
