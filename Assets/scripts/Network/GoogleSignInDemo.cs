@@ -31,11 +31,16 @@ public class GoogleSignInDemo : MonoBehaviour
                 if (task.Result == DependencyStatus.Available)
                     auth = FirebaseAuth.DefaultInstance;
                 else
+                {
                     AddToInformation("Could not resolve all Firebase dependencies: " + task.Result.ToString());
+                    Debug.Log("Тыква");
+                }
+                    
             }
             else
             {
                 AddToInformation("Dependency check was not completed. Error : " + task.Exception.Message);
+                Debug.Log("Сосулька");
             }
         });
     }
@@ -75,6 +80,7 @@ public class GoogleSignInDemo : MonoBehaviour
                 {
                     GoogleSignIn.SignInException error = (GoogleSignIn.SignInException)enumerator.Current;
                     AddToInformation("Got Error: " + error.Status + " " + error.Message);
+                    Debug.Log("Мёд");
                 }
                 else
                 {
