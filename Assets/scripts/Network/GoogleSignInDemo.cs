@@ -98,8 +98,8 @@ public class GoogleSignInDemo : MonoBehaviour
         {
             AddToInformation("Welcome: " + task.Result.DisplayName + "!");
             AddToInformation("Email = " + task.Result.Email);
-            AddToInformation("Google ID Token = " + task.Result.IdToken);
-            AddToInformation("Email = " + task.Result.Email);
+            //AddToInformation("Google ID Token = " + task.Result.IdToken);
+            //AddToInformation("Email = " + task.Result.Email);
             SignInWithGoogleOnFirebase(task.Result.IdToken);
         }
     }
