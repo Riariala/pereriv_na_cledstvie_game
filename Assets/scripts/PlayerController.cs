@@ -19,9 +19,6 @@ public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>//Mono
     private Collider _collider;
     private Vector3 closest_point;
     private Vector3 change_pos;
-    //[SerializeField] private Animator _animator;
-
-    //[SerializeField] private float speed =  10f;
     private float speed = 0.1f;
     private Transform playerCamera_transf;
 
@@ -29,12 +26,8 @@ public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>//Mono
     public override void Attached()
     {
         _rb = transform.GetChild(0).GetComponent<Rigidbody>();
-        //_rb = GetComponent<Rigidbody>();
         state.SetTransforms(state.PlayerTransform, transform);
         playerCamera_transf = playerCamera.transform;
-
-        //ChangeJoystick(_joystick);
-        //_transform = _rb.transform;
         _transform = transform;
     }
 
@@ -43,15 +36,9 @@ public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>//Mono
         if (!(_joystick is null))
         {
             float rad = playerCamera_transf.rotation.y * Mathf.PI;
-            //_rb.velocity = new Vector3(_joystick.Horizontal * speed * Mathf.Cos(rad) * BoltNetwork.FrameDeltaTime + _joystick.Vertical * speed * Mathf.Sin(rad) * BoltNetwork.FrameDeltaTime
-            //    , _rb.velocity.y,
-            //    _joystick.Horizontal * speed * Mathf.Sin(rad) * BoltNetwork.FrameDeltaTime + _joystick.Vertical * speed * Mathf.Cos(rad) * BoltNetwork.FrameDeltaTime);
-            //_transform.position = new Vector3(_joystick.Horizontal * speed * BoltNetwork.FrameDeltaTime + _transform.position.x, _transform.position.y, _transform.position.z + _joystick.Vertical * speed * BoltNetwork.FrameDeltaTime);
-            //Debug.Log("rot = " + (playerCamera_transf.rotation.y * 180f * 0.64f).ToString() + " " + (playerCamera_transf.rotation.x * 180f).ToString());
             _transform.position = new Vector3(_transform.position.x + _joystick.Horizontal * speed * Mathf.Cos(rad) + _joystick.Vertical * speed * Mathf.Sin(rad),
                 _transform.position.y,
                 _transform.position.z + _joystick.Horizontal * speed * Mathf.Sin(rad) + _joystick.Vertical * speed * Mathf.Cos(rad));
-            
         }
     }
 

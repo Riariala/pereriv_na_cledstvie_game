@@ -117,7 +117,7 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
                             else if (hit.collider.CompareTag("Player"))
                             {
                                 bool isfirst;
-                                isfirst = hit.collider.transform.GetChild(0).GetChild(0).gameObject.activeInHierarchy;
+                                isfirst = hit.collider.gameObject.activeInHierarchy;
                                 if (dialogPlayer.dialogSaver.playerData.isPlayer1 != isfirst) //это чтобы не вызывал диалог сам с собой
                                 {
                                     //Debug.Log("Хэээээээээй");
@@ -203,7 +203,7 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
                     {
 
                         bool isfirst;
-                        isfirst = hit.collider.transform.GetChild(0).GetChild(0).gameObject.activeInHierarchy;
+                        isfirst = hit.collider.gameObject.activeInHierarchy;
                         if (dialogPlayer.dialogSaver.playerData.isPlayer1 != isfirst) //это чтобы не вызывал диалог сам с собой
                         {
                             //Debug.Log("Хэээээээээй");

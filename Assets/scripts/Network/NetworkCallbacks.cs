@@ -7,6 +7,7 @@ public class NetworkCallbacks : GlobalEventListener
 {
     public GameObject player1;
     public GameObject player2;
+    public FixedJoystick _joystick;
     public bool isPlayer1;
     public bool isBusy;
     public bool click;
@@ -42,19 +43,20 @@ public class NetworkCallbacks : GlobalEventListener
             actions.setDefault();
             journal.clearAll();
         }
-        
         var spawnPos = new Vector3(Random.Range(-5, 5), 0, Random.Range(-5, 5));
         if (isPlayer1)
         {
             var player = BoltNetwork.Instantiate(player1, spawnPos, Quaternion.identity);
-            player.transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
-            Debug.Log("Player 1 Rogers " + player1.name);
+            PlayerController player_script = player.GetComponent<PlayerController>();
+            player_script.ChangeJoystick(_joystick);
+            Debug.Log("Player 1 " + player.name);
         }
         else
         {
             var player = BoltNetwork.Instantiate(player2, spawnPos, Quaternion.identity);
-            player.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
-            Debug.Log("Player 2 Mary " + player2.name);
+            PlayerController player_script = player.GetComponent<PlayerController>();
+            player_script.ChangeJoystick(_joystick);
+            Debug.Log("Player 2  " + player.name);
         }
 
     }
