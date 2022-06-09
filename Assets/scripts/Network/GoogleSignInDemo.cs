@@ -55,7 +55,8 @@ public class GoogleSignInDemo : MonoBehaviour
         GoogleSignIn.Configuration.RequestIdToken = true;
         AddToInformation("Calling SignIn");
 
-        GoogleSignIn.DefaultInstance.SignIn().ContinueWith(OnAuthenticationFinished);
+        //GoogleSignIn.DefaultInstance.SignIn().ContinueWith(OnAuthenticationFinished);
+        GoogleSignIn.DefaultInstance.SignIn().ContinueWithOnMainThread(OnAuthenticationFinished);
     }
 
     private void OnSignOut()
@@ -72,6 +73,7 @@ public class GoogleSignInDemo : MonoBehaviour
 
     internal void OnAuthenticationFinished(Task<GoogleSignInUser> task)
     {
+        AddToInformation("OnAuthenticationFinished");
         if (task.IsFaulted)
         {
             using (IEnumerator<Exception> enumerator = task.Exception.InnerExceptions.GetEnumerator())
