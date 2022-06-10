@@ -16,4 +16,4 @@ MonoBehaviour:
   char_player: {fileID: 1651104453875658818, guid: a37251e2c7bdcf74291f8ab32ba3eb6e,
     type: 3}
   dialogId: 0
-  isBusy: 1
+  isBusy: 0

@@ -10277,7 +10277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa105a850cd09ea45bf0ce0247d3089a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testMode: 1
+  testMode: 0
 --- !u!1001 &1580191250
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12690,6 +12690,7 @@ MonoBehaviour:
   _joystick: {fileID: 210846479}
   isPlayer1: 0
   isBusy: 0
+  isBusyAnswered: 0
   click: 0
   next: 0
   ask: 0
