@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4424802428861710240}
   m_Layer: 0
   m_Name: Bust
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43,8 +43,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.58, y: 1.09, z: 0.57}
-  m_Center: {x: 0.111, y: 0.53, z: -0.345}
+  m_Size: {x: 0.58, y: 1.42, z: 0.57}
+  m_Center: {x: 0.111, y: 0.68, z: -0.345}
 --- !u!1001 &5249180757142384863
 PrefabInstance:
   m_ObjectHideFlags: 0

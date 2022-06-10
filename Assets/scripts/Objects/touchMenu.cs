@@ -128,21 +128,12 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
                             else if (hit.collider.CompareTag("Player"))
                             {
                                 bool isfirst = hit.collider.gameObject.name == "Rogers";
-                                if (dialogPlayer.dialogSaver.playerData.isPlayer1 != isfirst) //это чтобы не вызывал диалог сам с собой
+                                if (dialogPlayer.dialogSaver.playerData.isPlayer1 != isfirst) 
                                 {
-                                    //Debug.Log("Хэээээээээй");
                                     var click = ClickOnPlayer.Create();
                                     click.Click = true;
                                     click.Send();
                                     isInitiator = true;
-                                    //if (!isBusy) //!!!!!!!!!!!!!!!!КРИСТИНА СЮДА ПРОВЕРКУ ЗАНЯТ ЛИ ВТОРОЙ ИГРОК!!!!!!!!!!!!!!!!!!
-                                    /*{
-                                        Debug.Log("Жизньтлен");
-                                        dialogPlayer.beginPlayersDialog(dialogPlayer.dialogSaver.playerData.dialogId);
-                                    }
-                                    isInitiator = false;
-                                    click.Click = false;
-                                    click.Send();*/
                                 }
                             }
                         }
@@ -185,7 +176,7 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
                 Vector3 pos = Input.mousePosition;
                 Ray ray = Camera.main.ScreenPointToRay(pos);
                 RaycastHit hit;
-                if (Physics.Raycast(ray, out hit))
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1, QueryTriggerInteraction.Ignore))
                 {
 
                     if (hit.collider.CompareTag("Item") || hit.collider.CompareTag("NPC"))
@@ -212,21 +203,13 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
                     else if (hit.collider.CompareTag("Player"))
                     {
                         bool isfirst = hit.collider.gameObject.name == "Rogers";
-                        Debug.Log(hit.collider.transform.parent.gameObject.name);
-                        if (dialogPlayer.dialogSaver.playerData.isPlayer1 != isfirst) //это чтобы не вызывал диалог сам с собой
+                        if (dialogPlayer.dialogSaver.playerData.isPlayer1 != isfirst) 
                         {
-                            //Debug.Log("Хэээээээээй");
                             isInitiator = true;
                             var click = ClickOnPlayer.Create();
                             click.Click = true;
                             click.Send();
                             Debug.Log(callbacks.isBusy);
-                            //if (!isBusy) //!!!!!!!!!!!!!!!!КРИСТИНА СЮДА ПРОВЕРКУ ЗАНЯТ ЛИ ВТОРОЙ ИГРОК!!!!!!!!!!!!!!!!!!
-                            //{
-                            //    Debug.Log("Жизньтлен");
-                            //    dialogPlayer.beginPlayersDialog(dialogPlayer.dialogSaver.playerData.dialogId);
-                            //}
-                            //isInitiator = false;
                         }
                         else { Debug.Log("Нельзя разговаривать самим с собой!"); }
                     }

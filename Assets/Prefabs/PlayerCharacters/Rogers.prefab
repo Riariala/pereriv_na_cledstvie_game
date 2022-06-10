@@ -46,7 +46,6 @@ GameObject:
   - component: {fileID: 2383620237321829706}
   - component: {fileID: 3498534587264363038}
   - component: {fileID: 945906040763038883}
-  - component: {fileID: 3541240972019371423}
   m_Layer: 6
   m_Name: Rogers
   m_TagString: Player
@@ -115,6 +114,7 @@ MonoBehaviour:
   _rb: {fileID: 3295938696965934072}
   playerCamera: {fileID: 1679769518368665418}
   _joystick: {fileID: 0}
+  playerCameraScript: {fileID: 7035535853636454751}
 --- !u!114 &7035535853636454751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,7 +129,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 1679769518368665418}
   player: {fileID: 3124089655766484163}
-  centerArea: {x: 4.39, y: 7.78, z: -0.46}
+  cameraYPos: 7.78
+  cameraZPos: -10.46
+  cameraXPos: 0
+  camXmodif: 1
+  camZmodif: 1
 --- !u!114 &2383620237321829706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,19 +178,6 @@ CapsuleCollider:
   m_Height: 6.67
   m_Direction: 1
   m_Center: {x: 0, y: 3.16, z: 0}
---- !u!65 &3541240972019371423
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1651104453875658818}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 1.82, y: 3.21, z: 1}
-  m_Center: {x: 0.26, y: 1.84, z: -1.926207}
 --- !u!1 &1679769518368665418
 GameObject:
   m_ObjectHideFlags: 0

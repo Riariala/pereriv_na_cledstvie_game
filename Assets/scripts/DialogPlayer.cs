@@ -106,6 +106,7 @@ public class DialogPlayer : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBeha
             dialogSaver.ReplaceActionSaver(playersDialogiesSaver.dialogiesList[dialogId].changes);
             dialogSaver.playerData.isBusy = false;
             playEffect(playersDialogiesSaver.dialogiesList[dialogId].effect);
+            dialogSaver.playerData.dialogId = playersDialogiesSaver.dialogiesList[dialogId].nextDialog;
         }
     }
 

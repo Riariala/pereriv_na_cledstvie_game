@@ -23,6 +23,14 @@ public class Menu : GlobalEventListener
     public InputField inputCode;
     public string matchName;
 
+    private BoltConfig _config;
+
+    private void Awake()
+    {
+        _config = BoltRuntimeSettings.instance.GetConfigCopy();
+        _config.serverConnectionLimit = 2; // Set here the max number of clients
+    } 
+
     public void StartServer()
     {
         if (BoltNetwork.IsClient) {
@@ -30,7 +38,7 @@ public class Menu : GlobalEventListener
         }
         matchName = UnityEngine.Random.Range(1000, 99999).ToString();
         roomCode.text = matchName;
-        BoltLauncher.StartServer();
+        BoltLauncher.StartServer(_config);
        
     }
 
@@ -91,7 +99,7 @@ public class Menu : GlobalEventListener
             BoltLauncher.Shutdown(); 
         }
 
-        BoltLauncher.StartClient();
+        BoltLauncher.StartClient(_config);
     }
 
     public override void SessionListUpdated(Map<Guid, UdpSession> SessionList)

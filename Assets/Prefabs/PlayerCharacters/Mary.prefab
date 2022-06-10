@@ -197,6 +197,7 @@ MonoBehaviour:
   _rb: {fileID: 3175694714790981355}
   playerCamera: {fileID: 1648438642274290265}
   _joystick: {fileID: 0}
+  playerCameraScript: {fileID: 6921168245716905036}
 --- !u!114 &6921168245716905036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,7 +212,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 1648438642274290265}
   player: {fileID: 3095430558700986832}
-  centerArea: {x: 4.39, y: 7.78, z: -0.46}
+  cameraYPos: 7.78
+  cameraZPos: -10.46
+  cameraXPos: 0
+  camXmodif: 1
+  camZmodif: 1
 --- !u!114 &2358622548739102809
 MonoBehaviour:
   m_ObjectHideFlags: 0
