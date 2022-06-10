@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -32,14 +33,14 @@ public class GoogleSignInDemo : MonoBehaviour
                     auth = FirebaseAuth.DefaultInstance;
                 else
                 {
-                    //AddToInformation("Could not resolve all Firebase dependencies: " + task.Result.ToString());
+                    AddToInformation("Could not resolve all Firebase dependencies: " + task.Result.ToString());
                     Debug.Log("Тыква");
                 }
                     
             }
             else
             {
-                //AddToInformation("Dependency check was not completed. Error : " + task.Exception.Message);
+                AddToInformation("Dependency check was not completed. Error : " + task.Exception.Message);
                 Debug.Log("Сосулька");
             }
         });
@@ -53,7 +54,7 @@ public class GoogleSignInDemo : MonoBehaviour
         GoogleSignIn.Configuration = configuration;
         GoogleSignIn.Configuration.UseGameSignIn = false;
         GoogleSignIn.Configuration.RequestIdToken = true;
-        //AddToInformation("Calling SignIn");
+        AddToInformation("Calling SignIn");
 
         GoogleSignIn.DefaultInstance.SignIn().ContinueWith(OnAuthenticationFinished);
         //GoogleSignIn.DefaultInstance.SignIn().ContinueWithOnMainThread(OnAuthenticationFinished);
@@ -61,46 +62,60 @@ public class GoogleSignInDemo : MonoBehaviour
 
     private void OnSignOut()
     {
-        //AddToInformation("Calling SignOut");
+        AddToInformation("Calling SignOut");
         GoogleSignIn.DefaultInstance.SignOut();
     }
 
     public void OnDisconnect()
     {
-        //AddToInformation("Calling Disconnect");
+        AddToInformation("Calling Disconnect");
         GoogleSignIn.DefaultInstance.Disconnect();
     }
 
     internal void OnAuthenticationFinished(Task<GoogleSignInUser> task)
     {
-        //AddToInformation("OnAuthenticationFinished");
+        AddToInformation("OnAuthenticationFinished");
         if (task.IsFaulted)
         {
-            using (IEnumerator<Exception> enumerator = task.Exception.InnerExceptions.GetEnumerator())
-            {
-                if (enumerator.MoveNext())
-                {
-                    GoogleSignIn.SignInException error = (GoogleSignIn.SignInException)enumerator.Current;
-                    //AddToInformation("Got Error: " + error.Status + " " + error.Message);
-                    Debug.Log("Мёд");
-                }
-                /*else
-                {
-                    AddToInformation("Got Unexpected Exception?!?" + task.Exception);
-                }*/
-            }
+            StartCoroutine(OnFailure(task));
         }
-        /*else if (task.IsCanceled)
+        else if (task.IsCanceled)
         {
-            //AddToInformation("Canceled");
-        }*/
+            AddToInformation("Canceled");
+        }
         else
         {
-            //AddToInformation("Welcome: " + task.Result.DisplayName + "!");
-            //AddToInformation("Email = " + task.Result.Email);
-            //AddToInformation("Google ID Token = " + task.Result.IdToken);
-            //AddToInformation("Email = " + task.Result.Email);
-            SignInWithGoogleOnFirebase(task.Result.IdToken);
+            StartCoroutine(OnSuccess(task));
+            
+        }
+    }
+
+    private IEnumerator OnSuccess(Task<GoogleSignInUser> task)
+    {
+        yield return new WaitForEndOfFrame();
+        Debug.Log("OnSuccess");
+        AddToInformation("Welcome: " + task.Result.DisplayName + "!");
+        AddToInformation("Email = " + task.Result.Email);
+        AddToInformation("Google ID Token = " + task.Result.IdToken);
+        AddToInformation("Email = " + task.Result.Email);
+        SignInWithGoogleOnFirebase(task.Result.IdToken);
+    }
+
+    private IEnumerator OnFailure(Task<GoogleSignInUser> task)
+    {
+        yield return new WaitForEndOfFrame();
+        using (IEnumerator<Exception> enumerator = task.Exception.InnerExceptions.GetEnumerator())
+        {
+            if (enumerator.MoveNext())
+            {
+                GoogleSignIn.SignInException error = (GoogleSignIn.SignInException)enumerator.Current;
+                AddToInformation("Got Error: " + error.Status + " " + error.Message);
+                Debug.Log("Мёд");
+            }
+            else
+            {
+                AddToInformation("Got Unexpected Exception?!?" + task.Exception);
+            }
         }
     }
 
@@ -111,20 +126,20 @@ public class GoogleSignInDemo : MonoBehaviour
         auth.SignInWithCredentialAsync(credential).ContinueWith(task =>
         {
             AggregateException ex = task.Exception;
-            /*if (ex != null)
+            if (ex != null)
             {
                 if (ex.InnerExceptions[0] is FirebaseException inner && (inner.ErrorCode != 0))
-                    //AddToInformation("\nError code = " + inner.ErrorCode + " Message = " + inner.Message);
+                    AddToInformation("\nError code = " + inner.ErrorCode + " Message = " + inner.Message);
                 else
                 {
                     AddToInformation("КАК");
-                }*/
+                }
             }
-            /*else
+            else
             {
-                //AddToInformation("Sign In Successful.");
+                AddToInformation("Sign In Successful.");
             }
-        }*/);
+        });
     }
 
     public void OnSignInSilently()
@@ -132,7 +147,7 @@ public class GoogleSignInDemo : MonoBehaviour
         GoogleSignIn.Configuration = configuration;
         GoogleSignIn.Configuration.UseGameSignIn = false;
         GoogleSignIn.Configuration.RequestIdToken = true;
-        //AddToInformation("Calling SignIn Silently");
+        AddToInformation("Calling SignIn Silently");
 
         GoogleSignIn.DefaultInstance.SignInSilently().ContinueWith(OnAuthenticationFinished);
     }
@@ -143,10 +158,10 @@ public class GoogleSignInDemo : MonoBehaviour
         GoogleSignIn.Configuration.UseGameSignIn = true;
         GoogleSignIn.Configuration.RequestIdToken = false;
 
-        //AddToInformation("Calling Games SignIn");
+        AddToInformation("Calling Games SignIn");
 
         GoogleSignIn.DefaultInstance.SignIn().ContinueWith(OnAuthenticationFinished);
     }
 
-    //private void AddToInformation(string str) { infoText.text += "\n" + str; }
+    private void AddToInformation(string str) { infoText.text += "\n" + str; }
 }
