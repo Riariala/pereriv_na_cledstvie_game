@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -56,6 +57,7 @@ public class GoogleSignInDemo : MonoBehaviour
         AddToInformation("Calling SignIn");
 
         GoogleSignIn.DefaultInstance.SignIn().ContinueWith(OnAuthenticationFinished);
+        //GoogleSignIn.DefaultInstance.SignIn().ContinueWithOnMainThread(OnAuthenticationFinished);
     }
 
     private void OnSignOut()
@@ -72,21 +74,10 @@ public class GoogleSignInDemo : MonoBehaviour
 
     internal void OnAuthenticationFinished(Task<GoogleSignInUser> task)
     {
+        AddToInformation("OnAuthenticationFinished");
         if (task.IsFaulted)
         {
-            using (IEnumerator<Exception> enumerator = task.Exception.InnerExceptions.GetEnumerator())
-            {
-                if (enumerator.MoveNext())
-                {
-                    GoogleSignIn.SignInException error = (GoogleSignIn.SignInException)enumerator.Current;
-                    AddToInformation("Got Error: " + error.Status + " " + error.Message);
-                    Debug.Log("Мёд");
-                }
-                else
-                {
-                    AddToInformation("Got Unexpected Exception?!?" + task.Exception);
-                }
-            }
+            StartCoroutine(OnFailure(task));
         }
         else if (task.IsCanceled)
         {
@@ -94,11 +85,37 @@ public class GoogleSignInDemo : MonoBehaviour
         }
         else
         {
-            AddToInformation("Welcome: " + task.Result.DisplayName + "!");
-            AddToInformation("Email = " + task.Result.Email);
-            AddToInformation("Google ID Token = " + task.Result.IdToken);
-            AddToInformation("Email = " + task.Result.Email);
-            SignInWithGoogleOnFirebase(task.Result.IdToken);
+            StartCoroutine(OnSuccess(task));
+            
+        }
+    }
+
+    private IEnumerator OnSuccess(Task<GoogleSignInUser> task)
+    {
+        yield return new WaitForEndOfFrame();
+        Debug.Log("OnSuccess");
+        AddToInformation("Welcome: " + task.Result.DisplayName + "!");
+        AddToInformation("Email = " + task.Result.Email);
+        AddToInformation("Google ID Token = " + task.Result.IdToken);
+        AddToInformation("Email = " + task.Result.Email);
+        SignInWithGoogleOnFirebase(task.Result.IdToken);
+    }
+
+    private IEnumerator OnFailure(Task<GoogleSignInUser> task)
+    {
+        yield return new WaitForEndOfFrame();
+        using (IEnumerator<Exception> enumerator = task.Exception.InnerExceptions.GetEnumerator())
+        {
+            if (enumerator.MoveNext())
+            {
+                GoogleSignIn.SignInException error = (GoogleSignIn.SignInException)enumerator.Current;
+                AddToInformation("Got Error: " + error.Status + " " + error.Message);
+                Debug.Log("Мёд");
+            }
+            else
+            {
+                AddToInformation("Got Unexpected Exception?!?" + task.Exception);
+            }
         }
     }
 
@@ -113,6 +130,10 @@ public class GoogleSignInDemo : MonoBehaviour
             {
                 if (ex.InnerExceptions[0] is FirebaseException inner && (inner.ErrorCode != 0))
                     AddToInformation("\nError code = " + inner.ErrorCode + " Message = " + inner.Message);
+                else
+                {
+                    AddToInformation("КАК");
+                }
             }
             else
             {
