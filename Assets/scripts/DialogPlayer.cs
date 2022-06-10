@@ -33,22 +33,13 @@ public class DialogPlayer : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBeha
 
     void Update()
     {
-        if (callbacks.click)
+        if (callbacks.next)
         {
-            if (callbacks.next)
+            if (!isHost)
             {
-                if (isHost = false)
-                {
-                    PlayNextCall();
-
-                }
-                else
-                {
-                    var next = NextDialog.Create();
-                    next.Next = false;
-                    next.Send();
-                }
+                PlayNextCall();
             }
+            callbacks.next = false;
         }
     }
 
@@ -82,7 +73,6 @@ public class DialogPlayer : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBeha
                 var next = NextDialog.Create();
                 next.Next = true;
                 next.Send();
-                //бнр гдеяэ нропюбэ йнлюмдс брнпнлс хцпнйс,врнаш лемък. бшгбюрэ с мецн йнлюмдс PlayNextCall();
                 PlayNextCall();
         }
     }
