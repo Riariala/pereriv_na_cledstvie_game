@@ -201,9 +201,8 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
                     }
                     else if (hit.collider.CompareTag("Player"))
                     {
-
-                        bool isfirst;
-                        isfirst = hit.collider.gameObject.activeInHierarchy;
+                        bool isfirst = hit.collider.transform.parent.gameObject.name == "Rogers";
+                        Debug.Log(hit.collider.transform.parent.gameObject.name);
                         if (dialogPlayer.dialogSaver.playerData.isPlayer1 != isfirst) //это чтобы не вызывал диалог сам с собой
                         {
                             //Debug.Log("Хэээээээээй");
