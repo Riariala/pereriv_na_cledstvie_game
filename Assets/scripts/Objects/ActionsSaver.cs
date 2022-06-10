@@ -16,6 +16,13 @@ public class ActionsSaver : ScriptableObject
         itemPlayerActions = readFromJSON();
     }
 
+    public void newValue(string NewJson)
+    {
+        //itemPlayerActions = readFromJSON();
+        ObjectsHolder itm = JsonConvert.DeserializeObject<ObjectsHolder>(NewJson);
+        itemPlayerActions = itm.itemPlayerActions;
+    }
+
     public List<ObjectActions> readFromJSON()
     {
 #if UNITY_ANDROID && !UNITY_EDITOR

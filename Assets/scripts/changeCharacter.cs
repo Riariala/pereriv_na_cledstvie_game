@@ -25,6 +25,7 @@ public class changeCharacter : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoB
         Player1_script = Player1.GetComponent<PlayerController>();
         Player2_script = Player2.GetComponent<PlayerController>();
         Player1_script.ChangeJoystick(_jystick);
+        player_data.isPlayer1 = true;
         var character = PlayerCharacter.Create();
         character.IsPlayer1 = true;
         character.Send();
@@ -40,7 +41,7 @@ public class changeCharacter : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoB
         }
         //player_data.SetCharacter(true, Player1);
         
-        //player_data.isPlayer1 = true;
+        
         //player_data.char_player = Player1;
     }
 
