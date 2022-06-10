@@ -12,6 +12,9 @@ public class NetworkCallbacks : GlobalEventListener
     public bool isBusy;
     public bool click;
     public bool next;
+    public bool ask;
+    public int dialogId;
+    public string actionsSaver;
     public PlayerData data;
     public ActionsSaver actions;
     public JournalInfo journal;
@@ -67,6 +70,7 @@ public class NetworkCallbacks : GlobalEventListener
     {
         isPlayer1=evnt.IsPlayer1;
         data.isPlayer1 = isPlayer1;
+        Debug.Log(isPlayer1);
     }
 
     public override void OnEvent(IsBusy evnt)
@@ -77,18 +81,20 @@ public class NetworkCallbacks : GlobalEventListener
     public override void OnEvent(ClickOnPlayer evnt)
     {
         click = evnt.Click;
-        //Debug.Log("клац");
-        //Debug.Log(click);
-        /*isPlayer1 = evnt.IsPlayer1;
-        data.isPlayer1 = isPlayer1;*/
     }
     public override void OnEvent(NextDialog evnt)
     {
         next = evnt.Next;
-        //Debug.Log("клац");
-        //Debug.Log(click);
-        /*isPlayer1 = evnt.IsPlayer1;
-        data.isPlayer1 = isPlayer1;*/
+    }
+
+    public override void OnEvent(StartData evnt)
+    {
+        dialogId = evnt.DialogId;
+        actionsSaver = evnt.ActionsSaver;
+    }
+    public override void OnEvent(AskForData evnt)
+    {
+        ask = evnt.Ask;
     }
 
     /*public override void SceneLoadLocalDone(string map)

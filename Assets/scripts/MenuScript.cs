@@ -57,7 +57,7 @@ public class MenuScript : MonoBehaviour
             if (child.CompareTag("Button")) {child.GetComponent<Button>().interactable = false;}
 
         }
-        NetworkMenu.StartClient();
+        //NetworkMenu.StartClient();
         //NetworkMenu.JoinGame();
     }
 

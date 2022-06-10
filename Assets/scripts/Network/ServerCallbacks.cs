@@ -10,10 +10,24 @@ using Photon.Bolt.Utils;
 [BoltGlobalBehaviour(BoltNetworkModes.Server)]
 public class ServerCallbacks : Photon.Bolt.GlobalEventListener
 {
+    /*public NetworkCallbacks callbacks;
+    public PlayerData data;
+    public ActionsSaver actions;
+    public JournalInfo journal;*/
+
+
     public override void Connected(BoltConnection connection)
     {
-        var log = LogEvent.Create();
+        /*var log = LogEvent.Create();
         log.Message = string.Format("{0} connected", connection.RemoteEndPoint);
-        log.Send();
+        log.Send();*/
+        /*var startData = StartData.Create();
+        startData.DialogId = 12;
+        startData.ActionsSaver = "בפעמם";
+        startData.Send();*/
+        //data.dialogId = callbacks.dialogId;
+        var ask = AskForData.Create();
+        ask.Ask = true;
+        ask.Send();
     }
 }
