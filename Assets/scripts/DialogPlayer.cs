@@ -68,7 +68,7 @@ public class DialogPlayer : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBeha
 
     public void PlayNextPlayersDialog()
     {
-        if (isHost) //тогда работает
+        if (isHost) 
         {
                 var next = NextDialog.Create();
                 next.Next = true;

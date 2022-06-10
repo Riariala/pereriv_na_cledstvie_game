@@ -10,6 +10,7 @@ public class NetworkCallbacks : GlobalEventListener
     public FixedJoystick _joystick;
     public bool isPlayer1;
     public bool isBusy;
+    public bool isBusyAnswered;
     public bool click;
     public bool next;
     public bool ask;
@@ -47,7 +48,7 @@ public class NetworkCallbacks : GlobalEventListener
             actions.setDefault();
             journal.clearAll();
         }
-        else { Debug.Log("Host"); }
+        data.isPlayer1 = isPlayer1;
         var spawnPos = new Vector3(Random.Range(-5, 5), 0, Random.Range(-5, 5));
         if (isPlayer1)
         {
@@ -78,7 +79,7 @@ public class NetworkCallbacks : GlobalEventListener
     public override void OnEvent(IsBusy evnt)
     {
         isBusy = evnt.Busy;
-        Debug.Log(isBusy);
+        isBusyAnswered = true;
     }
     public override void OnEvent(ClickOnPlayer evnt)
     {
