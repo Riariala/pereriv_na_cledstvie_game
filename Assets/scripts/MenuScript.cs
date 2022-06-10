@@ -31,6 +31,7 @@ public class MenuScript : MonoBehaviour
     void Start()
     {
         dialogSaver.setDefault();
+        playersDialogiesSaver.setDefault();
     }
 
     public void changeCoworker(GameObject checkp) 
@@ -57,7 +58,7 @@ public class MenuScript : MonoBehaviour
             if (child.CompareTag("Button")) {child.GetComponent<Button>().interactable = false;}
 
         }
-        NetworkMenu.StartClient();
+        //NetworkMenu.StartClient();
         //NetworkMenu.JoinGame();
     }
 

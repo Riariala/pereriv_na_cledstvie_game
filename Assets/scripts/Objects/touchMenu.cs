@@ -37,6 +37,7 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
         {
             if (isInitiator = false)
             {
+                callbacks.click = false;
                 var busy = IsBusy.Create();
                 busy.Busy = callbacks.data.isBusy;
                 busy.Send();
@@ -45,20 +46,18 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
                 {
                     dialogPlayer.beginPlayersDialog(dialogPlayer.dialogSaver.playerData.dialogId);
                 }
-                Debug.Log("Я туть");
-
-                
-
+                Debug.Log("Я ответил второму игроку.Я занят? - " + busy.Busy.ToString());
             }
             else
             {
                 isInitiator = false;
-                var click = ClickOnPlayer.Create();
-                click.Click = false;
-                click.Send();
+                callbacks.click = false;
+                //var click = ClickOnPlayer.Create();
+                //click.Click = false;
+                //click.Send();
                 if (!callbacks.isBusy) //!!!!!!!!!!!!!!!!КРИСТИНА СЮДА ПРОВЕРКУ ЗАНЯТ ЛИ ВТОРОЙ ИГРОК!!!!!!!!!!!!!!!!!!
                 {
-                   Debug.Log("Жизньтлен");
+                   Debug.Log("Я не занят. Могу говорить.");
                    dialogPlayer.beginPlayersDialog(dialogPlayer.dialogSaver.playerData.dialogId);
                 }
 
@@ -116,8 +115,7 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
                             }
                             else if (hit.collider.CompareTag("Player"))
                             {
-                                bool isfirst;
-                                isfirst = hit.collider.gameObject.activeInHierarchy;
+                                bool isfirst = hit.collider.transform.parent.gameObject.name == "Rogers";
                                 if (dialogPlayer.dialogSaver.playerData.isPlayer1 != isfirst) //это чтобы не вызывал диалог сам с собой
                                 {
                                     //Debug.Log("Хэээээээээй");
@@ -206,10 +204,10 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
                         if (dialogPlayer.dialogSaver.playerData.isPlayer1 != isfirst) //это чтобы не вызывал диалог сам с собой
                         {
                             //Debug.Log("Хэээээээээй");
+                            isInitiator = true;
                             var click = ClickOnPlayer.Create();
                             click.Click = true;
                             click.Send();
-                            isInitiator = true;
                             Debug.Log(callbacks.isBusy);
                             //if (!isBusy) //!!!!!!!!!!!!!!!!КРИСТИНА СЮДА ПРОВЕРКУ ЗАНЯТ ЛИ ВТОРОЙ ИГРОК!!!!!!!!!!!!!!!!!!
                             //{

@@ -219,7 +219,6 @@ public class DialogPlayer : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBeha
         {
             isHost = false;
         }
-        //isHost = //////////////////////////КРИСТИНА ОПРЕДЕЛИ ХОСТ ЭТО ИЛИ НЕТ
         dialogCount = 0;
         Debug.Log("начало диалога между игроками");
         playNext();

@@ -39,10 +39,12 @@ public class NetworkCallbacks : GlobalEventListener
         Debug.Log(data.isPlayer1);*/
         if (BoltNetwork.IsClient)
         {
+            Debug.Log("Client");
             isPlayer1 = !isPlayer1;
             actions.setDefault();
             journal.clearAll();
         }
+        else { Debug.Log("Host"); }
         var spawnPos = new Vector3(Random.Range(-5, 5), 0, Random.Range(-5, 5));
         if (isPlayer1)
         {

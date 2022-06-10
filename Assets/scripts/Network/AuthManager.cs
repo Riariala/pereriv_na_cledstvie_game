@@ -38,7 +38,7 @@ public class AuthManager : MonoBehaviour
             if (dependencyStatus == DependencyStatus.Available)
             {
                 //If they are avalible Initialize Firebase
-                InitializeFirebase();
+                //InitializeFirebase();
             }
             else
             {
