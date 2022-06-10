@@ -47,6 +47,7 @@ public class NetworkCallbacks : GlobalEventListener
         if (isPlayer1)
         {
             var player = BoltNetwork.Instantiate(player1, spawnPos, Quaternion.identity);
+            player.name = "Rogers";
             PlayerController player_script = player.GetComponent<PlayerController>();
             player_script.ChangeJoystick(_joystick);
             Debug.Log("Player 1 " + player.name);
@@ -54,6 +55,7 @@ public class NetworkCallbacks : GlobalEventListener
         else
         {
             var player = BoltNetwork.Instantiate(player2, spawnPos, Quaternion.identity);
+            player.name = "Mary";
             PlayerController player_script = player.GetComponent<PlayerController>();
             player_script.ChangeJoystick(_joystick);
             Debug.Log("Player 2  " + player.name);
