@@ -35,35 +35,40 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
     {
         if (callbacks.click)
         {
-            if (isInitiator = false)
+            callbacks.click = false;
+            if (!isInitiator)
             {
-                callbacks.click = false;
+                //callbacks.click = false;
                 var busy = IsBusy.Create();
                 busy.Busy = callbacks.data.isBusy;
                 busy.Send();
                 //isBusy = busy.Busy;
-                if (!busy.Busy) //!!!!!!!!!!!!!!!!КРИСТИНА СЮДА ПРОВЕРКУ ЗАНЯТ ЛИ ВТОРОЙ ИГРОК!!!!!!!!!!!!!!!!!!
+                if (!busy.Busy) 
                 {
                     dialogPlayer.beginPlayersDialog(dialogPlayer.dialogSaver.playerData.dialogId);
+                    Debug.Log("Я ответил второму игроку.");
                 }
-                Debug.Log("Я ответил второму игроку.Я занят? - " + busy.Busy.ToString());
+                Debug.Log("Я занят? - " + busy.Busy.ToString());
             }
-            else
-            {
-                isInitiator = false;
-                callbacks.click = false;
-                //var click = ClickOnPlayer.Create();
-                //click.Click = false;
-                //click.Send();
-                if (!callbacks.isBusy) //!!!!!!!!!!!!!!!!КРИСТИНА СЮДА ПРОВЕРКУ ЗАНЯТ ЛИ ВТОРОЙ ИГРОК!!!!!!!!!!!!!!!!!!
-                {
-                   Debug.Log("Я не занят. Могу говорить.");
-                   dialogPlayer.beginPlayersDialog(dialogPlayer.dialogSaver.playerData.dialogId);
-                }
+            //else
+            //{
+            //    //isInitiator = false;
+            //    callbacks.click = false;
+            //    //if (!callbacks.isBusy) //!!!!!!!!!!!!!!!!КРИСТИНА СЮДА ПРОВЕРКУ ЗАНЯТ ЛИ ВТОРОЙ ИГРОК!!!!!!!!!!!!!!!!!!
+            //    //{
+            //    //   Debug.Log("Я не занят. Могу говорить.");
+            //    //   dialogPlayer.beginPlayersDialog(dialogPlayer.dialogSaver.playerData.dialogId);
+            //    //}
 
-            }
+            //}
         }
-        
+        if (isInitiator && !callbacks.isBusy)
+        {
+            isInitiator = false;
+            callbacks.isBusy = false;
+            Debug.Log("Я не занят. Могу говорить.");
+            dialogPlayer.beginPlayersDialog(dialogPlayer.dialogSaver.playerData.dialogId);
+        }
 
 #if UNITY_ANDROID && !UNITY_EDITOR
         forAndroid();
