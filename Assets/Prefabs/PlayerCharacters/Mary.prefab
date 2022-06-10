@@ -268,7 +268,7 @@ GameObject:
   - component: {fileID: 3175694714790981355}
   - component: {fileID: 2442000767661333968}
   m_Layer: 7
-  m_Name: model
+  m_Name: Mary
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

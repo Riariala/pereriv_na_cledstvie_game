@@ -35,20 +35,33 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
     {
         if (callbacks.click)
         {
-            callbacks.click = false;
             if (!isInitiator)
             {
+
+                callbacks.click = false;
                 //callbacks.click = false;
                 var busy = IsBusy.Create();
                 busy.Busy = callbacks.data.isBusy;
                 busy.Send();
                 //isBusy = busy.Busy;
-                if (!busy.Busy) 
+                if (!busy.Busy)
                 {
                     dialogPlayer.beginPlayersDialog(dialogPlayer.dialogSaver.playerData.dialogId);
                     Debug.Log("Я ответил второму игроку.");
                 }
                 Debug.Log("Я занят? - " + busy.Busy.ToString());
+            }
+        }
+        if (callbacks.isBusyAnswered)
+        {
+            callbacks.isBusyAnswered = false;
+            if (isInitiator && !callbacks.isBusy)
+            {
+                callbacks.click = false;
+                isInitiator = false;
+                //callbacks.isBusy = true;
+                Debug.Log("Я не занят. Могу говорить.");
+                dialogPlayer.beginPlayersDialog(dialogPlayer.dialogSaver.playerData.dialogId);
             }
             //else
             //{
@@ -62,13 +75,7 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
 
             //}
         }
-        if (isInitiator && !callbacks.isBusy)
-        {
-            isInitiator = false;
-            callbacks.isBusy = false;
-            Debug.Log("Я не занят. Могу говорить.");
-            dialogPlayer.beginPlayersDialog(dialogPlayer.dialogSaver.playerData.dialogId);
-        }
+        
 
 #if UNITY_ANDROID && !UNITY_EDITOR
         forAndroid();

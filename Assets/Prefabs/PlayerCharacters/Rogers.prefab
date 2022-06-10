@@ -282,7 +282,7 @@ GameObject:
   - component: {fileID: 3295938696965934072}
   - component: {fileID: 2327351169095219395}
   m_Layer: 7
-  m_Name: model
+  m_Name: Rogers
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
