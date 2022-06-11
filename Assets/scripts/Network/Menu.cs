@@ -22,7 +22,13 @@ public class Menu : GlobalEventListener
     public Text roomCode;
     public InputField inputCode;
     public string matchName;
+    private BoltConfig _config;
 
+    private void Awake()
+    {
+        _config = BoltRuntimeSettings.instance.GetConfigCopy();
+        _config.serverConnectionLimit = 2; // Set here the max number of clients
+    }
     public void StartServer()
     {
         if (BoltNetwork.IsClient) {
@@ -30,7 +36,7 @@ public class Menu : GlobalEventListener
         }
         matchName = UnityEngine.Random.Range(1000, 99999).ToString();
         roomCode.text = matchName;
-        BoltLauncher.StartServer();
+        BoltLauncher.StartServer(_config);
        
     }
 
@@ -91,7 +97,7 @@ public class Menu : GlobalEventListener
             BoltLauncher.Shutdown(); 
         }
 
-        BoltLauncher.StartClient();
+        BoltLauncher.StartClient(_config);
     }
 
     public override void SessionListUpdated(Map<Guid, UdpSession> SessionList)
@@ -110,11 +116,15 @@ public class Menu : GlobalEventListener
             joinClone.transform.GetChild(0).GetComponent<Text>().text = session.Key.ToString(); //здесь надо имя, потом еще понять, откуда взять номер главы, которая проходится
             //var token = new TestToken();
             Debug.Log(photonSession.Id);
-            joinClone.gameObject.SetActive(true);
-            //joinClone.onClick.AddListener(() => JoinGame(photonSession));
-            joinClone.onClick.AddListener(() => BoltMatchmaking.JoinSession(photonSession));
+            Debug.Log(photonSession.ConnectionsCurrent);
+            if (photonSession.ConnectionsCurrent < 2)
+            {
+                joinClone.gameObject.SetActive(true);
+                //joinClone.onClick.AddListener(() => JoinGame(photonSession));
+                joinClone.onClick.AddListener(() => BoltMatchmaking.JoinSession(photonSession));
 
-            joinServerBtns.Add(joinClone);
+                joinServerBtns.Add(joinClone);
+            }
 
 
             /*if (photonSession.Source == UdpSessionSource.Photon)
