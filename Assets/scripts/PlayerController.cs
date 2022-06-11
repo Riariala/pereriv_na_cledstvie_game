@@ -50,7 +50,8 @@ public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>//Mono
                 _transform.position = desiredMovement + _transform.position;
                 float gip = Mathf.Sqrt((float)Math.Pow(_joystick.Horizontal,2) + (float)Math.Pow(_joystick.Vertical, 2));
                 float rot = Mathf.Atan2(_joystick.Horizontal / gip,  _joystick.Vertical / gip) * Mathf.Rad2Deg;
-                _transform.Rotate(Vector3.up, rot - _transform.rotation.eulerAngles.y);
+                _transform.rotation = Quaternion.Euler(_transform.eulerAngles.x, rot + Camera.main.transform.eulerAngles.y, _transform.eulerAngles.z);
+
             }
         }
     }

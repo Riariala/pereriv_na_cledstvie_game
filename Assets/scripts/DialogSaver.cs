@@ -23,6 +23,7 @@ public class DialogSaver : ScriptableObject
 
     public void setDefault()
     {
+        IsdialogOver = false;
         objects = readFromJSON();
         effectChangesSaver.setDefault();
         dialogVariantsSaver.setDefault();
@@ -89,6 +90,7 @@ public class DialogSaver : ScriptableObject
                 break;
             }
         }
+        Debug.Log("clickedEffectFind" + objID.ToString() + " " + dialogID.ToString() + " " + lineID.ToString());
         if (effectID > -1)
         {
             effectProceess(effectID);
@@ -127,8 +129,10 @@ public class DialogSaver : ScriptableObject
 
     public void dialogVariantEffect(int diavarID, int variantIndex)
     {
-        ObjectActions changes = dialogVariantsSaver.variants[diavarID].changes[variantIndex];
-        actionsSaver.Rewrite(changes.ID, changes.firstPlayerActs, changes.secPlayerActs);
+        foreach (ObjectActions changes in dialogVariantsSaver.variants[diavarID].changes[variantIndex])
+        {
+            actionsSaver.Rewrite(changes.ID, changes.firstPlayerActs, changes.secPlayerActs);
+        }
         int effectID = dialogVariantsSaver.variants[diavarID].effects[variantIndex];
         effectProceess(effectID);
 
@@ -136,17 +140,23 @@ public class DialogSaver : ScriptableObject
         {
             foreach (List<int> special in dialogVariantsSaver.variants[diavarID].specailActions)
             {
-                switch (special[1])
+                if (special[0] == variantIndex)
                 {
-                    case 0:
-                        IsdialogOver = true;
-                        Debug.Log(" IsdialogOver " + IsdialogOver);
-                        break;
-                    case 1:
-                        break;
+                    switch (special[1])
+                    {
+                        case 0:
+                            IsdialogOver = true;
+                            Debug.Log(" IsdialogOver " + IsdialogOver);
+                            break;
+                        case 1:
+                            string name;
+                            if (playerData.isPlayer1) { name = "Rogers"; } else { name = "Mary"; }
+                            Debug.Log(" This game is over for " + name);
+                            break;
 
-                    case 2:
-                        break;
+                        case 2:
+                            break;
+                    }
                 }
                 
             }

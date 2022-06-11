@@ -36,7 +36,7 @@
       "dialog_open": []
     },
     {
-      "effectID": 2, //улика: Нет следов проникновения; инфо: Шейла Картер (), Британский Музей ()
+      "effectID": 2, //улика: Нет следов проникновения
       "history": [],
       "evidences": [
         {
@@ -45,14 +45,6 @@
         }
       ],
       "info": [
-        {
-          "InfoId": 3,
-          "linesId": []
-        },
-        {
-          "InfoId": 6,
-          "linesId": []
-        }
       ],
       "dialog_variant_play": 0,
       "dialog_open": []
@@ -160,6 +152,162 @@
           "linesId": []
         }
       ],
+      "dialog_variant_play": 0,
+      "dialog_open": []
+    },
+    {
+      "effectID": 11, //Вариантивный диалог Р до М с Уорреном
+      "history": [],
+      "evidences": [],
+      "info": [],
+      "dialog_variant_play": 1,
+      "dialog_open": []
+    },
+    {
+      "effectID": 12, //Вариантивный диалог Р после М с Уорреном
+      "history": [],
+      "evidences": [],
+      "info": [],
+      "dialog_variant_play": 2,
+      "dialog_open": []
+    },
+    {
+      "effectID": 13, //Вариантивный диалог М до Р с Уорреном
+      "history": [],
+      "evidences": [],
+      "info": [],
+      "dialog_variant_play": 3,
+      "dialog_open": []
+    },
+    {
+      "effectID": 14, //Вариантивный диалог М после Р с Уорреном
+      "history": [],
+      "evidences": [],
+      "info": [],
+      "dialog_variant_play": 4,
+      "dialog_open": []
+    },
+    {
+      "effectID": 15, //конец обследования Р, с Уорреном
+      "history": [],
+      "evidences": [],
+      "info": [],
+      "dialog_variant_play": 5,
+      "dialog_open": []
+    },
+    {
+      "effectID": 16, //конец обследования М, с Шейлой
+      "history": [],
+      "evidences": [],
+      "info": [],
+      "dialog_variant_play": 6,
+      "dialog_open": []
+    },
+    {
+      "effectID": 17, //инфо: Уоррен
+      "history": [],
+      "evidences": [],
+      "info": [
+        {
+          "InfoId": 2,
+          "linesId": []
+        }
+      ],
+      "dialog_variant_play": 0,
+      "dialog_open": []
+    },
+    {
+      "effectID": 18, // инфо: Шейла Картер (), Британский Музей ()
+      "history": [],
+      "evidences": [],
+      "info": [
+        {
+          "InfoId": 3,
+          "linesId": []
+        },
+        {
+          "InfoId": 6,
+          "linesId": []
+        }
+      ],
+      "dialog_variant_play": 0,
+      "dialog_open": []
+    },
+    {
+      "effectID": 19, // инфо: Шейла Картер ()
+      "history": [],
+      "evidences": [],
+      "info": [
+        {
+          "InfoId": 3,
+          "linesId": []
+        }
+      ],
+      "dialog_variant_play": 0,
+      "dialog_open": []
+    },
+    {
+      "effectID": 20, // инфо: Британский Музей ()
+      "history": [],
+      "evidences": [],
+      "info": [
+        {
+          "InfoId": 6,
+          "linesId": []
+        }
+      ],
+      "dialog_variant_play": 0,
+      "dialog_open": []
+    },
+    {
+      "effectID": 21, //улика: Работники св ход по муз
+      "history": [],
+      "evidences": [
+        {
+          "EvidenceID": 8,
+          "Status": 1
+        }
+      ],
+      "info": [],
+      "dialog_variant_play": 0,
+      "dialog_open": []
+    },
+    {
+      "effectID": 22, //улика: Шейлы не было
+      "history": [],
+      "evidences": [
+        {
+          "EvidenceID": 9,
+          "Status": 0
+        }
+      ],
+      "info": [],
+      "dialog_variant_play": 0,
+      "dialog_open": []
+    },
+    {
+      "effectID": 23, //улика: доступ в музей
+      "history": [],
+      "evidences": [
+        {
+          "EvidenceID": 10,
+          "Status": 0
+        }
+      ],
+      "info": [],
+      "dialog_variant_play": 0,
+      "dialog_open": []
+    },
+    {
+      "effectID": 24, //улика: Свидетелей нет
+      "history": [],
+      "evidences": [
+        {
+          "EvidenceID": 11,
+          "Status": 0
+        }
+      ],
+      "info": [],
       "dialog_variant_play": 0,
       "dialog_open": []
     }
