@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1308627070230837134}
   - component: {fileID: 6819182943905528924}
+  - component: {fileID: 8208679087286988549}
   m_Layer: 0
   m_Name: Pot1
   m_TagString: Item
@@ -45,6 +46,20 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.53
   m_Center: {x: -0.03, y: 0.47, z: 0}
+--- !u!114 &8208679087286988549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1308818668896764521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6987462d35008d0418bec42aca7d3a8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: 12
+  enable_actions: 010000
 --- !u!1001 &8079203080495592074
 PrefabInstance:
   m_ObjectHideFlags: 0

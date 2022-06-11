@@ -1,14 +1,15 @@
-/*
+/*"effectID": 0,
+  "history": [ 1 ],
   "evidences": [
         {
           "EvidenceID": int,
-          "Status":  int (0, 1, 2)
+          "Status":  int (0, 1, 2) 0 - неподтв, 1 - подтв, 2 - ложь
         }
       ],
   "info": [{InfoId: int 
   linesId: List<int>}]
-  "dialog_open": [{dialogId: int, variantId: int, newMeaning: bool}]
   "dialog_variant_play": dialog_variantId, 
+    "dialog_open": [{dialogId: int, variantId: int, newMeaning: bool}]
   */
 
 {
@@ -22,72 +23,145 @@
       "dialog_open": []
     },
     {
-      "effectID": 1,
-      "history": [ 0, 2 ],
-      "evidences": [
-        {
-          "EvidenceID": 1,
-          "Status": 0
-        }
-      ],
-      "info": [
-        {
-          "InfoId": 0,
-          "linesId": [ 1 ]
-        },
-        {
-          "InfoId": 1,
-          "linesId": [ 0 ]
-        }
-      ],
-      "dialog_variant_play": 0,
-      "dialog_open": []
-    },
-    {
-      "effectID": 2,
-      "history": [ 1 ],
+      "effectID": 1, //улика: Сколотый край
+      "history": [],
       "evidences": [
         {
           "EvidenceID": 0,
-          "Status":  0
+          "Status": 1
+        }
+      ],
+      "info": [],
+      "dialog_variant_play": 0,
+      "dialog_open": []
+    },
+    {
+      "effectID": 2, //улика: Нет следов проникновения; инфо: Шейла Картер (), Британский Музей ()
+      "history": [],
+      "evidences": [
+        {
+          "EvidenceID": 1,
+          "Status": 1
         }
       ],
       "info": [
         {
-          "InfoId": 0,
-          "linesId": [0, 2]
+          "InfoId": 3,
+          "linesId": []
+        },
+        {
+          "InfoId": 6,
+          "linesId": []
         }
       ],
-      "dialog_variant_play": 1,
+      "dialog_variant_play": 0,
       "dialog_open": []
     },
     {
-      "effectID": 3,
-      "history": [],
-      "evidences": [],
-      "info": [],
-      "dialog_variant_play": 0,
-      "dialog_open": [
-        {
-          "dialogId": 1,
-          "variantId": 2,
-          "newMeaning": true
-        }
-      ]
-    },
-
-    {
-      "effectID": 4,
+      "effectID": 3, //улика: Окна не повреждены
       "history": [],
       "evidences": [
         {
           "EvidenceID": 2,
+          "Status": 1
+        }
+      ],
+      "info": [],
+      "dialog_variant_play": 0,
+      "dialog_open": []
+    },
+    {
+      "effectID": 4, //улика: Претупник имел доступ в музей
+      "history": [],
+      "evidences": [
+        {
+          "EvidenceID": 3,
           "Status": 0
         }
       ],
       "info": [],
       "dialog_variant_play": 0,
-      "dialog_open": [ ]
+      "dialog_open": []
+    },
+    {
+      "effectID": 5, //улика: Преступника могли заметить
+      "history": [],
+      "evidences": [
+        {
+          "EvidenceID": 4,
+          "Status": 0
+        }
+      ],
+      "info": [],
+      "dialog_variant_play": 0,
+      "dialog_open": []
+    },
+    {
+      "effectID": 6, //инфо: Сокровища Тутанхамона
+      "history": [],
+      "evidences": [
+      ],
+      "info": [
+        {
+          "InfoId": 4,
+          "linesId": []
+        }
+      ],
+      "dialog_variant_play": 0,
+      "dialog_open": []
+    },
+    {
+      "effectID": 7, //улика: Черный волос
+      "history": [],
+      "evidences": [
+        {
+          "EvidenceID": 5,
+          "Status": 1
+        }
+      ],
+      "info": [],
+      "dialog_variant_play": 0,
+      "dialog_open": []
+    },
+    {
+      "effectID": 8, //улика: Запанка
+      "history": [],
+      "evidences": [
+        {
+          "EvidenceID": 6,
+          "Status": 1
+        }
+      ],
+      "info": [],
+      "dialog_variant_play": 0,
+      "dialog_open": []
+    },
+    {
+      "effectID": 9, //улика: Уборщица не работала?
+      "history": [],
+      "evidences": [
+        {
+          "EvidenceID": 7,
+          "Status": 0
+        }
+      ],
+      "info": [],
+      "dialog_variant_play": 0,
+      "dialog_open": []
+    },
+    {
+      "effectID": 10, //инфо: Искусство Древнего Египта
+      "history": [],
+      "evidences": [
+      ],
+      "info": [
+        {
+          "InfoId": 5,
+          "linesId": []
+        }
+      ],
+      "dialog_variant_play": 0,
+      "dialog_open": []
     }
   ]
 }

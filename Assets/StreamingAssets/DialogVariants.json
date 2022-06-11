@@ -1,7 +1,15 @@
 /*
+  "variantId": 0,
+      "optionLines": [],
+      "changes": [{
+          "ID": 4,
+          "firstPlayerActs": [ 2, 0 ],
+          "secPlayerActs": [ 2, 0 ]
+        }],
+      "effects": [ 0, 0, 0 ],
+      "available": [true, true, false],
   specailActions: [int lineId, int type]- "dialog_out" (0), "game_end" (1), "scene_out"(2)
   */
-
 
 {
   "variants": [
@@ -13,29 +21,5 @@
       "available": [],
       "specailActions": []
     },
-    {
-      "variantId": 1,
-      "optionLines": [ "Вариант ответа номер 1", "Вариант ответа номер другой", "Вариант ответа номер еще какой-то" ],
-      "changes": [
-        {
-          "ID": 4,
-          "firstPlayerActs": [ 2, 0 ],
-          "secPlayerActs": [ 2, 0 ]
-        },
-        {
-          "ID": 4,
-          "firstPlayerActs": [ 3, 0 ],
-          "secPlayerActs": [ 3, 0 ]
-        },
-        {
-          "ID": 4,
-          "firstPlayerActs": [ 4, 0 ],
-          "secPlayerActs": [ 4, 0 ]
-        }
-      ],
-      "effects": [ 0, 0, 0 ],
-      "available": [ true, true, false ],
-      "specailActions": [ [1, 0] ]
-    }
   ]
 }

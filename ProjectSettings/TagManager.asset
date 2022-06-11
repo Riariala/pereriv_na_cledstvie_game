@@ -9,6 +9,7 @@ TagManager:
   - menu_touch
   - NPC
   - Door
+  - Untouch_item
   layers:
   - Default
   - TransparentFX

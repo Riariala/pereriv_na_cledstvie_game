@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 954588285766550201}
   m_Layer: 0
   m_Name: Pedestal1
-  m_TagString: Item
+  m_TagString: Untouch_item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

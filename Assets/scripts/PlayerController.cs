@@ -44,11 +44,9 @@ public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>//Mono
                 Vector3 dirForward = playerCamera_transf.forward;
                 dirForward.y = 0f;
                 dirForward.Normalize();
-                Debug.Log(dirForward);
                 Vector3 desiredMovement = (dirForward * _joystick.Vertical) + (dirRight * _joystick.Horizontal);
                 desiredMovement.Normalize();
                 desiredMovement *= speed;
-                Debug.Log("normal " + desiredMovement.x.ToString() + " " + desiredMovement.z.ToString());
                 _transform.position = desiredMovement + _transform.position;
                 float gip = Mathf.Sqrt((float)Math.Pow(_joystick.Horizontal,2) + (float)Math.Pow(_joystick.Vertical, 2));
                 float rot = Mathf.Atan2(_joystick.Horizontal / gip,  _joystick.Vertical / gip) * Mathf.Rad2Deg;

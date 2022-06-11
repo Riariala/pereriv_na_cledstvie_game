@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4631692780556539947}
   - component: {fileID: 151002185}
+  - component: {fileID: 6976434245530543785}
   m_Layer: 0
   m_Name: Vase
   m_TagString: Item
@@ -46,6 +47,20 @@ CapsuleCollider:
   m_Height: 3.75
   m_Direction: 1
   m_Center: {x: 0.1, y: 1.1, z: 0.09}
+--- !u!114 &6976434245530543785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5084195790779435144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6987462d35008d0418bec42aca7d3a8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: 11
+  enable_actions: 010000
 --- !u!1001 &7640623362475912950
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3743987060364893492}
   m_Layer: 0
   m_Name: Pedestal2
-  m_TagString: Item
+  m_TagString: Untouch_item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43,8 +43,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 6.46, z: 2.09}
-  m_Center: {x: 0.08, y: 3, z: 0.24}
+  m_Size: {x: 2, y: 2.96, z: 2.09}
+  m_Center: {x: 0.08, y: 1.24, z: 0.24}
 --- !u!1001 &4441410376801375802
 PrefabInstance:
   m_ObjectHideFlags: 0

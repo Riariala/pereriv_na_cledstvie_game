@@ -39,11 +39,9 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
             {
 
                 callbacks.click = false;
-                //callbacks.click = false;
                 var busy = IsBusy.Create();
                 busy.Busy = callbacks.data.isBusy;
                 busy.Send();
-                //isBusy = busy.Busy;
                 if (!busy.Busy)
                 {
                     dialogPlayer.beginPlayersDialog(dialogPlayer.dialogSaver.playerData.dialogId);
@@ -59,21 +57,9 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
             {
                 callbacks.click = false;
                 isInitiator = false;
-                //callbacks.isBusy = true;
                 Debug.Log("Я не занят. Могу говорить.");
                 dialogPlayer.beginPlayersDialog(dialogPlayer.dialogSaver.playerData.dialogId);
             }
-            //else
-            //{
-            //    //isInitiator = false;
-            //    callbacks.click = false;
-            //    //if (!callbacks.isBusy) //!!!!!!!!!!!!!!!!КРИСТИНА СЮДА ПРОВЕРКУ ЗАНЯТ ЛИ ВТОРОЙ ИГРОК!!!!!!!!!!!!!!!!!!
-            //    //{
-            //    //   Debug.Log("Я не занят. Могу говорить.");
-            //    //   dialogPlayer.beginPlayersDialog(dialogPlayer.dialogSaver.playerData.dialogId);
-            //    //}
-
-            //}
         }
         
 
@@ -107,21 +93,23 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
                             if (hit.collider.CompareTag("Item") || hit.collider.CompareTag("NPC"))
                             {
                                 touched_item = hit.collider.gameObject;
-                                menu = Instantiate(menu_obj_touch, parent);
-                                menu.transform.position = pos;
                                 List<bool> enable_actionsl = new List<bool>(touched_item.GetComponent<ObjectManager>().enable_actions);
                                 int count_actions = enable_actionsl.Count(x => x == true);
-
-                                float koef = Mathf.PI * 2 / count_actions;
-                                int indActiveAction = 0;
-                                for (int i = 0; i < enable_actionsl.Count; i++)
+                                if (count_actions > 0)
                                 {
-                                    if (enable_actionsl[i])
+                                    menu = Instantiate(menu_obj_touch, parent);
+                                    menu.transform.position = pos;
+                                    float koef = Mathf.PI * 2 / count_actions;
+                                    int indActiveAction = 0;
+                                    for (int i = 0; i < enable_actionsl.Count; i++)
                                     {
-                                        GameObject btn = menu.transform.GetChild(i).gameObject;
-                                        btn.SetActive(true);
-                                        btn.transform.localPosition = new Vector3(Mathf.Cos(indActiveAction * koef + (Mathf.PI / 2)) * 60, Mathf.Sin(indActiveAction * koef + (Mathf.PI / 2)) * 60, 0);
-                                        indActiveAction++;
+                                        if (enable_actionsl[i])
+                                        {
+                                            GameObject btn = menu.transform.GetChild(i).gameObject;
+                                            btn.SetActive(true);
+                                            btn.transform.localPosition = new Vector3(Mathf.Cos(indActiveAction * koef + (Mathf.PI / 2)) * 60, Mathf.Sin(indActiveAction * koef + (Mathf.PI / 2)) * 60, 0);
+                                            indActiveAction++;
+                                        }
                                     }
                                 }
                             }
@@ -182,21 +170,24 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
                     if (hit.collider.CompareTag("Item") || hit.collider.CompareTag("NPC"))
                     {
                         touched_item = hit.collider.gameObject;
-                        menu = Instantiate(menu_obj_touch, parent);
-                        menu.transform.position = pos;
+                        
                         List<bool> enable_actionsl = new List<bool>(touched_item.GetComponent<ObjectManager>().enable_actions);
                         int count_actions = enable_actionsl.Count(x => x == true);
-
-                        float koef = Mathf.PI * 2 / count_actions;
-                        int indActiveAction = 0;
-                        for (int i = 0; i < enable_actionsl.Count; i++)
+                        if (count_actions > 0)
                         {
-                            if (enable_actionsl[i])
+                            menu = Instantiate(menu_obj_touch, parent);
+                            menu.transform.position = pos;
+                            float koef = Mathf.PI * 2 / count_actions;
+                            int indActiveAction = 0;
+                            for (int i = 0; i < enable_actionsl.Count; i++)
                             {
-                                GameObject btn = menu.transform.GetChild(i).gameObject;
-                                btn.SetActive(true);
-                                btn.transform.localPosition = new Vector3(Mathf.Cos(indActiveAction * koef + (Mathf.PI / 2)) * 60, Mathf.Sin(indActiveAction * koef + (Mathf.PI / 2)) * 60, 0);
-                                indActiveAction++;
+                                if (enable_actionsl[i])
+                                {
+                                    GameObject btn = menu.transform.GetChild(i).gameObject;
+                                    btn.SetActive(true);
+                                    btn.transform.localPosition = new Vector3(Mathf.Cos(indActiveAction * koef + (Mathf.PI / 2)) * 60, Mathf.Sin(indActiveAction * koef + (Mathf.PI / 2)) * 60, 0);
+                                    indActiveAction++;
+                                }
                             }
                         }
                     }
@@ -263,8 +254,10 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
         if (menu != null) { Destroy(menu); }
     }
 
-    public void doItAction()
+    public void TalkToAction() //actionKind = 2
     {
-        Debug.Log("Когда-нибудь тут будут описываться итоги взаимодействия. И оно будет привязано к объекту, с которым взаимодействуют.");
+        int itemID = touched_item.GetComponent<ObjectManager>().ID;
+        dialogPlayer.beginDialog(itemID, 2);
+        if (menu != null) { Destroy(menu); }
     }
 }

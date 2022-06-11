@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 808434495788915308}
   - component: {fileID: 6226699644371481416}
+  - component: {fileID: 5471184960186316936}
   m_Layer: 0
   m_Name: Relief
   m_TagString: Item
@@ -45,6 +46,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 3.62, z: 0.4}
   m_Center: {x: 0, y: 1.81, z: 0.2}
+--- !u!114 &5471184960186316936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2073203884520679618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6987462d35008d0418bec42aca7d3a8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: 7
+  enable_actions: 010000
 --- !u!1001 &7509473059474987215
 PrefabInstance:
   m_ObjectHideFlags: 0

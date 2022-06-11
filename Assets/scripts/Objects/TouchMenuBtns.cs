@@ -14,7 +14,7 @@ public class TouchMenuBtns : MonoBehaviour
         }
         touch_menu.watchAtAction();
     }
-    
+
     public void TakeItActionInside()
     {
         if (!touch_menu)
@@ -24,12 +24,12 @@ public class TouchMenuBtns : MonoBehaviour
         touch_menu.TakeItAction();
     }
 
-    public void doItActionInside()
+    public void TalkToActionInside()
     {
         if (!touch_menu)
         {
             touch_menu = this.transform.root.gameObject.GetComponent<touchMenu>();
         }
-        touch_menu.doItAction();
+        touch_menu.TalkToAction();
     }
 }
