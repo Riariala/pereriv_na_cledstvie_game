@@ -43,10 +43,13 @@ public class MainHandler : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehav
 
         if (BoltNetwork.IsClient)
         {
+            Debug.Log("Привет");
+            Debug.Log(callbacks.actionsSaver);
             if (callbacks.actionsSaver != "")
             {
                 data.dialogId = callbacks.dialogId;
                 actions.newValue(callbacks.actionsSaver);
+                Debug.Log(actions);
                 callbacks.ask = false;
 
             }

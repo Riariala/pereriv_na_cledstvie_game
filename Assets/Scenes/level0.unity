@@ -2083,7 +2083,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a875f4f2f4de824bbb46076d8dbf115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player1: {fileID: 1651104453875658818, guid: a37251e2c7bdcf74291f8ab32ba3eb6e, type: 3}
+  Player1: {fileID: 1651104453875658818, guid: 7ce6a265d19d4094c8c6ad1827f5c985, type: 3}
   Player2: {fileID: 1677086788809594193, guid: cf990fcc269877140a9085eae935f11c, type: 3}
   _jystick: {fileID: 210846479}
   player_data: {fileID: 11400000, guid: 2336fb71654d97d4b9c3e67c350c186e, type: 2}
@@ -12685,7 +12685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5c20180f6223954188e17fb6e946a9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1: {fileID: 1651104453875658818, guid: a37251e2c7bdcf74291f8ab32ba3eb6e, type: 3}
+  player1: {fileID: 1651104453875658818, guid: 7ce6a265d19d4094c8c6ad1827f5c985, type: 3}
   player2: {fileID: 1677086788809594193, guid: cf990fcc269877140a9085eae935f11c, type: 3}
   _joystick: {fileID: 210846479}
   isPlayer1: 0
