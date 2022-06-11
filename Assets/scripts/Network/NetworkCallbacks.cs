@@ -20,11 +20,11 @@ public class NetworkCallbacks : GlobalEventListener
     public ActionsSaver actions;
     public JournalInfo journal;
 
-    public override void BoltStartBegin()
+    /*public override void BoltStartBegin()
     {
         BoltNetwork.RegisterTokenClass<CharToken>();
 
-    }
+    }*/
 
     public override void SceneLoadLocalDone(string scene, IProtocolToken token)
     {
@@ -66,14 +66,20 @@ public class NetworkCallbacks : GlobalEventListener
             player_script.ChangeJoystick(_joystick);
             Debug.Log("Player 2  " + player.name);
         }
+        if (BoltNetwork.IsClient)
+        {
+            var askHost = AskForData.Create();
+            askHost.Ask = true;
+            askHost.Send();
+        }
 
     }
 
     public override void OnEvent(PlayerCharacter evnt)
     {
         isPlayer1=evnt.IsPlayer1;
-        data.isPlayer1 = isPlayer1;
-        Debug.Log(isPlayer1);
+        //data.isPlayer1 = isPlayer1;
+        //Debug.Log(isPlayer1);
     }
 
     public override void OnEvent(IsBusy evnt)

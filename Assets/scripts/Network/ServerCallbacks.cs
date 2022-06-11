@@ -26,8 +26,8 @@ public class ServerCallbacks : Photon.Bolt.GlobalEventListener
         startData.ActionsSaver = "בפעמם";
         startData.Send();*/
         //data.dialogId = callbacks.dialogId;
-        var ask = AskForData.Create();
+        /*var ask = AskForData.Create();
         ask.Ask = true;
-        ask.Send();
+        ask.Send();*/
     }
 }

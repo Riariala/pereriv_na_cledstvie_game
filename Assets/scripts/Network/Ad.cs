@@ -31,6 +31,7 @@ public class Ad : MonoBehaviour
         {
             Advertisement.Show(placementId);
         }
+
         else
         {
             Debug.Log("Реклама не готова");
@@ -43,8 +44,10 @@ public class Ad : MonoBehaviour
         while (Advertisement.isInitialized)
         {
             yield return new WaitForSeconds(0.5f);
+            Debug.Log("Жди рекламу");
         }
         Advertisement.Banner.Show(banner);
+        Debug.Log("Реклама");
     }
 
 }
