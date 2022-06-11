@@ -23,6 +23,7 @@ public class DialogSaver : ScriptableObject
 
     public void setDefault()
     {
+        IsdialogOver = false;
         objects = readFromJSON();
         effectChangesSaver.setDefault();
         dialogVariantsSaver.setDefault();
@@ -89,6 +90,7 @@ public class DialogSaver : ScriptableObject
                 break;
             }
         }
+        Debug.Log("clickedEffectFind" + objID.ToString() + " " + dialogID.ToString() + " " + lineID.ToString());
         if (effectID > -1)
         {
             effectProceess(effectID);

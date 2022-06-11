@@ -185,7 +185,7 @@ public class DialogPlayer : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBeha
 
     public void textClicked()
     {
-        dialogSaver.clickedEffectFind(ObjectId, dialogId, dialogCount);
+        dialogSaver.clickedEffectFind(ObjectId, dialogId, dialogCount-1);
     }
 
     public void dialogVariantClicked(int btn_ind)
@@ -199,7 +199,11 @@ public class DialogPlayer : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBeha
         simple_dialog_panel.SetActive(true);
         variable_dialog_panel.SetActive(false);
         if (! dialogSaver.IsdialogOver) { beginDialog(ObjectId, lastActionKind); }
-        else { dialogSaver.playerData.isBusy = false; }
+        else 
+        { 
+            dialogSaver.playerData.isBusy = false;
+            dialogPanel.SetActive(false);
+        }
     }
 
     public void beginPlayersDialog(int locdialogId)

@@ -232,6 +232,84 @@
       ],
       "dialog_variant_play": 0,
       "dialog_open": []
+    },
+    {
+      "effectID": 19, // инфо: Шейла Картер ()
+      "history": [],
+      "evidences": [],
+      "info": [
+        {
+          "InfoId": 3,
+          "linesId": []
+        }
+      ],
+      "dialog_variant_play": 0,
+      "dialog_open": []
+    },
+    {
+      "effectID": 20, // инфо: Британский Музей ()
+      "history": [],
+      "evidences": [],
+      "info": [
+        {
+          "InfoId": 6,
+          "linesId": []
+        }
+      ],
+      "dialog_variant_play": 0,
+      "dialog_open": []
+    },
+    {
+      "effectID": 21, //улика: Работники св ход по муз
+      "history": [],
+      "evidences": [
+        {
+          "EvidenceID": 8,
+          "Status": 1
+        }
+      ],
+      "info": [],
+      "dialog_variant_play": 0,
+      "dialog_open": []
+    },
+    {
+      "effectID": 22, //улика: Шейлы не было
+      "history": [],
+      "evidences": [
+        {
+          "EvidenceID": 9,
+          "Status": 0
+        }
+      ],
+      "info": [],
+      "dialog_variant_play": 0,
+      "dialog_open": []
+    },
+    {
+      "effectID": 23, //улика: доступ в музей
+      "history": [],
+      "evidences": [
+        {
+          "EvidenceID": 10,
+          "Status": 0
+        }
+      ],
+      "info": [],
+      "dialog_variant_play": 0,
+      "dialog_open": []
+    },
+    {
+      "effectID": 24, //улика: Свидетелей нет
+      "history": [],
+      "evidences": [
+        {
+          "EvidenceID": 11,
+          "Status": 0
+        }
+      ],
+      "info": [],
+      "dialog_variant_play": 0,
+      "dialog_open": []
     }
   ]
 }

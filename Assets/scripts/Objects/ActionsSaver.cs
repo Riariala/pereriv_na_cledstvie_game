@@ -49,8 +49,24 @@ public class ActionsSaver : ScriptableObject
 
     public void Rewrite(int id, List<int> first, List<int> sec)
     {
-        itemPlayerActions[id].firstPlayerActs = first;
-        itemPlayerActions[id].secPlayerActs = sec;
+        for (int newactid = 0; newactid < first.Count; newactid++)
+        {
+            if (first[newactid] >= 0)
+            {
+                itemPlayerActions[id].firstPlayerActs[newactid] = first[newactid];
+            }
+        }
+        for (int newactid = 0; newactid < sec.Count; newactid++)
+        {
+            if (sec[newactid] >= 0)
+            {
+                itemPlayerActions[id].secPlayerActs[newactid] = sec[newactid];
+                Debug.Log(sec[newactid]);
+            }
+            
+        }
+        //itemPlayerActions[id].firstPlayerActs = first;
+        //itemPlayerActions[id].secPlayerActs = sec;
     }
 
 }

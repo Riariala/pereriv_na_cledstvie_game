@@ -16,57 +16,89 @@
       "evidanceID": 1,
       "title": "Нет следов проникновения",
       "desc": "Как удалось выяснить из разговора с констеблем, следов проникновения не обнаружено",
-      "connectionList": [ 2 ], 
-      "effects": [3], 
+      "connectionList": [ 2 ],
+      "effects": [ 3 ],
       "startPosition": [ 50, 50 ]
     },
     {
       "evidanceID": 2,
       "title": "Окна не повреждены",
       "desc": "Окна на месте проникновения не повреждены и не наблюдается следов взлома",
-      "connectionList": [ 1 ], 
-      "effects": [3], 
+      "connectionList": [ 1 ],
+      "effects": [ 3 ],
       "startPosition": [ 50, 170 ]
     },
     {
       "evidanceID": 3,
       "title": "Претупник имел доступ в музей?",
       "desc": "Раз преступник попал в музей не через окно и без взлома замков, то он мог иметь доступ в музей",
-      "connectionList": [],
-      "effects": [],
+      "connectionList": [8],
+      "effects": [23],
       "startPosition": [ 50, 110 ]
     },
     {
       "evidanceID": 4,
       "title": "Преступника могли заметить",
       "desc": "Наверняка технологии могли помочь!",
-      "connectionList": [], 
-      "effects": [], 
+      "connectionList": [],
+      "effects": [],
       "startPosition": [ -50, -50 ]
     },
     {
       "evidanceID": 5,
       "title": "Черный волос",
       "desc": "рядом с местом преступления был обнаружен волос",
-      "connectionList": [6], 
-      "effects": [9], 
+      "connectionList": [ 6 ],
+      "effects": [ 9 ],
       "startPosition": [ -250, -50 ]
     },
     {
       "evidanceID": 6,
       "title": "Запанка",
       "desc": "Среди экспонатов было обнаружено чье-то украшение",
-      "connectionList": [5], 
-      "effects": [9], 
+      "connectionList": [ 5 ],
+      "effects": [ 9 ],
       "startPosition": [ 0, -200 ]
     },
     {
       "evidanceID": 7,
       "title": "Уборщица не работала?",
       "desc": "Здесь такой беспорядок, такое ощущение, что со вчерашнего дня здесь не убирались",
-      "connectionList": [], 
-      "effects": [], 
+      "connectionList": [9],
+      "effects": [24],
       "startPosition": [ -125, -125 ]
+    },
+    {
+      "evidanceID": 8,
+      "title": "Работники свободно ходят по музею",
+      "desc": "По словам шейлы Картер, работники музея могли войти в этот зал",
+      "connectionList": [3],
+      "effects": [23],
+      "startPosition": [ 250, 100 ]
+    },
+    {
+      "evidanceID": 9,
+      "title": "Шейлы не было в музее во время кражи",
+      "desc": "Шейла Картер утверждает, что пришла на рабочее место уже после свершения кражи. Она может лгать?",
+      "connectionList": [7],
+      "effects": [24],
+      "startPosition": [ -300, -200 ]
+    },
+    {
+      "evidanceID": 10,
+      "title": "Преступник имел доступ в музей?",
+      "desc": "",
+      "connectionList": [],
+      "effects": [],
+      "startPosition": [ 150, 100 ]
+    },
+    {
+      "evidanceID": 11,
+      "title": "Свидетелей нет?",
+      "desc": "",
+      "connectionList": [],
+      "effects": [],
+      "startPosition": [ -210, -165 ]
     }
 
   ],

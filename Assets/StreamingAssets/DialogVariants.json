@@ -117,7 +117,13 @@
       "variantId": 5,
       "optionLines": [ "Да", "Еще нет" ],
       "changes": [
-        [],
+        [
+          {
+            "ID": 1,
+            "firstPlayerActs": [ -1, -1, 19 ],
+            "secPlayerActs": [ -1, -1, -1 ]
+          }
+        ],
         []
       ],
       "effects": [ 0, 0 ],
@@ -131,7 +137,13 @@
       "variantId": 6,
       "optionLines": [ "Кажется, да ", "Нет, ещё осталась пара углов " ],
       "changes": [
-        [],
+        [
+          {
+            "ID": 2,
+            "firstPlayerActs": [ -1, -1, -1 ],
+            "secPlayerActs": [ -1, -1, 7 ]
+          }
+        ],
         []
       ],
       "effects": [ 0, 0 ],
