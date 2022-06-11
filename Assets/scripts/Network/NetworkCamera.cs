@@ -17,10 +17,6 @@ public class NetworkCamera : Photon.Bolt.EntityBehaviour<ICustomPlayer>
     public float camXmodif = 0.5f;
     public float camZmodif = 0.6f;
 
-
-
-
-
     private void FixedUpdate()
     {
         if (entity.IsOwner && playerCamera.activeInHierarchy == false)
@@ -31,8 +27,6 @@ public class NetworkCamera : Photon.Bolt.EntityBehaviour<ICustomPlayer>
         }
         if (entity.IsOwner)
         {
-            //cameraTransform.position = new Vector3((centerArea.x + playerTransform.position.x) / 2, cameraYPos, (centerArea.z + playerTransform.position.z) / 2);
-            //cameraTransform.position = new Vector3((4 * playerTransform.position.x + centerArea.x) / 5 , cameraYPos, cameraZPos + playerTransform.position.z/4);
             cameraTransform.position = new Vector3(camXmodif * playerTransform.position.x + cameraXPos,
                 cameraYPos,
                 cameraZPos + camZmodif * playerTransform.position.z);

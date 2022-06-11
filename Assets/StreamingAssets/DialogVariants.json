@@ -21,5 +21,125 @@
       "available": [],
       "specailActions": []
     },
+    {
+      "variantId": 1,
+      "optionLines": [ "Раздраженно", "Прагматично" ],
+      "changes": [
+        [
+          {
+            "ID": 1,
+            "firstPlayerActs": [ 0, 0, 5 ],
+            "secPlayerActs": [ 2, 0, 15 ]
+          }
+        ],
+        [
+          {
+            "ID": 1,
+            "firstPlayerActs": [ 0, 0, 6 ],
+            "secPlayerActs": [ 2, 0, 15 ]
+          }
+        ]
+      ],
+      "effects": [ 0, 0 ],
+      "available": [ false, true ],
+      "specailActions": []
+    },
+    {
+      "variantId": 2,
+      "optionLines": [ "Обеспокоенно", "Прагматично" ],
+      "changes": [
+        [
+          {
+            "ID": 1,
+            "firstPlayerActs": [ 0, 0, 8 ],
+            "secPlayerActs": [ 2, 0, 20 ]
+          }
+        ],
+        [
+          {
+            "ID": 1,
+            "firstPlayerActs": [ 0, 0, 9 ],
+            "secPlayerActs": [ 2, 0, 20 ]
+          }
+        ]
+      ],
+      "effects": [ 0, 0 ],
+      "available": [ true, false ],
+      "specailActions": []
+    },
+    {
+      "variantId": 3,
+      "optionLines": [ "Дерзко", "Профессионально" ],
+      "changes": [
+        [
+          {
+            "ID": 1,
+            "firstPlayerActs": [ 0, 0, 7 ],
+            "secPlayerActs": [ 3, 0, 13 ]
+          }
+        ],
+        [
+          {
+            "ID": 1,
+            "firstPlayerActs": [ 0, 0, 7 ],
+            "secPlayerActs": [ 3, 0, 14 ]
+          }
+        ]
+      ],
+      "effects": [ 0, 0 ],
+      "available": [ false, true ],
+      "specailActions": []
+    },
+    {
+      "variantId": 4,
+      "optionLines": [ "Осторожно", "Профессионально" ],
+      "changes": [
+        [
+          {
+            "ID": 1,
+            "firstPlayerActs": [ 1, 0, 18 ],
+            "secPlayerActs": [ 3, 0, 16 ]
+          }
+        ],
+        [
+          {
+            "ID": 1,
+            "firstPlayerActs": [ 1, 0, 18 ],
+            "secPlayerActs": [ 3, 0, 17 ]
+          }
+        ]
+      ],
+      "effects": [ 0, 0 ],
+      "available": [ true, false ],
+      "specailActions": []
+    },
+    { //Роджерс окончил расследование
+      "variantId": 5,
+      "optionLines": [ "Да", "Еще нет" ],
+      "changes": [
+        [],
+        []
+      ],
+      "effects": [ 0, 0 ],
+      "available": [ true, true ],
+      "specailActions": [
+        [ 0, 1 ],
+        [ 1, 0 ]
+      ]
+    },
+    { // Мари окончила расследование
+      "variantId": 6,
+      "optionLines": [ "Кажется, да ", "Нет, ещё осталась пара углов " ],
+      "changes": [
+        [],
+        []
+      ],
+      "effects": [ 0, 0 ],
+      "available": [ true, true ],
+      "specailActions": [
+        [ 0, 1 ],
+        [ 1, 0 ]
+      ]
+    }
   ]
 }

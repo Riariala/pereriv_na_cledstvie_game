@@ -4,12 +4,12 @@
     {
       "ID": 0,
       "firstPlayerActs": [ 0, 0 ],
-      "secPlayerActs": [ 0, 0 ]
+      "secPlayerActs": [ 1, 0 ]
     },
     {
       "ID": 1,
-      "firstPlayerActs": [ 0, 0, 0 ],
-      "secPlayerActs": [ 2, 0, 0 ]
+      "firstPlayerActs": [ 0, 0, 4 ],
+      "secPlayerActs": [ 2, 0, 12 ]
     },
     {
       "ID": 2,

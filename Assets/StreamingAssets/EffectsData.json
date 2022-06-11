@@ -50,7 +50,7 @@
       "desc": "рядом с местом преступления был обнаружен волос",
       "connectionList": [6], 
       "effects": [9], 
-      "startPosition": [ -100, -50 ]
+      "startPosition": [ -250, -50 ]
     },
     {
       "evidanceID": 6,
@@ -58,7 +58,7 @@
       "desc": "Среди экспонатов было обнаружено чье-то украшение",
       "connectionList": [5], 
       "effects": [9], 
-      "startPosition": [ 0, -150 ]
+      "startPosition": [ 0, -200 ]
     },
     {
       "evidanceID": 7,
@@ -66,7 +66,7 @@
       "desc": "Здесь такой беспорядок, такое ощущение, что со вчерашнего дня здесь не убирались",
       "connectionList": [], 
       "effects": [], 
-      "startPosition": [ -50, -100 ]
+      "startPosition": [ -125, -125 ]
     }
 
   ],

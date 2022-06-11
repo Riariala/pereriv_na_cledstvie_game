@@ -48,7 +48,9 @@ public class NetworkCallbacks : GlobalEventListener
             actions.setDefault();
             journal.clearAll();
         }
+        Debug.Log("data.isPlayer1 before " + data.isPlayer1.ToString());
         data.isPlayer1 = isPlayer1;
+        Debug.Log("data.isPlayer1 after " + data.isPlayer1.ToString());
         var spawnPos = new Vector3(Random.Range(-5, 5), 0, Random.Range(-5, 5));
         if (isPlayer1)
         {

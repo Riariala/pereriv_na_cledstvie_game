@@ -29,6 +29,7 @@ public class DialogPlayer : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBeha
     private int lastEffectID;
     private bool isPlayersDialog;
     private bool isHost;
+    private int lastActionKind;
     public NetworkCallbacks callbacks;
 
     void Update()
@@ -49,7 +50,8 @@ public class DialogPlayer : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBeha
         dialogSaver.playerData.isBusy = true;
         dialogPanel.SetActive(true);
         ObjectId = ObjId;
-        dialogId = dialogSaver.AskDialogId(ObjectId, actionKind);
+        lastActionKind = actionKind;
+        dialogId = dialogSaver.AskDialogId(ObjectId, lastActionKind);
         massageText = dialogSaver.AskDialog(ObjectId, dialogId);
         titleText = dialogSaver.AskTitle(ObjectId, dialogId);
         isPlayer1 = dialogSaver.whichPlayer();
@@ -150,29 +152,35 @@ public class DialogPlayer : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBeha
     {
         lastEffectID = lastEffectid;
         int dialogVariantID = dialogSaver.effectChangesSaver.effectsChanges[lastEffectID].dialog_variant_play;
+        dialogSaver.effectProceess(lastEffectID);
         if (dialogVariantID != 0)
         {
             dialogSaver.playerData.isBusy = true;
             simple_dialog_panel.SetActive(false);
             variable_dialog_panel.SetActive(true);
-            for (int i = 0; i < dialogSaver.dialogVariantsSaver.variants[dialogVariantID].optionLines.Count; i++)
+            dialogPanel.SetActive(true);
+            int dialogCount = dialogSaver.dialogVariantsSaver.variants[dialogVariantID].optionLines.Count;
+            for (int i = 0; i < 3; i++)
             {
                 Transform child = variable_dialog_panel.transform.GetChild(i);
-                child.gameObject.SetActive(true);
-                child.GetChild(0).gameObject.GetComponent<Text>().text = dialogSaver.dialogVariantsSaver.variants[dialogVariantID].optionLines[i];
-                if (dialogSaver.dialogVariantsSaver.variants[dialogVariantID].available[i]) 
-                { 
-                    child.gameObject.GetComponent<Button>().interactable = true;
-                    child.GetChild(0).gameObject.GetComponent<Text>().color = new Color(50 / 255f, 50 / 255f, 50 / 255f);
+                if (i < dialogCount)
+                {
+                    child.gameObject.SetActive(true);
+                    child.GetChild(0).gameObject.GetComponent<Text>().text = dialogSaver.dialogVariantsSaver.variants[dialogVariantID].optionLines[i];
+                    if (dialogSaver.dialogVariantsSaver.variants[dialogVariantID].available[i])
+                    {
+                        child.gameObject.GetComponent<Button>().interactable = true;
+                        child.GetChild(0).gameObject.GetComponent<Text>().color = new Color(50 / 255f, 50 / 255f, 50 / 255f);
+                    }
+                    else
+                    {
+                        child.gameObject.GetComponent<Button>().interactable = false;
+                        child.GetChild(0).gameObject.GetComponent<Text>().color = new Color(128 / 255f, 128 / 255f, 128 / 255f);
+                    }
                 }
-                else 
-                { 
-                    child.gameObject.GetComponent<Button>().interactable = false;
-                    child.GetChild(0).gameObject.GetComponent<Text>().color = new Color(128 / 255f, 128 / 255f, 128 / 255f);
-                }
+                else { child.gameObject.SetActive(false); }
             }
         }
-        dialogSaver.effectProceess(lastEffectID);
     }
 
     public void textClicked()
@@ -190,7 +198,7 @@ public class DialogPlayer : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBeha
         }
         simple_dialog_panel.SetActive(true);
         variable_dialog_panel.SetActive(false);
-        if (! dialogSaver.IsdialogOver) { beginDialog(ObjectId, 0); }
+        if (! dialogSaver.IsdialogOver) { beginDialog(ObjectId, lastActionKind); }
         else { dialogSaver.playerData.isBusy = false; }
     }
 
