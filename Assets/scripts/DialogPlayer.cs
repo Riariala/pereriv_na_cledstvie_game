@@ -32,16 +32,6 @@ public class DialogPlayer : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBeha
     private int lastActionKind;
     public NetworkCallbacks callbacks;
 
-    void Start()
-    {
-        if (dialogSaver.playerData.isGameJustStarted)
-        {
-            dialogSaver.playerData.isGameJustStarted = false;
-            beginDialog(0, 0);
-        }
-    }
-
-
     void Update()
     {
         if (callbacks.next)
@@ -52,8 +42,15 @@ public class DialogPlayer : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBeha
             }
             callbacks.next = false;
         }
+        if (dialogSaver.playerData.isGameJustStarted)
+        {
+            Debug.Log("dialogSaver.playerData.isGameJustStarted " + dialogSaver.playerData.isGameJustStarted.ToString());
+            dialogSaver.playerData.isGameJustStarted = false;
+            beginDialog(0, 0);
+        }
     }
 
+     
 
     public void beginDialog(int ObjId, int actionKind)
     {
@@ -62,12 +59,12 @@ public class DialogPlayer : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBeha
         ObjectId = ObjId;
         lastActionKind = actionKind;
         dialogId = dialogSaver.AskDialogId(ObjectId, lastActionKind);
+        Debug.Log("dialogId " + dialogId.ToString());
         massageText = dialogSaver.AskDialog(ObjectId, dialogId);
+        Debug.Log("dialogId " + dialogId.ToString());
         titleText = dialogSaver.AskTitle(ObjectId, dialogId);
         isPlayer1 = dialogSaver.whichPlayer();
         dialogCount = 0;
-        Debug.Log(ObjectId);
-        Debug.Log(dialogId);
         isPlayersDialog = false;
         playNext();
     }
@@ -126,6 +123,8 @@ public class DialogPlayer : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBeha
 
     public void PlayNextSimpleDialog()
     {
+        Debug.Log("dialogCount " + dialogCount.ToString());
+        Debug.Log("titleText.Count " + titleText.Count.ToString());
         if (dialogCount < titleText.Count)
         {
             massage_txt.text = massageText[dialogCount];
