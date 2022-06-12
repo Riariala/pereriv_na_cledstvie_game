@@ -18,3 +18,5 @@ MonoBehaviour:
   effectChangesSaver: {fileID: 11400000, guid: d5c41f13daa6f474ebc9850edee32c4f, type: 2}
   dialogVariantsSaver: {fileID: 11400000, guid: 9e0053a1925b19a4c8d44d471d0c2028,
     type: 2}
+  isInitiator: 0
+  isGameOverloc: 1
