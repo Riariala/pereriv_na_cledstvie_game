@@ -31,6 +31,8 @@ public class DialogPlayer : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBeha
     private bool isHost;
     private int lastActionKind;
     public NetworkCallbacks callbacks;
+    public Transform gameOverMenu;
+    public bool isOverInit;
 
     void Update()
     {
@@ -47,6 +49,22 @@ public class DialogPlayer : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBeha
             Debug.Log("dialogSaver.playerData.isGameJustStarted " + dialogSaver.playerData.isGameJustStarted.ToString());
             dialogSaver.playerData.isGameJustStarted = false;
             beginDialog(0, 0);
+        }
+
+        if (callbacks.isGameOver)
+        {
+            if (!isOverInit)
+            {
+                if (dialogSaver.playerData.isGameOver) {
+                    var isOverAns = IsGameOverAns.Create();
+                    isOverAns.IsOverAns = dialogSaver.playerData.isGameOver;
+                    isOverAns.Send();
+                    gameOverMenu.GetChild(1).gameObject.SetActive(true);
+                }
+                
+                
+            }
+
         }
     }
 
@@ -194,6 +212,11 @@ public class DialogPlayer : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBeha
         }
         if (dialogSaver.playerData.isGameOver)
         {
+            var isGameOver = IsGameOverCheck.Create();
+            isGameOver.IsGameOver = true;
+            isGameOver.Send();
+            isOverInit = true;
+            gameOverMenu.GetChild(0).gameObject.SetActive(true);
             //«апрос второму игроку, закончил ли он игру//
             //
         }

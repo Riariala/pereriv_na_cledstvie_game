@@ -43,6 +43,7 @@ public class Menu : GlobalEventListener
             BoltLauncher.Shutdown();
         }
         matchName = UnityEngine.Random.Range(1000, 99999).ToString();
+        playerData.gameCode = matchName;
         roomCode.text = matchName;
         BoltLauncher.StartServer(_config);
        
