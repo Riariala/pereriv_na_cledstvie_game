@@ -7,7 +7,7 @@ using Photon.Bolt;
 using Photon.Bolt.Matchmaking;
 using Photon.Bolt.Utils;
 
-[BoltGlobalBehaviour(BoltNetworkModes.Server)]
+[BoltGlobalBehaviour(BoltNetworkModes.Client)]
 public class ServerCallbacks : Photon.Bolt.GlobalEventListener
 {
     /*public NetworkCallbacks callbacks;
@@ -15,6 +15,7 @@ public class ServerCallbacks : Photon.Bolt.GlobalEventListener
     public ActionsSaver actions;
     public JournalInfo journal;*/
 
+    public static event Action<bool> OnConnectResult;
 
     public override void Connected(BoltConnection connection)
     {
@@ -29,5 +30,28 @@ public class ServerCallbacks : Photon.Bolt.GlobalEventListener
         /*var ask = AskForData.Create();
         ask.Ask = true;
         ask.Send();*/
+    }
+
+    public override void ConnectFailed(UdpKit.UdpEndPoint endpoint, Photon.Bolt.IProtocolToken token)
+    {
+        base.ConnectFailed(endpoint, token);
+        Debug.Log("Он ушёл. Не жди.");
+        sendResult(false);
+    }
+    public override void Disconnected(BoltConnection connection)
+    {
+        base.Disconnected(connection);
+
+        BoltLauncher.Shutdown();
+        Application.LoadLevel("MainMenu");
+        Debug.Log("Он ушёл. Не жди.");
+    }
+    void sendResult(bool success)
+    {
+        if (null != OnConnectResult)
+        {
+            OnConnectResult.Invoke(success);
+            OnConnectResult = null;
+        }
     }
 }
