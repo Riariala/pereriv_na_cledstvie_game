@@ -12763,6 +12763,7 @@ MonoBehaviour:
   click: 0
   next: 0
   ask: 0
+  clickDialog: 0
   dialogId: 0
   dialogSaverData: 
   actionsSaver: 
