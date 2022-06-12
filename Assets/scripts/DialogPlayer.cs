@@ -53,21 +53,23 @@ public class DialogPlayer : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBeha
 
         if (callbacks.isGameOver)
         {
+            Debug.Log("got callbacks.isGameOver");
             if (!isOverInit)
             {
+                Debug.Log("dialogSaver.playerData.isGameOver" + dialogSaver.playerData.isGameOver.ToString());
                 if (dialogSaver.playerData.isGameOver) {
+                    Debug.Log("isOverAns.IsOverAns " + dialogSaver.playerData.isGameOver.ToString());
                     var isOverAns = IsGameOverAns.Create();
                     isOverAns.IsOverAns = dialogSaver.playerData.isGameOver;
                     isOverAns.Send();
                     gameOverMenu.GetChild(1).gameObject.SetActive(true);
-                }
-                
-                
+                }                
             }
             else
             {
                 if (callbacks.isOverAns)
                 {
+                    Debug.Log("isOverAns" + callbacks.isOverAns.ToString());
                     gameOverMenu.GetChild(1).gameObject.SetActive(true);
                 }
             }
@@ -229,7 +231,7 @@ public class DialogPlayer : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBeha
             dialogSaver.playerData.isGameOver = dialogSaver.isGameOverloc;
         }
         Debug.Log("IsGameOver " + dialogSaver.isGameOverloc.ToString() + " dialogSaver.IsdialogOver " + dialogSaver.IsdialogOver.ToString());
-        if (dialogSaver.playerData.isGameOver)
+        if (dialogSaver.playerData.isGameOver && !callbacks.isGameOver)
         {
             var isGameOver = IsGameOverCheck.Create();
             isGameOver.IsGameOver = true;
