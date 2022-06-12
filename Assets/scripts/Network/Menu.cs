@@ -29,6 +29,14 @@ public class Menu : GlobalEventListener
         _config = BoltRuntimeSettings.instance.GetConfigCopy();
         _config.serverConnectionLimit = 2; // Set here the max number of clients
     }
+
+    public override void Disconnected(BoltConnection connection)
+    {
+        if (BoltNetwork.Server.Equals(connection))
+        {
+            BoltLog.Warn("Disconnected from the server");
+        }
+    }
     public void StartServer()
     {
         if (BoltNetwork.IsClient) {
