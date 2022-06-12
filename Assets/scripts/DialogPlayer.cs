@@ -64,6 +64,13 @@ public class DialogPlayer : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBeha
                 
                 
             }
+            else
+            {
+                if (callbacks.isOverAns)
+                {
+                    gameOverMenu.GetChild(1).gameObject.SetActive(true);
+                }
+            }
 
         }
     }
