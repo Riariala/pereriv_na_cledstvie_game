@@ -4594,12 +4594,12 @@ MonoBehaviour:
   dependencyStatus: 0
   emailLoginField: {fileID: 1831855530}
   passwordLoginField: {fileID: 1213622237}
-  warningLoginText: {fileID: 535347963}
-  confirmLoginText: {fileID: 535347963}
+  warningLoginText: {fileID: 98764476}
+  confirmLoginText: {fileID: 98764476}
   usernameRegisterField: {fileID: 554648890}
   emailRegisterField: {fileID: 2142368672}
   passwordRegisterField: {fileID: 933104102}
-  warningRegisterText: {fileID: 98764476}
+  warningRegisterText: {fileID: 535347963}
 --- !u!1 &710550508
 GameObject:
   m_ObjectHideFlags: 0
