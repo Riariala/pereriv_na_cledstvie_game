@@ -59,6 +59,7 @@ public class NetworkCallbacks : GlobalEventListener
         Vector3 spawnPos;
         if (isPlayer1)
         {
+            data.dialogId = 0;
             spawnPos = new Vector3(6f, 0, -9f);
             var player = BoltNetwork.Instantiate(player1, spawnPos, Quaternion.identity);
             player.name = "Rogers";

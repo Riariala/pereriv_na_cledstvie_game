@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using UnityEngine.EventSystems;
+using Unity.VectorGraphics;
 
 public class InventoryLoader : MonoBehaviour
 {
@@ -237,10 +238,10 @@ public class InventoryLoader : MonoBehaviour
         switch (evid.status)
         {
             case 0:
-                evidColor = new Color(255, 200, 0, 255);
+                evidColor = new Color(205, 186, 110, 255);
                 break;
             case 1:
-                evidColor = new Color(0, 255, 100, 255);
+                evidColor = new Color(34, 136, 169, 255);
                 break;
             case 2:
                 evidColor = new Color(0, 100, 255, 255);
@@ -249,7 +250,7 @@ public class InventoryLoader : MonoBehaviour
                 evidColor = new Color(255, 255, 255, 255);
                 break;
         }
-        newEvid.GetComponent<Image>().color = evidColor;
+        newEvid.GetComponent<SVGImage>().color = evidColor;
     }
 
     public void clickEvidence(int ID)
@@ -281,7 +282,7 @@ public class InventoryLoader : MonoBehaviour
             else
             {
                 choosenEvidId = ID;
-                evidObj.GetComponent<Image>().color = new Color(255, 255, 255, 255);
+                evidObj.GetComponent<SVGImage>().color = new Color(255, 255, 255, 255);
                 choosenEvidObj = evidObj;
                 choosenEvidInfo = evid;
             }
