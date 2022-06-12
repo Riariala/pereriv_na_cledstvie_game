@@ -38,7 +38,7 @@ public class AuthManager : MonoBehaviour
             if (dependencyStatus == DependencyStatus.Available)
             {
                 //If they are avalible Initialize Firebase
-                //InitializeFirebase();
+                InitializeFirebase();
             }
             else
             {
@@ -78,30 +78,30 @@ public class AuthManager : MonoBehaviour
         if (LoginTask.Exception != null)
         {
             //If there are errors handle them
-            Debug.LogWarning(message: $"Failed to register task with {LoginTask.Exception}");
+            Debug.LogWarning(message: $"Ошибка регистрации {LoginTask.Exception}");
             FirebaseException firebaseEx = LoginTask.Exception.GetBaseException() as FirebaseException;
             AuthError errorCode = (AuthError)firebaseEx.ErrorCode;
 
-            string message = "Login Failed!";
+            string message = "Ошибка входа";
             switch (errorCode)
             {
                 case AuthError.MissingEmail:
-                    message = "Missing Email";
+                    message = "Email отсутствует";
                     break;
                 case AuthError.MissingPassword:
-                    message = "Missing Password";
+                    message = "Пароль отсутствует";
                     break;
                 case AuthError.WrongPassword:
-                    message = "Wrong Password";
+                    message = "Неверный пароль";
                     break;
                 case AuthError.InvalidEmail:
-                    message = "Invalid Email";
+                    message = "Недействительный email";
                     break;
                 case AuthError.UserNotFound:
-                    message = "Account does not exist";
+                    message = "Данный аккаунт не существует";
                     break;
             }
-            //warningLoginText.text = message;
+            warningLoginText.text = message;
             Debug.Log(message);
         }
         else
@@ -110,8 +110,8 @@ public class AuthManager : MonoBehaviour
             //Now get the result
             User = LoginTask.Result;
             Debug.LogFormat("User signed in successfully: {0} ({1})", User.DisplayName, User.Email);
-            //warningLoginText.text = "";
-            //confirmLoginText.text = "Logged In";
+            warningLoginText.text = "";
+            confirmLoginText.text = "Вы успешно вошли";
             Debug.Log("Logged In");
         }
     }
@@ -122,13 +122,21 @@ public class AuthManager : MonoBehaviour
         if (_username == "")
         {
             //If the username field is blank show a warning
-            warningRegisterText.text = "Missing Username";
+            warningRegisterText.text = "Введите логин";
         }
         /*else if(passwordRegisterField.text != passwordRegisterVerifyField.text)
         {
             //If the password does not match show a warning
             warningRegisterText.text = "Password Does Not Match!";
         }*/
+        else if (_password == "")
+        {
+            warningRegisterText.text = "Введите пароль";
+        }
+        else if (_password.Length < 6)
+        {
+            warningRegisterText.text = "Пароль слишком короткий";
+        }
         else 
         {
             //Call the Firebase auth signin function passing the email and password
@@ -141,27 +149,27 @@ public class AuthManager : MonoBehaviour
             if (RegisterTask.Exception != null)
             {
                 //If there are errors handle them
-                Debug.LogWarning(message: $"Failed to register task with {RegisterTask.Exception}");
+                Debug.LogWarning(message: $"Ошибка регистрации {RegisterTask.Exception}");
                 FirebaseException firebaseEx = RegisterTask.Exception.GetBaseException() as FirebaseException;
                 AuthError errorCode = (AuthError)firebaseEx.ErrorCode;
 
-                string message = "Register Failed!";
+                string message = "Ошибка Регистрации";
                 switch (errorCode)
                 {
                     case AuthError.MissingEmail:
-                        message = "Missing Email";
+                        message = "Отсутствует email";
                         break;
                     case AuthError.MissingPassword:
-                        message = "Missing Password";
+                        message = "Отсутствует пароль";
                         break;
                     case AuthError.WeakPassword:
-                        message = "Weak Password";
+                        message = "Слабый пароль";
                         break;
                     case AuthError.EmailAlreadyInUse:
-                        message = "Email Already In Use";
+                        message = "Email уже используется";
                         break;
                 }
-                //warningRegisterText.text = message;
+                warningRegisterText.text = message;
             }
             else
             {
@@ -182,17 +190,17 @@ public class AuthManager : MonoBehaviour
                     if (ProfileTask.Exception != null)
                     {
                         //If there are errors handle them
-                        Debug.LogWarning(message: $"Failed to register task with {ProfileTask.Exception}");
+                        Debug.LogWarning(message: $"Ошибка регистрации {ProfileTask.Exception}");
                         FirebaseException firebaseEx = ProfileTask.Exception.GetBaseException() as FirebaseException;
                         AuthError errorCode = (AuthError)firebaseEx.ErrorCode;
-                        warningRegisterText.text = "Username Set Failed!";
+                        warningRegisterText.text = "Ошибка логина";
                     }
                     else
                     {
                         //Username is now set
                         //Now return to login screen
                         //UIManager.instance.LoginScreen();
-                        //warningRegisterText.text = "";
+                        warningRegisterText.text = "";
                     }
                 }
             }
