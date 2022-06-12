@@ -9560,7 +9560,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   joinBtnInList: {fileID: 916963010}
   SessionListPanel: {fileID: 1474366439}
-  playerData: {fileID: 0}
+  playerData: {fileID: 11400000, guid: 2336fb71654d97d4b9c3e67c350c186e, type: 2}
   BtnSpacing: 40
   menuscript: {fileID: 707613682}
   friendBool: 0
