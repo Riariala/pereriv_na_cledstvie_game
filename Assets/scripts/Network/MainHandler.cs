@@ -69,7 +69,7 @@ public class MainHandler : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehav
                 actions.newValue(callbacks.actionsSaver);
                 Debug.Log(actions);
                 callbacks.ask = false;
-
+                callbacks.actionsSaver = "";
             }
         }
     }
