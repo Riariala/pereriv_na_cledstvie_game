@@ -15,6 +15,8 @@ public class NetworkCallbacks : GlobalEventListener
     public bool next;
     public bool ask;
     public bool clickDialog;
+    public bool isGameOver;
+    public bool isOverAns;
     public int dialogId;
     public string dialogSaverData;
     public string actionsSaver;
@@ -123,6 +125,16 @@ public class NetworkCallbacks : GlobalEventListener
     public override void OnEvent(ClickDialog evnt)
     {
         clickDialog = evnt.Click;
+    }
+
+    public override void OnEvent(IsGameOverCheck evnt)
+    {
+        isGameOver = evnt.IsGameOver;
+    }
+
+    public override void OnEvent(IsGameOverAns evnt)
+    {
+        isOverAns = evnt.IsOverAns;
     }
     /*public override void SceneLoadLocalDone(string map)
     {

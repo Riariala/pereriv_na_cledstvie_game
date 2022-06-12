@@ -11,6 +11,7 @@ public class PlayerData : ScriptableObject
     public bool isBusy;
     public bool isGameOver;
     public bool isGameJustStarted;
+    public string gameCode;
 
     public void ChangeCharacter(GameObject newplayer)
     {
