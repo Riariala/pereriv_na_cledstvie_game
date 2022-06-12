@@ -23,6 +23,7 @@ public class DialogSaver : ScriptableObject
     public List<ObjectDialogs> objects;
 
     private bool isdialogOver;
+    public bool isGameOverloc;
 
     public bool IsdialogOver {get { return isdialogOver;  } set { isdialogOver = value; } }
 
@@ -35,7 +36,7 @@ public class DialogSaver : ScriptableObject
         journalInfo.newInHistory = 0;
         journalInfo.newInEvid = new List<int>();
         journalInfo.newInInfo = new List<int>();
-
+        isGameOverloc = false;
     }
 
     public List<ObjectDialogs> readFromJSON()
@@ -158,6 +159,7 @@ public class DialogSaver : ScriptableObject
 
         if (dialogVariantsSaver.variants[diavarID].specailActions.Count > 0)
         {
+        
             foreach (List<int> special in dialogVariantsSaver.variants[diavarID].specailActions)
             {
                 if (special[0] == variantIndex)
@@ -169,17 +171,21 @@ public class DialogSaver : ScriptableObject
                             Debug.Log(" IsdialogOver " + IsdialogOver);
                             break;
                         case 1:
-                            string name;
-                            if (playerData.isPlayer1) { name = "Rogers"; } else { name = "Mary"; }
-                            Debug.Log(" This game is over for " + name);
-                            playerData.isGameOver = true;
+                            //string name;
+                            //if (playerData.isPlayer1) { name = "Rogers"; } else { name = "Mary"; }
+                            //Debug.Log(" This game is over for " + name);
+                            isGameOverloc = true;
+                            //playerData.isGameOver = true;
                             break;
 
                         case 2:
                             break;
                     }
                 }
-                
+            }
+            if (IsdialogOver)
+            {
+                playerData.isGameOver = isGameOverloc;
             }
         }
 

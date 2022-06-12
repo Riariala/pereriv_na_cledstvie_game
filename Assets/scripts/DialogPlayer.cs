@@ -178,8 +178,9 @@ public class DialogPlayer : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBeha
             dialogPanel.SetActive(false);
             dialogSaver.ReplaceActionSaver(ObjectId, dialogId); // ТУТ CHANGES
             dialogSaver.playerData.isBusy = false;
-            
             playEffect(dialogSaver.takeEffectId(ObjectId, dialogId));
+            
+            checkGameOver();
             dialogId = 0;
         }
     }
@@ -217,15 +218,25 @@ public class DialogPlayer : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBeha
                 else { child.gameObject.SetActive(false); }
             }
         }
+        else { dialogSaver.IsdialogOver = true; }
+        checkGameOver();
+    }
+
+    public void checkGameOver()
+    {
+        if (dialogSaver.IsdialogOver && dialogSaver.isGameOverloc)
+        {
+            dialogSaver.playerData.isGameOver = dialogSaver.isGameOverloc;
+        }
+        Debug.Log("IsGameOver " + dialogSaver.isGameOverloc.ToString() + " dialogSaver.IsdialogOver " + dialogSaver.IsdialogOver.ToString());
         if (dialogSaver.playerData.isGameOver)
         {
             var isGameOver = IsGameOverCheck.Create();
             isGameOver.IsGameOver = true;
             isGameOver.Send();
             isOverInit = true;
+            Debug.Log("IsGameOver true");
             gameOverMenu.GetChild(0).gameObject.SetActive(true);
-            //Запрос второму игроку, закончил ли он игру//
-            //
         }
     }
 
@@ -246,7 +257,8 @@ public class DialogPlayer : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBeha
         variable_dialog_panel.SetActive(false);
         if (! dialogSaver.IsdialogOver) { beginDialog(ObjectId, lastActionKind); }
         else 
-        { 
+        {
+            checkGameOver();
             dialogSaver.playerData.isBusy = false;
             dialogPanel.SetActive(false);
         }
@@ -254,6 +266,7 @@ public class DialogPlayer : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBeha
 
     public void beginPlayersDialog(int locdialogId)
     {
+        dialogSaver.IsdialogOver = false;
         dialogSaver.playerData.isBusy = true;
         dialogPanel.SetActive(true);
         massageText = playersDialogiesSaver.AskDialog(locdialogId);
