@@ -12,7 +12,6 @@ using Photon.Bolt.Utils;
 
 public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehaviour
 {
-
     [SerializeField] public GameObject menu_obj_touch;
     [SerializeField] public Transform parent;
     public DialogPlayer dialogPlayer;
@@ -31,7 +30,7 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
     private void Awake()
     {
         _config = BoltRuntimeSettings.instance.GetConfigCopy();
-        _config.serverConnectionLimit = 32; // Set here the max number of clients
+        _config.serverConnectionLimit = 2; 
     }
 
     void Start()
@@ -45,7 +44,6 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
         {
             if (!isInitiator)
             {
-
                 callbacks.click = false;
                 var busy = IsBusy.Create();
                 busy.Busy = callbacks.data.isBusy;
@@ -53,9 +51,7 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
                 if (!busy.Busy)
                 {
                     dialogPlayer.beginPlayersDialog(dialogPlayer.dialogSaver.playerData.dialogId);
-                    Debug.Log("Я ответил второму игроку.");
                 }
-                Debug.Log("Я занят? - " + busy.Busy.ToString());
             }
         }
         if (callbacks.isBusyAnswered)
@@ -65,7 +61,6 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
             {
                 callbacks.click = false;
                 isInitiator = false;
-                Debug.Log("Я не занят. Могу говорить.");
                 dialogPlayer.beginPlayersDialog(dialogPlayer.dialogSaver.playerData.dialogId);
             }
         }
@@ -73,10 +68,6 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
 
 #if UNITY_ANDROID && !UNITY_EDITOR
         forAndroid();
-#endif
-
-#if !UNITY_ANDROID || UNITY_EDITOR
-        forEditorUpdate();
 #endif
     }
 
@@ -103,6 +94,7 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
                             if (hit.collider.CompareTag("Item") || hit.collider.CompareTag("NPC"))
                             {
                                 touched_item = hit.collider.gameObject;
+
                                 List<bool> enable_actionsl = new List<bool>(touched_item.GetComponent<ObjectManager>().enable_actions);
                                 int count_actions = enable_actionsl.Count(x => x == true);
                                 if (count_actions > 0)
@@ -159,81 +151,6 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
                 case TouchPhase.Ended:
 
                     break;
-            }
-        }
-    }
-
-    public void forEditorUpdate()
-    {
-        if (Input.GetMouseButton(0))
-        {
-            if (!EventSystem.current.IsPointerOverGameObject())
-            {
-                if (menu != null) { Destroy(menu); }
-
-                Vector3 pos = Input.mousePosition;
-                Ray ray = Camera.main.ScreenPointToRay(pos);
-                RaycastHit hit;
-                int layerMask = 1 << 5;
-                layerMask = ~layerMask;
-                if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask, QueryTriggerInteraction.Ignore))
-                {
-                    Debug.Log("Player tagged by name " + hit.collider.gameObject.name);
-
-                    if (hit.collider.CompareTag("Item") || hit.collider.CompareTag("NPC"))
-                    {
-                        touched_item = hit.collider.gameObject;
-                        
-                        List<bool> enable_actionsl = new List<bool>(touched_item.GetComponent<ObjectManager>().enable_actions);
-                        int count_actions = enable_actionsl.Count(x => x == true);
-                        if (count_actions > 0)
-                        {
-                            menu = Instantiate(menu_obj_touch, parent);
-                            menu.transform.position = pos;
-                            float koef = Mathf.PI * 2 / count_actions;
-                            int indActiveAction = 0;
-                            for (int i = 0; i < enable_actionsl.Count; i++)
-                            {
-                                if (enable_actionsl[i])
-                                {
-                                    GameObject btn = menu.transform.GetChild(i).gameObject;
-                                    btn.SetActive(true);
-                                    btn.transform.localPosition = new Vector3(Mathf.Cos(indActiveAction * koef + (Mathf.PI / 2)) * 60, Mathf.Sin(indActiveAction * koef + (Mathf.PI / 2)) * 60, 0);
-                                    indActiveAction++;
-                                }
-                            }
-                        }
-                    }
-                    else if (hit.collider.CompareTag("Player"))
-                    {
-                        Debug.Log("Player Tagged name " + hit.collider.gameObject.name);
-                        bool isfirst = hit.collider.gameObject.name == "Rogers";
-                        if (dialogPlayer.dialogSaver.playerData.isPlayer1 != isfirst) 
-                        {
-                            Debug.Log("Sended click");
-                            isInitiator = true;
-                            var click = ClickOnPlayer.Create();
-                            click.Click = true;
-                            click.Send();
-                            Debug.Log("callbacks.isBusy in touchMenu " + callbacks.isBusy.ToString());
-                        }
-                        else { Debug.Log("Нельзя разговаривать самим с собой!"); }
-                    }
-                }
-            }
-            else
-            {
-                PointerEventData pointer = new PointerEventData(EventSystem.current);
-                pointer.position = Input.mousePosition;
-                List<RaycastResult> raycastResults = new List<RaycastResult>();
-                EventSystem.current.RaycastAll(pointer, raycastResults);
-                if (raycastResults.Count != 0)
-                {
-                    if (!raycastResults[0].gameObject.CompareTag("menu_touch"))
-                    {
-                        if (menu != null) { Destroy(menu); }
-                    }
-                }
             }
         }
     }

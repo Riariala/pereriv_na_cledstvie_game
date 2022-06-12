@@ -58,8 +58,6 @@ public class MenuScript : MonoBehaviour
             if (child.CompareTag("Button")) {child.GetComponent<Button>().interactable = false;}
 
         }
-        //NetworkMenu.StartClient();
-        //NetworkMenu.JoinGame();
     }
 
     public void closeModal(GameObject modal_menu)
@@ -126,20 +124,14 @@ public class MenuScript : MonoBehaviour
             new_game_modal.SetActive(true);
             foreach (Transform child in fourth_menu.GetComponentsInChildren<Transform>())
             {
-                if (child.CompareTag("Button")) {child.GetComponent<Button>().interactable = true;}
-                
+                if (child.CompareTag("Button")) {child.GetComponent<Button>().interactable = true;}                
             }
             NetworkMenu.StartServer();
-
-            //SceneManager.LoadScene(1); //������
         }
         actionsSaver.setDefault();
         journalInfo.clearAll();
         playersDialogiesSaver.setDefault();
     }
-
-
-
 
     IEnumerator closing_modals(GameObject modal_menu)
     {
@@ -154,5 +146,4 @@ public class MenuScript : MonoBehaviour
         prev_menu.SetActive(false);
         cur_menu.SetActive(true);
     }
-
 }

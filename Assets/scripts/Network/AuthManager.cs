@@ -49,7 +49,7 @@ public class AuthManager : MonoBehaviour
 
     private void InitializeFirebase()
     {
-        Debug.Log("Setting up Firebase Auth");
+        //Debug.Log("Setting up Firebase Auth");
         //Set the authentication instance object
         auth = FirebaseAuth.DefaultInstance;
     }
@@ -78,7 +78,7 @@ public class AuthManager : MonoBehaviour
         if (LoginTask.Exception != null)
         {
             //If there are errors handle them
-            Debug.LogWarning(message: $"Ошибка регистрации {LoginTask.Exception}");
+            //Debug.LogWarning(message: $"Ошибка регистрации {LoginTask.Exception}");
             FirebaseException firebaseEx = LoginTask.Exception.GetBaseException() as FirebaseException;
             AuthError errorCode = (AuthError)firebaseEx.ErrorCode;
 
@@ -102,17 +102,17 @@ public class AuthManager : MonoBehaviour
                     break;
             }
             warningLoginText.text = message;
-            Debug.Log(message);
+            //Debug.Log(message);
         }
         else
         {
             //User is now logged in
             //Now get the result
             User = LoginTask.Result;
-            Debug.LogFormat("User signed in successfully: {0} ({1})", User.DisplayName, User.Email);
+            //Debug.LogFormat("User signed in successfully: {0} ({1})", User.DisplayName, User.Email);
             warningLoginText.text = "";
             confirmLoginText.text = "Вы успешно вошли";
-            Debug.Log("Logged In");
+            //Debug.Log("Logged In");
         }
     }
 
@@ -140,16 +140,16 @@ public class AuthManager : MonoBehaviour
         else 
         {
             //Call the Firebase auth signin function passing the email and password
-            Debug.Log("трунь");
+            //Debug.Log("трунь");
             var RegisterTask = auth.CreateUserWithEmailAndPasswordAsync(_email, _password);
-            Debug.Log("кукуруза");
+            //Debug.Log("кукуруза");
             //Wait until the task completes
             yield return new WaitUntil(predicate: () => RegisterTask.IsCompleted);
 
             if (RegisterTask.Exception != null)
             {
                 //If there are errors handle them
-                Debug.LogWarning(message: $"Ошибка регистрации {RegisterTask.Exception}");
+                //Debug.LogWarning(message: $"Ошибка регистрации {RegisterTask.Exception}");
                 FirebaseException firebaseEx = RegisterTask.Exception.GetBaseException() as FirebaseException;
                 AuthError errorCode = (AuthError)firebaseEx.ErrorCode;
 
@@ -190,7 +190,7 @@ public class AuthManager : MonoBehaviour
                     if (ProfileTask.Exception != null)
                     {
                         //If there are errors handle them
-                        Debug.LogWarning(message: $"Ошибка регистрации {ProfileTask.Exception}");
+                        //Debug.LogWarning(message: $"Ошибка регистрации {ProfileTask.Exception}");
                         FirebaseException firebaseEx = ProfileTask.Exception.GetBaseException() as FirebaseException;
                         AuthError errorCode = (AuthError)firebaseEx.ErrorCode;
                         warningRegisterText.text = "Ошибка логина";

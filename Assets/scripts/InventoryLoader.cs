@@ -26,7 +26,6 @@ public class InventoryLoader : MonoBehaviour
     public GameObject evidLinePrefub;
     public Transform evidContent;
 
-
     private int choosenEvidId;
     private GameObject choosenEvidObj;
     private Evidences choosenEvidInfo;
@@ -58,8 +57,6 @@ public class InventoryLoader : MonoBehaviour
             List<int> changeCopy = new List<int>(journalInfo.newInInfo);
             foreach (Transform child in content_btns.GetChild(1).transform)
             {
-                Debug.Log(content_btns.gameObject.name);
-                Debug.Log(child.gameObject.name);
                 int childId = Int32.Parse(child.gameObject.name);
                 if (changeCopy.Contains(childId))
                 {
@@ -132,12 +129,6 @@ public class InventoryLoader : MonoBehaviour
                 break;
             }
         }
-        string f = "";
-        foreach (int d in infoLines)
-        {
-            f += d.ToString() + " ";
-        }
-        Debug.Log(f);
         foreach (int lineid in infoLines)
         {
             newText += effectsSaver.info[ID].lines[lineid] + "\n";
@@ -263,7 +254,7 @@ public class InventoryLoader : MonoBehaviour
         float timePass = Time.time - timeEvidClickOn;
         if (timePass > 0.7f)
         {
-            Debug.Log("timePass " + timePass.ToString()); //в ожидании дизайна уллик
+             //в ожидании дизайна уллик
         }
         else
         {

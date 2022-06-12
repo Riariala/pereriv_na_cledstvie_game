@@ -46,38 +46,32 @@ public class DialogPlayer : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBeha
         }
         if (dialogSaver.playerData.isGameJustStarted)
         {
-            Debug.Log("dialogSaver.playerData.isGameJustStarted " + dialogSaver.playerData.isGameJustStarted.ToString());
             dialogSaver.playerData.isGameJustStarted = false;
             beginDialog(0, 0);
         }
 
         if (callbacks.isGameOver)
         {
-            Debug.Log("got callbacks.isGameOver");
-            if (!isOverInit)
-            {
-                Debug.Log("dialogSaver.playerData.isGameOver" + dialogSaver.playerData.isGameOver.ToString());
-                if (dialogSaver.playerData.isGameOver) {
-                    Debug.Log("isOverAns.IsOverAns " + dialogSaver.playerData.isGameOver.ToString());
-                    var isOverAns = IsGameOverAns.Create();
-                    isOverAns.IsOverAns = dialogSaver.playerData.isGameOver;
-                    isOverAns.Send();
-                    gameOverMenu.GetChild(1).gameObject.SetActive(true);
-                }                
-            }
-            else
+            if (isOverInit)
             {
                 if (callbacks.isOverAns)
                 {
-                    Debug.Log("isOverAns" + callbacks.isOverAns.ToString());
+                    gameOverMenu.GetChild(1).gameObject.SetActive(true);
+                }
+            }
+            else
+            {
+                if (dialogSaver.playerData.isGameOver)
+                {
+                    var isOverAns = IsGameOverAns.Create();
+                    isOverAns.IsOverAns = dialogSaver.playerData.isGameOver;
+                    isOverAns.Send();
                     gameOverMenu.GetChild(1).gameObject.SetActive(true);
                 }
             }
 
         }
     }
-
-     
 
     public void beginDialog(int ObjId, int actionKind)
     {
@@ -86,9 +80,7 @@ public class DialogPlayer : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBeha
         ObjectId = ObjId;
         lastActionKind = actionKind;
         dialogId = dialogSaver.AskDialogId(ObjectId, lastActionKind);
-        Debug.Log("dialogId " + dialogId.ToString());
         massageText = dialogSaver.AskDialog(ObjectId, dialogId);
-        Debug.Log("dialogId " + dialogId.ToString());
         titleText = dialogSaver.AskTitle(ObjectId, dialogId);
         isPlayer1 = dialogSaver.whichPlayer();
         dialogCount = 0;
@@ -106,10 +98,10 @@ public class DialogPlayer : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBeha
     {
         if (isHost) 
         {
-                var next = NextDialog.Create();
-                next.Next = true;
-                next.Send();
-                PlayNextCall();
+            var next = NextDialog.Create();
+            next.Next = true;
+            next.Send();
+            PlayNextCall();
         }
     }
 
@@ -150,8 +142,6 @@ public class DialogPlayer : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBeha
 
     public void PlayNextSimpleDialog()
     {
-        Debug.Log("dialogCount " + dialogCount.ToString());
-        Debug.Log("titleText.Count " + titleText.Count.ToString());
         if (dialogCount < titleText.Count)
         {
             massage_txt.text = massageText[dialogCount];
@@ -178,10 +168,9 @@ public class DialogPlayer : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBeha
         {
             dialogCount = 0;
             dialogPanel.SetActive(false);
-            dialogSaver.ReplaceActionSaver(ObjectId, dialogId); // ТУТ CHANGES
+            dialogSaver.ReplaceActionSaver(ObjectId, dialogId);
             dialogSaver.playerData.isBusy = false;
             playEffect(dialogSaver.takeEffectId(ObjectId, dialogId));
-            
             checkGameOver();
             dialogId = 0;
         }
@@ -230,14 +219,12 @@ public class DialogPlayer : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBeha
         {
             dialogSaver.playerData.isGameOver = dialogSaver.isGameOverloc;
         }
-        Debug.Log("IsGameOver " + dialogSaver.isGameOverloc.ToString() + " dialogSaver.IsdialogOver " + dialogSaver.IsdialogOver.ToString());
         if (dialogSaver.playerData.isGameOver && !callbacks.isGameOver)
         {
             var isGameOver = IsGameOverCheck.Create();
             isGameOver.IsGameOver = true;
             isGameOver.Send();
             isOverInit = true;
-            Debug.Log("IsGameOver true");
             gameOverMenu.GetChild(0).gameObject.SetActive(true);
         }
     }
@@ -257,12 +244,14 @@ public class DialogPlayer : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBeha
         }
         simple_dialog_panel.SetActive(true);
         variable_dialog_panel.SetActive(false);
-        if (! dialogSaver.IsdialogOver) { beginDialog(ObjectId, lastActionKind); }
-        else 
-        {
+        if (dialogSaver.IsdialogOver) {
             checkGameOver();
             dialogSaver.playerData.isBusy = false;
             dialogPanel.SetActive(false);
+        }
+        else 
+        {
+            beginDialog(ObjectId, lastActionKind);
         }
     }
 
@@ -284,9 +273,6 @@ public class DialogPlayer : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBeha
             isHost = false;
         }
         dialogCount = 0;
-        Debug.Log("начало диалога между игроками");
         playNext();
     }
-
-
 }
