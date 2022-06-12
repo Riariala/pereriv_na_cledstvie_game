@@ -15,6 +15,7 @@ public class NetworkCallbacks : GlobalEventListener
     public bool next;
     public bool ask;
     public int dialogId;
+    public string dialogSaverData;
     public string actionsSaver;
     public PlayerData data;
     public ActionsSaver actions;
@@ -108,6 +109,10 @@ public class NetworkCallbacks : GlobalEventListener
         ask = evnt.Ask;
     }
 
+    public override void OnEvent(DialogSaverEvent evnt)
+    {
+        dialogSaverData = evnt.Data;
+    }
     /*public override void SceneLoadLocalDone(string map)
     {
         SpawnServerPlayer();
