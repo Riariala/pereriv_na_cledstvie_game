@@ -10,7 +10,7 @@ using Photon.Bolt.Matchmaking;
 using Photon.Bolt.Utils;
 
 
-public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehaviour
+public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>
 {
     public Rigidbody _rb;
     public GameObject playerCamera;
@@ -56,7 +56,6 @@ public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>//Mono
         }
     }
 
-        
     public void ChangeJoystick(FixedJoystick newJstk)
     {
         _joystick = newJstk;
@@ -72,8 +71,6 @@ public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>//Mono
             playerCameraScript.cameraXPos = otherData.cameraXPos;
             playerCameraScript.camXmodif = otherData.camXmodif;
             playerCameraScript.camZmodif = otherData.camZmodif;
-
-        }
-        
+        }        
     }
 }

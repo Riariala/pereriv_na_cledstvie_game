@@ -34,14 +34,12 @@ public class GoogleSignInDemo : MonoBehaviour
                 else
                 {
                     AddToInformation("Could not resolve all Firebase dependencies: " + task.Result.ToString());
-                    Debug.Log("Тыква");
                 }
                     
             }
             else
             {
                 AddToInformation("Dependency check was not completed. Error : " + task.Exception.Message);
-                Debug.Log("Сосулька");
             }
         });
     }
@@ -93,7 +91,6 @@ public class GoogleSignInDemo : MonoBehaviour
     private IEnumerator OnSuccess(Task<GoogleSignInUser> task)
     {
         yield return new WaitForEndOfFrame();
-        Debug.Log("OnSuccess");
         AddToInformation("Welcome: " + task.Result.DisplayName + "!");
         AddToInformation("Email = " + task.Result.Email);
         AddToInformation("Google ID Token = " + task.Result.IdToken);
@@ -110,7 +107,6 @@ public class GoogleSignInDemo : MonoBehaviour
             {
                 GoogleSignIn.SignInException error = (GoogleSignIn.SignInException)enumerator.Current;
                 AddToInformation("Got Error: " + error.Status + " " + error.Message);
-                Debug.Log("Мёд");
             }
             else
             {

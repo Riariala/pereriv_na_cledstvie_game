@@ -32,7 +32,6 @@ public class InventoryScript : MonoBehaviour
         if (!(currentMenu is null)) { currentMenu.SetActive(false); }
         currentMenu = menu;
         currentMenu.SetActive(true);
-
     }
 
     public void close_inv(GameObject inv)

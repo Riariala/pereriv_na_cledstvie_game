@@ -18,7 +18,6 @@ public class ActionsSaver : ScriptableObject
 
     public void newValue(string NewJson)
     {
-        //itemPlayerActions = readFromJSON();
         ObjectsHolder itm = JsonConvert.DeserializeObject<ObjectsHolder>(NewJson);
         itemPlayerActions = itm.itemPlayerActions;
     }
@@ -46,7 +45,6 @@ public class ActionsSaver : ScriptableObject
         return itm.itemPlayerActions;
     }
 
-
     public void Rewrite(int id, List<int> first, List<int> sec)
     {
         for (int newactid = 0; newactid < first.Count; newactid++)
@@ -65,8 +63,5 @@ public class ActionsSaver : ScriptableObject
             }
             
         }
-        //itemPlayerActions[id].firstPlayerActs = first;
-        //itemPlayerActions[id].secPlayerActs = sec;
     }
-
 }

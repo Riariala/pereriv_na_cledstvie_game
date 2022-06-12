@@ -10,7 +10,7 @@ using Photon.Bolt.Matchmaking;
 using Photon.Bolt.Utils;
 
 
-public class changeCharacter : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehaviour
+public class changeCharacter : Photon.Bolt.EntityBehaviour<ICustomPlayer>
 {
     [SerializeField] private GameObject Player1;
     [SerializeField] private GameObject Player2;
@@ -39,10 +39,6 @@ public class changeCharacter : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoB
             Player2_script.ChangeJoystick(_jystick);
             player_data.SetObjectCharacter(Player2);
         }
-        //player_data.SetCharacter(true, Player1);
-        
-        
-        //player_data.char_player = Player1;
     }
 
     public void Change_chars(){
@@ -60,19 +56,5 @@ public class changeCharacter : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoB
             Player2_script.ChangeJoystick(_jystick);
             player_data.SetObjectCharacter(Player2);
         }
-        //handler.SetValueChar();
-        //    if (player_data.isPlayer1){
-        //        player_data.isPlayer1 = false;
-        //        Player2_script.ChangeJoystick(_jystick);
-        //        Player1_script.ChangeJoystick(null);
-        //        player_data.char_player = Player2;
-        //    }
-        //    else
-        //    {
-        //        player_data.isPlayer1 = true;
-        //        Player1_script.ChangeJoystick(_jystick);
-        //        Player2_script.ChangeJoystick(null);
-        //        player_data.char_player = Player1;
-        //    }
     }
 }
