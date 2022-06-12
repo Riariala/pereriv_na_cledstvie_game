@@ -5,6 +5,10 @@ using System.Linq;
 using System.IO;
 using Newtonsoft.Json;
 using System.Text;
+using UdpKit.Platform.Photon;
+using Photon.Bolt;
+using Photon.Bolt.Matchmaking;
+using Photon.Bolt.Utils;
 
 [CreateAssetMenu(fileName = "DialogSaver", menuName = "Dialog Saver", order = 51)]
 public class DialogSaver : ScriptableObject
@@ -14,6 +18,7 @@ public class DialogSaver : ScriptableObject
     public JournalInfo journalInfo;
     public EffectChangesSaver effectChangesSaver;
     public DialogVariantsSaver dialogVariantsSaver;
+    public bool isInitiator;
 
     public List<ObjectDialogs> objects;
 
@@ -60,7 +65,12 @@ public class DialogSaver : ScriptableObject
     {
         foreach (ObjectActions change in objects[ObjectID].changes[ActionID])
         {
+            var dialogSaverEvnt = DialogSaverEvent.Create();
+            dialogSaverEvnt.Data = JsonConvert.SerializeObject(change);
+            dialogSaverEvnt.Send();
+            isInitiator = true;
             actionsSaver.Rewrite(change.ID, change.firstPlayerActs, change.secPlayerActs);
+            
         }
     }
 
@@ -68,6 +78,10 @@ public class DialogSaver : ScriptableObject
     {
         foreach (ObjectActions change in newActions)
         {
+            var dialogSaverEvnt = DialogSaverEvent.Create();
+            dialogSaverEvnt.Data = JsonConvert.SerializeObject(change);
+            dialogSaverEvnt.Send();
+            isInitiator = true;
             actionsSaver.Rewrite(change.ID, change.firstPlayerActs, change.secPlayerActs);
         }
     }

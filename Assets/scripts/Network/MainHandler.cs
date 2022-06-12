@@ -17,17 +17,27 @@ public class MainHandler : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehav
     public PlayerData data;
     public ActionsSaver actions;
     public JournalInfo journal;
-
+    public DialogSaver dialogSaver;
 
     // Update is called once per frame
     void Update()
     {
+        if (!dialogSaver.isInitiator)
+        {
+            ObjectActions dialogData = JsonConvert.DeserializeObject<ObjectActions>(callbacks.dialogSaverData);
+            actions.Rewrite(dialogData.ID, dialogData.firstPlayerActs, dialogData.secPlayerActs);
+            
+        }
+        else
+        {
+            dialogSaver.isInitiator = false;
+        }
         if (BoltNetwork.IsServer)
         {
             if (callbacks.ask)
             {
-                var actionsSaver = new ActionsSaver();
-                var serializedActions = JsonConvert.SerializeObject(actionsSaver);
+                //var actionsSaver = new ActionsSaver();
+                var serializedActions = JsonConvert.SerializeObject(actions);
                 //var newActionsSaver = JsonConvert.DeserializeObject<Person>(serializedPerson);
 
                 var startData = StartData.Create();
@@ -53,7 +63,6 @@ public class MainHandler : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehav
                 callbacks.ask = false;
 
             }
-            //BoltLauncher.Shutdown();
         }
     }
 }
