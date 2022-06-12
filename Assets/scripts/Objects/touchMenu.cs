@@ -193,9 +193,11 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
                     }
                     else if (hit.collider.CompareTag("Player"))
                     {
+                        Debug.Log("Player Tagged name " + hit.collider.gameObject.name);
                         bool isfirst = hit.collider.gameObject.name == "Rogers";
                         if (dialogPlayer.dialogSaver.playerData.isPlayer1 != isfirst) 
                         {
+                            Debug.Log("Sended click");
                             isInitiator = true;
                             var click = ClickOnPlayer.Create();
                             click.Click = true;
