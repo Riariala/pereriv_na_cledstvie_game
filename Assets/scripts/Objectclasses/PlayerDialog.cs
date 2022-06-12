@@ -8,6 +8,6 @@ public class PlayerDialog
     public List<bool> isFirstTalk;
     public List<string> dialogLines;
     public List<ObjectActions> changes;
-    public int effect;
+    public List<int> effect;
     public int nextDialog;
 }

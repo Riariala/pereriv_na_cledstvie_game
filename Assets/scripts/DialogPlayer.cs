@@ -32,6 +32,16 @@ public class DialogPlayer : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBeha
     private int lastActionKind;
     public NetworkCallbacks callbacks;
 
+    void Start()
+    {
+        if (dialogSaver.playerData.isGameJustStarted)
+        {
+            dialogSaver.playerData.isGameJustStarted = false;
+            beginDialog(0, 0);
+        }
+    }
+
+
     void Update()
     {
         if (callbacks.next)
@@ -107,7 +117,9 @@ public class DialogPlayer : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBeha
             dialogPanel.SetActive(false);
             dialogSaver.ReplaceActionSaver(playersDialogiesSaver.dialogiesList[dialogId].changes);
             dialogSaver.playerData.isBusy = false;
-            playEffect(playersDialogiesSaver.dialogiesList[dialogId].effect);
+            int effectid;
+            if (dialogSaver.playerData.isPlayer1) { effectid = 0;  } else { effectid = 1; }
+            playEffect(playersDialogiesSaver.dialogiesList[dialogId].effect[effectid]);
             dialogSaver.playerData.dialogId = playersDialogiesSaver.dialogiesList[dialogId].nextDialog;
         }
     }
@@ -180,6 +192,11 @@ public class DialogPlayer : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBeha
                 }
                 else { child.gameObject.SetActive(false); }
             }
+        }
+        if (dialogSaver.playerData.isGameOver)
+        {
+            //«апрос второму игроку, закончил ли он игру//
+            //
         }
     }
 

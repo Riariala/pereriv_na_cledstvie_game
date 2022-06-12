@@ -52,10 +52,14 @@ public class NetworkCallbacks : GlobalEventListener
         }
         Debug.Log("data.isPlayer1 before " + data.isPlayer1.ToString());
         data.isPlayer1 = isPlayer1;
+        data.isBusy = false;
+        data.isGameJustStarted = true;
+        data.isGameOver = false;
         Debug.Log("data.isPlayer1 after " + data.isPlayer1.ToString());
-        var spawnPos = new Vector3(Random.Range(-5, 5), 0, Random.Range(-5, 5));
+        Vector3 spawnPos;
         if (isPlayer1)
         {
+            spawnPos = new Vector3(6f, 0, -9f);
             var player = BoltNetwork.Instantiate(player1, spawnPos, Quaternion.identity);
             player.name = "Rogers";
             PlayerController player_script = player.GetComponent<PlayerController>();
@@ -64,6 +68,7 @@ public class NetworkCallbacks : GlobalEventListener
         }
         else
         {
+            spawnPos = new Vector3(-1.5f, 0, 43f);
             var player = BoltNetwork.Instantiate(player2, spawnPos, Quaternion.identity);
             player.name = "Mary";
             PlayerController player_script = player.GetComponent<PlayerController>();

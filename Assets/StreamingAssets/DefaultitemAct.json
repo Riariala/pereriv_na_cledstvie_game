@@ -78,8 +78,8 @@
     },
     {
       "ID": 15,
-      "firstPlayerActs": [ 1, 3 ],
-      "secPlayerActs": [ 1, 3 ]
+      "firstPlayerActs": [ 0, 0],
+      "secPlayerActs": [ 1, 0 ]
     }
   ]
 }

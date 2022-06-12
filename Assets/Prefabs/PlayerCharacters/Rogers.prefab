@@ -130,11 +130,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 1679769518368665418}
   player: {fileID: 3124089655766484163}
-  cameraYPos: 7.78
-  cameraZPos: -10.46
-  cameraXPos: 0
-  camXmodif: 1
-  camZmodif: 1
+  cameraYPos: 13.75
+  cameraZPos: 10.5
+  cameraXPos: 8
+  camXmodif: 0.5
+  camZmodif: 0.6
 --- !u!114 &2383620237321829706
 MonoBehaviour:
   m_ObjectHideFlags: 0

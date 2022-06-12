@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2320509e04fb3d4fa65cb71cbcdb03a, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  isPlayer1: 0
+  isPlayer1: 1
   char_player: {fileID: 1651104453875658818, guid: a37251e2c7bdcf74291f8ab32ba3eb6e,
     type: 3}
   dialogId: 0
   isBusy: 0
+  isGameOver: 0
+  isGameJustStarted: 0

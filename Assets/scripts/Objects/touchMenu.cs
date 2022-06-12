@@ -26,6 +26,14 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
     public NetworkCallbacks callbacks;
     private bool isBusy;
 
+    private BoltConfig _config;
+
+    private void Awake()
+    {
+        _config = BoltRuntimeSettings.instance.GetConfigCopy();
+        _config.serverConnectionLimit = 32; // Set here the max number of clients
+    }
+
     void Start()
     {
         screen_height = Screen.height;
@@ -239,6 +247,8 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
     public void toMainMenu()
     {
         SceneManager.LoadScene(0);
+        BoltLauncher.Shutdown();
+        BoltLauncher.StartClient(_config);
     }
 
     public void callJournal(GameObject journal_panel)

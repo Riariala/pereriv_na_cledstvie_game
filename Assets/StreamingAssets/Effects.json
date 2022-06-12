@@ -317,8 +317,8 @@
       "dialog_open": []
     },
     {
-      "effectID": 25, //история: нужен брифинг
-      "history": [ 0 ],
+      "effectID": 25, //история: нужен брифинг и поговорить с Мари
+      "history": [ 0, 3 ],
       "evidences": [],
       "info": [],
       "dialog_variant_play": 0,
@@ -327,6 +327,30 @@
     {
       "effectID": 26, //история: послушал брифинг
       "history": [ 1, 2 ],
+      "evidences": [],
+      "info": [],
+      "dialog_variant_play": 0,
+      "dialog_open": []
+    },
+    {
+      "effectID": 27, //история: нужно поговорить с Роджерсом
+      "history": [ 4 ],
+      "evidences": [],
+      "info": [],
+      "dialog_variant_play": 0,
+      "dialog_open": []
+    },
+    {
+      "effectID": 28, //история: поговорил с Мари
+      "history": [ 5 ],
+      "evidences": [],
+      "info": [],
+      "dialog_variant_play": 0,
+      "dialog_open": []
+    },
+    {
+      "effectID": 29, //история: поговорила с Роджерсом
+      "history": [ 6, 2 ],
       "evidences": [],
       "info": [],
       "dialog_variant_play": 0,

@@ -57,7 +57,7 @@
         ]
       ],
       "changes": [        [],        []      ],
-      "effects": [25, 0],
+      "effects": [25, 27],
       "clickedEffect": [ [], []]
     },
     {
@@ -77,10 +77,10 @@
         [ "Уоррен", "player", "Уоррен", "player", "Уоррен", "player", "Уоррен", "Уоррен" ], //11
         [ "Уоррен" ], //12
         [ "player", "Уоррен", "player", "Уоррен", "player", "Уоррен", "player" ], //13
-        [ "player", "Уоррен", "player", "Уоррен" ], //14
+        [ "player", "Уоррен", "Уоррен", "player" ], //14
         [ "Уоррен" ], //15
         [ "player", "Уоррен", "Уоррен", "player", "Уоррен", "Уоррен" ], //16
-        [ "player", "Уоррен", "player", "Уоррен" ], //17
+        [ "player", "Уоррен", "Уоррен", "player" ], //17
         [ "Уоррен" ], //18
         [ "Уоррен", "player", "player", "Уоррен", "player", "Уоррен", "player", "Уоррен", "player"], //19
         [ "Уоррен" ] //20
@@ -658,15 +658,15 @@
         [
           {
             "ID": 15,
-            "firstPlayerActs": [ 0, 0 ],
-            "secPlayerActs": [ 2, 0 ]
+            "firstPlayerActs": [ -1, -1 ],
+            "secPlayerActs": [ 2, -1 ]
           }
         ],
         [
           {
             "ID": 15,
-            "firstPlayerActs": [ 0, 0 ],
-            "secPlayerActs": [ 1, 0 ]
+            "firstPlayerActs": [ -1, -1],
+            "secPlayerActs": [ 1, -1 ]
           }
         ]
       ],

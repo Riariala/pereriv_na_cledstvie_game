@@ -172,6 +172,7 @@ public class DialogSaver : ScriptableObject
                             string name;
                             if (playerData.isPlayer1) { name = "Rogers"; } else { name = "Mary"; }
                             Debug.Log(" This game is over for " + name);
+                            playerData.isGameOver = true;
                             break;
 
                         case 2:
