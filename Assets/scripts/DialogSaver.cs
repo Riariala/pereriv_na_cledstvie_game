@@ -68,6 +68,9 @@ public class DialogSaver : ScriptableObject
             var dialogSaverEvnt = DialogSaverEvent.Create();
             dialogSaverEvnt.Data = JsonConvert.SerializeObject(change);
             dialogSaverEvnt.Send();
+            var clickDialog = ClickDialog.Create();
+            clickDialog.Click = true;
+            clickDialog.Send();
             isInitiator = true;
             actionsSaver.Rewrite(change.ID, change.firstPlayerActs, change.secPlayerActs);
             
@@ -81,6 +84,9 @@ public class DialogSaver : ScriptableObject
             var dialogSaverEvnt = DialogSaverEvent.Create();
             dialogSaverEvnt.Data = JsonConvert.SerializeObject(change);
             dialogSaverEvnt.Send();
+            var clickDialog = ClickDialog.Create();
+            clickDialog.Click = true;
+            clickDialog.Send();
             isInitiator = true;
             actionsSaver.Rewrite(change.ID, change.firstPlayerActs, change.secPlayerActs);
         }
