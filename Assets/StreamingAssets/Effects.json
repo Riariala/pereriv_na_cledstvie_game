@@ -63,7 +63,7 @@
       "dialog_open": []
     },
     {
-      "effectID": 4, //улика: Претупник имел доступ в музей
+      "effectID": 4, //улика: Преступник имел доступ в музей
       "history": [],
       "evidences": [
         {
@@ -210,7 +210,7 @@
       "info": [
         {
           "InfoId": 2,
-          "linesId": []
+          "linesId": [ 0 ]
         }
       ],
       "dialog_variant_play": 0,
@@ -223,11 +223,11 @@
       "info": [
         {
           "InfoId": 3,
-          "linesId": []
+          "linesId": [ 0 ]
         },
         {
           "InfoId": 6,
-          "linesId": []
+          "linesId": [ 0 ]
         }
       ],
       "dialog_variant_play": 0,
@@ -240,7 +240,7 @@
       "info": [
         {
           "InfoId": 3,
-          "linesId": []
+          "linesId": [ 1 ]
         }
       ],
       "dialog_variant_play": 0,
@@ -253,7 +253,7 @@
       "info": [
         {
           "InfoId": 6,
-          "linesId": []
+          "linesId": [ 0 ]
         }
       ],
       "dialog_variant_play": 0,
@@ -281,7 +281,12 @@
           "Status": 0
         }
       ],
-      "info": [],
+      "info": [
+        {
+          "InfoId": 3,
+          "linesId": [ 2 ]
+        }
+      ],
       "dialog_variant_play": 0,
       "dialog_open": []
     },
@@ -307,6 +312,22 @@
           "Status": 0
         }
       ],
+      "info": [],
+      "dialog_variant_play": 0,
+      "dialog_open": []
+    },
+    {
+      "effectID": 25, //история: нужен брифинг
+      "history": [ 0 ],
+      "evidences": [],
+      "info": [],
+      "dialog_variant_play": 0,
+      "dialog_open": []
+    },
+    {
+      "effectID": 26, //история: послушал брифинг
+      "history": [ 1, 2 ],
+      "evidences": [],
       "info": [],
       "dialog_variant_play": 0,
       "dialog_open": []

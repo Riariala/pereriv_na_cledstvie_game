@@ -197,6 +197,7 @@ MonoBehaviour:
   _rb: {fileID: 3175694714790981355}
   playerCamera: {fileID: 1648438642274290265}
   _joystick: {fileID: 0}
+  speed: 0.1
   playerCameraScript: {fileID: 6921168245716905036}
 --- !u!114 &6921168245716905036
 MonoBehaviour:

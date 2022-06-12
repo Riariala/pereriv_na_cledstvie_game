@@ -140,7 +140,7 @@ public class DialogPlayer : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBeha
         {
             dialogCount = 0;
             dialogPanel.SetActive(false);
-            dialogSaver.ReplaceActionSaver(ObjectId, dialogId);
+            dialogSaver.ReplaceActionSaver(ObjectId, dialogId); // рср CHANGES
             dialogSaver.playerData.isBusy = false;
             
             playEffect(dialogSaver.takeEffectId(ObjectId, dialogId));

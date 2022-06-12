@@ -88,7 +88,7 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
                         Vector3 pos = touch.position;
                         Ray ray = Camera.main.ScreenPointToRay(pos);
                         RaycastHit hit;
-                        if (Physics.Raycast(ray, out hit))
+                        if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1, QueryTriggerInteraction.Ignore))
                         {
                             if (hit.collider.CompareTag("Item") || hit.collider.CompareTag("NPC"))
                             {
