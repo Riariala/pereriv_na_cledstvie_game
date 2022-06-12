@@ -34,4 +34,6 @@ public class NetworkCamera : Photon.Bolt.EntityBehaviour<ICustomPlayer>
         }
 
     }
+
+
 }

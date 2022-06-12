@@ -7,7 +7,7 @@ using Photon.Bolt;
 using Photon.Bolt.Matchmaking;
 using Photon.Bolt.Utils;
 
-[BoltGlobalBehaviour(BoltNetworkModes.Client)]
+//[BoltGlobalBehaviour(BoltNetworkModes.Client)]
 public class ServerCallbacks : Photon.Bolt.GlobalEventListener
 {
     /*public NetworkCallbacks callbacks;
@@ -31,8 +31,17 @@ public class ServerCallbacks : Photon.Bolt.GlobalEventListener
         ask.Ask = true;
         ask.Send();*/
     }
+    public override void BoltShutdownBegin(AddCallback registerDoneCallback, UdpConnectionDisconnectReason disconnectReason)
+    {
+        SceneManager.LoadScene("MainMenu");
+        /*registerDoneCallback(() =>
+        {
+            Invoke("StartBoltServer", 0.5f);
+        });*/
+    }
 
-    public override void ConnectFailed(UdpKit.UdpEndPoint endpoint, Photon.Bolt.IProtocolToken token)
+
+   /* public override void ConnectFailed(UdpKit.UdpEndPoint endpoint, Photon.Bolt.IProtocolToken token)
     {
         base.ConnectFailed(endpoint, token);
         Debug.Log("Он ушёл. Не жди.");
@@ -40,11 +49,10 @@ public class ServerCallbacks : Photon.Bolt.GlobalEventListener
     }
     public override void Disconnected(BoltConnection connection)
     {
-        base.Disconnected(connection);
-
-        BoltLauncher.Shutdown();
-        Application.LoadLevel("MainMenu");
-        Debug.Log("Он ушёл. Не жди.");
+        if (BoltNetwork.Server.Equals(connection))
+        {
+            BoltLog.Warn("Disconnected from the server");
+        }
     }
     void sendResult(bool success)
     {
@@ -53,5 +61,9 @@ public class ServerCallbacks : Photon.Bolt.GlobalEventListener
             OnConnectResult.Invoke(success);
             OnConnectResult = null;
         }
-    }
+    }*/
+
+
+
+
 }
