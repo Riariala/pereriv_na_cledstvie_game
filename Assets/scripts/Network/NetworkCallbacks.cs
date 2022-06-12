@@ -14,6 +14,7 @@ public class NetworkCallbacks : GlobalEventListener
     public bool click;
     public bool next;
     public bool ask;
+    public bool clickDialog;
     public int dialogId;
     public string dialogSaverData;
     public string actionsSaver;
@@ -112,6 +113,11 @@ public class NetworkCallbacks : GlobalEventListener
     public override void OnEvent(DialogSaverEvent evnt)
     {
         dialogSaverData = evnt.Data;
+    }
+
+    public override void OnEvent(ClickDialog evnt)
+    {
+        clickDialog = evnt.Click;
     }
     /*public override void SceneLoadLocalDone(string map)
     {
