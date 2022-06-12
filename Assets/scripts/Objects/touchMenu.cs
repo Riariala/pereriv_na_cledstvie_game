@@ -88,7 +88,9 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
                         Vector3 pos = touch.position;
                         Ray ray = Camera.main.ScreenPointToRay(pos);
                         RaycastHit hit;
-                        if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1, QueryTriggerInteraction.Ignore))
+                        int layerMask = 1 << 5;
+                        layerMask = ~layerMask;
+                        if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask, QueryTriggerInteraction.Ignore))
                         {
                             if (hit.collider.CompareTag("Item") || hit.collider.CompareTag("NPC"))
                             {
@@ -164,8 +166,11 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
                 Vector3 pos = Input.mousePosition;
                 Ray ray = Camera.main.ScreenPointToRay(pos);
                 RaycastHit hit;
-                if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1, QueryTriggerInteraction.Ignore))
+                int layerMask = 1 << 5;
+                layerMask = ~layerMask;
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask, QueryTriggerInteraction.Ignore))
                 {
+                    Debug.Log("Player tagged by name " + hit.collider.gameObject.name);
 
                     if (hit.collider.CompareTag("Item") || hit.collider.CompareTag("NPC"))
                     {
@@ -193,6 +198,7 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
                     }
                     else if (hit.collider.CompareTag("Player"))
                     {
+                        Debug.Log("Player tagged by name " + hit.collider.gameObject.name);
                         bool isfirst = hit.collider.gameObject.name == "Rogers";
                         if (dialogPlayer.dialogSaver.playerData.isPlayer1 != isfirst) 
                         {
@@ -200,7 +206,7 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
                             var click = ClickOnPlayer.Create();
                             click.Click = true;
                             click.Send();
-                            Debug.Log(callbacks.isBusy);
+                            Debug.Log("callbacks.isBusy in touchMenu " + callbacks.isBusy.ToString());
                         }
                         else { Debug.Log("Нельзя разговаривать самим с собой!"); }
                     }
