@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8462098747042230467}
   - component: {fileID: 4424802428861710240}
+  - component: {fileID: 3188897518809385520}
   - component: {fileID: 7484949192540573060}
   m_Layer: 0
   m_Name: Bust
@@ -44,8 +45,22 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.58, y: 1.42, z: 0.57}
-  m_Center: {x: 0.111, y: 0.68, z: -0.345}
+  m_Size: {x: 0.58, y: 0.72, z: 0.57}
+  m_Center: {x: 0.111, y: 0.34, z: -0.345}
+--- !u!136 &3188897518809385520
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1375905806276978936}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.2
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0.111, y: 0.83, z: -0.345}
 --- !u!114 &7484949192540573060
 MonoBehaviour:
   m_ObjectHideFlags: 0

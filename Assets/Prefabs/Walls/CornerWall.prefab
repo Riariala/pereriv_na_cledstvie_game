@@ -57,7 +57,7 @@ Transform:
   m_GameObject: {fileID: 3422733449674756485}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 14.1, y: 0, z: -13.2300005}
-  m_LocalScale: {x: 1, y: 1, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2951340503960536676}
   - {fileID: 2951340504270596360}
@@ -300,6 +300,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1151388028547126963, guid: a51e06a4bab842b4ca864cc19a3f81b2,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.02
       objectReference: {fileID: 0}
     - target: {fileID: 8164078558771037576, guid: a51e06a4bab842b4ca864cc19a3f81b2,
         type: 3}
