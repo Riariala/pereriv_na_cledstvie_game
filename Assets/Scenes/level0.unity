@@ -14199,6 +14199,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Worren
       objectReference: {fileID: 0}
+    - target: {fileID: 3960576682239124286, guid: 96df582d4dc90f645b1299fe87ad65ea,
+        type: 3}
+      propertyPath: m_TagString
+      value: NPC
+      objectReference: {fileID: 0}
     - target: {fileID: 4448741894251264388, guid: 96df582d4dc90f645b1299fe87ad65ea,
         type: 3}
       propertyPath: m_RootOrder
