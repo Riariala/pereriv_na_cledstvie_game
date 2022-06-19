@@ -7,8 +7,6 @@ public class NetworkCamera : Photon.Bolt.EntityBehaviour<ICustomPlayer>
 {
     public GameObject playerCamera;
     public GameObject player;
-    //public Vector3 centerArea = new Vector3(4.39f, 7.78f, -0.46f);
-
     private Transform cameraTransform;
     private Transform playerTransform;
     public float cameraYPos = 13.75f;
@@ -32,8 +30,5 @@ public class NetworkCamera : Photon.Bolt.EntityBehaviour<ICustomPlayer>
                 cameraZPos + camZmodif * playerTransform.position.z);
             cameraTransform.LookAt(playerTransform.position + Vector3.up);
         }
-
     }
-
-
 }

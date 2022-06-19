@@ -24,40 +24,18 @@ public class NetworkCallbacks : GlobalEventListener
     public ActionsSaver actions;
     public JournalInfo journal;
 
-    /*public override void BoltStartBegin()
-    {
-        BoltNetwork.RegisterTokenClass<CharToken>();
-
-    }*/
-
     public override void SceneLoadLocalDone(string scene, IProtocolToken token)
     {
-        /*data.SetCharacter(true);
-        Debug.Log(data);
-        if (BoltNetwork.IsServer)
-        {
-            Debug.Log("сервер");
-            handler.SetValueChar();
-        }
-        
-        Debug.Log(reader.isPlayer1);
-        Debug.Log("варенец");
-
-        isPlayer1 = data.isPlayer1;
-        Debug.Log(data.isPlayer1);*/
         if (BoltNetwork.IsClient)
         {
-            Debug.Log("Client");
             isPlayer1 = !isPlayer1;
             actions.setDefault();
             journal.clearAll();
         }
-        Debug.Log("data.isPlayer1 before " + data.isPlayer1.ToString());
         data.isPlayer1 = isPlayer1;
         data.isBusy = false;
         data.isGameJustStarted = true;
         data.isGameOver = false;
-        Debug.Log("data.isPlayer1 after " + data.isPlayer1.ToString());
         Vector3 spawnPos;
         if (isPlayer1)
         {
@@ -67,7 +45,6 @@ public class NetworkCallbacks : GlobalEventListener
             player.name = "Rogers";
             PlayerController player_script = player.GetComponent<PlayerController>();
             player_script.ChangeJoystick(_joystick);
-            Debug.Log("Player 1 " + player.name);
         }
         else
         {
@@ -76,7 +53,6 @@ public class NetworkCallbacks : GlobalEventListener
             player.name = "Mary";
             PlayerController player_script = player.GetComponent<PlayerController>();
             player_script.ChangeJoystick(_joystick);
-            Debug.Log("Player 2  " + player.name);
         }
         if (BoltNetwork.IsClient)
         {
@@ -84,14 +60,11 @@ public class NetworkCallbacks : GlobalEventListener
             askHost.Ask = true;
             askHost.Send();
         }
-
     }
 
     public override void OnEvent(PlayerCharacter evnt)
     {
         isPlayer1=evnt.IsPlayer1;
-        //data.isPlayer1 = isPlayer1;
-        //Debug.Log(isPlayer1);
     }
 
     public override void OnEvent(IsBusy evnt)
@@ -137,9 +110,4 @@ public class NetworkCallbacks : GlobalEventListener
     {
         isOverAns = evnt.IsOverAns;
     }
-    /*public override void SceneLoadLocalDone(string map)
-    {
-        SpawnServerPlayer();
-    }*/
-
 }

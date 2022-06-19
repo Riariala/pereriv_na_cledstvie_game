@@ -12,7 +12,6 @@ using Photon.Bolt.Utils;
 
 public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehaviour
 {
-
     [SerializeField] public GameObject menu_obj_touch;
     [SerializeField] public Transform parent;
     public DialogPlayer dialogPlayer;
@@ -31,7 +30,7 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
     private void Awake()
     {
         _config = BoltRuntimeSettings.instance.GetConfigCopy();
-        _config.serverConnectionLimit = 32; // Set here the max number of clients
+        _config.serverConnectionLimit = 2; 
     }
 
     void Start()
@@ -45,7 +44,6 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
         {
             if (!isInitiator)
             {
-
                 callbacks.click = false;
                 var busy = IsBusy.Create();
                 busy.Busy = callbacks.data.isBusy;
@@ -53,9 +51,7 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
                 if (!busy.Busy)
                 {
                     dialogPlayer.beginPlayersDialog(dialogPlayer.dialogSaver.playerData.dialogId);
-                    Debug.Log("Я ответил второму игроку.");
                 }
-                Debug.Log("Я занят? - " + busy.Busy.ToString());
             }
         }
         if (callbacks.isBusyAnswered)
@@ -65,11 +61,10 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
             {
                 callbacks.click = false;
                 isInitiator = false;
-                Debug.Log("Я не занят. Могу говорить.");
                 dialogPlayer.beginPlayersDialog(dialogPlayer.dialogSaver.playerData.dialogId);
             }
         }
-        
+
 
 #if UNITY_ANDROID && !UNITY_EDITOR
         forAndroid();
@@ -103,6 +98,7 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
                             if (hit.collider.CompareTag("Item") || hit.collider.CompareTag("NPC"))
                             {
                                 touched_item = hit.collider.gameObject;
+
                                 List<bool> enable_actionsl = new List<bool>(touched_item.GetComponent<ObjectManager>().enable_actions);
                                 int count_actions = enable_actionsl.Count(x => x == true);
                                 if (count_actions > 0)
@@ -183,7 +179,7 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
                     if (hit.collider.CompareTag("Item") || hit.collider.CompareTag("NPC"))
                     {
                         touched_item = hit.collider.gameObject;
-                        
+
                         List<bool> enable_actionsl = new List<bool>(touched_item.GetComponent<ObjectManager>().enable_actions);
                         int count_actions = enable_actionsl.Count(x => x == true);
                         if (count_actions > 0)
@@ -208,7 +204,7 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
                     {
                         Debug.Log("Player Tagged name " + hit.collider.gameObject.name);
                         bool isfirst = hit.collider.gameObject.name == "Rogers";
-                        if (dialogPlayer.dialogSaver.playerData.isPlayer1 != isfirst) 
+                        if (dialogPlayer.dialogSaver.playerData.isPlayer1 != isfirst)
                         {
                             Debug.Log("Sended click");
                             isInitiator = true;

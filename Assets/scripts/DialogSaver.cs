@@ -97,7 +97,6 @@ public class DialogSaver : ScriptableObject
     {
         int effectID = objects[objID].effects[dialogID];
         return effectID;
-        //if (effectID != 0) { effectProceess(effectID); }
     }
 
     public void clickedEffectFind(int objID, int dialogID, int lineID)
@@ -111,7 +110,6 @@ public class DialogSaver : ScriptableObject
                 break;
             }
         }
-        Debug.Log("clickedEffectFind " + objID.ToString() + " " + dialogID.ToString() + " " + lineID.ToString());
         if (effectID > -1)
         {
             effectProceess(effectID);
@@ -120,7 +118,6 @@ public class DialogSaver : ScriptableObject
 
     public void effectProceess(int effectID)
     {
-        Debug.Log("effectID" + effectID);
         Effectschanges effect = effectChangesSaver.takeEffect(effectID);
         if (effect.history.Count != 0) { journalInfo.addHistory(effect.history); }
         if (effect.evidences.Count != 0)
@@ -137,12 +134,10 @@ public class DialogSaver : ScriptableObject
                 journalInfo.addToPersonInfo(inf.InfoId, inf.linesId);
             }
         }
-        Debug.Log(" effect.dialog_open.Count " + effect.dialog_open.Count.ToString());
         if (effect.dialog_open.Count != 0)
         {
             foreach (OpenedDialogs opndia in effect.dialog_open)
             {
-                Debug.Log(" opndia: " + opndia.dialogId.ToString() + " " + opndia.variantId.ToString() + " " + opndia.newMeaning.ToString());
                 dialogVariantsSaver.changeAvailable(opndia.dialogId, opndia.variantId, opndia.newMeaning);
             }
         }
@@ -156,10 +151,8 @@ public class DialogSaver : ScriptableObject
         }
         int effectID = dialogVariantsSaver.variants[diavarID].effects[variantIndex];
         effectProceess(effectID);
-
         if (dialogVariantsSaver.variants[diavarID].specailActions.Count > 0)
         {
-        
             foreach (List<int> special in dialogVariantsSaver.variants[diavarID].specailActions)
             {
                 if (special[0] == variantIndex)
@@ -168,14 +161,9 @@ public class DialogSaver : ScriptableObject
                     {
                         case 0:
                             IsdialogOver = true;
-                            Debug.Log(" IsdialogOver " + IsdialogOver);
                             break;
                         case 1:
-                            //string name;
-                            //if (playerData.isPlayer1) { name = "Rogers"; } else { name = "Mary"; }
-                            //Debug.Log(" This game is over for " + name);
                             isGameOverloc = true;
-                            //playerData.isGameOver = true;
                             break;
 
                         case 2:
@@ -183,14 +171,10 @@ public class DialogSaver : ScriptableObject
                     }
                 }
             }
-            if (IsdialogOver)
-            {
-                playerData.isGameOver = isGameOverloc;
-            }
+            if (IsdialogOver) { playerData.isGameOver = isGameOverloc; }
         }
 
     }
-
 
     public List<string> AskDialog(int ObjectID, int dialogId)
     {
