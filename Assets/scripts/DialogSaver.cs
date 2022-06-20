@@ -33,9 +33,9 @@ public class DialogSaver : ScriptableObject
         objects = readFromJSON();
         effectChangesSaver.setDefault();
         dialogVariantsSaver.setDefault();
-        journalInfo.newInHistory = 0;
-        journalInfo.newInEvid = new List<int>();
-        journalInfo.newInInfo = new List<int>();
+        journalInfo.newInHistory = new List<int>();
+        journalInfo.newInEvid = new List<List<int>>();
+        journalInfo.newInInfo = new List<List<int>>();
         isGameOverloc = false;
     }
 
@@ -66,15 +66,18 @@ public class DialogSaver : ScriptableObject
     {
         foreach (ObjectActions change in objects[ObjectID].changes[ActionID])
         {
-            var dialogSaverEvnt = DialogSaverEvent.Create();
-            dialogSaverEvnt.Data = JsonConvert.SerializeObject(change);
-            dialogSaverEvnt.Send();
-            var clickDialog = ClickDialog.Create();
-            clickDialog.Click = true;
-            clickDialog.Send();
-            isInitiator = true;
+            if (playerData.gametype != 0)
+            {
+                var dialogSaverEvnt = DialogSaverEvent.Create();
+                dialogSaverEvnt.Data = JsonConvert.SerializeObject(change);
+                dialogSaverEvnt.Send();
+                var clickDialog = ClickDialog.Create();
+                clickDialog.Click = true;
+                clickDialog.Send();
+
+                isInitiator = true;
+            }
             actionsSaver.Rewrite(change.ID, change.firstPlayerActs, change.secPlayerActs);
-            
         }
     }
 
@@ -82,13 +85,16 @@ public class DialogSaver : ScriptableObject
     {
         foreach (ObjectActions change in newActions)
         {
-            var dialogSaverEvnt = DialogSaverEvent.Create();
-            dialogSaverEvnt.Data = JsonConvert.SerializeObject(change);
-            dialogSaverEvnt.Send();
-            var clickDialog = ClickDialog.Create();
-            clickDialog.Click = true;
-            clickDialog.Send();
-            isInitiator = true;
+            if (playerData.gametype != 0)
+            {
+                var dialogSaverEvnt = DialogSaverEvent.Create();
+                dialogSaverEvnt.Data = JsonConvert.SerializeObject(change);
+                dialogSaverEvnt.Send();
+                var clickDialog = ClickDialog.Create();
+                clickDialog.Click = true;
+                clickDialog.Send();
+                isInitiator = true;
+            }
             actionsSaver.Rewrite(change.ID, change.firstPlayerActs, change.secPlayerActs);
         }
     }
@@ -171,7 +177,12 @@ public class DialogSaver : ScriptableObject
                     }
                 }
             }
-            if (IsdialogOver) { playerData.isGameOver = isGameOverloc; }
+            int ind;
+            if (playerData.isPlayer1) { ind = 0; } else { ind = 1; }
+            if (IsdialogOver) 
+            { 
+                playerData.isGameOver[ind] = isGameOverloc; 
+            }
         }
 
     }

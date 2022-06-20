@@ -1,6 +1,9 @@
+
+using System.Collections.Generic;
 using UnityEngine;
 using UdpKit.Platform.Photon;
 using Photon.Bolt;
+using System.Linq;
 
 [BoltGlobalBehaviour]
 public class NetworkCallbacks : GlobalEventListener
@@ -34,8 +37,14 @@ public class NetworkCallbacks : GlobalEventListener
         }
         data.isPlayer1 = isPlayer1;
         data.isBusy = false;
-        data.isGameJustStarted = true;
-        data.isGameOver = false;
+        data.isGameJustStarted = new List<bool>();
+        data.isGameJustStarted.Add(true);
+        data.isGameJustStarted.Add(true);
+        //data.isGameJustStarted = true;
+        //data.isGameOver = false;
+        data.isGameOver = new List<bool>();
+        data.isGameOver.Add(false);
+        data.isGameOver.Add(false);
         Vector3 spawnPos;
         if (isPlayer1)
         {
