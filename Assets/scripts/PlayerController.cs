@@ -15,7 +15,7 @@ public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>
     public Rigidbody _rb;
     public GameObject playerCamera;
     private Transform _transform;
-    [SerializeField] private FixedJoystick _joystick;
+    [SerializeField] public FixedJoystick _joystick;
     private Collider _collider;
     private Vector3 closest_point;
     private Vector3 change_pos;
