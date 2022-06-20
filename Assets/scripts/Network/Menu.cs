@@ -23,6 +23,7 @@ public class Menu : GlobalEventListener
     public InputField inputCode;
     public string matchName;
     private BoltConfig _config;
+    public GameObject refresh_btn;
 
     private void Awake()
     {
@@ -83,13 +84,18 @@ public class Menu : GlobalEventListener
             
     }
 
+    public void RefreshSessionList()
+    {
+        StartClient();
+        refresh_btn.SetActive(false);
+    }
+
     public void StartClient()
     {
         if (BoltNetwork.IsServer)
         {
             BoltLauncher.Shutdown(); 
         }
-
         BoltLauncher.StartClient(_config);
     }
 

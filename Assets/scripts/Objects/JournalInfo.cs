@@ -6,59 +6,88 @@ using System.Linq;
 [CreateAssetMenu(fileName = "JournalInfo", menuName = "JournalInfo", order = 51)]
 public class JournalInfo : ScriptableObject
 {
-    public List<int> playerHistoryID;
-    public List<Evidences> playerEvidencesID;
-    public List<InfoDeteiledID> playerInfoID;
+    public List<List<int>> playerHistoryID; //0 - isPlayer
+    public List<List<Evidences>> playerEvidencesID;
+    public List<List<InfoDeteiledID>> playerInfoID;
 
-    public List<int> evidListShift; //(x,y)
+    public List<List<int>> evidListShift; //(x,y)
 
-    public int newInHistory;
-    public List<int> newInEvid;
-    public List<int> newInInfo;
+    public List<int> newInHistory;
+    public List<List<int>> newInEvid;
+    public List<List<int>>  newInInfo;
+    public PlayerData playerData;
 
     public void clearAll()
     {
-        playerHistoryID = new List<int>();
-        playerEvidencesID = new List<Evidences>();
-        playerInfoID = new List<InfoDeteiledID>();
+        playerHistoryID = new List<List<int>>();
+        playerHistoryID.Add(new List<int>());
+        playerHistoryID.Add(new List<int>());
+        playerEvidencesID = new List<List<Evidences>>();
+        playerEvidencesID.Add(new List<Evidences>());
+        playerEvidencesID.Add(new List<Evidences>());
+        playerInfoID = new List<List<InfoDeteiledID>>();
+        playerInfoID.Add(new List<InfoDeteiledID>());
+        playerInfoID.Add(new List<InfoDeteiledID>());
+
+        newInHistory = new List<int>();
+        newInHistory.Add(0);
+        newInHistory.Add(0);
+
+        newInEvid = new List<List<int>>();
+        newInEvid.Add(new List<int>());
+        newInEvid.Add(new List<int>());
+
+        newInInfo = new List<List<int>>();
+        newInInfo.Add(new List<int>());
+        newInInfo.Add(new List<int>());
     }
 
     public void addHistory(List<int> newid)
     {
+        int ind;
+        if (playerData.isPlayer1) { ind = 0; } else { ind = 1; }
         foreach (int id in newid)
         {
-            if (!playerHistoryID.Contains(id))
+            if (!playerHistoryID[ind].Contains(id))
             {
-                playerHistoryID.Add(id);
-                newInHistory++;
+                playerHistoryID[ind].Add(id);
+                newInHistory[ind]++;
             }
         }
     }
 
     public void addHistory(int newid)
     {
-        if (!playerHistoryID.Contains(newid))
+        int ind;
+        if (playerData.isPlayer1) { ind = 0; } else { ind = 1; }
+        if (!playerHistoryID[ind].Contains(newid))
         {
-            playerHistoryID.Add(newid);
-            newInHistory++;
+            playerHistoryID[ind].Add(newid);
+            newInHistory[ind]++;
         }
     }
 
     public void newInfoPerson(int personInfoId)
     {
-        playerInfoID.Add(new InfoDeteiledID(personInfoId));
-        if (!newInInfo.Contains(personInfoId)) { newInInfo.Add(personInfoId); }
+        int ind;
+        if (playerData.isPlayer1) { ind = 0; } else { ind = 1; }
+        playerInfoID[ind].Add(new InfoDeteiledID(personInfoId));
+        if (!newInInfo[ind].Contains(personInfoId)) { newInInfo[ind].Add(personInfoId); }
     }
 
     public void newInfoPerson(int personInfoId, List<int> newlines)
     {
-        playerInfoID.Add(new InfoDeteiledID(personInfoId, newlines));
-        if (!newInInfo.Contains(personInfoId)) { newInInfo.Add(personInfoId); }
+        int ind;
+        if (playerData.isPlayer1) { ind = 0; } else { ind = 1; }
+        playerInfoID[ind].Add(new InfoDeteiledID(personInfoId, newlines));
+        if (!newInInfo[ind].Contains(personInfoId)) { newInInfo[ind].Add(personInfoId); }
     }
 
     public void addToPersonInfo(int personInfoId, List<int> newLines)
     {
-        foreach (InfoDeteiledID personInfo in playerInfoID)
+        int ind;
+        if (playerData.isPlayer1) { ind = 0; } else { ind = 1; }
+        foreach (InfoDeteiledID personInfo in playerInfoID[ind])
         {
             if (personInfo.InfoId == personInfoId)
             {
@@ -67,7 +96,7 @@ public class JournalInfo : ScriptableObject
                     if (!personInfo.linesId.Contains(lineid))
                     {
 
-                        if (!newInInfo.Contains(personInfoId)) { newInInfo.Add(personInfoId); }
+                        if (!newInInfo[ind].Contains(personInfoId)) { newInInfo[ind].Add(personInfoId); }
                         personInfo.addLinesTo(newLines);
                     }
                 }
@@ -80,29 +109,35 @@ public class JournalInfo : ScriptableObject
 
     public void addEvidence(int newid, int newStatus)
     {
-        playerEvidencesID.Add(new Evidences(newid, newStatus));
-        newInEvid.Add(newid);
+        int ind;
+        if (playerData.isPlayer1) { ind = 0; } else { ind = 1; }
+        playerEvidencesID[ind].Add(new Evidences(newid, newStatus));
+        newInEvid[ind].Add(newid);
     }
 
     public void addEvidence(List<int> newid)
     {
+        int ind;
+        if (playerData.isPlayer1) { ind = 0; } else { ind = 1; }
         foreach (int id in newid)
         {
-            playerEvidencesID.Add(new Evidences(id, 0));
-            newInEvid.Add(id);
+            playerEvidencesID[ind].Add(new Evidences(id, 0));
+            newInEvid[ind].Add(id);
         }
     }
 
     public void changeEvidenceStatus(int evidID, int newStatus)
     {
-        foreach (Evidences evidence in playerEvidencesID)
+        int ind;
+        if (playerData.isPlayer1) { ind = 0; } else { ind = 1; }
+        foreach (Evidences evidence in playerEvidencesID[ind])
         {
             if (evidence.evidenceID == evidID)
             {
                 if (evidence.status != newStatus)
                 {
                     evidence.status = newStatus;
-                    newInEvid.Add(evidID);
+                    newInEvid[ind].Add(evidID);
                 }
                 return;
             }

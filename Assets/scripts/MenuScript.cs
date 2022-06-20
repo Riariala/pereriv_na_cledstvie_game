@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UdpKit;
+using UdpKit.Platform.Photon;
+using Photon.Bolt;
+using Photon.Bolt.Matchmaking;
+using Photon.Bolt.Utils;
 
 public class MenuScript : MonoBehaviour
 {
@@ -19,6 +24,7 @@ public class MenuScript : MonoBehaviour
     public PlayerData playerData;
     public JournalInfo journalInfo;
     public PlayersDialogiesSaver playersDialogiesSaver;
+    public GameObject refresh_btn;
 
     public Menu NetworkMenu;
 
@@ -97,6 +103,7 @@ public class MenuScript : MonoBehaviour
     public void goToFourthMenu(GameObject prev_menu)
     {
         StartCoroutine(changing_menu(prev_menu, fourth_menu));
+        refresh_btn.SetActive(true);
     }
 
     public void goToStorehMenu(GameObject prev_menu)
@@ -117,10 +124,24 @@ public class MenuScript : MonoBehaviour
     {
         if (!isCoworker)
         {
-            NetworkMenu.StartServer();
+            if (_isUnknowns) 
+            { 
+                playerData.gametype = 3;
+                NetworkMenu.StartServer();
+            } 
+            else 
+            {    
+                playerData.gametype = 0;
+                if (BoltNetwork.IsClient)
+                {
+                    BoltLauncher.Shutdown();
+                }
+                SceneManager.LoadScene("level0");
+            }
         }
         else 
         {
+            if (_isUnknowns) { playerData.gametype = 2; } else { playerData.gametype = 1; }
             new_game_modal.SetActive(true);
             foreach (Transform child in fourth_menu.GetComponentsInChildren<Transform>())
             {
