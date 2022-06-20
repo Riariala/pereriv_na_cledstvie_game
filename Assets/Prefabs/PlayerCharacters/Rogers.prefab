@@ -116,7 +116,7 @@ MonoBehaviour:
   _rb: {fileID: 3295938696965934072}
   playerCamera: {fileID: 1679769518368665418}
   _joystick: {fileID: 0}
-  speed: 4
+  speed: 4.5
   playerCameraScript: {fileID: 7035535853636454751}
   playerData: {fileID: 11400000, guid: 2336fb71654d97d4b9c3e67c350c186e, type: 2}
 --- !u!114 &7035535853636454751
