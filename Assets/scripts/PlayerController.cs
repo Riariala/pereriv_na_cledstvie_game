@@ -24,6 +24,8 @@ public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>
     public NetworkCamera playerCameraScript;
     public PlayerData playerData;
 
+    public bool isStilMoving;
+
 
     public override void Attached()
     {
@@ -32,6 +34,9 @@ public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>
         state.SetTransforms(state.PlayerTransform, transform);
         playerCamera_transf = playerCamera.transform;
         _transform = transform;
+        state.SetAnimator(GetComponent<Animator>());
+
+        state.Animator.applyRootMotion = entity.IsOwner;
     }
 
     void Start()
@@ -68,6 +73,26 @@ public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>
         }
     }
 
+    private void Update()
+    {
+        if (state.isMoving)
+        {
+            if (!isStilMoving)
+            {
+                state.Animator.Play("Walk");
+                state.Animator.SetInteger("State", 1);
+                GetComponent<Animator>().SetInteger("State", 1);
+                isStilMoving = true;
+            }
+            
+        }
+        else
+        { state.Animator.Play("Neutral"); 
+            state.Animator.SetInteger("State", 0);
+            GetComponent<Animator>().SetInteger("State", 0);
+            isStilMoving = false; }
+    }
+
     public override void SimulateOwner()
     {
         if (!(_joystick is null))
@@ -89,10 +114,14 @@ public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>
                 float gip = Mathf.Sqrt((float)Math.Pow(_joystick.Horizontal,2) + (float)Math.Pow(_joystick.Vertical, 2));
                 float rot = Mathf.Atan2(_joystick.Horizontal / gip,  _joystick.Vertical / gip) * Mathf.Rad2Deg;
                 _transform.rotation = Quaternion.Euler(_transform.eulerAngles.x, rot + Camera.main.transform.eulerAngles.y, _transform.eulerAngles.z);
-
-                
+                state.isMoving = true;
+                //state.Animator.SetInteger("State", 1);
             }
-            else { _rb.velocity = new Vector3(0, 0, 0); }
+            else {
+                state.isMoving = false;
+                _rb.velocity = new Vector3(0, 0, 0);
+                //state.Animator.SetInteger("State", 0);
+            }
         }
     }
 

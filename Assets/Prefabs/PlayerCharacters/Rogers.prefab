@@ -119,6 +119,7 @@ MonoBehaviour:
   speed: 4.5
   playerCameraScript: {fileID: 7035535853636454751}
   playerData: {fileID: 11400000, guid: 2336fb71654d97d4b9c3e67c350c186e, type: 2}
+  isStilMoving: 0
 --- !u!114 &7035535853636454751
 MonoBehaviour:
   m_ObjectHideFlags: 0

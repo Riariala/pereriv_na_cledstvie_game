@@ -47,7 +47,6 @@ public class Menu : GlobalEventListener
         playerData.gameCode = matchName;
         roomCode.text = matchName;
         BoltLauncher.StartServer(_config);
-       
     }
 
     public override void BoltStartDone()
@@ -117,7 +116,7 @@ public class Menu : GlobalEventListener
                 joinClone.gameObject.SetActive(true);
                 //joinClone.onClick.AddListener(() => JoinGame(photonSession));
                 joinClone.onClick.AddListener(() => BoltMatchmaking.JoinSession(photonSession));
-
+                joinClone.onClick.AddListener(() => menuscript.OpenLoadingMenu());
                 joinServerBtns.Add(joinClone);
             }
         }

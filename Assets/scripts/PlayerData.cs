@@ -12,7 +12,7 @@ public class PlayerData : ScriptableObject
     public List<bool> isGameOver; //0 - Роджерс (Player1)
     public List<bool> isGameJustStarted;
     public string gameCode;
-    public int gametype; //0 - одиночная, 1 - определенный напарник, 2 - незнакомый определенный напарник, 3 - случайный напарник
+    public int gametype; //0 - одиночная, 1 - определенный напарник, 2 - незнакомый определенный напарник, 3 - случайный напарник, 4 - клиент
 
     public void ChangeCharacter(GameObject newplayer)
     {

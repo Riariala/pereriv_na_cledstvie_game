@@ -46,12 +46,12 @@ public class changeCharacter : Photon.Bolt.EntityBehaviour<ICustomPlayer>
             Player2_script.ChangeJoystick(_jystick);
             player_data.SetObjectCharacter(Player2);
         }
-        if (player_data.gametype == 0 || player_data.gametype == 3)
+        if (player_data.gametype == 0)
         {
             changeCharBtn.SetActive(true);
             spawnCharsInSingle();
         }
-        else { changeCharBtn.SetActive(false); }
+        else {  changeCharBtn.SetActive(player_data.gametype == 3); }
     }
 
     public void Change_chars(){
@@ -61,8 +61,6 @@ public class changeCharacter : Photon.Bolt.EntityBehaviour<ICustomPlayer>
             var character = PlayerCharacter.Create();
             character.IsPlayer1 = player_data.isPlayer1;
             character.Send();
-
-
             if (player_data.isPlayer1)
             {
                 player_data.SetObjectCharacter(Player1);
@@ -118,5 +116,10 @@ public class changeCharacter : Photon.Bolt.EntityBehaviour<ICustomPlayer>
             RogersSingle.GetComponent<PlayerController>().deleteJoystick();
             RogersSingle.GetComponent<NetworkCamera>().cameraOut();
         }
+    }
+
+    public void cngCharBtnSet(bool newStat)
+    {
+        changeCharBtn.SetActive(newStat);
     }
 }
