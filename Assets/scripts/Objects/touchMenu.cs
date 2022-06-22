@@ -122,12 +122,20 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
                             else if (hit.collider.CompareTag("Player"))
                             {
                                 bool isfirst = hit.collider.gameObject.name == "Rogers";
-                                if (dialogPlayer.dialogSaver.playerData.isPlayer1 != isfirst) 
+                                if (dialogPlayer.dialogSaver.playerData.isPlayer1 != isfirst)
                                 {
-                                    var click = ClickOnPlayer.Create();
-                                    click.Click = true;
-                                    click.Send();
-                                    isInitiator = true;
+                                    if (dialogPlayer.dialogSaver.playerData.gametype != 0)
+                                    {
+                                        isInitiator = true;
+                                        var click = ClickOnPlayer.Create();
+                                        click.Click = true;
+                                        click.Send();
+                                    }
+                                    else { dialogPlayer.beginPlayersDialog(dialogPlayer.dialogSaver.playerData.dialogId); }
+                                }
+                                else
+                                {
+                                    Debug.Log("Нельзя разговаривать самим с собой!");
                                 }
                             }
                         }
@@ -202,18 +210,22 @@ public class touchMenu : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehavio
                     }
                     else if (hit.collider.CompareTag("Player"))
                     {
-                        Debug.Log("Player Tagged name " + hit.collider.gameObject.name);
                         bool isfirst = hit.collider.gameObject.name == "Rogers";
                         if (dialogPlayer.dialogSaver.playerData.isPlayer1 != isfirst)
                         {
-                            Debug.Log("Sended click");
-                            isInitiator = true;
-                            var click = ClickOnPlayer.Create();
-                            click.Click = true;
-                            click.Send();
-                            Debug.Log("callbacks.isBusy in touchMenu " + callbacks.isBusy.ToString());
+                            if (dialogPlayer.dialogSaver.playerData.gametype != 0)
+                            {
+                                isInitiator = true;
+                                var click = ClickOnPlayer.Create();
+                                click.Click = true;
+                                click.Send();
+                            }
+                            else { dialogPlayer.beginPlayersDialog(dialogPlayer.dialogSaver.playerData.dialogId);  }
                         }
-                        else { Debug.Log("Нельзя разговаривать самим с собой!"); }
+                        else
+                        {
+                            Debug.Log("Нельзя разговаривать самим с собой!");
+                        }
                     }
                 }
             }

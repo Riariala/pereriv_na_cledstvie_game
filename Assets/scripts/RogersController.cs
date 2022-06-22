@@ -23,13 +23,10 @@ public class RogersController : MonoBehaviour
         movement = controller.GetDesiredMovement();
         if (movement.sqrMagnitude > 0.2){
             _state = 1;
-            Debug.Log("Видит джойстик");
         }
         else{
             _state = 0;
-            Debug.Log("No Видит джойстик");
         }
-        Debug.Log(movement.sqrMagnitude);
         animator.SetInteger("State", _state);
     }
 

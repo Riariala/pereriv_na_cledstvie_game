@@ -1,6 +1,9 @@
+
+using System.Collections.Generic;
 using UnityEngine;
 using UdpKit.Platform.Photon;
 using Photon.Bolt;
+using System.Linq;
 
 [BoltGlobalBehaviour]
 public class NetworkCallbacks : GlobalEventListener
@@ -31,29 +34,43 @@ public class NetworkCallbacks : GlobalEventListener
             isPlayer1 = !isPlayer1;
             actions.setDefault();
             journal.clearAll();
+            data.gametype = 4;
         }
         data.isPlayer1 = isPlayer1;
         data.isBusy = false;
-        data.isGameJustStarted = true;
-        data.isGameOver = false;
+        data.isGameJustStarted = new List<bool>();
+        data.isGameJustStarted.Add(true);
+        data.isGameJustStarted.Add(true);
+        data.isGameOver = new List<bool>();
+        data.isGameOver.Add(false);
+        data.isGameOver.Add(false);
         Vector3 spawnPos;
-        if (isPlayer1)
-        {
-            data.dialogId = 0;
-            spawnPos = new Vector3(6f, 0, -9f);
-            var player = BoltNetwork.Instantiate(player1, spawnPos, Quaternion.identity);
-            player.name = "Rogers";
+        GameObject player;
+        //if (data.gametype != 3)
+        //{
+            if (isPlayer1)
+            {
+                data.dialogId = 0;
+                spawnPos = new Vector3(6f, 0, -9f);
+                player = BoltNetwork.Instantiate(player1, spawnPos, Quaternion.identity);
+                player.name = "Rogers";
+                //player.GetComponent<NetworkCamera>().cameraOn();
+                //PlayerController player_script = player.GetComponent<PlayerController>();
+                //player_script.ChangeJoystick(_joystick);
+            }
+            else
+            {
+                spawnPos = new Vector3(-1.5f, 0, 43f);
+                player = BoltNetwork.Instantiate(player2, spawnPos, Quaternion.identity);
+                player.name = "Mary";
+                //player.GetComponent<NetworkCamera>().cameraOn();
+                //PlayerController player_script = player.GetComponent<PlayerController>();
+                //player_script.ChangeJoystick(_joystick);
+            }
+            player.GetComponent<NetworkCamera>().cameraOn();
             PlayerController player_script = player.GetComponent<PlayerController>();
             player_script.ChangeJoystick(_joystick);
-        }
-        else
-        {
-            spawnPos = new Vector3(-1.5f, 0, 43f);
-            var player = BoltNetwork.Instantiate(player2, spawnPos, Quaternion.identity);
-            player.name = "Mary";
-            PlayerController player_script = player.GetComponent<PlayerController>();
-            player_script.ChangeJoystick(_joystick);
-        }
+        //}
         if (BoltNetwork.IsClient)
         {
             var askHost = AskForData.Create();

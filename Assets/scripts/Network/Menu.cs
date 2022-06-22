@@ -23,6 +23,7 @@ public class Menu : GlobalEventListener
     public InputField inputCode;
     public string matchName;
     private BoltConfig _config;
+    public GameObject refresh_btn;
 
     private void Awake()
     {
@@ -46,7 +47,6 @@ public class Menu : GlobalEventListener
         playerData.gameCode = matchName;
         roomCode.text = matchName;
         BoltLauncher.StartServer(_config);
-       
     }
 
     public override void BoltStartDone()
@@ -83,13 +83,18 @@ public class Menu : GlobalEventListener
             
     }
 
+    public void RefreshSessionList()
+    {
+        StartClient();
+        refresh_btn.SetActive(false);
+    }
+
     public void StartClient()
     {
         if (BoltNetwork.IsServer)
         {
             BoltLauncher.Shutdown(); 
         }
-
         BoltLauncher.StartClient(_config);
     }
 
@@ -111,7 +116,7 @@ public class Menu : GlobalEventListener
                 joinClone.gameObject.SetActive(true);
                 //joinClone.onClick.AddListener(() => JoinGame(photonSession));
                 joinClone.onClick.AddListener(() => BoltMatchmaking.JoinSession(photonSession));
-
+                joinClone.onClick.AddListener(() => menuscript.OpenLoadingMenu());
                 joinServerBtns.Add(joinClone);
             }
         }
