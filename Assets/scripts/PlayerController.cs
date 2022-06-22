@@ -15,13 +15,14 @@ public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>
     public Rigidbody _rb;
     public GameObject playerCamera;
     private Transform _transform;
-    [SerializeField] private FixedJoystick _joystick;
+    [SerializeField] public FixedJoystick _joystick;
     private Collider _collider;
     private Vector3 closest_point;
     private Vector3 change_pos;
     public float speed = 0.1f;
     private Transform playerCamera_transf;
     public NetworkCamera playerCameraScript;
+    public PlayerData playerData;
 
 
     public override void Attached()
@@ -31,6 +32,40 @@ public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>
         state.SetTransforms(state.PlayerTransform, transform);
         playerCamera_transf = playerCamera.transform;
         _transform = transform;
+    }
+
+    void Start()
+    {
+        if (playerData.gametype == 0)
+        {
+            _rb = transform.GetComponent<Rigidbody>();
+            //SetTransforms(PlayerTransform, transform);
+            playerCamera_transf = playerCamera.transform;
+            _transform = transform;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (playerData.gametype == 0 && !(_joystick is null))
+        {
+            if (_joystick.Horizontal != 0 || _joystick.Vertical != 0)
+            {
+                Vector3 dirRight = playerCamera_transf.right;
+                dirRight.y = 0f;
+                dirRight.Normalize();
+                Vector3 dirForward = playerCamera_transf.forward;
+                dirForward.y = 0f;
+                dirForward.Normalize();
+                Vector3 desiredMovement = (dirForward * _joystick.Vertical) + (dirRight * _joystick.Horizontal);
+                desiredMovement.Normalize();
+                desiredMovement *= speed;
+                _rb.AddForce(desiredMovement, ForceMode.Impulse);
+                float gip = Mathf.Sqrt((float)Math.Pow(_joystick.Horizontal, 2) + (float)Math.Pow(_joystick.Vertical, 2));
+                float rot = Mathf.Atan2(_joystick.Horizontal / gip, _joystick.Vertical / gip) * Mathf.Rad2Deg;
+                _transform.rotation = Quaternion.Euler(_transform.eulerAngles.x, rot + Camera.main.transform.eulerAngles.y, _transform.eulerAngles.z);
+            }
+        }
     }
 
     public override void SimulateOwner()
@@ -46,19 +81,11 @@ public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>
                 dirForward.y = 0f;
                 dirForward.Normalize();
                 Vector3 desiredMovement = (dirForward * _joystick.Vertical) + (dirRight * _joystick.Horizontal);
-                Debug.Log("desiredMovement " + (desiredMovement * speed).ToString());
                 desiredMovement.Normalize();
                 desiredMovement *= speed;
                 //_transform.position = desiredMovement + _transform.position;
-                Debug.Log("desiredMovement " + (desiredMovement * speed).ToString());
-                // _rb.velocity = desiredMovement; 
-                //_rb.AddForce(desiredMovement);
-                //_transform.position = _transform.position;
-                //_transform.Translate(desiredMovement * speed);
                 _rb.AddForce(desiredMovement, ForceMode.Impulse);
                 _transform.position = _transform.position;
-                Debug.Log("_rb.velocity " + _rb.velocity.ToString());
-                //_rb.MovePosition(desiredMovement * speed + _rb.position );
                 float gip = Mathf.Sqrt((float)Math.Pow(_joystick.Horizontal,2) + (float)Math.Pow(_joystick.Vertical, 2));
                 float rot = Mathf.Atan2(_joystick.Horizontal / gip,  _joystick.Vertical / gip) * Mathf.Rad2Deg;
                 _transform.rotation = Quaternion.Euler(_transform.eulerAngles.x, rot + Camera.main.transform.eulerAngles.y, _transform.eulerAngles.z);
@@ -72,6 +99,11 @@ public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>
     public void ChangeJoystick(FixedJoystick newJstk)
     {
         _joystick = newJstk;
+    }
+
+    public void deleteJoystick()
+    {
+        _joystick = null;
     }
 
     void OnTriggerEnter(Collider other)

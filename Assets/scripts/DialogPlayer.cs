@@ -36,40 +36,53 @@ public class DialogPlayer : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBeha
 
     void Update()
     {
-        if (callbacks.next)
+
+        if (dialogSaver.playerData.gametype != 0)
         {
-            if (!isHost)
+            if (callbacks.next)
             {
-                PlayNextCall();
+                if (!isHost)
+                {
+                    PlayNextCall();
+                }
+                callbacks.next = false;
             }
-            callbacks.next = false;
+
+
+            if (callbacks.isGameOver)
+            {
+                if (isOverInit)
+                {
+                    if (callbacks.isOverAns)
+                    {
+                        gameOverMenu.GetChild(1).gameObject.SetActive(true);
+                    }
+                }
+                else
+                {
+                    int ind;
+                    if (dialogSaver.playerData.isPlayer1) { ind = 0; } else { ind = 1; }
+                    if (dialogSaver.playerData.isGameOver[ind])
+                    {
+                        var isOverAns = IsGameOverAns.Create();
+                        isOverAns.IsOverAns = dialogSaver.playerData.isGameOver[ind];
+                        isOverAns.Send();
+                        gameOverMenu.GetChild(1).gameObject.SetActive(true);
+                    }
+                }
+
+            }
         }
-        if (dialogSaver.playerData.isGameJustStarted)
+    }
+
+    void FixedUpdate()
+    {
+        int ind;
+        if (dialogSaver.playerData.isPlayer1) { ind = 0; } else { ind = 1; }
+        if (dialogSaver.playerData.isGameJustStarted[ind])
         {
-            dialogSaver.playerData.isGameJustStarted = false;
+            dialogSaver.playerData.isGameJustStarted[ind] = false;
             beginDialog(0, 0);
-        }
-
-        if (callbacks.isGameOver)
-        {
-            if (isOverInit)
-            {
-                if (callbacks.isOverAns)
-                {
-                    gameOverMenu.GetChild(1).gameObject.SetActive(true);
-                }
-            }
-            else
-            {
-                if (dialogSaver.playerData.isGameOver)
-                {
-                    var isOverAns = IsGameOverAns.Create();
-                    isOverAns.IsOverAns = dialogSaver.playerData.isGameOver;
-                    isOverAns.Send();
-                    gameOverMenu.GetChild(1).gameObject.SetActive(true);
-                }
-            }
-
         }
     }
 
@@ -96,13 +109,17 @@ public class DialogPlayer : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBeha
 
     public void PlayNextPlayersDialog()
     {
-        if (isHost) 
+        if (dialogSaver.playerData.gametype != 0)
         {
-            var next = NextDialog.Create();
-            next.Next = true;
-            next.Send();
-            PlayNextCall();
+            if (isHost)
+            {
+                var next = NextDialog.Create();
+                next.Next = true;
+                next.Send();
+                PlayNextCall();
+            }
         }
+        else { PlayNextCall(); }
     }
 
     public void PlayNextCall()
@@ -215,19 +232,40 @@ public class DialogPlayer : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBeha
 
     public void checkGameOver()
     {
+        int ind;
+        if (dialogSaver.playerData.isPlayer1) { ind = 0; } else { ind = 1; }
         if (dialogSaver.IsdialogOver && dialogSaver.isGameOverloc)
         {
-            dialogSaver.playerData.isGameOver = dialogSaver.isGameOverloc;
+            dialogSaver.playerData.isGameOver[ind] = dialogSaver.isGameOverloc;
+            dialogSaver.IsdialogOver = false;
+            dialogSaver.isGameOverloc = false;
         }
-        if (dialogSaver.playerData.isGameOver && !callbacks.isGameOver)
+        if (dialogSaver.playerData.gametype != 0)
         {
-            var isGameOver = IsGameOverCheck.Create();
-            isGameOver.IsGameOver = true;
-            isGameOver.Send();
-            isOverInit = true;
-            gameOverMenu.GetChild(0).gameObject.SetActive(true);
+            if (dialogSaver.playerData.isGameOver[ind] && !callbacks.isGameOver)
+            {
+                var isGameOver = IsGameOverCheck.Create();
+                isGameOver.IsGameOver = true;
+                isGameOver.Send();
+                isOverInit = true;
+                gameOverMenu.GetChild(0).gameObject.SetActive(true);
+            }
+        }
+        else
+        {
+            if (dialogSaver.playerData.isGameOver[ind])
+            {
+                gameOverMenu.GetChild(0).gameObject.SetActive(true);
+            }
+            else
+            { gameOverMenu.GetChild(0).gameObject.SetActive(false); }
+            if (dialogSaver.playerData.isGameOver[0] && dialogSaver.playerData.isGameOver[1])
+            {
+                gameOverMenu.GetChild(1).gameObject.SetActive(true);
+            }
         }
     }
+
 
     public void textClicked()
     {
@@ -261,7 +299,9 @@ public class DialogPlayer : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBeha
         dialogSaver.playerData.isBusy = true;
         dialogPanel.SetActive(true);
         massageText = playersDialogiesSaver.AskDialog(locdialogId);
+        Debug.Log(massageText[0]);
         isFirstTalkList = playersDialogiesSaver.AskTitles(locdialogId);
+        Debug.Log(isFirstTalkList[0]);
         dialogId = locdialogId;
         isPlayersDialog = true;
         if (BoltNetwork.IsServer)

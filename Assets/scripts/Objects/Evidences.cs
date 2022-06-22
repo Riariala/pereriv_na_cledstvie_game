@@ -12,5 +12,6 @@ public class Evidences
     {
         evidenceID = id;
         status = newStatus;
+        connected = new List<int>();
     }
 }

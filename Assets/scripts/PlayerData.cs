@@ -9,9 +9,10 @@ public class PlayerData : ScriptableObject
     public GameObject char_player;
     public int dialogId;
     public bool isBusy;
-    public bool isGameOver;
-    public bool isGameJustStarted;
+    public List<bool> isGameOver; //0 - Роджерс (Player1)
+    public List<bool> isGameJustStarted;
     public string gameCode;
+    public int gametype; //0 - одиночная, 1 - определенный напарник, 2 - незнакомый определенный напарник, 3 - случайный напарник
 
     public void ChangeCharacter(GameObject newplayer)
     {

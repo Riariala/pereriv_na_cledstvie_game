@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -182,18 +182,18 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 7d8f9a8d33eda9c4b8d8a78b329db310, type: 3}
-    m_FontSize: 14
+    m_FontSize: 35
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
-    m_MaxSize: 40
+    m_MaxSize: 46
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: "\u041E\u0431\u043D\u043E\u0432\u0438\u0442\u044C"
 --- !u!222 &4253121
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4578,6 +4578,7 @@ MonoBehaviour:
   journalInfo: {fileID: 11400000, guid: dd172ace3ffc9ed4f9bf32fd16a613b0, type: 2}
   playersDialogiesSaver: {fileID: 11400000, guid: 857f4ea528d999545bbab4bdc54360e8,
     type: 2}
+  refresh_btn: {fileID: 1843866323}
   NetworkMenu: {fileID: 1672513916}
 --- !u!114 &707613683
 MonoBehaviour:
@@ -6361,7 +6362,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 0
 --- !u!114 &1012895604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9568,6 +9569,7 @@ MonoBehaviour:
   roomCode: {fileID: 2138478509}
   inputCode: {fileID: 129918009}
   matchName: 
+  refresh_btn: {fileID: 1843866323}
 --- !u!4 &1672513917
 Transform:
   m_ObjectHideFlags: 0
@@ -10380,15 +10382,15 @@ GameObject:
   m_Component:
   - component: {fileID: 1843866324}
   - component: {fileID: 1843866327}
-  - component: {fileID: 1843866326}
   - component: {fileID: 1843866325}
+  - component: {fileID: 1843866326}
   m_Layer: 5
   m_Name: Refresh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1843866324
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10406,8 +10408,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -122.15, y: 136}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 262.0489, y: 89.4847}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1843866325
 MonoBehaviour:
@@ -10453,9 +10455,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1672513916}
         m_TargetAssemblyTypeName: Menu, Assembly-CSharp
-        m_MethodName: StartClient
+        m_MethodName: RefreshSessionList
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10474,7 +10476,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1843866323}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Script: {fileID: 11500000, guid: ef8b96895a0ec4ba685178a052544251, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
@@ -10485,16 +10487,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_Sprite: {fileID: 3286163911610860551, guid: 5804d4acc69838f4baabdb0eea798c72,
+    type: 3}
+  m_PreserveAspect: 1
 --- !u!222 &1843866327
 CanvasRenderer:
   m_ObjectHideFlags: 0
