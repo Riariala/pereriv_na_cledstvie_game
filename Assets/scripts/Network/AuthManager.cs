@@ -1,8 +1,10 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Firebase;
 using Firebase.Auth;
+using Firebase.Database;
 //using Unity.TextMeshPro;
 //using TMPro;
 
@@ -28,7 +30,15 @@ public class AuthManager : MonoBehaviour
     public InputField passwordRegisterField;
     //public InputField passwordRegisterVerifyField;
     public Text warningRegisterText;
+    //DatabaseReference reference;
+    public RealTimeDataBase db;
 
+
+    /*void Start()
+    {
+        
+    }*/
+     
     void Awake()
     {
         //Check that all of the necessary dependencies for Firebase are present on the system
@@ -45,6 +55,8 @@ public class AuthManager : MonoBehaviour
                 Debug.LogError("Could not resolve all Firebase dependencies: " + dependencyStatus);
             }
         });
+        //DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
+
     }
 
     private void InitializeFirebase()
@@ -176,6 +188,15 @@ public class AuthManager : MonoBehaviour
                 //User has now been created
                 //Now get the result
                 User = RegisterTask.Result;
+                //db.writeNewUser(User.UserId, 0);
+                Debug.Log(FirebaseDatabase.DefaultInstance.RootReference);
+                DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
+                User userDb = new User(User.UserId, 0);
+                string json = JsonUtility.ToJson(userDb);
+                Debug.Log(userDb.UID);
+                Debug.Log(reference);
+
+                reference.Child("money_base").Child(userDb.UID).SetRawJsonValueAsync(json);
 
                 if (User != null)
                 {
@@ -206,4 +227,7 @@ public class AuthManager : MonoBehaviour
             }
         }
     }
+
+
+    
 }
