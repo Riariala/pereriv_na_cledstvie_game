@@ -11,20 +11,27 @@ using Photon.Bolt.Utils;
 
 public class MenuScript : MonoBehaviour
 {
-    [SerializeField] public GameObject first_menu;
-    [SerializeField] public GameObject second_menu;
-    [SerializeField] public GameObject third_menu;
-    [SerializeField] public GameObject fourth_menu;
-    [SerializeField] public GameObject new_game_modal;
-    [SerializeField] public GameObject store_menu;
-    [SerializeField] public GameObject reg_menu;
-    [SerializeField] public GameObject auth_menu;
+    public GameObject first_menu;
+    public GameObject second_menu;
+    public GameObject third_menu;
+    public GameObject fourth_menu;
+    public GameObject new_game_modal;
+    public GameObject store_menu;
+    public GameObject reg_menu;
+    public GameObject auth_menu;
+    public Transform loading_menu;
+    public Text load_inform_text;
     public ActionsSaver actionsSaver;
     public DialogSaver dialogSaver;
     public PlayerData playerData;
     public JournalInfo journalInfo;
     public PlayersDialogiesSaver playersDialogiesSaver;
     public GameObject refresh_btn;
+    private string[] loadInformTexts = new string[] { "Во время одиночной игры можно свободно переключаться между персонажами.",
+            "Запретив незнакомых игроков, вы не позволяете присоединяться к игре из лобби - только по коду подключения.",
+            "Вы не сможете начать игру с напарником, пока не поднлючится второй игрок - придется ожидать.",
+            "При игре без напарника, но с разрешением подключаться незнакомцам, вы можете играть в одиночном режиме, пока не присоединится второй игрок.",
+            "Подключаясь к готовой сессии, вы займете свободного персонажа."};
 
     public Menu NetworkMenu;
 
@@ -154,6 +161,42 @@ public class MenuScript : MonoBehaviour
         playersDialogiesSaver.setDefault();
     }
 
+    public void OpenLoadingMenu()
+    {
+        loading_menu.gameObject.SetActive(true);
+        switch (playerData.gametype)
+        {
+            case 0:
+                loading_menu.GetChild(0).gameObject.SetActive(false);
+                loading_menu.GetChild(1).gameObject.SetActive(true);
+                load_inform_text.text = loadInformTexts[0];
+                break;
+            case 1:
+                loading_menu.GetChild(0).gameObject.SetActive(true);
+                loading_menu.GetChild(1).gameObject.SetActive(false);
+                break;
+            case 2:
+                loading_menu.GetChild(0).gameObject.SetActive(true);
+                loading_menu.GetChild(1).gameObject.SetActive(false);
+                break;
+            case 3:
+                loading_menu.GetChild(0).gameObject.SetActive(false);
+                loading_menu.GetChild(1).gameObject.SetActive(true);
+                load_inform_text.text = loadInformTexts[3];
+                break;
+            default:
+                loading_menu.GetChild(0).gameObject.SetActive(false);
+                loading_menu.GetChild(1).gameObject.SetActive(true);
+                load_inform_text.text = loadInformTexts[4];
+                break;
+        }
+    }
+
+    public void closeLoading()
+    {
+        loading_menu.gameObject.SetActive(false);
+    }
+
     IEnumerator closing_modals(GameObject modal_menu)
     {
         modal_menu.GetComponent<Animation>().Play("modal_disappear");
@@ -167,4 +210,8 @@ public class MenuScript : MonoBehaviour
         prev_menu.SetActive(false);
         cur_menu.SetActive(true);
     }
+
+
+
+
 }

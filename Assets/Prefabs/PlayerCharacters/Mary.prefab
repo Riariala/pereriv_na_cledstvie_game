@@ -129,6 +129,7 @@ GameObject:
   - component: {fileID: 2358622548739102809}
   - component: {fileID: 3540561478516117261}
   - component: {fileID: 905042949421554096}
+  - component: {fileID: 647292336178887738}
   m_Layer: 6
   m_Name: Mary
   m_TagString: Player
@@ -196,9 +197,10 @@ MonoBehaviour:
   _rb: {fileID: 3175694714790981355}
   playerCamera: {fileID: 1648438642274290265}
   _joystick: {fileID: 0}
-  speed: 4.5
+  speed: 0.8
   playerCameraScript: {fileID: 6921168245716905036}
   playerData: {fileID: 11400000, guid: 2336fb71654d97d4b9c3e67c350c186e, type: 2}
+  isStilMoving: 0
 --- !u!114 &6921168245716905036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,6 +266,25 @@ CapsuleCollider:
   m_Height: 6.67
   m_Direction: 1
   m_Center: {x: 0, y: 3.16, z: 0}
+--- !u!95 &647292336178887738
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1677086788809594193}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3095430558700986832
 GameObject:
   m_ObjectHideFlags: 0

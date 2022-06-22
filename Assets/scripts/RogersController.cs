@@ -20,13 +20,10 @@ public class RogersController : MonoBehaviour
     {
         if (playerController._joystick.Horizontal != 0 || playerController._joystick.Vertical != 0){
             _state = 1;
-            Debug.Log("Видит джойстик");
         }
         else{
             _state = 0;
-            Debug.Log("No Видит джойстик");
         }
-
         animator.SetInteger("State", _state);
     }
 }
