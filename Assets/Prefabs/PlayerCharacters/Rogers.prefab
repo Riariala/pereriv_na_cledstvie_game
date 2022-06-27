@@ -121,6 +121,9 @@ MonoBehaviour:
   playerCameraScript: {fileID: 7035535853636454751}
   desiredMovement: {x: 0, y: 0, z: 0}
   isStillMoving: 0
+  playerData: {fileID: 11400000, guid: 2336fb71654d97d4b9c3e67c350c186e, type: 2}
+  isStilMoving: 0
+  playerAnimator: {fileID: -4220439411703897128}
 --- !u!114 &7035535853636454751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,6 +222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 3219229905755538841}
   _rb: {fileID: 3498534587264363038}
+  playerData: {fileID: 11400000, guid: 2336fb71654d97d4b9c3e67c350c186e, type: 2}
 --- !u!1 &1679769518368665418
 GameObject:
   m_ObjectHideFlags: 0
@@ -379,6 +383,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 3219229905755538841}
   _rb: {fileID: 0}
+  playerData: {fileID: 0}
 --- !u!1001 &8600316604307570
 PrefabInstance:
   m_ObjectHideFlags: 0

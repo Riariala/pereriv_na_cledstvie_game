@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 5788107427147150313}
   _rb: {fileID: 0}
+  playerData: {fileID: 0}
 --- !u!1 &1103911637237107166
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,6 +146,7 @@ GameObject:
   - component: {fileID: 3540561478516117261}
   - component: {fileID: 905042949421554096}
   - component: {fileID: 647292336178887738}
+  - component: {fileID: 5056938500854607952}
   m_Layer: 6
   m_Name: Mary
   m_TagString: Player
@@ -213,10 +215,13 @@ MonoBehaviour:
   playerCamera: {fileID: 1648438642274290265}
   _transform: {fileID: 0}
   _joystick: {fileID: 0}
-  speed: 0.8
+  speed: 5
   playerCameraScript: {fileID: 6921168245716905036}
+  desiredMovement: {x: 0, y: 0, z: 0}
+  isStillMoving: 0
   playerData: {fileID: 11400000, guid: 2336fb71654d97d4b9c3e67c350c186e, type: 2}
   isStilMoving: 0
+  playerAnimator: {fileID: 647292336178887738}
 --- !u!114 &6921168245716905036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -291,16 +296,31 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1677086788809594193}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: 0c114d2e19aba5f4ead3200d36922249, type: 3}
+  m_Controller: {fileID: 9100000, guid: 21e4c5f0400f2a7409cca1826035fbc7, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5056938500854607952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1677086788809594193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96163daad8f06f343b3b1e8c1a120b90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 5788107427147150313}
+  _rb: {fileID: 3540561478516117261}
+  playerData: {fileID: 11400000, guid: 2336fb71654d97d4b9c3e67c350c186e, type: 2}
 --- !u!1 &3095430558700986832
 GameObject:
   m_ObjectHideFlags: 0
