@@ -139,7 +139,7 @@ MonoBehaviour:
   playerCamera: {fileID: 1679769518368665418}
   player: {fileID: 3124089655766484163}
   playerData: {fileID: 11400000, guid: 2336fb71654d97d4b9c3e67c350c186e, type: 2}
-  isPlayer1Belong: 0
+  isPlayer1Belong: 1
   cameraYPos: 12
   cameraZPos: 10.5
   cameraXPos: 8

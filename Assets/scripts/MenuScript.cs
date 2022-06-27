@@ -129,9 +129,23 @@ public class MenuScript : MonoBehaviour
 
     public void createNewGame()
     {
-        if (!isCoworker)
+
+        actionsSaver.setDefault();
+        journalInfo.clearAll();
+        playersDialogiesSaver.setDefault();
+        if (isCoworker)
         {
-            if (_isUnknowns) 
+            if (_isUnknowns) { playerData.gametype = 2; } else { playerData.gametype = 1; }
+            new_game_modal.SetActive(true);
+            foreach (Transform child in fourth_menu.GetComponentsInChildren<Transform>())
+            {
+                if (child.CompareTag("Button")) {child.GetComponent<Button>().interactable = true;}                
+            }
+            NetworkMenu.StartServer();
+        }
+        else 
+        {
+           if (_isUnknowns) 
             { 
                 playerData.gametype = 3;
                 NetworkMenu.StartServer();
@@ -144,21 +158,9 @@ public class MenuScript : MonoBehaviour
                     BoltLauncher.Shutdown();
                 }
                 SceneManager.LoadScene("level0");
-            }
+            } 
         }
-        else 
-        {
-            if (_isUnknowns) { playerData.gametype = 2; } else { playerData.gametype = 1; }
-            new_game_modal.SetActive(true);
-            foreach (Transform child in fourth_menu.GetComponentsInChildren<Transform>())
-            {
-                if (child.CompareTag("Button")) {child.GetComponent<Button>().interactable = true;}                
-            }
-            NetworkMenu.StartServer();
-        }
-        actionsSaver.setDefault();
-        journalInfo.clearAll();
-        playersDialogiesSaver.setDefault();
+        
     }
 
     public void OpenLoadingMenu()

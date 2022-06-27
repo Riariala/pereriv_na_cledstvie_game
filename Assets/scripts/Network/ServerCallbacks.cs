@@ -20,12 +20,21 @@ public class ServerCallbacks : Photon.Bolt.GlobalEventListener
         {
             if (playerData.gametype == 3)
             {
-                Debug.Log(cngChar);
                 cngChar.cngCharBtnSet(false);
+                // здесь: отправить "второму игроку" данные из JournalInfo И (!) КООРДИНАТЫ (!) персонажа. (ActionSaver был передан ранее. в принципе, JournalInfo можно там же)
+                cngChar.KillCharacter(!playerData.isPlayer1);
             }
             else 
             {
                 gameMenu.showLoading(false);
+            }
+        }
+        else
+        {
+            if (playerData.gametype == 3)
+            {
+                cngChar.cngCharBtnSet(false);
+                // принять новые координаты персонажа и создать его
             }
         }
     }
@@ -36,7 +45,11 @@ public class ServerCallbacks : Photon.Bolt.GlobalEventListener
         {
             if (playerData.gametype == 3)
             {
-                Debug.Log(cngChar);
+                Vector3 newpos = new Vector3(6f, 0, -9f);
+                // принять координаты персонажа от отсоединившегося второго игрока и создать персонажа
+                
+                cngChar.CreateCharacter(!playerData.isPlayer1, newpos);
+
                 cngChar.cngCharBtnSet(true);
             }
             else 
@@ -44,6 +57,11 @@ public class ServerCallbacks : Photon.Bolt.GlobalEventListener
                 gameMenu.showLoading(true);
                 //gameMenu.toMainMenu();
             }
+        }
+        else
+        {
+            // перед отсоединением: отправить "первому игроку" данные из JournalInfo И (!) КООРДИНАТЫ (!) персонажа.
+
         }
     }
 
