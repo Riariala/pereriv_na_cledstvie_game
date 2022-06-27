@@ -17,10 +17,13 @@ public class RogersController : Photon.Bolt.EntityBehaviour<ICustomPlayer>
     private PlayerController controller;
     public PlayerData playerData;
 
+    private AudioSource audioSource;
+
     private void Start()
     {
         animator = GetComponent<Animator>();
         controller = gameObject.GetComponent<PlayerController>();
+        audioSource = GetComponent<AudioSource>();
     }
 
 
@@ -60,6 +63,7 @@ public class RogersController : Photon.Bolt.EntityBehaviour<ICustomPlayer>
             else
             {
                 _state = 0;
+                audioSource.Play();
             }
             animator.SetInteger("State", _state);
         }
@@ -82,6 +86,7 @@ public class RogersController : Photon.Bolt.EntityBehaviour<ICustomPlayer>
                 {
                     state.Animator.SetInteger("State", 0);
                     animator.SetInteger("State", 0);
+                    audioSource.Play();
                     //state.Animator.Play("Neutral");
                     //isStillMoving = false;
 
