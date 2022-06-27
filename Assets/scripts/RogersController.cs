@@ -26,31 +26,8 @@ public class RogersController : Photon.Bolt.EntityBehaviour<ICustomPlayer>
         audioSource = GetComponent<AudioSource>();
     }
 
-
     private void Update()
     {
-        //if (playerData.gametype != 0)
-        //{
-        //    if (state.isMoving)
-        //    {
-        //        //if (!isStillMoving)
-        //        //{
-        //        state.Animator.SetInteger("State", 1);
-        //        playerAnimator.SetInteger("State", 1);
-        //        //state.Animator.Play("Walk");
-        //        //isStillMoving = true;
-        //        //}
-
-        //    }
-        //    else
-        //    {
-        //        state.Animator.SetInteger("State", 0);
-        //        playerAnimator.SetInteger("State", 0);
-        //        //state.Animator.Play("Neutral");
-        //        //isStillMoving = false;
-
-        //    }
-        //}
 
         if (entity.IsOwner)
         {
@@ -73,36 +50,25 @@ public class RogersController : Photon.Bolt.EntityBehaviour<ICustomPlayer>
             {
                 if (state.isMoving)
                 {
-                    //if (!isStillMoving)
-                    //{
                     state.Animator.SetInteger("State", 1);
                     animator.SetInteger("State", 1);
-                    //state.Animator.Play("Walk");
-                    //isStillMoving = true;
-                    //}
 
                 }
                 else
                 {
                     state.Animator.SetInteger("State", 0);
                     animator.SetInteger("State", 0);
+<<<<<<< HEAD
                     audioSource.Play();
                     //state.Animator.Play("Neutral");
                     //isStillMoving = false;
+=======
+>>>>>>> 167e38c80135808b09541e26e1924313194e5530
 
                 }
             }
         }
 
-        //movement = controller.GetDesiredMovement();
-        //Debug.Log("movement.sqrMagnitude " + movement.sqrMagnitude);
-        //if (movement.sqrMagnitude > 0.2){
-        //    _state = 1;
-        //}
-        //else{
-        //    _state = 0;
-        //}
-        //animator.SetInteger("State", _state);
     }
 
 }

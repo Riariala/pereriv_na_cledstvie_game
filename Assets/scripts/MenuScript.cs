@@ -27,11 +27,11 @@ public class MenuScript : MonoBehaviour
     public JournalInfo journalInfo;
     public PlayersDialogiesSaver playersDialogiesSaver;
     public GameObject refresh_btn;
-    private string[] loadInformTexts = new string[] { "Во время одиночной игры можно свободно переключаться между персонажами.",
-            "Запретив незнакомых игроков, вы не позволяете присоединяться к игре из лобби - только по коду подключения.",
-            "Вы не сможете начать игру с напарником, пока не поднлючится второй игрок - придется ожидать.",
-            "При игре без напарника, но с разрешением подключаться незнакомцам, вы можете играть в одиночном режиме, пока не присоединится второй игрок.",
-            "Подключаясь к готовой сессии, вы займете свободного персонажа."};
+    private string[] loadInformTexts = new string[] { "пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.",
+            "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.",
+            "пїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.",
+            "пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.",
+            "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ."};
 
     public Menu NetworkMenu;
 
@@ -129,9 +129,23 @@ public class MenuScript : MonoBehaviour
 
     public void createNewGame()
     {
-        if (!isCoworker)
+
+        actionsSaver.setDefault();
+        journalInfo.clearAll();
+        playersDialogiesSaver.setDefault();
+        if (isCoworker)
         {
-            if (_isUnknowns) 
+            if (_isUnknowns) { playerData.gametype = 2; } else { playerData.gametype = 1; }
+            new_game_modal.SetActive(true);
+            foreach (Transform child in fourth_menu.GetComponentsInChildren<Transform>())
+            {
+                if (child.CompareTag("Button")) {child.GetComponent<Button>().interactable = true;}                
+            }
+            NetworkMenu.StartServer();
+        }
+        else 
+        {
+           if (_isUnknowns) 
             { 
                 playerData.gametype = 3;
                 NetworkMenu.StartServer();
@@ -144,21 +158,9 @@ public class MenuScript : MonoBehaviour
                     BoltLauncher.Shutdown();
                 }
                 SceneManager.LoadScene("level0");
-            }
+            } 
         }
-        else 
-        {
-            if (_isUnknowns) { playerData.gametype = 2; } else { playerData.gametype = 1; }
-            new_game_modal.SetActive(true);
-            foreach (Transform child in fourth_menu.GetComponentsInChildren<Transform>())
-            {
-                if (child.CompareTag("Button")) {child.GetComponent<Button>().interactable = true;}                
-            }
-            NetworkMenu.StartServer();
-        }
-        actionsSaver.setDefault();
-        journalInfo.clearAll();
-        playersDialogiesSaver.setDefault();
+        
     }
 
     public void OpenLoadingMenu()
