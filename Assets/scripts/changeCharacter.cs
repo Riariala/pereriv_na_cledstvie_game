@@ -46,7 +46,7 @@ public class changeCharacter : Photon.Bolt.EntityBehaviour<ICustomPlayer>
             Player2_script.ChangeJoystick(_jystick);
             player_data.SetObjectCharacter(Player2);
         }
-        if (player_data.gametype == 0)
+        if (player_data.gametype == 0 )
         {
             changeCharBtn.SetActive(true);
             spawnCharsInSingle();
@@ -56,23 +56,13 @@ public class changeCharacter : Photon.Bolt.EntityBehaviour<ICustomPlayer>
 
     public void Change_chars(){
         player_data.isPlayer1 = !player_data.isPlayer1;
-        if (player_data.gametype != 0)
+        if ( player_data.gametype !=0  )
         {
             var character = PlayerCharacter.Create();
             character.IsPlayer1 = player_data.isPlayer1;
             character.Send();
-            if (player_data.isPlayer1)
-            {
-                player_data.SetObjectCharacter(Player1);
-                Player1_script.ChangeJoystick(_jystick);
-            }
-            else
-            {
-                Player2_script.ChangeJoystick(_jystick);
-                player_data.SetObjectCharacter(Player2);
-            }
         }
-        else { changeCharsSingle();  }
+        changeCharsSingle();  
     }
 
     public void spawnCharsInSingle()
@@ -90,9 +80,9 @@ public class changeCharacter : Photon.Bolt.EntityBehaviour<ICustomPlayer>
         spawnPos = new Vector3(6f, 0, -9f);
         RogersSingle = Instantiate(Player1, spawnPos, Quaternion.identity);
         RogersSingle.name = "Rogers";
-        //RogersSingle.GetComponent<PlayerController>().ChangeJoystick(_jystick);
-        PlayerController player_script = RogersSingle.GetComponent<PlayerController>();
-        player_script.ChangeJoystick(_jystick);
+        RogersSingle.GetComponent<PlayerController>().ChangeJoystick(_jystick);
+        //PlayerController player_script = RogersSingle.GetComponent<PlayerController>();
+        //player_script.ChangeJoystick(_jystick);
         RogersSingle.GetComponent<NetworkCamera>().isPlayer1Belong = true;
         spawnPos = new Vector3(-1.5f, 0, 43f);
         MarySingle = Instantiate(Player2, spawnPos, Quaternion.identity);
@@ -104,10 +94,10 @@ public class changeCharacter : Photon.Bolt.EntityBehaviour<ICustomPlayer>
     {
         if (player_data.isPlayer1)
         {
-            RogersSingle.GetComponent<PlayerController>().ChangeJoystick(_jystick);
-            RogersSingle.GetComponent<NetworkCamera>().cameraOn();
             MarySingle.GetComponent<PlayerController>().deleteJoystick();
             MarySingle.GetComponent<NetworkCamera>().cameraOut();
+            RogersSingle.GetComponent<PlayerController>().ChangeJoystick(_jystick);
+            RogersSingle.GetComponent<NetworkCamera>().cameraOn();
         }
         else
         {
@@ -122,4 +112,42 @@ public class changeCharacter : Photon.Bolt.EntityBehaviour<ICustomPlayer>
     {
         changeCharBtn.SetActive(newStat);
     }
+
+    public void setMary(GameObject newMar)
+    {
+        MarySingle = newMar;
+    }
+
+    public void setRogers(GameObject newRog)
+    {
+        RogersSingle = newRog;
+    }
+
+    public void KillCharacter(bool first)
+    {
+        if (first)
+        {
+            Destroy(RogersSingle);
+        }
+        else
+        {
+            Destroy(MarySingle);
+        }
+    }
+
+    public void CreateCharacter(bool first, Vector3 spawnpos)
+    {
+        //GameObject player;
+        if (first)
+        {
+            RogersSingle = BoltNetwork.Instantiate(Player1, spawnpos, Quaternion.identity);
+            RogersSingle.name = "Rogers";
+        }
+        else
+        {
+            MarySingle = BoltNetwork.Instantiate(Player2, spawnpos, Quaternion.identity);
+            MarySingle.name = "Mary";
+        }
+    }
+
 }

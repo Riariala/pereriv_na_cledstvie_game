@@ -20,12 +20,21 @@ public class ServerCallbacks : Photon.Bolt.GlobalEventListener
         {
             if (playerData.gametype == 3)
             {
-                Debug.Log(cngChar);
                 cngChar.cngCharBtnSet(false);
+                // �����: ��������� "������� ������" ������ �� JournalInfo � (!) ���������� (!) ���������. (ActionSaver ��� ������� �����. � ��������, JournalInfo ����� ��� ��)
+                cngChar.KillCharacter(!playerData.isPlayer1);
             }
             else 
             {
                 gameMenu.showLoading(false);
+            }
+        }
+        else
+        {
+            if (playerData.gametype == 3)
+            {
+                cngChar.cngCharBtnSet(false);
+                // ������� ����� ���������� ��������� � ������� ���
             }
         }
     }
@@ -36,7 +45,11 @@ public class ServerCallbacks : Photon.Bolt.GlobalEventListener
         {
             if (playerData.gametype == 3)
             {
-                Debug.Log(cngChar);
+                Vector3 newpos = new Vector3(6f, 0, -9f);
+                // ������� ���������� ��������� �� ���������������� ������� ������ � ������� ���������
+                
+                cngChar.CreateCharacter(!playerData.isPlayer1, newpos);
+
                 cngChar.cngCharBtnSet(true);
             }
             else 
@@ -44,6 +57,11 @@ public class ServerCallbacks : Photon.Bolt.GlobalEventListener
                 gameMenu.showLoading(true);
                 //gameMenu.toMainMenu();
             }
+        }
+        else
+        {
+            // ����� �������������: ��������� "������� ������" ������ �� JournalInfo � (!) ���������� (!) ���������.
+
         }
     }
 
