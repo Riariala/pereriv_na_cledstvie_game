@@ -29,6 +29,7 @@ public class NetworkCallbacks : GlobalEventListener
 
     public override void SceneLoadLocalDone(string scene, IProtocolToken token)
     {
+        isPlayer1 = true;
         if (BoltNetwork.IsClient)
         {
             isPlayer1 = !isPlayer1;
