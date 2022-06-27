@@ -17,10 +17,13 @@ public class RogersController : Photon.Bolt.EntityBehaviour<ICustomPlayer>
     private PlayerController controller;
     public PlayerData playerData;
 
+    private AudioSource audioSource;
+
     private void Start()
     {
         animator = GetComponent<Animator>();
         controller = gameObject.GetComponent<PlayerController>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void FixedUpdate()
