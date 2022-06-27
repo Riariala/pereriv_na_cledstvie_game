@@ -60,9 +60,12 @@ public class RogersController : Photon.Bolt.EntityBehaviour<ICustomPlayer>
                     animator.SetInteger("State", 0);
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                     audioSource.Play();
                     //state.Animator.Play("Neutral");
                     //isStillMoving = false;
+=======
+>>>>>>> 167e38c80135808b09541e26e1924313194e5530
 =======
 >>>>>>> 167e38c80135808b09541e26e1924313194e5530
 =======
