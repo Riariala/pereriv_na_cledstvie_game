@@ -71,39 +71,14 @@ public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>
                 _rb.AddForce(desiredMovement, ForceMode.Impulse);
                 float gip = Mathf.Sqrt((float)Math.Pow(_joystick.Horizontal, 2) + (float)Math.Pow(_joystick.Vertical, 2));
                 float rot = Mathf.Atan2(_joystick.Horizontal / gip, _joystick.Vertical / gip) * Mathf.Rad2Deg;
-                _transform.rotation = Quaternion.Euler(_transform.eulerAngles.x, rot + Camera.main.transform.eulerAngles.y, _transform.eulerAngles.z);
+                //_transform.rotation = Quaternion.Euler(_transform.eulerAngles.x, rot + Camera.main.transform.eulerAngles.y, _transform.eulerAngles.z);
+                _transform.rotation = Quaternion.Euler(_transform.eulerAngles.x, rot + playerCamera_transf.eulerAngles.y, _transform.eulerAngles.z);
             }
             else 
             {
                 desiredMovement = new Vector3(0,0,0);
             }
         }
-    }
-
-    private void Update()
-    {
-        //if (playerData.gametype != 0)
-        //{
-        //    if (state.isMoving)
-        //    {
-        //        //if (!isStillMoving)
-        //        //{
-        //        state.Animator.SetInteger("State", 1);
-        //        playerAnimator.SetInteger("State", 1);
-        //        //state.Animator.Play("Walk");
-        //        //isStillMoving = true;
-        //        //}
-
-        //    }
-        //    else
-        //    {
-        //        state.Animator.SetInteger("State", 0);
-        //        playerAnimator.SetInteger("State", 0);
-        //        //state.Animator.Play("Neutral");
-        //        //isStillMoving = false;
-
-        //    }
-        //}
     }
 
     public override void SimulateOwner()
@@ -127,10 +102,8 @@ public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>
                 _transform.position = _transform.position;
                 float gip = Mathf.Sqrt((float)Math.Pow(_joystick.Horizontal,2) + (float)Math.Pow(_joystick.Vertical, 2));
                 float rot = Mathf.Atan2(_joystick.Horizontal / gip,  _joystick.Vertical / gip) * Mathf.Rad2Deg;
-                _transform.rotation = Quaternion.Euler(_transform.eulerAngles.x, rot + Camera.main.transform.eulerAngles.y, _transform.eulerAngles.z);
+                _transform.rotation = Quaternion.Euler(_transform.eulerAngles.x, rot + playerCamera_transf.eulerAngles.y, _transform.eulerAngles.z);
                 state.isMoving = true;
-
-
             }
             else 
             { 
@@ -140,9 +113,6 @@ public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>
             }
         }
     }
-
- 
-
 
     public void ChangeJoystick(FixedJoystick newJstk)
     {
