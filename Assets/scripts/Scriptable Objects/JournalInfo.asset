@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c438253436ffc964abeda741c8ec803e, type: 3}
   m_Name: JournalInfo
   m_EditorClassIdentifier: 
-  playerHistoryID: 
-  playerEvidencesID: 
+  newInHistory: 
+  playerData: {fileID: 11400000, guid: 2336fb71654d97d4b9c3e67c350c186e, type: 2}

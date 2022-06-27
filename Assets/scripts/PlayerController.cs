@@ -24,6 +24,10 @@ public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>
     public NetworkCamera playerCameraScript;
     public Vector3 desiredMovement;
     public bool isStillMoving;
+    public PlayerData playerData;
+
+    public bool isStilMoving;
+    public Animator playerAnimator;
 
     public override void Attached()
     {
@@ -32,9 +36,74 @@ public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>
         state.SetTransforms(state.PlayerTransform, transform);
         playerCamera_transf = playerCamera.transform;
         _transform = transform;
-        state.SetAnimator(GetComponent<Animator>());
+        //state.SetAnimator(GetComponent<Animator>());
+        state.SetAnimator(playerAnimator);
 
-        state.Animator.applyRootMotion = entity.IsOwner;
+        //state.Animator.applyRootMotion = entity.IsOwner;
+    }
+
+    void Start()
+    {
+        if (playerData.gametype == 0)
+        {
+            _rb = transform.GetComponent<Rigidbody>();
+            //SetTransforms(PlayerTransform, transform);
+            playerCamera_transf = playerCamera.transform;
+            _transform = transform;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (playerData.gametype == 0 && !(_joystick is null))
+        {
+            if (_joystick.Horizontal != 0 || _joystick.Vertical != 0)
+            {
+                Vector3 dirRight = playerCamera_transf.right;
+                dirRight.y = 0f;
+                dirRight.Normalize();
+                Vector3 dirForward = playerCamera_transf.forward;
+                dirForward.y = 0f;
+                dirForward.Normalize();
+                desiredMovement = (dirForward * _joystick.Vertical) + (dirRight * _joystick.Horizontal);
+                desiredMovement.Normalize();
+                desiredMovement *= speed;
+                _rb.AddForce(desiredMovement, ForceMode.Impulse);
+                float gip = Mathf.Sqrt((float)Math.Pow(_joystick.Horizontal, 2) + (float)Math.Pow(_joystick.Vertical, 2));
+                float rot = Mathf.Atan2(_joystick.Horizontal / gip, _joystick.Vertical / gip) * Mathf.Rad2Deg;
+                _transform.rotation = Quaternion.Euler(_transform.eulerAngles.x, rot + Camera.main.transform.eulerAngles.y, _transform.eulerAngles.z);
+            }
+            else 
+            {
+                desiredMovement = new Vector3(0,0,0);
+            }
+        }
+    }
+
+    private void Update()
+    {
+        //if (playerData.gametype != 0)
+        //{
+        //    if (state.isMoving)
+        //    {
+        //        //if (!isStillMoving)
+        //        //{
+        //        state.Animator.SetInteger("State", 1);
+        //        playerAnimator.SetInteger("State", 1);
+        //        //state.Animator.Play("Walk");
+        //        //isStillMoving = true;
+        //        //}
+
+        //    }
+        //    else
+        //    {
+        //        state.Animator.SetInteger("State", 0);
+        //        playerAnimator.SetInteger("State", 0);
+        //        //state.Animator.Play("Neutral");
+        //        //isStillMoving = false;
+
+        //    }
+        //}
     }
 
     public override void SimulateOwner()
@@ -54,57 +123,35 @@ public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>
                 desiredMovement.Normalize();
                 desiredMovement *= speed;
                 //_transform.position = desiredMovement + _transform.position;
-                Debug.Log("desiredMovement " + (desiredMovement * speed).ToString());
-                // _rb.velocity = desiredMovement; 
-                //_rb.AddForce(desiredMovement);
-                //_transform.position = _transform.position;
-                //_transform.Translate(desiredMovement * speed);
                 _rb.AddForce(desiredMovement, ForceMode.Impulse);
                 _transform.position = _transform.position;
-                Debug.Log("_rb.velocity " + _rb.velocity.ToString());
-                //_rb.MovePosition(desiredMovement * speed + _rb.position );
                 float gip = Mathf.Sqrt((float)Math.Pow(_joystick.Horizontal,2) + (float)Math.Pow(_joystick.Vertical, 2));
                 float rot = Mathf.Atan2(_joystick.Horizontal / gip,  _joystick.Vertical / gip) * Mathf.Rad2Deg;
                 _transform.rotation = Quaternion.Euler(_transform.eulerAngles.x, rot + Camera.main.transform.eulerAngles.y, _transform.eulerAngles.z);
                 state.isMoving = true;
-                
+
+
             }
             else 
             { 
-                _rb.velocity = new Vector3(0, 0, 0); 
+                _rb.velocity = new Vector3(0, 0, 0);
                 desiredMovement = new Vector3(0, 0, 0);
                 state.isMoving = false;
             }
         }
     }
 
-    private void Update()
-    {
-        if(state.isMoving)
-        {
-            //if (!isStillMoving)
-            //{
-                state.Animator.SetInteger("State", 1);
-                GetComponent<Animator>().SetInteger("State", 1);
-                state.Animator.Play("Walk");
-                //isStillMoving = true;
-            //}
-            
-        }
-        else
-        {
-            state.Animator.SetInteger("State", 0);
-            GetComponent<Animator>().SetInteger("State", 0);
-            state.Animator.Play("Neutral");
-            //isStillMoving = false;
-            
-        }
-    }
+ 
 
 
     public void ChangeJoystick(FixedJoystick newJstk)
     {
         _joystick = newJstk;
+    }
+
+    public void deleteJoystick()
+    {
+        _joystick = null;
     }
 
     void OnTriggerEnter(Collider other)
