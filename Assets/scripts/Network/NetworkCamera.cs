@@ -17,7 +17,7 @@ public class NetworkCamera : Photon.Bolt.EntityBehaviour<ICustomPlayer>
     public float camXmodif = 0.5f;
     public float camZmodif = 0.6f;
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (playerData.gametype != 0 && playerData.gametype != 3)
         {

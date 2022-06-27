@@ -17,11 +17,10 @@ public class GameMenu : MonoBehaviour
     {
         bool meaning = playerData.gametype == 1 || playerData.gametype == 2;
         showLoading(meaning);
-        if (playerData.gametype != 0 && playerData.gametype != 4)
+        if (playerData.gametype != 0 && playerData.gametype != 4 && BoltMatchmaking.CurrentSession.ConnectionsCurrent < 2)
         { 
             load_code_text.text = playerData.gameCode; 
         }
-
     }
 
     public void toMainMenu()

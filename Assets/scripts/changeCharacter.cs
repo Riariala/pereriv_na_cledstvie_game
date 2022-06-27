@@ -71,7 +71,6 @@ public class changeCharacter : Photon.Bolt.EntityBehaviour<ICustomPlayer>
         player_data.isGameJustStarted = new List<bool>();
         player_data.isGameJustStarted.Add(true);
         player_data.isGameJustStarted.Add(true);
-        //player_data.isGameOver = false;
         player_data.isGameOver = new List<bool>();
         player_data.isGameOver.Add(false);
         player_data.isGameOver.Add(false);
@@ -81,8 +80,6 @@ public class changeCharacter : Photon.Bolt.EntityBehaviour<ICustomPlayer>
         RogersSingle = Instantiate(Player1, spawnPos, Quaternion.identity);
         RogersSingle.name = "Rogers";
         RogersSingle.GetComponent<PlayerController>().ChangeJoystick(_jystick);
-        //PlayerController player_script = RogersSingle.GetComponent<PlayerController>();
-        //player_script.ChangeJoystick(_jystick);
         RogersSingle.GetComponent<NetworkCamera>().isPlayer1Belong = true;
         spawnPos = new Vector3(-1.5f, 0, 43f);
         MarySingle = Instantiate(Player2, spawnPos, Quaternion.identity);
@@ -137,7 +134,6 @@ public class changeCharacter : Photon.Bolt.EntityBehaviour<ICustomPlayer>
 
     public void CreateCharacter(bool first, Vector3 spawnpos)
     {
-        //GameObject player;
         if (first)
         {
             RogersSingle = BoltNetwork.Instantiate(Player1, spawnpos, Quaternion.identity);

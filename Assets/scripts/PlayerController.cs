@@ -124,11 +124,6 @@ public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>
         _joystick = null;
     }
 
-    public void deleteJoystick()
-    {
-        _joystick = null;
-    }
-
     void OnTriggerEnter(Collider other)
     {
         if (other.transform.parent.gameObject.name == "EventColliders")
