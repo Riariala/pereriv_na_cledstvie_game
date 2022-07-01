@@ -14,18 +14,20 @@ public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>
 {
     public Rigidbody _rb;
     public GameObject playerCamera;
-    private Transform _transform;
-    [SerializeField] public FixedJoystick _joystick;
+    public Transform _transform;
+    [SerializeField] private FixedJoystick _joystick;
     private Collider _collider;
     private Vector3 closest_point;
     private Vector3 change_pos;
     public float speed = 0.1f;
     private Transform playerCamera_transf;
     public NetworkCamera playerCameraScript;
+    public Vector3 desiredMovement;
+    public bool isStillMoving;
     public PlayerData playerData;
 
     public bool isStilMoving;
-
+    public Animator playerAnimator;
 
     public override void Attached()
     {
@@ -34,9 +36,10 @@ public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>
         state.SetTransforms(state.PlayerTransform, transform);
         playerCamera_transf = playerCamera.transform;
         _transform = transform;
-        state.SetAnimator(GetComponent<Animator>());
+        //state.SetAnimator(GetComponent<Animator>());
+        state.SetAnimator(playerAnimator);
 
-        state.Animator.applyRootMotion = entity.IsOwner;
+        //state.Animator.applyRootMotion = entity.IsOwner;
     }
 
     void Start()
@@ -62,35 +65,20 @@ public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>
                 Vector3 dirForward = playerCamera_transf.forward;
                 dirForward.y = 0f;
                 dirForward.Normalize();
-                Vector3 desiredMovement = (dirForward * _joystick.Vertical) + (dirRight * _joystick.Horizontal);
+                desiredMovement = (dirForward * _joystick.Vertical) + (dirRight * _joystick.Horizontal);
                 desiredMovement.Normalize();
                 desiredMovement *= speed;
                 _rb.AddForce(desiredMovement, ForceMode.Impulse);
                 float gip = Mathf.Sqrt((float)Math.Pow(_joystick.Horizontal, 2) + (float)Math.Pow(_joystick.Vertical, 2));
                 float rot = Mathf.Atan2(_joystick.Horizontal / gip, _joystick.Vertical / gip) * Mathf.Rad2Deg;
-                _transform.rotation = Quaternion.Euler(_transform.eulerAngles.x, rot + Camera.main.transform.eulerAngles.y, _transform.eulerAngles.z);
+                //_transform.rotation = Quaternion.Euler(_transform.eulerAngles.x, rot + Camera.main.transform.eulerAngles.y, _transform.eulerAngles.z);
+                _transform.rotation = Quaternion.Euler(_transform.eulerAngles.x, rot + playerCamera_transf.eulerAngles.y, _transform.eulerAngles.z);
             }
-        }
-    }
-
-    private void Update()
-    {
-        if (state.isMoving)
-        {
-            if (!isStilMoving)
+            else 
             {
-                state.Animator.Play("Walk");
-                state.Animator.SetInteger("State", 1);
-                GetComponent<Animator>().SetInteger("State", 1);
-                isStilMoving = true;
+                desiredMovement = new Vector3(0,0,0);
             }
-            
         }
-        else
-        { state.Animator.Play("Neutral"); 
-            state.Animator.SetInteger("State", 0);
-            GetComponent<Animator>().SetInteger("State", 0);
-            isStilMoving = false; }
     }
 
     public override void SimulateOwner()
@@ -105,7 +93,8 @@ public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>
                 Vector3 dirForward = playerCamera_transf.forward;
                 dirForward.y = 0f;
                 dirForward.Normalize();
-                Vector3 desiredMovement = (dirForward * _joystick.Vertical) + (dirRight * _joystick.Horizontal);
+                desiredMovement = (dirForward * _joystick.Vertical) + (dirRight * _joystick.Horizontal);
+                Debug.Log("desiredMovement " + (desiredMovement * speed).ToString());
                 desiredMovement.Normalize();
                 desiredMovement *= speed;
                 //_transform.position = desiredMovement + _transform.position;
@@ -113,14 +102,14 @@ public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>
                 _transform.position = _transform.position;
                 float gip = Mathf.Sqrt((float)Math.Pow(_joystick.Horizontal,2) + (float)Math.Pow(_joystick.Vertical, 2));
                 float rot = Mathf.Atan2(_joystick.Horizontal / gip,  _joystick.Vertical / gip) * Mathf.Rad2Deg;
-                _transform.rotation = Quaternion.Euler(_transform.eulerAngles.x, rot + Camera.main.transform.eulerAngles.y, _transform.eulerAngles.z);
+                _transform.rotation = Quaternion.Euler(_transform.eulerAngles.x, rot + playerCamera_transf.eulerAngles.y, _transform.eulerAngles.z);
                 state.isMoving = true;
-                //state.Animator.SetInteger("State", 1);
             }
-            else {
-                state.isMoving = false;
+            else 
+            { 
                 _rb.velocity = new Vector3(0, 0, 0);
-                //state.Animator.SetInteger("State", 0);
+                desiredMovement = new Vector3(0, 0, 0);
+                state.isMoving = false;
             }
         }
     }
@@ -146,5 +135,10 @@ public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>
             playerCameraScript.camXmodif = otherData.camXmodif;
             playerCameraScript.camZmodif = otherData.camZmodif;
         }        
+    }
+
+    public Vector3 GetDesiredMovement()
+    {
+        return this.desiredMovement;
     }
 }

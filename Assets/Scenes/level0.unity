@@ -1836,6 +1836,16 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7658747045952085653, guid: 65d8a6cd36bbf864fb626cbc09472699,
+        type: 3}
+      propertyPath: m_RootBone
+      value: 
+      objectReference: {fileID: 166626978}
+    - target: {fileID: 7658747045952085653, guid: 65d8a6cd36bbf864fb626cbc09472699,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 59a4f0453eb8bee40b69fbfb4db67756, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65d8a6cd36bbf864fb626cbc09472699, type: 3}
 --- !u!4 &166626972 stripped
@@ -1864,6 +1874,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 2
   enable_actions: 010001
+--- !u!95 &166626975 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8534884562338775866, guid: 65d8a6cd36bbf864fb626cbc09472699,
+    type: 3}
+  m_PrefabInstance: {fileID: 166626971}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &166626976
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166626973}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 0c114d2e19aba5f4ead3200d36922249, type: 3}
+  m_Controller: {fileID: 9100000, guid: 161bd7440e852d742a669bde62397bbb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &166626977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166626973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16b6843de301cf045b614c870252eeb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 166626975}
+--- !u!4 &166626978 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7573930157927012656, guid: 65d8a6cd36bbf864fb626cbc09472699,
+    type: 3}
+  m_PrefabInstance: {fileID: 166626971}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &181855065
 GameObject:
   m_ObjectHideFlags: 0
@@ -17997,6 +18051,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 2336fb71654d97d4b9c3e67c350c186e, type: 2}
   actions: {fileID: 11400000, guid: 9d3e989a4e3bcb34795e602d6e824d4a, type: 2}
   journal: {fileID: 11400000, guid: dd172ace3ffc9ed4f9bf32fd16a613b0, type: 2}
+  _changeCharacter: {fileID: 333963698}
 --- !u!4 &1927280843
 Transform:
   m_ObjectHideFlags: 0
@@ -18983,6 +19038,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 1
   enable_actions: 010001
+--- !u!95 &2065079269
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2065079266}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 2c2e4d210de4f4c4599d2d3cdae4b4ed, type: 3}
+  m_Controller: {fileID: 9100000, guid: 72c7ce5c112e6b84595866ffee7cbe3a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!95 &2065079270 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1466875944373337032, guid: 96df582d4dc90f645b1299fe87ad65ea,
+    type: 3}
+  m_PrefabInstance: {fileID: 2065079264}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2065079271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2065079266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16b6843de301cf045b614c870252eeb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 2065079270}
 --- !u!1001 &2073768753
 PrefabInstance:
   m_ObjectHideFlags: 0

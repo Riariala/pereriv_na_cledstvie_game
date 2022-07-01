@@ -17,15 +17,13 @@ public class NetworkCamera : Photon.Bolt.EntityBehaviour<ICustomPlayer>
     public float camXmodif = 0.5f;
     public float camZmodif = 0.6f;
 
-    private void FixedUpdate()
+    private void Update()
     {
-        if (playerData.gametype != 0)
+        if (playerData.gametype != 0 && playerData.gametype != 3)
         {
             if (entity.IsOwner && !playerCamera.activeInHierarchy)
             {
-                playerCamera.SetActive(true);
-                cameraTransform = playerCamera.transform;
-                playerTransform = player.transform;
+                cameraOn();
             }
             if (entity.IsOwner)
             {
@@ -39,9 +37,7 @@ public class NetworkCamera : Photon.Bolt.EntityBehaviour<ICustomPlayer>
         {
             if (isPlayer1Belong == playerData.isPlayer1 && !playerCamera.activeInHierarchy)
             {
-                playerCamera.SetActive(true);
-                cameraTransform = playerCamera.transform;
-                playerTransform = player.transform;
+                cameraOn();
             }
             if (isPlayer1Belong == playerData.isPlayer1)
             {

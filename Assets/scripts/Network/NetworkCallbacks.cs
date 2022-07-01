@@ -26,9 +26,11 @@ public class NetworkCallbacks : GlobalEventListener
     public PlayerData data;
     public ActionsSaver actions;
     public JournalInfo journal;
+    public changeCharacter _changeCharacter;
 
     public override void SceneLoadLocalDone(string scene, IProtocolToken token)
     {
+        //isPlayer1 = true;
         if (BoltNetwork.IsClient)
         {
             isPlayer1 = !isPlayer1;
@@ -44,39 +46,55 @@ public class NetworkCallbacks : GlobalEventListener
         data.isGameOver = new List<bool>();
         data.isGameOver.Add(false);
         data.isGameOver.Add(false);
-        Vector3 spawnPos;
+        //Vector3 spawnPos;
         GameObject player;
-        //if (data.gametype != 3)
-        //{
+        if (data.gametype == 3)
+        {
+            data.dialogId = 0;
+            player = createCharacterByType(false, new Vector3(-1.5f, 0, 43f));
+            _changeCharacter.setMary(player);
+            //player.GetComponent<NetworkCamera>().cameraOut();
+            player = createCharacterByType(true, new Vector3(6f, 0, -9f));
+            _changeCharacter.setRogers(player);
+        }
+        if (data.gametype != 3)
+        {
             if (isPlayer1)
             {
                 data.dialogId = 0;
-                spawnPos = new Vector3(6f, 0, -9f);
-                player = BoltNetwork.Instantiate(player1, spawnPos, Quaternion.identity);
-                player.name = "Rogers";
-                //player.GetComponent<NetworkCamera>().cameraOn();
-                //PlayerController player_script = player.GetComponent<PlayerController>();
-                //player_script.ChangeJoystick(_joystick);
+                player = createCharacterByType(true, new Vector3(6f, 0, -9f));
             }
             else
             {
-                spawnPos = new Vector3(-1.5f, 0, 43f);
-                player = BoltNetwork.Instantiate(player2, spawnPos, Quaternion.identity);
-                player.name = "Mary";
-                //player.GetComponent<NetworkCamera>().cameraOn();
-                //PlayerController player_script = player.GetComponent<PlayerController>();
-                //player_script.ChangeJoystick(_joystick);
+                player = createCharacterByType(false, new Vector3(-1.5f, 0, 43f));
             }
             player.GetComponent<NetworkCamera>().cameraOn();
             PlayerController player_script = player.GetComponent<PlayerController>();
             player_script.ChangeJoystick(_joystick);
-        //}
+        }
+       
         if (BoltNetwork.IsClient)
         {
             var askHost = AskForData.Create();
             askHost.Ask = true;
             askHost.Send();
         }
+    }
+
+    private GameObject createCharacterByType(bool first, Vector3 spawnpos)
+    {
+        GameObject player;
+        if (first)
+        {
+            player = BoltNetwork.Instantiate(player1, spawnpos, Quaternion.identity);
+            player.name = "Rogers";
+        }
+        else 
+        {
+            player = BoltNetwork.Instantiate(player2, spawnpos, Quaternion.identity);
+            player.name = "Mary";
+        }
+        return player;
     }
 
     public override void OnEvent(PlayerCharacter evnt)

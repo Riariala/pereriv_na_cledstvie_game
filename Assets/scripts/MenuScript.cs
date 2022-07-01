@@ -27,11 +27,11 @@ public class MenuScript : MonoBehaviour
     public JournalInfo journalInfo;
     public PlayersDialogiesSaver playersDialogiesSaver;
     public GameObject refresh_btn;
-    private string[] loadInformTexts = new string[] { "Во время одиночной игры можно свободно переключаться между персонажами.",
-            "Запретив незнакомых игроков, вы не позволяете присоединяться к игре из лобби - только по коду подключения.",
-            "Вы не сможете начать игру с напарником, пока не поднлючится второй игрок - придется ожидать.",
-            "При игре без напарника, но с разрешением подключаться незнакомцам, вы можете играть в одиночном режиме, пока не присоединится второй игрок.",
-            "Подключаясь к готовой сессии, вы займете свободного персонажа."};
+    private string[] loadInformTexts = new string[] { "Р’Рѕ РІСЂРµРјСЏ РѕРґРёРЅРѕС‡РЅРѕР№ РёРіСЂС‹ РјРѕР¶РЅРѕ СЃРІРѕР±РѕРґРЅРѕ РїРµСЂРµРєР»СЋС‡Р°С‚СЊСЃСЏ РјРµР¶РґСѓ РїРµСЂСЃРѕРЅР°Р¶Р°РјРё.",
+            "Р—Р°РїСЂРµС‚РёРІ РЅРµР·РЅР°РєРѕРјС‹С… РёРіСЂРѕРєРѕРІ, РІС‹ РЅРµ РїРѕР·РІРѕР»СЏРµС‚Рµ РїСЂРёСЃРѕРµРґРёРЅСЏС‚СЊСЃСЏ Рє РёРіСЂРµ РёР· Р»РѕР±Р±Рё - С‚РѕР»СЊРєРѕ РїРѕ РєРѕРґСѓ РїРѕРґРєР»СЋС‡РµРЅРёСЏ.",
+            "Р’С‹ РЅРµ СЃРјРѕР¶РµС‚Рµ РЅР°С‡Р°С‚СЊ РёРіСЂСѓ СЃ РЅР°РїР°СЂРЅРёРєРѕРј, РїРѕРєР° РЅРµ РїРѕРґРЅР»СЋС‡РёС‚СЃСЏ РІС‚РѕСЂРѕР№ РёРіСЂРѕРє - РїСЂРёРґРµС‚СЃСЏ РѕР¶РёРґР°С‚СЊ.",
+            "РџСЂРё РёРіСЂРµ Р±РµР· РЅР°РїР°СЂРЅРёРєР°, РЅРѕ СЃ СЂР°Р·СЂРµС€РµРЅРёРµРј РїРѕРґРєР»СЋС‡Р°С‚СЊСЃСЏ РЅРµР·РЅР°РєРѕРјС†Р°Рј, РІС‹ РјРѕР¶РµС‚Рµ РёРіСЂР°С‚СЊ РІ РѕРґРёРЅРѕС‡РЅРѕРј СЂРµР¶РёРјРµ, РїРѕРєР° РЅРµ РїСЂРёСЃРѕРµРґРёРЅРёС‚СЃСЏ РІС‚РѕСЂРѕР№ РёРіСЂРѕРє.",
+            "РџРѕРґРєР»СЋС‡Р°СЏСЃСЊ Рє РіРѕС‚РѕРІРѕР№ СЃРµСЃСЃРёРё, РІС‹ Р·Р°Р№РјРµС‚Рµ СЃРІРѕР±РѕРґРЅРѕРіРѕ РїРµСЂСЃРѕРЅР°Р¶Р°."};
 
     public Menu NetworkMenu;
 
@@ -129,9 +129,23 @@ public class MenuScript : MonoBehaviour
 
     public void createNewGame()
     {
-        if (!isCoworker)
+
+        actionsSaver.setDefault();
+        journalInfo.clearAll();
+        playersDialogiesSaver.setDefault();
+        if (isCoworker)
         {
-            if (_isUnknowns) 
+            if (_isUnknowns) { playerData.gametype = 2; } else { playerData.gametype = 1; }
+            new_game_modal.SetActive(true);
+            foreach (Transform child in fourth_menu.GetComponentsInChildren<Transform>())
+            {
+                if (child.CompareTag("Button")) {child.GetComponent<Button>().interactable = true;}                
+            }
+            NetworkMenu.StartServer();
+        }
+        else 
+        {
+           if (_isUnknowns) 
             { 
                 playerData.gametype = 3;
                 NetworkMenu.StartServer();
@@ -144,21 +158,9 @@ public class MenuScript : MonoBehaviour
                     BoltLauncher.Shutdown();
                 }
                 SceneManager.LoadScene("level0");
-            }
+            } 
         }
-        else 
-        {
-            if (_isUnknowns) { playerData.gametype = 2; } else { playerData.gametype = 1; }
-            new_game_modal.SetActive(true);
-            foreach (Transform child in fourth_menu.GetComponentsInChildren<Transform>())
-            {
-                if (child.CompareTag("Button")) {child.GetComponent<Button>().interactable = true;}                
-            }
-            NetworkMenu.StartServer();
-        }
-        actionsSaver.setDefault();
-        journalInfo.clearAll();
-        playersDialogiesSaver.setDefault();
+        
     }
 
     public void OpenLoadingMenu()

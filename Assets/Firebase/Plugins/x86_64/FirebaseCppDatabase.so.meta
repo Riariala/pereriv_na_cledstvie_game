@@ -3,7 +3,11 @@ guid: 7e0d636394aa43cd80440641a013d37c
 labels:
 - gvh
 - gvh_version-9.1.0
+<<<<<<<< HEAD:Assets/Firebase/Plugins/x86_64/FirebaseCppDatabase.so.meta
 - gvhp_exportpath-Firebase/Plugins/x86_64/FirebaseCppDatabase.so
+========
+- gvhp_exportpath-Firebase/Plugins/x86_64/FirebaseCppAuth.bundle
+>>>>>>>> d5ed59a2f86ca471fc001dcc70ce4a1dcbc6d09a:Assets/Firebase/Plugins/x86_64/FirebaseCppAuth.bundle.meta
 timeCreated: 1480838400
 PluginImporter:
   serializedVersion: 1
