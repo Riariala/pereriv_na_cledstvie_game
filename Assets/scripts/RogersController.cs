@@ -38,10 +38,10 @@ public class RogersController : Photon.Bolt.EntityBehaviour<ICustomPlayer>
                 {
                     _state = 1;
                 }
-                //else
-                //{
-                //    _state = 0;
-                //}
+                else
+                {
+                    audioSource.Play();
+                }
                 //animator.SetInteger("State", _state);
             }
             else 
@@ -56,8 +56,9 @@ public class RogersController : Photon.Bolt.EntityBehaviour<ICustomPlayer>
                     else
                     {
                         state.Animator.SetInteger("State", 0);
-                        //animator.SetInteger("State", 0);
-                    }
+                        audioSource.Play();
+                    //animator.SetInteger("State", 0);
+                }
             }
         }
         else
@@ -66,6 +67,11 @@ public class RogersController : Photon.Bolt.EntityBehaviour<ICustomPlayer>
             if (movement.sqrMagnitude > 0.2)
             {
                 _state = 1;
+                //audioSource.Play(); 
+            }
+            else 
+            {
+                audioSource.Play();
             }
         }
         animator.SetInteger("State", _state);

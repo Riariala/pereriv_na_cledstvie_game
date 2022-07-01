@@ -94,7 +94,6 @@ public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>
                 dirForward.y = 0f;
                 dirForward.Normalize();
                 desiredMovement = (dirForward * _joystick.Vertical) + (dirRight * _joystick.Horizontal);
-                Debug.Log("desiredMovement " + (desiredMovement * speed).ToString());
                 desiredMovement.Normalize();
                 desiredMovement *= speed;
                 //_transform.position = desiredMovement + _transform.position;

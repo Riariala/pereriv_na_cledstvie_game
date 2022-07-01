@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System.IO;
+using Newtonsoft.Json;
 
 [CreateAssetMenu(fileName = "JournalInfo", menuName = "JournalInfo", order = 51)]
 public class JournalInfo : ScriptableObject
@@ -40,6 +42,16 @@ public class JournalInfo : ScriptableObject
         newInInfo = new List<List<int>>();
         newInInfo.Add(new List<int>());
         newInInfo.Add(new List<int>());
+    }
+
+    public void DeserializeInfo(List<string> info)
+    {
+        playerHistoryID = JsonConvert.DeserializeObject<List<List<int>>>(info[0]);
+        playerEvidencesID = JsonConvert.DeserializeObject<List<List<Evidences>>>(info[1]);
+        playerInfoID = JsonConvert.DeserializeObject<List<List<InfoDeteiledID>>>(info[2]);
+        newInHistory = JsonConvert.DeserializeObject<List<int>>(info[3]);
+        newInEvid = JsonConvert.DeserializeObject<List<List<int>>>(info[4]);
+        newInInfo = JsonConvert.DeserializeObject<List<List<int>>>(info[5]);
     }
 
     public void addHistory(List<int> newid)
@@ -144,4 +156,24 @@ public class JournalInfo : ScriptableObject
         }
         addEvidence(evidID, newStatus);
     }
+
+    public List<string> SerializeInfo()
+    {
+        List<string> info = new List<string>();
+        string newstr = JsonConvert.SerializeObject(playerHistoryID);
+        info.Add(newstr);
+        newstr = JsonConvert.SerializeObject(playerEvidencesID);
+        info.Add(newstr);
+        newstr = JsonConvert.SerializeObject(playerInfoID);
+        info.Add(newstr);
+        newstr = JsonConvert.SerializeObject(newInHistory);
+        info.Add(newstr);
+        newstr = JsonConvert.SerializeObject(newInEvid);
+        info.Add(newstr);
+        newstr = JsonConvert.SerializeObject(newInInfo);
+        info.Add(newstr);
+        return info;
+
+    }
+
 }
