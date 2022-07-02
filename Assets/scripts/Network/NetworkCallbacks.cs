@@ -43,6 +43,7 @@ public class NetworkCallbacks : GlobalEventListener
             actions.setDefault();
             journal.clearAll();
             data.gametype = 4;
+            data.isPlayer1 = false;
         }
         else
         {

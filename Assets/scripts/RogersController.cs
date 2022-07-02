@@ -27,7 +27,7 @@ public class RogersController : Photon.Bolt.EntityBehaviour<ICustomPlayer>
         audioSource = GetComponent<AudioSource>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         _state = 0;
         if (playerData.gametype != 0)

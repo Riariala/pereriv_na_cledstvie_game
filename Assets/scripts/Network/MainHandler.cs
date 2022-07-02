@@ -20,7 +20,7 @@ public class MainHandler : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehav
     public DialogSaver dialogSaver;
     public changeCharacter _changeChars;
 
-    void FixedUpdate()
+    void Update()
     {
         if (callbacks.clickDialog)
         {
@@ -43,7 +43,6 @@ public class MainHandler : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehav
         {
             if (callbacks.ask)
             {
-                Debug.Log("Im in callbacks.ask taker");
                 callbacks.ask = false;
                 var startData = StartData.Create();
                 startData.DialogId = data.dialogId;
@@ -86,7 +85,7 @@ public class MainHandler : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehav
                 actions.newValue(callbacks.actionsSaver);
                 List<string> journinf = JsonConvert.DeserializeObject<List<string>>(callbacks.journalInfo);
                 journal.DeserializeInfo(journinf);
-                Debug.Log("Im in actionSaver taker");
+                //Debug.Log("Im in actionSaver taker");
                 callbacks.actionsSaver = "";
                 callbacks.createSecondPlayer(callbacks.isPlayer1_forStart, callbacks.newcharPosition);
             }

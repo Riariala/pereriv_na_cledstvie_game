@@ -53,7 +53,7 @@ public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>
         }
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (playerData.gametype == 0 && !(_joystick is null))
         {
@@ -71,11 +71,11 @@ public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>
                 _rb.AddForce(desiredMovement, ForceMode.Impulse);
                 float gip = Mathf.Sqrt((float)Math.Pow(_joystick.Horizontal, 2) + (float)Math.Pow(_joystick.Vertical, 2));
                 float rot = Mathf.Atan2(_joystick.Horizontal / gip, _joystick.Vertical / gip) * Mathf.Rad2Deg;
-                //_transform.rotation = Quaternion.Euler(_transform.eulerAngles.x, rot + Camera.main.transform.eulerAngles.y, _transform.eulerAngles.z);
                 _transform.rotation = Quaternion.Euler(_transform.eulerAngles.x, rot + playerCamera_transf.eulerAngles.y, _transform.eulerAngles.z);
             }
             else 
             {
+                _rb.velocity = new Vector3(0, 0, 0);
                 desiredMovement = new Vector3(0,0,0);
             }
         }
@@ -96,11 +96,9 @@ public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>
                 desiredMovement = (dirForward * _joystick.Vertical) + (dirRight * _joystick.Horizontal);
                 desiredMovement.Normalize();
                 desiredMovement *= speed;
-                //_transform.position = desiredMovement + _transform.position;
                 _rb.AddForce(desiredMovement, ForceMode.Impulse);
-                _transform.position = _transform.position;
-                float gip = Mathf.Sqrt((float)Math.Pow(_joystick.Horizontal,2) + (float)Math.Pow(_joystick.Vertical, 2));
-                float rot = Mathf.Atan2(_joystick.Horizontal / gip,  _joystick.Vertical / gip) * Mathf.Rad2Deg;
+                float gip = Mathf.Sqrt((float)Math.Pow(_joystick.Horizontal, 2) + (float)Math.Pow(_joystick.Vertical, 2));
+                float rot = Mathf.Atan2(_joystick.Horizontal / gip, _joystick.Vertical / gip) * Mathf.Rad2Deg;
                 _transform.rotation = Quaternion.Euler(_transform.eulerAngles.x, rot + playerCamera_transf.eulerAngles.y, _transform.eulerAngles.z);
                 state.isMoving = true;
             }
