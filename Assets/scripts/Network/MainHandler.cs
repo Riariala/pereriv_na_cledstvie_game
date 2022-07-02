@@ -20,7 +20,7 @@ public class MainHandler : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehav
     public DialogSaver dialogSaver;
     public changeCharacter _changeChars;
 
-    void Update()
+    void FixedUpdate()
     {
         if (callbacks.clickDialog)
         {
@@ -43,6 +43,8 @@ public class MainHandler : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehav
         {
             if (callbacks.ask)
             {
+                Debug.Log("Im in callbacks.ask taker");
+                callbacks.ask = false;
                 var startData = StartData.Create();
                 startData.DialogId = data.dialogId;
                 //startData.JournalInfo = JsonConvert.SerializeObject(journal);
@@ -50,7 +52,7 @@ public class MainHandler : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehav
                 startData.JournalInfo = JsonConvert.SerializeObject(journalInf);
                 startData.isPlayer1 = !data.isPlayer1;
                 Vector3 pos;
-                if (data.isPlayer1 && !(_changeChars.MarySingle is null)) 
+                if (data.isPlayer1) 
                 {
                     if (!(_changeChars.MarySingle == null))
                     {
@@ -70,7 +72,7 @@ public class MainHandler : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehav
                 startData.ActionsSaver = JsonConvert.SerializeObject(actions);
                 startData.Send();
                 _changeChars.KillCharacter(!data.isPlayer1);
-                callbacks.ask = false;
+                //callbacks.ask = false;
             }
         }
 
@@ -78,12 +80,13 @@ public class MainHandler : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehav
         {
             if (callbacks.actionsSaver != "")
             {
+                callbacks.ask = false;
                 data.dialogId = callbacks.dialogId;
+                data.isPlayer1 = callbacks.isPlayer1_forStart;
                 actions.newValue(callbacks.actionsSaver);
                 List<string> journinf = JsonConvert.DeserializeObject<List<string>>(callbacks.journalInfo);
                 journal.DeserializeInfo(journinf);
-                //Debug.Log(actions);
-                callbacks.ask = false;
+                Debug.Log("Im in actionSaver taker");
                 callbacks.actionsSaver = "";
                 callbacks.createSecondPlayer(callbacks.isPlayer1_forStart, callbacks.newcharPosition);
             }

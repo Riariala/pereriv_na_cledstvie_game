@@ -46,7 +46,6 @@ public class NetworkCallbacks : GlobalEventListener
         }
         else
         {
-            //data.isPlayer1 = true;
             GameObject player;
             if (data.gametype == 3)
             {

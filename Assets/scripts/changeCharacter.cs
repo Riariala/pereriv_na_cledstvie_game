@@ -30,12 +30,6 @@ public class changeCharacter : Photon.Bolt.EntityBehaviour<ICustomPlayer>
         Player2_script = Player2.GetComponent<PlayerController>();
         Player1_script.ChangeJoystick(_jystick);
         player_data.isPlayer1 = true;
-        //if (player_data.gametype != 0)
-        //{
-        //    var character = PlayerCharacter.Create();
-        //    character.IsPlayer1 = true;
-        //    character.Send();
-        //}
         if (player_data.isPlayer1)
         {
             Player1_script.ChangeJoystick(_jystick);
@@ -56,12 +50,6 @@ public class changeCharacter : Photon.Bolt.EntityBehaviour<ICustomPlayer>
 
     public void Change_chars(){
         player_data.isPlayer1 = !player_data.isPlayer1;
-        //if ( player_data.gametype !=0  )
-        //{
-        //    var character = PlayerCharacter.Create();
-        //    character.IsPlayer1 = player_data.isPlayer1;
-        //    character.Send();
-        //}
         changeCharsSingle();  
     }
 

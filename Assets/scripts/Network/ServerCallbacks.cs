@@ -3,7 +3,7 @@ using UnityEngine;using System;using UdpKit;using UnityEngine.SceneManagement
                 if (playerData.gametype == 3)
                 {
                     cngChar.cngCharBtnSet(false);
-                }            }        }    }    public override void Disconnected(BoltConnection connection)    {        if (BoltNetwork.IsServer)        {            if (playerData.gametype == 3)            {                Vector3 newpos = new Vector3(6f, 0, -9f);
+                }            }        }        Debug.Log("Connected!");    }    public override void Disconnected(BoltConnection connection)    {        if (BoltNetwork.IsServer)        {            if (playerData.gametype == 3)            {                Vector3 newpos = new Vector3(6f, 0, -9f);
                 // принять координаты персонажа от отсоединившегося второго игрока и создать персонажа
 
                 cngChar.CreateCharacter(!playerData.isPlayer1, newpos);                cngChar.cngCharBtnSet(true);            }            else
@@ -14,4 +14,5 @@ using UnityEngine;using System;using UdpKit;using UnityEngine.SceneManagement
                 // перед отсоединением: отправить "первому игроку" данные из JournalInfo И (!) КООРДИНАТЫ (!) персонажа.
 
             }
-        }    }    public override void BoltShutdownBegin(AddCallback registerDoneCallback, UdpConnectionDisconnectReason disconnectReason)    {        SceneManager.LoadScene("MainMenu");    }}
+        }
+        Debug.Log("Disconnected...");    }    public override void BoltShutdownBegin(AddCallback registerDoneCallback, UdpConnectionDisconnectReason disconnectReason)    {        SceneManager.LoadScene("MainMenu");    }}

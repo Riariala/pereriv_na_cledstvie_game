@@ -53,7 +53,7 @@ public class PlayerController : Photon.Bolt.EntityBehaviour<ICustomPlayer>
         }
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (playerData.gametype == 0 && !(_joystick is null))
         {
