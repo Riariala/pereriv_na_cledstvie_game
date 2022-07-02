@@ -3331,6 +3331,8 @@ MonoBehaviour:
   player_data: {fileID: 11400000, guid: 2336fb71654d97d4b9c3e67c350c186e, type: 2}
   handler: {fileID: 1927280844}
   changeCharBtn: {fileID: 1390629049}
+  RogersSingle: {fileID: 0}
+  MarySingle: {fileID: 0}
 --- !u!4 &333963700
 Transform:
   m_ObjectHideFlags: 0
@@ -18048,6 +18050,9 @@ MonoBehaviour:
   dialogId: 0
   dialogSaverData: 
   actionsSaver: 
+  journalInfo: 
+  isPlayer1_forStart: 0
+  newcharPosition: {x: 0, y: 0, z: 0}
   data: {fileID: 11400000, guid: 2336fb71654d97d4b9c3e67c350c186e, type: 2}
   actions: {fileID: 11400000, guid: 9d3e989a4e3bcb34795e602d6e824d4a, type: 2}
   journal: {fileID: 11400000, guid: dd172ace3ffc9ed4f9bf32fd16a613b0, type: 2}
@@ -18110,6 +18115,7 @@ MonoBehaviour:
   actions: {fileID: 11400000, guid: 9d3e989a4e3bcb34795e602d6e824d4a, type: 2}
   journal: {fileID: 11400000, guid: dd172ace3ffc9ed4f9bf32fd16a613b0, type: 2}
   dialogSaver: {fileID: 11400000, guid: 61d9fcc0319dcc940a4e8ecece744dad, type: 2}
+  _changeChars: {fileID: 333963698}
 --- !u!114 &1927280847
 MonoBehaviour:
   m_ObjectHideFlags: 0

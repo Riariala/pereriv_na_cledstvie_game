@@ -12,16 +12,16 @@ using Photon.Bolt.Utils;
 
 public class changeCharacter : Photon.Bolt.EntityBehaviour<ICustomPlayer>
 {
-    [SerializeField] private GameObject Player1;
-    [SerializeField] private GameObject Player2;
+    [SerializeField] public GameObject Player1;
+    [SerializeField] public GameObject Player2;
     private PlayerController Player1_script;
     private PlayerController Player2_script;
     [SerializeField] private FixedJoystick _jystick;
     public PlayerData player_data;
     public CharHandler handler;
     public GameObject changeCharBtn;
-    private GameObject RogersSingle;
-    private GameObject MarySingle;
+    public GameObject RogersSingle;
+    public GameObject MarySingle;
 
 
     void OnEnable()
@@ -30,12 +30,6 @@ public class changeCharacter : Photon.Bolt.EntityBehaviour<ICustomPlayer>
         Player2_script = Player2.GetComponent<PlayerController>();
         Player1_script.ChangeJoystick(_jystick);
         player_data.isPlayer1 = true;
-        if (player_data.gametype != 0)
-        {
-            var character = PlayerCharacter.Create();
-            character.IsPlayer1 = true;
-            character.Send();
-        }
         if (player_data.isPlayer1)
         {
             Player1_script.ChangeJoystick(_jystick);
@@ -56,12 +50,6 @@ public class changeCharacter : Photon.Bolt.EntityBehaviour<ICustomPlayer>
 
     public void Change_chars(){
         player_data.isPlayer1 = !player_data.isPlayer1;
-        if ( player_data.gametype !=0  )
-        {
-            var character = PlayerCharacter.Create();
-            character.IsPlayer1 = player_data.isPlayer1;
-            character.Send();
-        }
         changeCharsSingle();  
     }
 
@@ -81,10 +69,12 @@ public class changeCharacter : Photon.Bolt.EntityBehaviour<ICustomPlayer>
         RogersSingle.name = "Rogers";
         RogersSingle.GetComponent<PlayerController>().ChangeJoystick(_jystick);
         RogersSingle.GetComponent<NetworkCamera>().isPlayer1Belong = true;
+        RogersSingle.GetComponent<AudioListener>().enabled = true;
         spawnPos = new Vector3(-1.5f, 0, 43f);
         MarySingle = Instantiate(Player2, spawnPos, Quaternion.identity);
         MarySingle.name = "Mary";
         MarySingle.GetComponent<NetworkCamera>().isPlayer1Belong = false;
+        MarySingle.GetComponent<AudioListener>().enabled = false;
     }
 
     public void changeCharsSingle()
@@ -95,6 +85,8 @@ public class changeCharacter : Photon.Bolt.EntityBehaviour<ICustomPlayer>
             MarySingle.GetComponent<NetworkCamera>().cameraOut();
             RogersSingle.GetComponent<PlayerController>().ChangeJoystick(_jystick);
             RogersSingle.GetComponent<NetworkCamera>().cameraOn();
+            MarySingle.GetComponent<AudioListener>().enabled = false;
+            RogersSingle.GetComponent<AudioListener>().enabled = true;
         }
         else
         {
@@ -102,6 +94,8 @@ public class changeCharacter : Photon.Bolt.EntityBehaviour<ICustomPlayer>
             MarySingle.GetComponent<NetworkCamera>().cameraOn();
             RogersSingle.GetComponent<PlayerController>().deleteJoystick();
             RogersSingle.GetComponent<NetworkCamera>().cameraOut();
+            MarySingle.GetComponent<AudioListener>().enabled = true;
+            RogersSingle.GetComponent<AudioListener>().enabled = false;
         }
     }
 
@@ -138,11 +132,15 @@ public class changeCharacter : Photon.Bolt.EntityBehaviour<ICustomPlayer>
         {
             RogersSingle = BoltNetwork.Instantiate(Player1, spawnpos, Quaternion.identity);
             RogersSingle.name = "Rogers";
+            RogersSingle.GetComponent<NetworkCamera>().cameraOut();
+            RogersSingle.GetComponent<PlayerController>().ChangeJoystick(_jystick);
         }
         else
         {
             MarySingle = BoltNetwork.Instantiate(Player2, spawnpos, Quaternion.identity);
             MarySingle.name = "Mary";
+            MarySingle.GetComponent<NetworkCamera>().cameraOut();
+            MarySingle.GetComponent<PlayerController>().ChangeJoystick(_jystick);
         }
     }
 

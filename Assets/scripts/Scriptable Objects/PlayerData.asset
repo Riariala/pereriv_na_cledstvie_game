@@ -16,6 +16,8 @@ MonoBehaviour:
   char_player: {fileID: 1651104453875658818, guid: a37251e2c7bdcf74291f8ab32ba3eb6e,
     type: 3}
   dialogId: 0
-  isBusy: 0
-  isGameOver: 0
-  isGameJustStarted: 0
+  isBusy: 1
+  isGameOver: 0000
+  isGameJustStarted: 0001
+  gameCode: 9988
+  gametype: 4

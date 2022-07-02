@@ -18,6 +18,7 @@ public class RogersController : Photon.Bolt.EntityBehaviour<ICustomPlayer>
     public PlayerData playerData;
 
     private AudioSource audioSource;
+    private int prevState;
 
     private void Start()
     {
@@ -26,7 +27,7 @@ public class RogersController : Photon.Bolt.EntityBehaviour<ICustomPlayer>
         audioSource = GetComponent<AudioSource>();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         _state = 0;
         if (playerData.gametype != 0)
@@ -38,26 +39,24 @@ public class RogersController : Photon.Bolt.EntityBehaviour<ICustomPlayer>
                 {
                     _state = 1;
                 }
-                //else
-                //{
-                //    _state = 0;
-                //}
-                //animator.SetInteger("State", _state);
+                else
+                {
+                    audioSource.Play();
+                }
             }
             else 
             {
-                    if (state.isMoving)
-                    {
-                        state.Animator.SetInteger("State", 1);
+                if (state.isMoving)
+                {
+                    //state.Animator.SetInteger("State", 1);
                     _state = 1;
-                    //animator.SetInteger("State", 1);
 
                 }
-                    else
-                    {
-                        state.Animator.SetInteger("State", 0);
-                        //animator.SetInteger("State", 0);
-                    }
+                else
+                {
+                    //state.Animator.SetInteger("State", 0);
+                    audioSource.Play();
+                }
             }
         }
         else
@@ -67,8 +66,16 @@ public class RogersController : Photon.Bolt.EntityBehaviour<ICustomPlayer>
             {
                 _state = 1;
             }
+            else 
+            {
+                audioSource.Play();
+            }
         }
-        animator.SetInteger("State", _state);
+        if (prevState != _state)
+        {
+            animator.SetInteger("State", _state);
+            prevState = _state;
+        }
     }
 
 }

@@ -18,8 +18,9 @@ public class MainHandler : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehav
     public ActionsSaver actions;
     public JournalInfo journal;
     public DialogSaver dialogSaver;
+    public changeCharacter _changeChars;
 
-    void Update()
+    void FixedUpdate()
     {
         if (callbacks.clickDialog)
         {
@@ -31,7 +32,6 @@ public class MainHandler : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehav
                     actions.Rewrite(dialogData.ID, dialogData.firstPlayerActs, dialogData.secPlayerActs);
                     callbacks.clickDialog = false;
                 }
-
             }
             else
             {
@@ -43,12 +43,36 @@ public class MainHandler : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehav
         {
             if (callbacks.ask)
             {
-                var serializedActions = JsonConvert.SerializeObject(actions);
+                Debug.Log("Im in callbacks.ask taker");
+                callbacks.ask = false;
                 var startData = StartData.Create();
                 startData.DialogId = data.dialogId;
-                startData.ActionsSaver = serializedActions;
+                //startData.JournalInfo = JsonConvert.SerializeObject(journal);
+                List<string> journalInf = journal.SerializeInfo();
+                startData.JournalInfo = JsonConvert.SerializeObject(journalInf);
+                startData.isPlayer1 = !data.isPlayer1;
+                Vector3 pos;
+                if (data.isPlayer1) 
+                {
+                    if (!(_changeChars.MarySingle == null))
+                    {
+                        pos = _changeChars.MarySingle.transform.position;
+                    }
+                    else { pos = new Vector3(-1.5f, 0, 43f); }
+                }
+                else
+                {
+                    if (!(_changeChars.RogersSingle == null))
+                    {
+                        pos = _changeChars.RogersSingle.transform.position;
+                    }
+                    else { pos = new Vector3(6f, 0, -9f); }
+                }
+                startData.Position = pos;
+                startData.ActionsSaver = JsonConvert.SerializeObject(actions);
                 startData.Send();
-                callbacks.ask = false;
+                _changeChars.KillCharacter(!data.isPlayer1);
+                //callbacks.ask = false;
             }
         }
 
@@ -56,11 +80,15 @@ public class MainHandler : Photon.Bolt.EntityBehaviour<ICustomPlayer>//MonoBehav
         {
             if (callbacks.actionsSaver != "")
             {
-                data.dialogId = callbacks.dialogId;
-                actions.newValue(callbacks.actionsSaver);
-                Debug.Log(actions);
                 callbacks.ask = false;
+                data.dialogId = callbacks.dialogId;
+                data.isPlayer1 = callbacks.isPlayer1_forStart;
+                actions.newValue(callbacks.actionsSaver);
+                List<string> journinf = JsonConvert.DeserializeObject<List<string>>(callbacks.journalInfo);
+                journal.DeserializeInfo(journinf);
+                Debug.Log("Im in actionSaver taker");
                 callbacks.actionsSaver = "";
+                callbacks.createSecondPlayer(callbacks.isPlayer1_forStart, callbacks.newcharPosition);
             }
         }
     }
